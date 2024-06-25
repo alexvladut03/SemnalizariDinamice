@@ -3,8 +3,10 @@ import ProduseCard from "./ProduseCard";
 
 export default function Produse() {
   return (
-    <div className=" bg-orange-400">
-      <div className="text-3xl text-center pb-8 pt-8">Produse</div>
+    <div className=" bg-gray-700">
+      <div className="text-3xl text-center pb-8 pt-8 text-white text-shadow">
+        Produse
+      </div>
       <div className="grid grid-cols-3 justify-items-center pl-40 pr-40">
         <ProduseCard
           pImageSrc={"/CapaceNegreMiciAudi.jpeg"}

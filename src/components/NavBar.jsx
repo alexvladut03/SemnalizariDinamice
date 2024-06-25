@@ -3,7 +3,7 @@ import React from "react";
 
 export default function NavBar() {
   return (
-    <div className="flex justify-around items-center bg-orange-500 ">
+    <div className="flex justify-around items-center bg-amber-500 ">
       <Image
         src="/Logo.jpeg"
         width={70}
@@ -17,7 +17,7 @@ export default function NavBar() {
         <div>Despre Noi</div>
         <div>Recenzii</div>
       </div>
-      <button className="p-2 text-white bg-green-600 rounded-xl shadow-lg shadow-green-500 hover:text-green-300">
+      <button className="lg:p-2 text-white bg-green-600 rounded-xl shadow-md hover:shadow-green-900 hover:text-green-900 ">
         WhatsApp
       </button>
     </div>
