@@ -9,11 +9,20 @@ const ProduseCard2 = ({ pImageSrc, pName, pPrice }) => {
         alt={pName}
         width={500}
         height={500}
-        className="rounded-[25px] p-2 h-[250px] w-full object-cover"
+        className="rounded-t-2xl p-2 h-[250px] w-full object-cover"
       />
-      <div className="px-2 py-6 h-32 text-center gap-2 flex justify-between flex-col items-center">
-        <p>{pName}</p>
-        <p className="font-bold">{pPrice}</p>
+      <div className="px-3 py-4 flex flex-col justify-between h-[150px]">
+        <div className="flex flex-col items-center">
+          <p className="text-center">{pName}</p>
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="font-bold">{pPrice}</p>
+        </div>
+        <div className="flex justify-center">
+          <button className="p-1 px-3 text-white bg-amber-400 rounded-xl font-semibold border-2 border-black hover:shadow-amber-400 shadow-sm ">
+            Arata Detalii
+          </button>
+        </div>
       </div>
     </div>
   );

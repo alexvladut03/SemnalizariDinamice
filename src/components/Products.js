@@ -15,7 +15,7 @@ const Produse2 = () => {
           pPrice={"80 RON"}
         />
         <ProductCard
-          pImageSrc={"/img/CapaceGriAudi.webp"}
+          pImageSrc={"/img/CapaceNegreAudi.webp"}
           pName={"Capace Audi Negre Stea"}
           pPrice={"100 RON"}
         />
