@@ -3,7 +3,7 @@ import React from "react";
 
 const ProduseCard2 = ({ pImageSrc, pName, pPrice }) => {
   return (
-    <div className="bg-black md:w-1/4 lg:hover:shadow-amber-400 shadow-md border-2 border-black m-4 rounded-2xl transition-shadow duration-200 text-white">
+    <div className="bg-gray-800 md:w-1/4 lg:hover:shadow-amber-400 shadow-md border-2 border-black m-4 rounded-2xl transition-shadow duration-200 text-white">
       <Image
         src={pImageSrc}
         alt={pName}

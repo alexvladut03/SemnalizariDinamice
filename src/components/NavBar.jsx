@@ -15,11 +15,12 @@ export default function NavBar() {
   return (
     <header className="bg-black p-4">
       <div className="max-w-7xl mx-auto">
-        <div className="flex justify-between items-center">
+        <div className="flex lg:flex justify-between items-center">
+          <FaWhatsapp className="inline-block text-2xl text-amber-400 animate-pulse lg:hidden" />
           <Image
             src="/Logo.jpeg"
-            width={40}
-            height={40}
+            width={50}
+            height={50}
             alt="Logo"
             className="rounded-3xl hover:animate-spin"
           />

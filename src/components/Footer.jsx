@@ -18,31 +18,41 @@ export default function Footer() {
           className="rounded-full"
         ></Image>
         <div className="flex justify-end text-3xl gap-3">
-          <FaFacebook />
-          <FaInstagram />
-          <FaTiktok />
+          <FaFacebook className=" hover:text-amber-400" />
+          <FaInstagram className="hover:text-amber-400" />
+          <FaTiktok className="hover:text-amber-400" />
         </div>
       </div>
 
       <div className="mb-3">
-        <p className="pt-5">Adresa:</p>
-        <p>Dambovita, Crevedia, Str.Berzelor, Nr.111</p>
-        <p className="pt-5">Contact:</p>
-        <p>alexvladut03@gmail.com</p>
-        <p>bratualin0.2003@gmail.com</p>
-        <p>mocanuandrei@gmail.com</p>
+        <p className="pt-5 hover:text-amber-400">Adresa:</p>
+        <p className="hover:text-amber-400">
+          Dambovita, Crevedia, Str.Berzelor, Nr.111
+        </p>
+        <p className="pt-5 hover:text-amber-400">Contact:</p>
+        <p className="hover:text-amber-400">alexvladut03@gmail.com</p>
+        <p className="hover:text-amber-400">bratualin0.2003@gmail.com</p>
+        <p className="hover:text-amber-400">mocanuandrei@gmail.com</p>
       </div>
 
       <hr></hr>
 
       <div className="grid grid-cols-2 pt-3">
         <div>
-          <p>2024 Relume. Toate drepturile rezervate</p>
+          <p className="lg:hover:underline hover:text-amber-400">
+            2024 Relume. Toate drepturile rezervate
+          </p>
         </div>
         <div className="lg:flex lg:justify-end lg:gap-5">
-          <p className="lg:hover:underline">Politica de Confidentialitate</p>
-          <p className="lg:hover:underline">Termeni si Conditii</p>
-          <p className="lg:hover:underline">Setari Cookie-uri</p>
+          <p className="lg:hover:underline hover:text-amber-400">
+            Politica de Confidentialitate
+          </p>
+          <p className="lg:hover:underline hover:text-amber-400">
+            Termeni si Conditii
+          </p>
+          <p className="lg:hover:underline hover:text-amber-400">
+            Setari Cookie-uri
+          </p>
         </div>
       </div>
     </div>
