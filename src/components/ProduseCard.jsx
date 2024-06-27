@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ProduseCard({ pImageSrc, pName, pPrice }) {
   return (
-    <div className="bg-white sm:hover:shadow-slate-200 sm:shadow-md  sm:border-2 sm:border-slate-700 sm:m-2 rounded-2xl transition-shadow duration-200 max-w-60">
+    <div className="bg-white lg:hover:shadow-slate-200 shadow-md border-2 border-slate-700 m-4 rounded-2xl transition-shadow duration-200 max-w-60 ">
       <Image
         src={pImageSrc}
         alt={pName}
