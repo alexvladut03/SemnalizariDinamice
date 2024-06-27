@@ -3,7 +3,7 @@ import ProduseCard from "./ProduseCard";
 
 export default function Produse() {
   return (
-    <div className="bg-gray-700">
+    <div className="bg-gray-900">
       <div className="text-3xl text-center pb-8 pt-8 text-white text-shadow">
         Produse
       </div>
