@@ -7,7 +7,7 @@ export default function Produse() {
       <div className="text-3xl text-center pb-8 pt-8 text-white text-shadow">
         Produse
       </div>
-      <div className="grid lg:grid-cols-3 justify-items-center lg:gap-8 lg:px-40 sm:grid-cols-1">
+      <div className="grid lg:grid-cols-5 justify-items-center lg:gap-8 lg:px-40 sm:grid-cols-1">
         <ProduseCard
           pImageSrc={"/CapaceNegreMiciAudi.jpeg"}
           pName={"Capace Audi Negre 60mm"}
@@ -23,8 +23,6 @@ export default function Produse() {
           pName={"Capace Audi Gri Stea"}
           pPrice={"100de lei"}
         />
-      </div>
-      <div className="grid lg:grid-cols-2 justify-items-center lg:mt-12 lg:gap-8 lg:px-80 sm:grid-cols-1">
         <ProduseCard
           pImageSrc={"/SemnalizariDinamice.jpeg"}
           pName={"Semnalizari Dinamice Audi B8"}
