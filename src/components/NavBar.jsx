@@ -4,6 +4,7 @@ import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaWhatsapp } from "react-icons/fa";
+import Link from "next/link";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +14,7 @@ export default function NavBar() {
   };
 
   return (
-    <header className="bg-black p-4">
+    <header className="bg-black p-4 sticky top-0">
       <div className="max-w-7xl mx-auto">
         <div className="flex lg:flex justify-between items-center">
           <FaWhatsapp className="inline-block text-2xl text-amber-400 animate-pulse lg:hidden" />
@@ -25,12 +26,30 @@ export default function NavBar() {
             className="rounded-3xl hover:animate-spin"
           />
           <nav className="hidden lg:flex gap-8 text-white font-semibold">
-            <div className="hover:text-amber-400 cursor-pointer">Acasa</div>
-            <div className="hover:text-amber-400 cursor-pointer">Produse</div>
-            <div className="hover:text-amber-400 cursor-pointer">
+            <Link
+              href={"#acasa"}
+              className="hover:text-amber-400 cursor-pointer"
+            >
+              Acasa
+            </Link>
+            <Link
+              href={"#produse"}
+              className="hover:text-amber-400 cursor-pointer"
+            >
+              Produse
+            </Link>
+            <Link
+              href={"#desprenoi"}
+              className="hover:text-amber-400 cursor-pointer"
+            >
               Despre Noi
-            </div>
-            <div className="hover:text-amber-400 cursor-pointer">Recenzii</div>
+            </Link>
+            <Link
+              href={"#recenzii"}
+              className="hover:text-amber-400 cursor-pointer"
+            >
+              Recenzii
+            </Link>
           </nav>
           <button className="hidden lg:flex  p-2 text-white bg-green-600 hover:bg-green-800 rounded-xl shadow-md hover:shadow-green-900 font-semibold">
             <FaWhatsapp className="inline-block mr-1 text-2xl" />
@@ -50,10 +69,18 @@ export default function NavBar() {
           }`}
         >
           <nav className="flex flex-col mt-4 gap-4 text-sm font-semibold text-amber-400">
-            <div>Acasa</div>
-            <div>Produse</div>
-            <div>Despre Noi</div>
-            <div>Recenzii</div>
+            <Link href={"#acasa"} className="cursor-pointer">
+              Acasa
+            </Link>
+            <Link href={"#produse"} className="cursor-pointer">
+              Produse
+            </Link>
+            <Link href={"#desprenoi"} className="cursor-pointer">
+              Despre Noi
+            </Link>
+            <Link href={"#recenzii"} className="cursor-pointer">
+              Recenzii
+            </Link>
           </nav>
         </div>
       </div>
