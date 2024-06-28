@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
 
 const Produse2 = () => {
   return (
-    <section id="produse" className="bg-gray-900 pb-10">
+    <section id="Produse" className="bg-gray-900 pb-10">
       <div className="text-3xl text-center pb-8 pt-8 text-white text-shadow">
         Produse
       </div>

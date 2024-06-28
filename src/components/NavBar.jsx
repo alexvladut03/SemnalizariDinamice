@@ -27,25 +27,25 @@ export default function NavBar() {
           />
           <nav className="hidden lg:flex gap-8 text-white font-semibold">
             <Link
-              href={"#acasa"}
+              href={"#Acasa"}
               className="hover:text-amber-400 cursor-pointer"
             >
               Acasa
             </Link>
             <Link
-              href={"#produse"}
+              href={"#Produse"}
               className="hover:text-amber-400 cursor-pointer"
             >
               Produse
             </Link>
             <Link
-              href={"#desprenoi"}
+              href={"#Despre-noi"}
               className="hover:text-amber-400 cursor-pointer"
             >
               Despre Noi
             </Link>
             <Link
-              href={"#recenzii"}
+              href={"#Recenzii"}
               className="hover:text-amber-400 cursor-pointer"
             >
               Recenzii
@@ -69,16 +69,16 @@ export default function NavBar() {
           }`}
         >
           <nav className="flex flex-col mt-4 gap-4 text-sm font-semibold text-amber-400">
-            <Link href={"#acasa"} className="cursor-pointer">
+            <Link href={"#Acasa"} className="cursor-pointer">
               Acasa
             </Link>
-            <Link href={"#produse"} className="cursor-pointer">
+            <Link href={"#Produse"} className="cursor-pointer">
               Produse
             </Link>
-            <Link href={"#desprenoi"} className="cursor-pointer">
+            <Link href={"#Despre-noi"} className="cursor-pointer">
               Despre Noi
             </Link>
-            <Link href={"#recenzii"} className="cursor-pointer">
+            <Link href={"#Recenzii"} className="cursor-pointer">
               Recenzii
             </Link>
           </nav>

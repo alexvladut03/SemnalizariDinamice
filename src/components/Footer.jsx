@@ -6,7 +6,10 @@ import { FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <div className="grid justify-items-stretch bg-black  text-white font-light p-20 text-xs lg:text-lg">
+    <footer
+      id="Recenzii"
+      className="grid justify-items-stretch bg-black  text-white font-light p-20 text-xs lg:text-lg"
+    >
       <hr></hr>
 
       <div className="grid grid-cols-2 pt-3 ">
@@ -55,6 +58,6 @@ export default function Footer() {
           </p>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
