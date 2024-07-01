@@ -1,7 +1,15 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-const ProduseCard2 = ({ pImageSrc, pName, pPrice }) => {
+const ProduseCard2 = ({ pImageSrc, pName, pPrice, pId }) => {
+  const router = useRouter();
+
+  const onClickGoToId = () => {
+    router.push(`/products/${pId}`);
+  };
+
   return (
     <div className="bg-gray-800 md:w-1/4 lg:hover:shadow-amber-400 shadow-md border-2 border-black m-4 rounded-2xl transition-shadow duration-200 text-white">
       <Image
@@ -19,7 +27,10 @@ const ProduseCard2 = ({ pImageSrc, pName, pPrice }) => {
           <p className="font-bold">{pPrice}</p>
         </div>
         <div className="flex justify-center">
-          <button className="p-1 px-3 text-white bg-amber-400 rounded-xl font-semibold border-2 border-black hover:shadow-amber-400 shadow-sm ">
+          <button
+            onClick={onClickGoToId}
+            className="p-1 px-3 text-white bg-amber-400 rounded-xl font-semibold border-2 border-black hover:shadow-amber-400 shadow-sm"
+          >
             Arata Detalii
           </button>
         </div>
