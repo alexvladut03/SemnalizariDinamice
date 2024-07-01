@@ -2,7 +2,10 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="relative pt-48 pb-12 overflow-hidden bg-black xl:pt-60 sm:pb-16 lg:pb-32 xl:pb-48 2xl:pb-56">
+    <div
+      id="Acasa"
+      className="relative pt-48 pb-12 overflow-hidden bg-black xl:pt-60 sm:pb-16 lg:pb-32 xl:pb-48 2xl:pb-56"
+    >
       <div className="absolute inset-0 bg-black z-10 animate-waveSlideBlack"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-transparent from-0% via-yellow-500 via-10% to-black to-20% z-10 animate-waveSlideYellow"></div>
 
