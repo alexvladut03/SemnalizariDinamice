@@ -1,30 +1,38 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
-const ProduseCard2 = ({ pImageSrc, pName, pPrice }) => {
+const ProduseCard2 = ({ name, image, price }) => {
   return (
-    <div className="bg-gray-800 md:w-1/4 lg:hover:shadow-amber-400 shadow-md border-2 border-black m-4 rounded-2xl transition-shadow duration-200 text-white">
-      <Image
-        src={pImageSrc}
-        alt={pName}
-        width={500}
-        height={500}
-        className="rounded-t-2xl p-2 h-[250px] w-full object-cover"
-      />
-      <div className="px-3 py-4 flex flex-col justify-between h-[150px]">
-        <div className="flex flex-col items-center">
-          <p className="text-center">{pName}</p>
-        </div>
-        <div className="flex flex-col items-center">
-          <p className="font-bold">{pPrice}</p>
-        </div>
-        <div className="flex justify-center">
-          <button className="p-1 px-3 text-white bg-amber-400 rounded-xl font-semibold border-2 border-black hover:shadow-amber-400 shadow-sm ">
-            Arata Detalii
-          </button>
+    <Link
+      href="/produse"
+      className="group relative border border-grey-500 flex justify-between flex-col rounded-lg p-6 overflow-hidden"
+    >
+      <div className="relative block">
+        <Image
+          src={image}
+          alt={name}
+          width={200}
+          height={200}
+          className="w-3/4 mx-auto sm:w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+        />
+        <div>
+          <span className="whitespace-nowrap bg-yellow-400 absolute top-0 h-8 w-14 rounded-lg flex items-center justify-center text-xs font-medium">
+            {" "}
+            Nou{" "}
+          </span>
+          <h3 className="mt-4 text-lg font-medium text-gray-900">{name}</h3>
         </div>
       </div>
-    </div>
+      <div className="flex flex-col gap-3">
+        <p className="mt-1.5 text-md text-gray-700 font-bold">{price}</p>
+        <form>
+          <button className="block w-full rounded bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+            Adauga in cos
+          </button>
+        </form>
+      </div>
+    </Link>
   );
 };
 

@@ -1,40 +1,24 @@
-// components/Produse2.js
-
-import React from "react";
 import ProductCard from "./ProductCard";
+import { products } from "@/lib/utils/products";
 
 const Produse2 = () => {
   return (
-    <section id="Produse" className=" pb-10">
-      <div className="text-3xl text-center pb-8 pt-8 text-white text-shadow">
-        Produse
+    <section id="Produse" className="my-28 max-w-7xl mx-auto px-6 xl:px-0">
+      <div className="pb-12 text-center text-black">
+        <p>PRODUSE</p>
+        <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight text-black">
+          Accesorii și Echipamente Auto
+        </h2>
       </div>
-      <div className="flex lg:max-w-7xl lg:mx-auto justify-center flex-wrap lg:flex-nowrap">
-        <ProductCard
-          pImageSrc={"/img/CapaceNegreMiciAudi.webp"}
-          pName={"Capace Audi Negre 60mm"}
-          pPrice={"80 RON"}
-        />
-        <ProductCard
-          pImageSrc={"/img/CapaceNegreAudi.webp"}
-          pName={"Capace Audi Negre Stea"}
-          pPrice={"100 RON"}
-        />
-        <ProductCard
-          pImageSrc={"/img/CapaceGriAudi.webp"}
-          pName={"Capace Audi Gri Stea"}
-          pPrice={"100 RON"}
-        />
-        <ProductCard
-          pImageSrc={"/img/SemnalizariDinamiceB8.5.webp"}
-          pName={"Semnalizari Dinamice Audi B8.5"}
-          pPrice={"150 RON"}
-        />
-        <ProductCard
-          pImageSrc={"/img/SemnalizariDinamiceB8.webp"}
-          pName={"Semnalizari Dinamice Audi B8"}
-          pPrice={"150 RON"}
-        />
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-strech">
+        {products.map((product) => (
+          <ProductCard
+            key={product.productID}
+            image={product.productImage}
+            name={product.productName}
+            price={product.productPrice}
+          />
+        ))}
       </div>
     </section>
   );

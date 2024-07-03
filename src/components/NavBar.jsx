@@ -17,13 +17,12 @@ export default function NavBar() {
     <header className="bg-black p-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto">
         <div className="flex lg:flex justify-between items-center">
-          <FaWhatsapp className="inline-block text-2xl text-amber-400 animate-pulse lg:hidden" />
           <Image
-            src="/Logo.jpeg"
-            width={50}
-            height={50}
+            src="/logo.png"
+            width={120}
+            height={180}
             alt="Logo"
-            className="rounded-3xl hover:animate-spin"
+            className="rounded-3xl"
           />
           <nav className="hidden lg:flex gap-8 text-white font-semibold">
             <Link
@@ -57,9 +56,9 @@ export default function NavBar() {
           </button>
           <div className="lg:hidden" onClick={checkOpen}>
             {isOpen ? (
-              <IoCloseOutline className="text-2xl animate-pulse text-amber-400" />
+              <IoCloseOutline className="text-2xl text-yellow-500" />
             ) : (
-              <RxHamburgerMenu className="text-xl animate-pulse text-amber-400" />
+              <RxHamburgerMenu className="text-xl text-yellow-500" />
             )}
           </div>
         </div>

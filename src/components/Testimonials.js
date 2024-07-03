@@ -2,11 +2,14 @@ import React from "react";
 
 const Testimonials = () => {
   return (
-    <section id="Recenzii" className="bg-white">
-      <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <h2 className="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Read trusted reviews from our customers
-        </h2>
+    <section id="Recenzii" className="py-28">
+      <div className="max-w-7xl mx-auto px-6 xl:px-0">
+        <div className="pb-12 text-center text-black">
+          <p>TESTIMONIALE</p>
+          <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight">
+            Citiți Recenzii de Încredere de la Clienții Noștri Auto
+          </h2>
+        </div>
 
         <div className="mt-8 [column-fill:_balance] sm:columns-2 sm:gap-6 lg:columns-3 lg:gap-8">
           <div className="mb-8 sm:break-inside-avoid">
