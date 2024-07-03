@@ -1,5 +1,5 @@
 import ProductCard from "./ProductCard";
-import { products } from "@/lib/utils/products";
+import products from "./data/products";
 
 const Produse2 = () => {
   return (
@@ -13,10 +13,11 @@ const Produse2 = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-strech">
         {products.map((product) => (
           <ProductCard
-            key={product.productID}
-            image={product.productImage}
-            name={product.productName}
-            price={product.productPrice}
+            key={product.id}
+            id={product.id}
+            image={product.imageSrc}
+            name={product.name}
+            price={product.price}
           />
         ))}
       </div>

@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const ProduseCard2 = ({ name, image, price }) => {
+const ProduseCard2 = ({ name, image, price, id }) => {
   return (
     <Link
-      href="/produse"
+      href={`/produse/${id}`}
       className="group relative border border-grey-500 flex justify-between flex-col rounded-lg p-6 overflow-hidden"
     >
       <div className="relative block">

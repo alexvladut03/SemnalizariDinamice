@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import products from "@/components/data/[products]";
+import products from "@/components/data/products";
 import Image from "next/image";
 
 const ProductDetails = () => {
