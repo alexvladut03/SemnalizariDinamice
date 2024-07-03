@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -16,7 +17,7 @@ export default function NavBar() {
   return (
     <header className="bg-black p-4 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto">
-        <div className="flex lg:flex justify-between items-center">
+        <div className="flex justify-between items-center">
           <FaWhatsapp className="inline-block text-2xl text-amber-400 animate-pulse lg:hidden" />
           <Image
             src="/Logo.jpeg"
@@ -27,31 +28,31 @@ export default function NavBar() {
           />
           <nav className="hidden lg:flex gap-8 text-white font-semibold">
             <Link
-              href={"#Acasa"}
+              href="/#Acasa"
               className="hover:text-amber-400 cursor-pointer"
             >
               Acasa
             </Link>
             <Link
-              href={"#Produse"}
+              href="/#Produse"
               className="hover:text-amber-400 cursor-pointer"
             >
               Produse
             </Link>
             <Link
-              href={"#Despre-noi"}
+              href="/#Despre-noi"
               className="hover:text-amber-400 cursor-pointer"
             >
               Despre Noi
             </Link>
             <Link
-              href={"#Recenzii"}
+              href="/#Recenzii"
               className="hover:text-amber-400 cursor-pointer"
             >
               Recenzii
             </Link>
           </nav>
-          <button className="hidden lg:flex  p-2 text-white bg-green-600 hover:bg-green-800 rounded-xl shadow-md hover:shadow-green-900 font-semibold">
+          <button className="hidden lg:flex p-2 text-white bg-green-600 hover:bg-green-800 rounded-xl shadow-md hover:shadow-green-900 font-semibold">
             <FaWhatsapp className="inline-block mr-1 text-2xl" />
             <p>WhatsApp</p>
           </button>
@@ -69,16 +70,16 @@ export default function NavBar() {
           }`}
         >
           <nav className="flex flex-col mt-4 gap-4 text-sm font-semibold text-amber-400">
-            <Link href={"#Acasa"} className="cursor-pointer">
+            <Link href="/#Acasa" className="cursor-pointer">
               Acasa
             </Link>
-            <Link href={"#Produse"} className="cursor-pointer">
+            <Link href="/#Produse" className="cursor-pointer">
               Produse
             </Link>
-            <Link href={"#Despre-noi"} className="cursor-pointer">
+            <Link href="/#Despre-noi" className="cursor-pointer">
               Despre Noi
             </Link>
-            <Link href={"#Recenzii"} className="cursor-pointer">
+            <Link href="/#Recenzii" className="cursor-pointer">
               Recenzii
             </Link>
           </nav>
