@@ -30,7 +30,12 @@ const page = ({ params }) => {
           <div>
             <h1 className="text-2xl font-bold mb-4">{product.name}</h1>
             <p className="text-xl font-semibold mb-4">{product.price}</p>
+            <p className="text-2xl font-bold mb-4">Descriere</p>
             <p className="mb-4">{product.description}</p>
+            <p className="text-2xl font-bold mb-4">Compatibilitate</p>
+            <p className="">{product.fitment}</p>
+            <p className="text-2xl font-bold mb-4">Caracteristici</p>
+            <p className="">{product.characteristics}</p>
             <button className="p-2 px-4 text-white bg-amber-400 rounded-lg font-semibold border-2 border-black hover:shadow-amber-400 shadow-sm mt-4 md:mt-0 self-start md:self-end">
               Adaugă în coș
             </button>
