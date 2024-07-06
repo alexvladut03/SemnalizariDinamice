@@ -1,6 +1,6 @@
 import React from "react";
-import Video from "./custom ui/video";
-import { Button } from "./ui/button";
+import Video from "../custom ui/video";
+import { Button } from "../ui/button";
 
 const Hero = () => {
   return (
