@@ -6,40 +6,49 @@ const products = [
     imageSrc: "/img/CapaceNegreMiciAudi.webp",
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
-    fitment: "Compatibile cu jante Audi de 60mm",
+    fitment:
+      "Capacele se potrivesc in mod alternativ oricarui model Audi cu diametrul de 60 mm",
     characteristics: [
-      "Diametru: 60mm",
-      "Material: ABS+Aluminiu",
-      "Culoare: Negru ",
-      "Impermeabile: 100%",
+      "Set: 4 capace",
+      "Model auto: Audi",
+      "Material: ABS",
+      "Culoare: negru/crom",
+      "Rezistenta la radiatii UV si agenti chimici",
+      "Dimensiuni: 60mm",
     ],
   },
   {
     id: "capace-audi-negre-stea",
-    name: "Capace Audi Negre Stea",
+    name: "Capace Audi Negre Tip Stea 135mm",
     price: "100 RON",
     imageSrc: "/img/CapaceNegreAudi.webp",
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
-    fitment: "Compatibile cu jante Audi de tip stea",
+    fitment: "Compatibile cu jante Audi OEM",
     characteristics: [
-      "Material: ABS+Aluminiu",
-      "Culoare: Negru",
+      "Diametru exterior 135 MM",
+      "Material: Plastic ABS",
       "Impermeabile: 100%",
+      "Culoare: Negru",
+      "Rezistent la radiatiile UV si agenti chimici",
+      "Pretul afisat este pentru set 4 bucati",
     ],
   },
   {
     id: "capace-audi-gri-stea",
-    name: "Capace Audi Gri Stea",
+    name: "Capace Audi Gri Tip Stea 135mm",
     price: "100 RON",
     imageSrc: "/img/CapaceGriAudi.webp",
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
     fitment: "Compatibile cu jante Audi de tip stea",
     characteristics: [
-      "Material: ABS+Aluminiu",
-      "Culoare: Gri",
+      "Diametru exterior 135 MM",
+      "Material: Plastic ABS",
       "Impermeabile: 100%",
+      "Culoare: Gri",
+      "Rezistent la radiatiile UV si agenti chimici",
+      "Pretul afisat este pentru set 4 bucati",
     ],
   },
   {
@@ -49,12 +58,23 @@ const products = [
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
-    fitment: "Compatibile cu Audi B8.5",
+    fitment: [
+      "Audi A4 B8.5 (2011—2016)",
+      "Audi A5 B8.5 (2010—-2016)",
+      "Audi S5 2010-2016",
+      "Audi A3 8P B8.5 (2010-2013)",
+      "Audi RS3 2012",
+      "Audi RS4 2013 2014",
+      "Audi RS5 2011-2016",
+    ],
     characteristics: [
       "Culoarea luminii: Galben",
       "Efect vizual: Flux de apă",
       "Instalare: Înlocuire directă",
       "Impermeabile: 100%",
+      "Nu este necesara codificarea",
+      "Cu suprafata mata rezistenta la zgarieturi",
+      "X2 bucati semnalizare stanga/dreapta",
     ],
   },
   {
@@ -64,12 +84,22 @@ const products = [
     imageSrc: "/img/SemnalizariDinamiceB8.webp",
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
-    fitment: "Compatibile cu Audi B8",
+    fitment: [
+      "A4 / S4 2008-2009 B8",
+      "A5 / S5 2007-2009 B8",
+      "A6 / S6 2008-2011 C6 ",
+      "A8 / S8 2008-2010 D3",
+      "Q3 / SQ3 2012-2015",
+      "A3 8P 2008-2010 ",
+    ],
     characteristics: [
       "Culoarea luminii: Galben",
       "Efect vizual: Flux de apă",
       "Instalare: Înlocuire directă",
       "Impermeabile: 100%",
+      "Nu este necesara codificarea",
+      "Cu suprafata mata rezistenta la zgarieturi",
+      "X2 bucati semnalizare stanga/dreapta",
     ],
   },
   {
@@ -78,13 +108,18 @@ const products = [
     price: "100 RON",
     imageSrc: "",
     description:
-      "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
-    fitment: "Compatibile cu Audi C7",
+      "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
+    fitment: ["A6 C7 2011-2015", "A6 C7.5 Facelift 2015-2018"],
     characteristics: [
       "Culoarea luminii: Galben",
       "Efect vizual: Flux de apă",
       "Instalare: Înlocuire directă",
       "Impermeabile: 100%",
+      "Nu este necesara codificarea",
+      "Cu suprafata mata rezistenta la zgarieturi",
+      "X2 bucati semnalizare stanga/dreapta",
+      "Nu dau eroare de bec ars (Canbus)",
+      "Durata de viata: 50000 ore",
     ],
   },
   {
@@ -93,7 +128,7 @@ const products = [
     price: "100 RON",
     imageSrc: "",
     description:
-      "Aceste embleme de spate sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Emblemele full negre sunt ideale pentru cei care doresc să aducă un plus de rafinament și personalitate mașinii lor.",
+      "Aceste embleme de spate sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău. Emblemele full negre sunt ideale pentru cei care doresc să aducă un plus de rafinament și personalitate mașinii lor.",
     fitment:
       "Compatibile cu modelele Audi cu dimensiunea emblemei spate de 192mm",
     characteristics: [
