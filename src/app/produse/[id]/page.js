@@ -13,8 +13,9 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { LiaShippingFastSolid } from "react-icons/lia";
-import { MdOutlineVerifiedUser } from "react-icons/md";
+
+import { MdOutlineLocalShipping, MdOutlineVerifiedUser } from "react-icons/md";
+import { FaCartPlus, FaHeart } from "react-icons/fa6";
 
 const Page = ({ params }) => {
   const { id } = params;
@@ -149,15 +150,24 @@ const Page = ({ params }) => {
           </div>
           <div className="flex flex-col items-start text-gray-700 border border-amber-500 p-4 max-w-full lg:max-w-80 rounded-lg">
             <div className=" font-semibold">
-              <div className="flex">
-                <LiaShippingFastSolid className="text-2xl mr-2" />
-                <p>Transport gratuit la comenzi mai mari de 150 de lei</p>
+              <div className="flex mb-2">
+                <MdOutlineLocalShipping className="text-xl mr-2" />
+                <p>
+                  Transport Gratuit.
+                  <br></br>
+                  <span className="text-sm text-gray-600">
+                    La plăți mai mari de 150 RON.
+                  </span>
+                </p>
               </div>
               <div className="flex">
-                <MdOutlineVerifiedUser className="text-2xl mr-2" />
+                <MdOutlineVerifiedUser className="text-xl mr-2" />
                 <p>
-                  Securitate și confidențialitate, plăți securizate ,detalii
-                  personale securizate
+                  Securitate & Confidențialitate.
+                  <br></br>
+                  <span className="text-sm text-gray-600">
+                    Plăți securizate. Detalii personale securizate.
+                  </span>
                 </p>
               </div>
               <hr className="border-amber-500 mt-3" />
@@ -192,57 +202,72 @@ const Page = ({ params }) => {
                 <CiCirclePlus />
               </button>
             </div>
-            <p className="pt-2">Vândut de: Magazinul nostru</p>
+
             <p className="pt-2">{`Disponibilitate: În stoc ${stock}`}</p>
-            <button className="mt-3 p-2 px-4 w-full text-white bg-amber-400 rounded-lg font-semibold border-2 border-black hover:shadow-amber-400 shadow-sm">
-              Cumpara acum
+
+            <button className="flex gap-2 items-center justify-center w-full rounded-lg bg-amber-500 p-4 text-sm font-medium transition hover:scale-105 mt-5 mb-5">
+              <FaCartPlus className="text-xl " />
+              Cumpara Acum
             </button>
-            <button className="mt-3 p-2 px-4 w-full text-white bg-amber-400 rounded-lg font-semibold border-2 border-black hover:shadow-amber-400 shadow-sm">
-              Adaugă în coș
+            <button className="flex gap-2 items-center justify-center w-full rounded-lg bg-amber-200 p-4 text-sm font-medium transition hover:scale-105">
+              <FaHeart className="text-xl " />
+              Adauga in cos
             </button>
           </div>
         </section>
 
-        <section className="bg-black text-white p-6">
+        <section className="bg-black text-white p-4 rounded-lg mb-10">
           <div className="flex gap-4 flex-wrap">
             <p
               onClick={() => setActiveSection("descriere")}
-              className={`text-2xl font-bold mb-4 cursor-pointer ${
-                activeSection === "descriere" ? "font-bold underline" : ""
+              className={`text-2xl font-bold  cursor-pointer p-2 ${
+                activeSection === "descriere"
+                  ? "font-bold bg-white text-black rounded-t-lg "
+                  : ""
               }`}
             >
               Descriere
             </p>
             <p
               onClick={() => setActiveSection("compatibilitate")}
-              className={`text-2xl font-bold mb-4 cursor-pointer ${
-                activeSection === "compatibilitate" ? "font-bold underline" : ""
+              className={`text-2xl font-bold  cursor-pointer p-2 ${
+                activeSection === "compatibilitate"
+                  ? "font-bold bg-white text-black rounded-t-lg "
+                  : ""
               }`}
             >
               Compatibilitate
             </p>
             <p
               onClick={() => setActiveSection("caracteristici")}
-              className={`text-2xl font-bold mb-4 cursor-pointer ${
-                activeSection === "caracteristici" ? "font-bold underline" : ""
+              className={`text-2xl font-bold  cursor-pointer p-2 ${
+                activeSection === "caracteristici"
+                  ? "font-bold bg-white text-black rounded-t-lg "
+                  : ""
               }`}
             >
               Caracteristici
             </p>
           </div>
           {activeSection === "descriere" && (
-            <p className="mb-4">{product.description}</p>
+            <p className="mb-4 bg-white text-black p-4 rounded-b-lg rounded-r-lg">
+              {product.description}
+            </p>
           )}
           {activeSection === "compatibilitate" && (
             <div
-              className="mb-4"
+              className="mb-4 bg-white text-black p-4 rounded-lg"
               dangerouslySetInnerHTML={{ __html: product.fitment }}
             ></div>
           )}
-          {activeSection === "caracteristici" &&
-            product.characteristics.map((characteristic, index) => (
-              <p key={index}>{characteristic}</p>
-            ))}
+
+          {activeSection === "caracteristici" && (
+            <div className="bg-white text-black p-4 rounded-lg">
+              {product.characteristics.map((characteristic, index) => (
+                <p key={index}>{characteristic}</p>
+              ))}
+            </div>
+          )}
         </section>
       </div>
     </main>
