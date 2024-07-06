@@ -58,15 +58,16 @@ const products = [
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
-    fitment: [
-      "Audi A4 B8.5 (2011—2016)",
-      "Audi A5 B8.5 (2010—-2016)",
-      "Audi S5 2010-2016",
-      "Audi A3 8P B8.5 (2010-2013)",
-      "Audi RS3 2012",
-      "Audi RS4 2013 2014",
-      "Audi RS5 2011-2016",
-    ],
+    fitment: `
+      <ul>
+        <li>Audi A4 B8.5 (2011—2016)</li>
+        <li>Audi A5 B8.5 (2010—2016)</li>
+        <li>Audi S5 2010-2016</li>
+        <li>Audi A3 8P B8.5 (2010-2013)</li>
+        <li>Audi RS3 2012</li>
+        <li>Audi RS4 2013 2014</li>
+        <li>Audi RS5 2011-2016</li>
+      </ul>`,
     characteristics: [
       "Culoarea luminii: Galben",
       "Efect vizual: Flux de apă",
