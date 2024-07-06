@@ -13,6 +13,8 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { LiaShippingFastSolid } from "react-icons/lia";
+import { MdOutlineVerifiedUser } from "react-icons/md";
 
 const Page = ({ params }) => {
   const { id } = params;
@@ -146,8 +148,18 @@ const Page = ({ params }) => {
             </div>
           </div>
           <div className="flex flex-col items-start text-gray-700 border border-amber-500 p-4 max-w-full lg:max-w-80 rounded-lg">
-            <div className="font-semibold">
-              Transport gratuit la comenzi mai mari de 150 de lei
+            <div className=" font-semibold">
+              <div className="flex">
+                <LiaShippingFastSolid className="text-2xl mr-2" />
+                <p>Transport gratuit la comenzi mai mari de 150 de lei</p>
+              </div>
+              <div className="flex">
+                <MdOutlineVerifiedUser className="text-2xl mr-2" />
+                <p>
+                  Securitate și confidențialitate, plăți securizate ,detalii
+                  personale securizate
+                </p>
+              </div>
               <hr className="border-amber-500 mt-3" />
             </div>
             <p className="font-semibold pt-2">Cantitate</p>
