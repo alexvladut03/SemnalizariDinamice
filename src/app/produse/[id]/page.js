@@ -23,8 +23,6 @@ const Page = ({ params }) => {
     "/img/SemnalizariDinamiceB8.5.webp",
   ];
 
-  const stock = 10;
-
   return (
     <main className="bg-white">
       <div className="max-w-7xl mx-auto">
@@ -32,7 +30,7 @@ const Page = ({ params }) => {
         <section className="grid sm:grid-cols-1 lg:grid-cols-3 justify-items-center pb-5 items-center">
           <ProductImages name={product.name} images={product.gallery} />
           <ProductPrice price={product.price} id={product.id} images={images} />
-          <ProductBuy stock={stock} />
+          <ProductBuy stock={product.stock} />
         </section>
 
         <ProductDetails

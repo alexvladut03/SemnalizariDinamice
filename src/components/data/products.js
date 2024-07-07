@@ -4,6 +4,7 @@ const products = [
     category: "Capace-Audi",
     name: "Capace Audi Negre 60mm",
     price: "80 RON",
+    stock: 10,
     imageSrc: "/img/CapaceNegreMiciAudi.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -28,6 +29,7 @@ const products = [
     category: "Capace-Audi",
     name: "Capace Audi Negre Tip Stea 135mm",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/CapaceNegreAudi.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -53,6 +55,7 @@ const products = [
     category: "Capace-Audi",
     name: "Capace Audi Gri Tip Stea 135mm",
     price: "100 RON",
+    stock: 3,
     imageSrc: "/img/CapaceGriAudi.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -77,6 +80,7 @@ const products = [
     id: "semnalizari-dinamice-audi-b8-5",
     name: "Semnalizari Dinamice Audi B8.5",
     price: "150 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -111,6 +115,7 @@ const products = [
     id: "semnalizari-dinamice-audi-b8",
     name: "Semnalizari Dinamice Audi B8",
     price: "150 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -143,6 +148,7 @@ const products = [
     id: "semnalizari-dinamice-audi-c7",
     name: "Semnalizari dinamice Audi C7",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -170,6 +176,7 @@ const products = [
     id: "emblema-spate-audi-192mm",
     name: "Emblema spate 192mm",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -192,6 +199,7 @@ const products = [
     id: "emblema-audi-fata-273mm",
     name: "Emblema Audi fata 273mm",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -215,6 +223,7 @@ const products = [
     category: "Capace-Audi",
     name: "Capace Audi rotunde Black cu rama argintie 61mm",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -238,6 +247,7 @@ const products = [
     category: "Capace-Audi",
     name: "Capace Audi gri 60mm",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -260,6 +270,7 @@ const products = [
     id: "prosop-audi-l",
     name: "Prosop Audi L",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -281,6 +292,7 @@ const products = [
     id: "semnalizari-dinamice-bmw-f10",
     name: "Semnalizari dinamice BMW F10",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -303,6 +315,7 @@ const products = [
     id: "semnalizari-dinamice-bmw-f30",
     name: "Semnalizari dinamice BMW F30",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -325,6 +338,7 @@ const products = [
     id: "semnalizari-dinamice-golf-5",
     name: "Semnalizari dinamice Golf 5",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
@@ -347,6 +361,7 @@ const products = [
     id: "semnalizari-dinamice-golf-7",
     name: "Semnalizari dinamice Golf 7",
     price: "100 RON",
+    stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
