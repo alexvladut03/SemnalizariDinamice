@@ -1,9 +1,15 @@
 const products = [
   {
     id: "capace-audi-negre-60mm",
+    category: "Capace-Audi",
     name: "Capace Audi Negre 60mm",
     price: "80 RON",
     imageSrc: "/img/CapaceNegreMiciAudi.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+    ],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
     fitment:
@@ -19,9 +25,17 @@ const products = [
   },
   {
     id: "capace-audi-negre-stea",
+    category: "Capace-Audi",
     name: "Capace Audi Negre Tip Stea 135mm",
     price: "100 RON",
     imageSrc: "/img/CapaceNegreAudi.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
     fitment: "Compatibile cu jante Audi OEM",
@@ -36,9 +50,17 @@ const products = [
   },
   {
     id: "capace-audi-gri-stea",
+    category: "Capace-Audi",
     name: "Capace Audi Gri Tip Stea 135mm",
     price: "100 RON",
     imageSrc: "/img/CapaceGriAudi.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
     fitment: "Compatibile cu jante Audi de tip stea",
@@ -56,6 +78,13 @@ const products = [
     name: "Semnalizari Dinamice Audi B8.5",
     price: "150 RON",
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
     fitment: `
@@ -83,6 +112,13 @@ const products = [
     name: "Semnalizari Dinamice Audi B8",
     price: "150 RON",
     imageSrc: "/img/SemnalizariDinamiceB8.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
     fitment: [
@@ -107,7 +143,14 @@ const products = [
     id: "semnalizari-dinamice-audi-c7",
     name: "Semnalizari dinamice Audi C7",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
     fitment: ["A6 C7 2011-2015", "A6 C7.5 Facelift 2015-2018"],
@@ -127,7 +170,14 @@ const products = [
     id: "emblema-spate-audi-192mm",
     name: "Emblema spate 192mm",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste embleme de spate sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău. Emblemele full negre sunt ideale pentru cei care doresc să aducă un plus de rafinament și personalitate mașinii lor.",
     fitment:
@@ -142,7 +192,14 @@ const products = [
     id: "emblema-audi-fata-273mm",
     name: "Emblema Audi fata 273mm",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste embleme de fata sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Emblemele full negre sunt ideale pentru cei care doresc să aducă un plus de rafinament și personalitate mașinii lor.",
     fitment:
@@ -155,9 +212,17 @@ const products = [
   },
   {
     id: "capace-audi-rotunde-black-rama-argintie-61mm",
+    category: "Capace-Audi",
     name: "Capace Audi rotunde Black cu rama argintie 61mm",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
     fitment: "Compatibile cu jante Audi de 61mm",
@@ -170,9 +235,17 @@ const products = [
   },
   {
     id: "capace-audi-gri-60mm",
+    category: "Capace-Audi",
     name: "Capace Audi gri 60mm",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
     fitment: "Compatibile cu jante Audi de 60mm",
@@ -187,7 +260,14 @@ const products = [
     id: "prosop-audi-l",
     name: "Prosop Audi L",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Prosop Audi de dimensiune L. Material de calitate superioară, absorbție excelentă.",
     fitment: "Universal",
@@ -201,7 +281,14 @@ const products = [
     id: "semnalizari-dinamice-bmw-f10",
     name: "Semnalizari dinamice BMW F10",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău BMW. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
     fitment: "Compatibile cu BMW F10",
@@ -216,7 +303,14 @@ const products = [
     id: "semnalizari-dinamice-bmw-f30",
     name: "Semnalizari dinamice BMW F30",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău BMW. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
     fitment: "Compatibile cu BMW F30",
@@ -231,7 +325,14 @@ const products = [
     id: "semnalizari-dinamice-golf-5",
     name: "Semnalizari dinamice Golf 5",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului GOLF-ul  tau. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
     fitment: "Compatibile cu Golf 5",
@@ -246,7 +347,14 @@ const products = [
     id: "semnalizari-dinamice-golf-7",
     name: "Semnalizari dinamice Golf 7",
     price: "100 RON",
-    imageSrc: "",
+    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    gallery: [
+      "/img/CapaceNegreMiciAudi.webp",
+      "/img/CapaceNegreAudi.webp",
+      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+    ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului GOLF-ul  tau. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
     fitment: "Compatibile cu Golf 7",

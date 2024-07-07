@@ -1,19 +1,28 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const ProductImages = ({ name, images }) => {
   const [activeImage, setActiveImage] = useState(0);
+  const imageContainerRef = useRef(null);
+
+  const scrollAmount = 90; // Image width + margin
 
   const setNextImage = () => {
-    setActiveImage((prevIndex) => (prevIndex + 1) % images.length);
+    setActiveImage((prevIndex) => {
+      const newIndex = (prevIndex + 1) % images.length;
+      imageContainerRef.current.scrollLeft += scrollAmount;
+      return newIndex;
+    });
   };
 
   const setPreviousImage = () => {
-    setActiveImage((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
+    setActiveImage((prevIndex) => {
+      const newIndex = prevIndex === 0 ? images.length - 1 : prevIndex - 1;
+      imageContainerRef.current.scrollLeft -= scrollAmount;
+      return newIndex;
+    });
   };
 
   return (
@@ -35,19 +44,29 @@ const ProductImages = ({ name, images }) => {
         >
           <FaArrowLeft />
         </button>
-        {images.map((image, index) => (
-          <Image
-            key={index}
-            src={image}
-            alt={name}
-            width={80}
-            height={80}
-            className={`rounded-lg hover:border-2 border-amber-500 ${
-              index === activeImage ? "border-amber-500" : ""
-            }`}
-            onClick={() => setActiveImage(index)}
-          />
-        ))}
+        <div
+          className="flex overflow-x-hidden"
+          ref={imageContainerRef}
+          style={{ scrollBehavior: "smooth" }}
+        >
+          {images.map((image, index) => (
+            <Image
+              key={index}
+              src={image}
+              alt={name}
+              width={80}
+              height={80}
+              className={`rounded-lg hover:border-2 border-amber-500 cursor-pointer ${
+                index === activeImage ? "border-amber-500" : ""
+              }`}
+              onClick={() => {
+                setActiveImage(index);
+                const offset = index * scrollAmount;
+                imageContainerRef.current.scrollLeft = offset;
+              }}
+            />
+          ))}
+        </div>
         <button
           onClick={setNextImage}
           disabled={activeImage === images.length - 1}

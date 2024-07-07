@@ -20,6 +20,7 @@ const Page = ({ params }) => {
     "/img/CapaceNegreAudi.webp",
     "/img/CapaceGriAudi.webp",
     "/img/SemnalizariDinamiceB8.5.webp",
+    "/img/SemnalizariDinamiceB8.5.webp",
   ];
 
   const stock = 10;
@@ -29,7 +30,7 @@ const Page = ({ params }) => {
       <div className="max-w-7xl mx-auto">
         <ProductTitle title={product.name} />
         <section className="grid sm:grid-cols-1 lg:grid-cols-3 justify-items-center pb-5 items-center">
-          <ProductImages name={product.name} images={images} />
+          <ProductImages name={product.name} images={product.gallery} />
           <ProductPrice price={product.price} id={product.id} images={images} />
           <ProductBuy stock={stock} />
         </section>

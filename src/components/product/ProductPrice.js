@@ -16,7 +16,7 @@ const ProductPrice = ({ price, id, images }) => {
         <p>Retur: gratis pana la 15 zile</p>
         <hr className="border-t-2 border-amber-500 my-4" />
       </div>
-      <div className="flex space-x-2">
+      <div className="grid grid-cols-4 gap-2">
         {images.map((image, index) => (
           <Image
             key={index}
