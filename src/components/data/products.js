@@ -8,8 +8,9 @@ const products = [
     imageSrc: "/img/CapaceNegreMiciAudi.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
-      "/img/CapaceGriAudi.webp",
+      "/img/CapaceNegreMiciAudiG1.webp",
+      "/img/CapaceNegreMiciAudiG2.webp",
+      "/img/CapaceNegreMiciAudiG3.webp",
     ],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
@@ -31,13 +32,7 @@ const products = [
     price: "100 RON",
     stock: 5,
     imageSrc: "/img/CapaceNegreAudi.webp",
-    gallery: [
-      "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
-      "/img/CapaceGriAudi.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
-    ],
+    gallery: ["/img/CapaceNegreAudi.webp", "/img/CapaceNegreAudiG1.webp"],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
     fitment: "Compatibile cu jante Audi OEM",
@@ -58,11 +53,10 @@ const products = [
     stock: 3,
     imageSrc: "/img/CapaceGriAudi.webp",
     gallery: [
-      "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
       "/img/CapaceGriAudi.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/CapaceGriAudiG1.webp",
+      "/img/CapaceGriAudiG2.webp",
+      "/img/CapaceGriAudiG3.webp",
     ],
     description:
       "Aceste capace centrale pentru roți sunt proiectate pentru a adăuga un aspect modern și sofisticat vehiculului tău Audi. Fiecare set include patru capace de roți, fabricate din materiale de înaltă calitate pentru a garanta durabilitatea și rezistența la intemperii.",
@@ -78,16 +72,17 @@ const products = [
   },
   {
     id: "semnalizari-dinamice-audi-b8-5",
+    category: "Semnalizari-Audi",
     name: "Semnalizari Dinamice Audi B8.5",
     price: "150 RON",
     stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
-      "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
-      "/img/CapaceGriAudi.webp",
       "/img/SemnalizariDinamiceB8.5.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5G1.webp",
+      "/img/SemnalizariDinamiceB8.5G2.webp",
+      "/img/SemnalizariDinamiceB8.5G3.webp",
+      "/img/SemnalizariDinamiceB8.5G2.webp",
     ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
@@ -113,16 +108,18 @@ const products = [
   },
   {
     id: "semnalizari-dinamice-audi-b8",
+    category: "Semnalizari-Audi",
     name: "Semnalizari Dinamice Audi B8",
     price: "150 RON",
     stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.webp",
     gallery: [
-      "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
-      "/img/CapaceGriAudi.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.webp",
+      "/img/SemnalizariDinamiceB8.5G1.webp",
+      "/img/SemnalizariDinamiceB8.5G2.webp",
+      "/img/SemnalizariDinamiceB8.5G3.webp",
+      "/img/SemnalizariDinamiceB8.5G2.webp",
+      "/img/SemnalizariDinamiceB8.5G3.webp",
     ],
     description:
       "Aceste semnalizări dinamice sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Setul include două bucăți (stânga și dreapta) și este prevăzut cu un design aerodinamic, adaptându-se perfect caroseriei mașinii tale.",
@@ -151,9 +148,8 @@ const products = [
     stock: 5,
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
-      "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
-      "/img/CapaceGriAudi.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/SemnalizariDinamiceB8.5.webp",
       "/img/SemnalizariDinamiceB8.5.webp",
       "/img/SemnalizariDinamiceB8.5.webp",
     ],
@@ -180,9 +176,7 @@ const products = [
     imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
     gallery: [
       "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
-      "/img/CapaceGriAudi.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
+
       "/img/SemnalizariDinamiceB8.5.webp",
     ],
     description:
@@ -205,8 +199,6 @@ const products = [
       "/img/CapaceNegreMiciAudi.webp",
       "/img/CapaceNegreAudi.webp",
       "/img/CapaceGriAudi.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
-      "/img/SemnalizariDinamiceB8.5.webp",
     ],
     description:
       "Aceste embleme de fata sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Emblemele full negre sunt ideale pentru cei care doresc să aducă un plus de rafinament și personalitate mașinii lor.",

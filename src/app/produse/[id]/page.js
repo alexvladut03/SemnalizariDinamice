@@ -15,13 +15,9 @@ const Page = ({ params }) => {
     notFound();
   }
 
-  const images = [
-    "/img/CapaceNegreMiciAudi.webp",
-    "/img/CapaceNegreAudi.webp",
-    "/img/CapaceGriAudi.webp",
-    "/img/SemnalizariDinamiceB8.5.webp",
-    "/img/SemnalizariDinamiceB8.5.webp",
-  ];
+  const filteredCategories = products.filter(
+    (prod) => prod.category === product.category
+  );
 
   return (
     <main className="bg-white">
@@ -29,7 +25,11 @@ const Page = ({ params }) => {
         <ProductTitle title={product.name} />
         <section className="grid sm:grid-cols-1 lg:grid-cols-3 justify-items-center pb-5 items-center">
           <ProductImages name={product.name} images={product.gallery} />
-          <ProductPrice price={product.price} id={product.id} images={images} />
+          <ProductPrice
+            price={product.price}
+            id={product.id}
+            filteredCategories={filteredCategories}
+          />
           <ProductBuy stock={product.stock} />
         </section>
 
