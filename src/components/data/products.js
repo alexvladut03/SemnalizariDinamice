@@ -143,6 +143,7 @@ const products = [
   },
   {
     id: "semnalizari-dinamice-audi-c7",
+    category: "Semnalizari-Audi",
     name: "Semnalizari dinamice Audi C7",
     price: "100 RON",
     stock: 5,
@@ -170,14 +171,15 @@ const products = [
   },
   {
     id: "emblema-spate-audi-192mm",
+    category: "Embleme-Audi",
     name: "Emblema spate 192mm",
     price: "100 RON",
     stock: 5,
-    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    imageSrc: "/img/EmblemaFataAudi.webp",
     gallery: [
-      "/img/CapaceNegreMiciAudi.webp",
-
-      "/img/SemnalizariDinamiceB8.5.webp",
+      "/img/EmblemaFataAudi.webp",
+      "/img/EmblemaFataAudiG1.webp",
+      "/img/EmblemaFataAudiG2.webp",
     ],
     description:
       "Aceste embleme de spate sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău. Emblemele full negre sunt ideale pentru cei care doresc să aducă un plus de rafinament și personalitate mașinii lor.",
@@ -191,14 +193,15 @@ const products = [
   },
   {
     id: "emblema-audi-fata-273mm",
+    category: "Embleme-Audi",
     name: "Emblema Audi fata 273mm",
     price: "100 RON",
     stock: 5,
-    imageSrc: "/img/SemnalizariDinamiceB8.5.webp",
+    imageSrc: "/img/EmblemaFataAudi.webp",
     gallery: [
-      "/img/CapaceNegreMiciAudi.webp",
-      "/img/CapaceNegreAudi.webp",
-      "/img/CapaceGriAudi.webp",
+      "/img/EmblemaFataAudi.webp",
+      "/img/EmblemaFataAudiG1.webp",
+      "/img/EmblemaFataAudiG2.webp",
     ],
     description:
       "Aceste embleme de fata sunt concepute pentru a oferi un aspect modern și elegant vehiculului tău Audi. Emblemele full negre sunt ideale pentru cei care doresc să aducă un plus de rafinament și personalitate mașinii lor.",
@@ -260,6 +263,7 @@ const products = [
   },
   {
     id: "prosop-audi-l",
+    category: "Prosop-Audi",
     name: "Prosop Audi L",
     price: "100 RON",
     stock: 5,
@@ -282,6 +286,7 @@ const products = [
   },
   {
     id: "semnalizari-dinamice-bmw-f10",
+    category: "Semnalizari-BMW",
     name: "Semnalizari dinamice BMW F10",
     price: "100 RON",
     stock: 5,
@@ -305,6 +310,7 @@ const products = [
   },
   {
     id: "semnalizari-dinamice-bmw-f30",
+    category: "Semnalizari-BMW",
     name: "Semnalizari dinamice BMW F30",
     price: "100 RON",
     stock: 5,
@@ -328,6 +334,7 @@ const products = [
   },
   {
     id: "semnalizari-dinamice-golf-5",
+    category: "Semnalizari-Golf",
     name: "Semnalizari dinamice Golf 5",
     price: "100 RON",
     stock: 5,
@@ -351,6 +358,7 @@ const products = [
   },
   {
     id: "semnalizari-dinamice-golf-7",
+    category: "Semnalizari-Golf",
     name: "Semnalizari dinamice Golf 7",
     price: "100 RON",
     stock: 5,
