@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ProductPrice = ({ price, id, filteredCategories }) => {
   return (
-    <div className="grid grid-rows-3 items-center w-full lg:w-auto">
+    <div className=" w-full lg:w-auto">
       <div>
         <p className="text-3xl font-semibold text-gray-900">
           {`${price} / 4 buc`}
@@ -19,7 +20,7 @@ const ProductPrice = ({ price, id, filteredCategories }) => {
       <div className="grid grid-cols-4 gap-2">
         {filteredCategories && filteredCategories.length > 0 ? (
           filteredCategories.map((catProduct) => (
-            <div key={catProduct.id}>
+            <Link href={`/produse/${catProduct.id}`} key={catProduct.id}>
               <Image
                 src={catProduct.imageSrc}
                 alt={catProduct.name}
@@ -27,7 +28,7 @@ const ProductPrice = ({ price, id, filteredCategories }) => {
                 height={100}
                 className="hover:border-2 border-amber-500 rounded-lg cursor-pointer"
               />
-            </div>
+            </Link>
           ))
         ) : (
           <p>No categories found.</p>
