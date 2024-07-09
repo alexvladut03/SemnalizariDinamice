@@ -1,6 +1,7 @@
+import { connectDB } from "@/lib/mongodb";
 import React from "react";
 
-const page = () => {
+const page = async () => {
   return <div>page</div>;
 };
 
