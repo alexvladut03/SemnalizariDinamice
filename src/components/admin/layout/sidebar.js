@@ -58,7 +58,7 @@ const Sidebar = () => {
           <div>Produse</div>
         </Link>
         <Link
-          href={"/utilizatori"}
+          href={"/admin/utilizatori"}
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <FaUser />
