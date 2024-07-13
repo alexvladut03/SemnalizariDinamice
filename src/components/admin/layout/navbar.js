@@ -20,7 +20,7 @@ const NavbarAdmin = async ({ username, role }) => {
           <div className="text-sm text-gray-500">{role}</div>
         </div>
         <form action={logout}>
-          <button type="submit">
+          <button type="submit" className="px-5 flex items-center text-xl">
             <FiLogOut />
           </button>
         </form>

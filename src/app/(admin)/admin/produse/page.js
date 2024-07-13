@@ -34,7 +34,7 @@ const produse = async () => {
           {products.map((product, index) => (
             <div
               key={index}
-              className="p-2 border-b border-gray-200 grid grid-cols-7"
+              className="p-2 border-b border-gray-200 grid grid-cols-7 items-center"
             >
               <div>{product.id}</div>
               <div>
@@ -48,7 +48,7 @@ const produse = async () => {
               <div>{product.category}</div>
               <div>{product.price}</div>
               <div>{product.stock}</div>
-              <div className="grid grid-cols-3  gap-3">
+              <div className="flex  gap-3">
                 <Link
                   href={`/admin/produse/edit/${product.id}`}
                   className="text-2xl"

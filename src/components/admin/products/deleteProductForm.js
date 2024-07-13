@@ -1,5 +1,5 @@
 "use client";
-import { MdDeleteForever } from "react-icons/md";
+import { RiDeleteBin2Fill, RiDeleteBin5Fill } from "react-icons/ri";
 import { deleteProduct } from "../../../../actions/product";
 
 const DeleteProductForm = ({ id }) => {
@@ -8,7 +8,7 @@ const DeleteProductForm = ({ id }) => {
   return (
     <form action={productToDelete} className="text-red-500 text-2xl">
       <button type="submit">
-        <MdDeleteForever />
+        <RiDeleteBin5Fill />
       </button>
     </form>
   );
