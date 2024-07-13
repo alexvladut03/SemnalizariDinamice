@@ -22,15 +22,15 @@ const AdminDashboard = () => {
   };
   return (
     <div className="flex h-screen bg-gray-100">
-      <div className="w-72 bg-gray-800 text-white flex flex-col p-4">
+      <div className="w-72 bg-gray-800 text-white flex flex-col p-4 ">
         <div className="p-4 text-2xl font-bold">Admin Dashboard</div>
-        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2">
+        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
           <FaHome />
           <div>Dashboard</div>
         </div>
         <div
           onClick={onClickSetActivePage}
-          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2"
+          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <FaRegFileAlt />
           <div>Pages</div>
@@ -41,21 +41,23 @@ const AdminDashboard = () => {
             activePage ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="p-4 hover:bg-gray-700 cursor-pointer">Main Page</div>
-          <div className="p-4 hover:bg-gray-700 cursor-pointer">
+          <div className="p-4 ml-7 hover:bg-gray-700 cursor-pointer text-sm">
+            Main Page
+          </div>
+          <div className="p-4 ml-7 hover:bg-gray-700 cursor-pointer text-sm">
             Product Page
           </div>
         </div>
-        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2">
+        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
           <MdOutlineMail />
           <div>Mail</div>
         </div>
-        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2">
+        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
           <IoSettingsOutline />
           <div>Settings</div>
         </div>
       </div>
-      <section className="flex flex-col flex-1">
+      <section className="flex flex-col flex-1 ">
         <nav className="flex items-center justify-between p-4 bg-white shadow-md">
           <div className="text-xl font-bold">Dashboard</div>
           <div className="flex items-center">
@@ -95,7 +97,7 @@ const AdminDashboard = () => {
               </div>
               <div className="ml-4">
                 <div>Bani Primiti</div>
-                <div className="text-2xl font-bold">2900 RON</div>
+                <div className="text-2xl font-bold">3200 RON</div>
                 <div className="text-green-500">
                   A crescut cu 12% față de luna trecută
                 </div>
