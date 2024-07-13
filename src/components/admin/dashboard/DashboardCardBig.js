@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 
-export default function dashboardCardBig() {
+export default function DashboardCardBig() {
   return (
     <div className="grid grid-cols-3 gap-4">
       <div className="bg-white p-4 rounded-lg">

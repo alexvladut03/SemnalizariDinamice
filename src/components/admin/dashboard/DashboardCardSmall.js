@@ -3,7 +3,7 @@ import { FaRegMoneyBillAlt, FaUserTie } from "react-icons/fa";
 import { GrCart } from "react-icons/gr";
 import { IoBagHandle } from "react-icons/io5";
 
-export default function dashboardCardSmall() {
+export default function DashboardCardSmall() {
   return (
     <div className="grid grid-cols-4 gap-4 mb-4">
       <div className="p-4 bg-white shadow rounded-lg flex items-center">

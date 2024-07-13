@@ -1,5 +1,5 @@
-import DashboardCardBig from "@/components/admin/dashboard/dashboardCardBig";
-import DashboardCardSmall from "@/components/admin/dashboard/dashboardCardSmall";
+import DashboardCardBig from "@/components/admin/dashboard/DashboardCardBig";
+import DashboardCardSmall from "@/components/admin/dashboard/DashboardCardSmall";
 
 const AdminDashboard = () => {
   return (

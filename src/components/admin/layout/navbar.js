@@ -1,8 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { IoSettingsOutline } from "react-icons/io5";
+import { logout } from "../../../../actions/user";
+import { FiLogOut } from "react-icons/fi";
 
-const NavbarAdmin = () => {
+const NavbarAdmin = async ({ username, role }) => {
   return (
     <nav className="flex items-center justify-between p-4 bg-white shadow-md sticky top-0">
       <div className="text-xl font-bold">Dashboard</div>
@@ -15,12 +16,14 @@ const NavbarAdmin = () => {
           className="w-10 h-10 rounded-full"
         />
         <div className="ml-2">
-          <div className="font-bold">Ionita Alexandru</div>
-          <div className="text-sm text-gray-500">Admin</div>
+          <div className="font-bold">{username}</div>
+          <div className="text-sm text-gray-500">{role}</div>
         </div>
-        <button className="hover:text-amber-500 text-2xl ml-6 animate-spin">
-          <IoSettingsOutline />
-        </button>
+        <form action={logout}>
+          <button type="submit">
+            <FiLogOut />
+          </button>
+        </form>
       </div>
     </nav>
   );
