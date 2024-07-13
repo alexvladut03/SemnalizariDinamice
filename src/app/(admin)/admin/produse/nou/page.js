@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { productSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addProduct } from "../../../../../actions/product";
+import { addProduct } from "../../../../../../actions/product";
 
 export function ProfileForm() {
   const form = useForm({

@@ -1,5 +1,5 @@
 "use client";
-import { FaEdit } from "react-icons/fa";
+import { MdDeleteForever } from "react-icons/md";
 import { deleteProduct } from "../../../../actions/product";
 
 const DeleteProductForm = ({ id }) => {
@@ -9,7 +9,7 @@ const DeleteProductForm = ({ id }) => {
   return (
     <form action={productToDelete} className="space-y-8">
       <button type="submit">
-        <FaEdit />
+        <MdDeleteForever />
       </button>
     </form>
   );

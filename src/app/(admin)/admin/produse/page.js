@@ -7,12 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getProducts } from "../../../../actions/product";
 
-import { MdDeleteForever } from "react-icons/md";
 import { IoDuplicate } from "react-icons/io5";
 import DeleteProductForm from "@/components/admin/products/deleteProductForm";
 import Link from "next/link";
+import { getProducts } from "../../../../../actions/product";
+import { FaEdit } from "react-icons/fa";
 
 const produse = async () => {
   const products = await getProducts();
@@ -51,17 +51,17 @@ const produse = async () => {
               <TableCell>{product.fitment}</TableCell>
               <TableCell>{product.characteristics}</TableCell>
               <TableCell className="flex text-2xl gap-3">
-                <DeleteProductForm id={product.id} />
+                <form>
+                  <button type="submit">
+                    <FaEdit />
+                  </button>
+                </form>
                 <form>
                   <button type="submit">
                     <IoDuplicate />
                   </button>
                 </form>
-                <form>
-                  <button type="submit">
-                    <MdDeleteForever />
-                  </button>
-                </form>
+                <DeleteProductForm id={product.id} />
               </TableCell>
             </TableRow>
           ))}
