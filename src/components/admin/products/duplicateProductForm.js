@@ -6,7 +6,7 @@ const DuplicateProductForm = ({ id }) => {
   const productToDuplicate = duplicateProduct.bind(null, id);
 
   return (
-    <form action={productToDuplicate} className="space-y-8">
+    <form action={productToDuplicate} className="text-2xl">
       <button type="submit">
         <IoDuplicate />
       </button>

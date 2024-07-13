@@ -1,14 +1,3 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
-import { IoDuplicate } from "react-icons/io5";
 import DeleteProductForm from "@/components/admin/products/deleteProductForm";
 import Link from "next/link";
 import { getProducts } from "../../../../../actions/product";
@@ -59,8 +48,11 @@ const produse = async () => {
               <div>{product.category}</div>
               <div>{product.price}</div>
               <div>{product.stock}</div>
-              <div className="flex items-center gap-3">
-                <Link href={`/admin/produse/edit/${product.id}`}>
+              <div className="grid grid-cols-3  gap-3">
+                <Link
+                  href={`/admin/produse/edit/${product.id}`}
+                  className="text-2xl"
+                >
                   <FaEdit />
                 </Link>
                 <DuplicateProductForm id={product.id} />
