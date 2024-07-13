@@ -13,6 +13,7 @@ import DeleteProductForm from "@/components/admin/products/deleteProductForm";
 import Link from "next/link";
 import { getProducts } from "../../../../../actions/product";
 import { FaEdit } from "react-icons/fa";
+import DuplicateProductForm from "@/components/admin/products/duplicateProductForm";
 
 const produse = async () => {
   const products = await getProducts();
@@ -59,16 +60,10 @@ const produse = async () => {
               <div>{product.price}</div>
               <div>{product.stock}</div>
               <div className="flex items-center gap-3">
-                <form>
-                  <button type="submit" className="text-blue-500 text-xl">
-                    <FaEdit />
-                  </button>
-                </form>
-                <form>
-                  <button type="submit" className="text-green-500 text-xl">
-                    <IoDuplicate />
-                  </button>
-                </form>
+                <Link href={`/admin/produse/edit/${product.id}`}>
+                  <FaEdit />
+                </Link>
+                <DuplicateProductForm id={product.id} />
                 <DeleteProductForm id={product.id} />
               </div>
             </div>
