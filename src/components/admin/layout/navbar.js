@@ -17,7 +17,7 @@ const NavbarAdmin = async ({ username, role }) => {
         />
         <div className="ml-2">
           <div className="font-bold">{username}</div>
-          <div className="text-sm text-gray-500">{role}</div>
+          <div className="text-sm text-gray-500">Admin</div>
         </div>
         <form action={logout}>
           <button type="submit" className="px-5 flex items-center text-xl">

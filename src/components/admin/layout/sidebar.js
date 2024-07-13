@@ -46,10 +46,7 @@ const Sidebar = () => {
             Pagina de produse
           </div>
         </div>
-        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
-          <MdOutlineMail />
-          <div>Mail</div>
-        </div>
+
         <Link
           href={"/admin/produse"}
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
@@ -62,13 +59,8 @@ const Sidebar = () => {
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <FaUser />
-
           <div>Utilizatori</div>
         </Link>
-        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
-          <IoSettingsOutline />
-          <div>Setari</div>
-        </div>
       </div>
     </div>
   );
