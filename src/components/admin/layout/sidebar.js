@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 import { IoSettingsOutline } from "react-icons/io5";
-import { FaHome, FaProductHunt, FaRegFileAlt } from "react-icons/fa";
+import { FaHome, FaProductHunt, FaRegFileAlt, FaUser } from "react-icons/fa";
 import {
   MdKeyboardArrowDown,
   MdKeyboardArrowRight,
@@ -56,6 +56,14 @@ const Sidebar = () => {
         >
           <FaProductHunt />
           <div>Produse</div>
+        </Link>
+        <Link
+          href={"/utilizatori"}
+          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
+        >
+          <FaUser />
+
+          <div>Utilizatori</div>
         </Link>
         <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
           <IoSettingsOutline />
