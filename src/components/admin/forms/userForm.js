@@ -11,22 +11,17 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { userSchema } from "@/lib/zod";
-import { register } from "../../../../actions/user";
 import { Button } from "@/components/ui/button";
 
-const UserForm = () => {
+const UserForm = ({ formData, action }) => {
   const form = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: {
-      name: "",
-      username: "",
-      password: "",
-    },
+    defaultValues: formData,
   });
 
   return (
     <Form {...form}>
-      <form action={register} className="space-y-8">
+      <form action={action} className="space-y-8">
         <FormField
           control={form.control}
           name="name"
