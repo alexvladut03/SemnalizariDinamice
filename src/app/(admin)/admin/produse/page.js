@@ -18,56 +18,64 @@ const produse = async () => {
   const products = await getProducts();
 
   return (
-    <div className="max-w-7xl mx-auto h-screen">
-      <Link href="/admin/produse/nou">Adauga produs</Link>
-      <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Categorie</TableHead>
-            <TableHead>Nume</TableHead>
-            <TableHead>Pret</TableHead>
-            <TableHead>Stoc</TableHead>
-            <TableHead>Imagine</TableHead>
-            <TableHead>Galerie</TableHead>
-            <TableHead>Descriere</TableHead>
-            <TableHead>Fitment</TableHead>
-            <TableHead>Caracteristici</TableHead>
-            <TableHead>Actiuni</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
+    <main className="p-4 bg-gray-100">
+      <div className="text-center text-2xl my-8 font-semibold">
+        O lista cu produsele adaugate
+      </div>
+      <div className="flex justify-end mb-4">
+        <Link href="/admin/produse/nou">
+          <button className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg">
+            Adauga produs
+          </button>
+        </Link>
+      </div>
+
+      <section className="bg-white rounded-lg">
+        <div className="grid grid-cols-7 p-2 mb-2 rounded-t-lg font-bold bg-gray-400">
+          <div>ID</div>
+          <div>Imagine</div>
+          <div>Nume</div>
+          <div>Categorie</div>
+          <div>Pret</div>
+          <div>Stoc</div>
+          <div>Actiuni</div>
+        </div>
+        <div>
           {products.map((product, index) => (
-            <TableRow key={index}>
-              <TableCell>{product.id}</TableCell>
-              <TableCell>{product.category}</TableCell>
-              <TableCell>{product.name}</TableCell>
-              <TableCell>{product.price}</TableCell>
-              <TableCell>{product.stock}</TableCell>
-              <TableCell>{product.mainImage}</TableCell>
-              <TableCell>{product.gallery}</TableCell>
-              <TableCell>{product.description}</TableCell>
-              <TableCell>{product.fitment}</TableCell>
-              <TableCell>{product.characteristics}</TableCell>
-              <TableCell className="flex text-2xl gap-3">
+            <div
+              key={index}
+              className="p-2 border-b border-gray-200 grid grid-cols-7"
+            >
+              <div>{product.id}</div>
+              <div>
+                <img
+                  src={product.mainImage}
+                  alt={product.name}
+                  className="w-16 h-16 object-cover"
+                />
+              </div>
+              <div>{product.name}</div>
+              <div>{product.category}</div>
+              <div>{product.price}</div>
+              <div>{product.stock}</div>
+              <div className="flex items-center gap-3">
                 <form>
-                  <button type="submit">
+                  <button type="submit" className="text-blue-500 text-xl">
                     <FaEdit />
                   </button>
                 </form>
                 <form>
-                  <button type="submit">
+                  <button type="submit" className="text-green-500 text-xl">
                     <IoDuplicate />
                   </button>
                 </form>
                 <DeleteProductForm id={product.id} />
-              </TableCell>
-            </TableRow>
+              </div>
+            </div>
           ))}
-        </TableBody>
-      </Table>
-    </div>
+        </div>
+      </section>
+    </main>
   );
 };
 

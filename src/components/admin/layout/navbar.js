@@ -4,7 +4,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 
 const NavbarAdmin = () => {
   return (
-    <nav className="flex items-center justify-between p-4 bg-white shadow-md">
+    <nav className="flex items-center justify-between p-4 bg-white shadow-md sticky top-0">
       <div className="text-xl font-bold">Dashboard</div>
       <div className="flex items-center">
         <Image

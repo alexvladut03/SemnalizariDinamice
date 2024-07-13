@@ -1,19 +1,14 @@
 "use client";
 import React, { useState } from "react";
 
-import { IoBagHandle, IoSettingsOutline } from "react-icons/io5";
-import {
-  FaHome,
-  FaRegFileAlt,
-  FaRegMoneyBillAlt,
-  FaUserTie,
-} from "react-icons/fa";
-import { GrCart } from "react-icons/gr";
+import { IoSettingsOutline } from "react-icons/io5";
+import { FaHome, FaProductHunt, FaRegFileAlt } from "react-icons/fa";
 import {
   MdKeyboardArrowDown,
   MdKeyboardArrowRight,
   MdOutlineMail,
 } from "react-icons/md";
+import Link from "next/link";
 
 const Sidebar = () => {
   const [activePage, setActivePage] = useState();
@@ -21,13 +16,16 @@ const Sidebar = () => {
     setActivePage(!activePage);
   };
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 sticky top-0 ">
       <div className="w-72 bg-gray-800 text-white flex flex-col p-4 ">
         <p className="p-4 text-2xl font-bold">Admin Dashboard</p>
-        <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
+        <Link
+          href={"/admin"}
+          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
+        >
           <FaHome />
           <div>Dashboard</div>
-        </div>
+        </Link>
         <div
           onClick={onClickSetActivePage}
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
@@ -42,19 +40,26 @@ const Sidebar = () => {
           }`}
         >
           <div className="p-4 ml-7 hover:bg-gray-700 cursor-pointer text-sm">
-            Main Page
+            Pagina principala
           </div>
           <div className="p-4 ml-7 hover:bg-gray-700 cursor-pointer text-sm">
-            Product Page
+            Pagina de produse
           </div>
         </div>
         <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
           <MdOutlineMail />
           <div>Mail</div>
         </div>
+        <Link
+          href={"/admin/produse"}
+          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
+        >
+          <FaProductHunt />
+          <div>Produse</div>
+        </Link>
         <div className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg">
           <IoSettingsOutline />
-          <div>Settings</div>
+          <div>Setari</div>
         </div>
       </div>
     </div>

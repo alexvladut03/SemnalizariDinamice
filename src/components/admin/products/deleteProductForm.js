@@ -7,7 +7,7 @@ const DeleteProductForm = ({ id }) => {
   const productToDelete = deleteProduct.bind(null, id);
 
   return (
-    <form action={productToDelete} className="space-y-8">
+    <form action={productToDelete} className="text-red-500 text-2xl">
       <button type="submit">
         <MdDeleteForever />
       </button>
