@@ -1,6 +1,8 @@
 import React from "react";
 import { getUsers } from "../../../../../actions/user";
 import Link from "next/link";
+import { FaEdit } from "react-icons/fa";
+import DeleteUserForm from "@/components/admin/users/deleteUserForm";
 
 const page = async () => {
   const users = await getUsers();
@@ -32,6 +34,15 @@ const page = async () => {
             >
               <div>{user.name}</div>
               <div>{user.username}</div>
+              <div className="grid grid-cols-2 gap-3">
+                <Link
+                  href={`/admin/utilizatori/edit/${user.id}`}
+                  className="text-2xl"
+                >
+                  <FaEdit />
+                </Link>
+                <DeleteUserForm id={user.id} />
+              </div>
             </div>
           ))}
         </div>

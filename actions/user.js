@@ -68,3 +68,52 @@ export const getUsers = async () => {
   const users = await User.find();
   return users;
 };
+
+export const deleteUser = async (id) => {
+  await connectDB();
+  await User.findByIdAndDelete(id);
+
+  redirect("/admin/utilizatori");
+};
+
+export const getUser = async (id) => {
+  await connectDB();
+  const user = await User.findById(id);
+  if (!user) {
+    throw new Error("User not found");
+  }
+  return user;
+};
+
+export const updateUser = async (id, formData) => {
+  const name = formData.get("name");
+  const username = formData.get("username");
+  const password = formData.get("password");
+
+  const result = userSchema.safeParse({ username, password });
+
+  if (!result.success) {
+    return result.error.errors[0].message;
+  }
+
+  await connectDB();
+
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  // Hash password
+  const hashedPassword = await hash(password, 12);
+
+  const updatedUser = {
+    name,
+    username,
+    password: hashedPassword,
+  };
+
+  await User.findByIdAndUpdate(id, updatedUser);
+  console.log("User updated");
+  redirect("/admin/utilizatori");
+};
