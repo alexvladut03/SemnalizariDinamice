@@ -8,7 +8,7 @@ const NavbarLogin = async () => {
 
   return (
     <div>
-      <p>{session?.user.name}</p>
+      <p>{session?.user?.name}</p>
       <form action={logout}>
         <button type="submit">Sign Out</button>
       </form>
