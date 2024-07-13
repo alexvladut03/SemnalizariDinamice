@@ -3,7 +3,6 @@ import { MdDeleteForever } from "react-icons/md";
 import { deleteProduct } from "../../../../actions/product";
 
 const DeleteProductForm = ({ id }) => {
-  console.log("Deleting product", id);
   const productToDelete = deleteProduct.bind(null, id);
 
   return (
