@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -5,18 +6,17 @@ import { FaCartPlus } from "react-icons/fa6";
 
 export default function DesktopNavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  let closeTimeout = null;
 
   const handleMouseEnter = () => {
+    clearTimeout(closeTimeout);
     setIsCartOpen(true);
   };
 
   const handleMouseLeave = () => {
-    setInterval(
-      () => {
-        setIsCartOpen(false);
-      },
-      isCartOpen ? 3000 : 0
-    );
+    closeTimeout = setTimeout(() => {
+      setIsCartOpen(false);
+    }, 400);
   };
 
   return (
