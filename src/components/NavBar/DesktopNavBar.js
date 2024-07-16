@@ -53,7 +53,7 @@ export default function DesktopNavBar() {
         <FaCartPlus className="mr-3 text-2xl" />
         <p>Coșul meu</p>
         {isCartOpen && (
-          <div className="absolute left-1/2 transform -translate-x-1/2 mt-12 w-64 bg-white border border-gray-200 rounded-lg">
+          <div className="absolute left-1/2 transform -translate-x-1/2 mt-12 w-64 bg-white border border-gray-200 rounded-lg shadow-sm shadow-amber-500">
             <div className="p-4">
               <p className="text-gray-700">Nu ai nici-un produs in coș</p>
               <button className="w-full bg-yellow-500 text-white p-2 mt-2 rounded">
