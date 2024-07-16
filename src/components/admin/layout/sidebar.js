@@ -1,13 +1,7 @@
 "use client";
 import React, { useState } from "react";
-
-import { IoSettingsOutline } from "react-icons/io5";
 import { FaHome, FaProductHunt, FaRegFileAlt, FaUser } from "react-icons/fa";
-import {
-  MdKeyboardArrowDown,
-  MdKeyboardArrowRight,
-  MdOutlineMail,
-} from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
 
 const Sidebar = () => {

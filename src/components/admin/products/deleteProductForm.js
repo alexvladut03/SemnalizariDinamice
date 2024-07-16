@@ -1,5 +1,5 @@
 "use client";
-import { RiDeleteBin2Fill, RiDeleteBin5Fill } from "react-icons/ri";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 import { deleteProduct } from "../../../../actions/product";
 
 const DeleteProductForm = ({ id }) => {
