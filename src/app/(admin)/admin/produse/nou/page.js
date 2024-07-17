@@ -9,7 +9,7 @@ export function AdaugaProdus() {
     price: "",
     stock: "",
     mainImage: "",
-    gallery: "",
+    gallery: [],
     description: "",
     fitment: "",
     characteristics: "",

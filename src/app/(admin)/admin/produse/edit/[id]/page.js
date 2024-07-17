@@ -11,6 +11,8 @@ const EditeazaProdus = async ({ params }) => {
 
   const productData = await product();
 
+  console.log(productData);
+
   const formData = {
     id: productData.id,
     category: productData.category,

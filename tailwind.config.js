@@ -1,11 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 
+const { withUt } = require("uploadthing/tw");
+
 const plugin = require("tailwindcss/plugin");
-module.exports = {
+
+module.exports = withUt({
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{ts,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -47,4 +51,4 @@ module.exports = {
       );
     }),
   ],
-};
+});

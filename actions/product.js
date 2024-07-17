@@ -10,8 +10,8 @@ export const addProduct = async (formData) => {
   const name = formData.get("name");
   const price = formData.get("price");
   const stock = formData.get("stock");
-  const mainImage = formData.get("mainImage");
-  const gallery = formData.getAll("gallery");
+  const mainImage = JSON.parse(formData.get("mainImage"));
+  const gallery = JSON.parse(formData.getAll("gallery"));
   const description = formData.get("description");
   const fitment = formData.get("fitment");
   const characteristics = formData.get("characteristics");
@@ -60,7 +60,7 @@ export const addProduct = async (formData) => {
   };
 
   await Product.create(product);
-  console.log("Product created successfully");
+  console.log("Product created successfully", product);
   redirect("/admin/produse");
 };
 
@@ -139,8 +139,8 @@ export const updateProduct = async (id, formData) => {
   const newProductName = formData.get("name");
   const newProductPrice = formData.get("price");
   const newProductStock = formData.get("stock");
-  const newProductMainImage = formData.get("mainImage");
-  const newProductGallery = formData.getAll("gallery");
+  const newProductMainImage = JSON.parse(formData.get("mainImage"));
+  const newProductGallery = JSON.parse(formData.getAll("gallery"));
   const newProductDescription = formData.get("description");
   const newProductFitment = formData.get("fitment");
   const newProductCharacteristics = formData.get("characteristics");

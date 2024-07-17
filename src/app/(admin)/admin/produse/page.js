@@ -39,7 +39,7 @@ const produse = async () => {
               <div>{product.id}</div>
               <div>
                 <img
-                  src={product.mainImage}
+                  src={product.mainImage.url}
                   alt={product.name}
                   className="w-16 h-16 object-cover"
                 />

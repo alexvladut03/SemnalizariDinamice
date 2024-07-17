@@ -12,12 +12,35 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
+import { useState } from "react";
+import Image from "next/image";
+import { imageRemove } from "../../../../actions/images";
 
 const ProductForm = ({ formData, action }) => {
   const form = useForm({
     resolver: zodResolver(productSchema),
     defaultValues: formData,
   });
+
+  const [mainImage, setMainImage] = useState(formData.mainImage);
+  const [gallery, setGallery] = useState(formData.gallery);
+
+  const handleRemoveMainImage = async () => {
+    const res = await imageRemove(mainImage.key);
+    if (res.success) {
+      alert("Image removed successfully");
+      setMainImage("");
+    }
+  };
+
+  const handleRemoveGalleryImage = async (image) => {
+    const res = await imageRemove(image.key);
+    if (res.success) {
+      alert("Image removed successfully");
+      setGallery(gallery.filter((img) => img !== image));
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -38,7 +61,6 @@ const ProductForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="category"
@@ -52,7 +74,6 @@ const ProductForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-
             <div className="grid grid-cols-3 gap-4">
               <FormField
                 control={form.control}
@@ -95,33 +116,79 @@ const ProductForm = ({ formData, action }) => {
               />
             </div>
 
-            <FormField
-              control={form.control}
-              name="mainImage"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Main Image</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Main Image URL" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+            <div className="my-2">
+              <FormLabel>Imagine Principala</FormLabel>
+              {mainImage ? (
+                <>
+                  <Image
+                    className="rounded-lg mx-auto mb-2"
+                    src={mainImage.url}
+                    alt="Main Image"
+                    width={200}
+                    height={200}
+                  />
+                  <button type="button" onClick={handleRemoveMainImage}>
+                    Remove
+                  </button>
+                </>
+              ) : (
+                <UploadDropzone
+                  endpoint="imageUploader"
+                  onClientUploadComplete={(res) => {
+                    setMainImage(res[0]);
+                  }}
+                  onUploadError={(error) => {
+                    // Do something with the error.
+                    alert(`ERROR! ${error.message}`);
+                  }}
+                />
               )}
-            />
 
-            <FormField
-              control={form.control}
-              name="gallery"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Gallery</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Gallery Images URLs" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <input
+                type="hidden"
+                {...form.register("mainImage")}
+                value={JSON.stringify(mainImage)}
+              />
+            </div>
+
+            <div className="my-2">
+              <FormLabel>Galerie</FormLabel>
+              {gallery &&
+                gallery.map((image, index) => (
+                  <div key={index}>
+                    <Image
+                      className="rounded-lg mx-auto mb-2"
+                      src={image.url}
+                      alt="Gallery Image"
+                      width={200}
+                      height={200}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveGalleryImage(image)}
+                      className="bg-red-500 hover:bg-red-700 text-white rounded-2xl text-center w-full py-2"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              <UploadDropzone
+                endpoint="imageUploader"
+                onClientUploadComplete={(res) => {
+                  setGallery((gallery) => [...gallery, res[0]]);
+                }}
+                onUploadError={(error) => {
+                  // Do something with the error.
+                  alert(`ERROR! ${error.message}`);
+                }}
+              />
+
+              <input
+                type="hidden"
+                {...form.register("gallery")}
+                value={JSON.stringify(gallery)}
+              />
+            </div>
 
             <FormField
               control={form.control}
@@ -136,7 +203,6 @@ const ProductForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="fitment"
@@ -150,7 +216,6 @@ const ProductForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="characteristics"
@@ -164,7 +229,6 @@ const ProductForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-
             <Button
               className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2"
               type="submit"
