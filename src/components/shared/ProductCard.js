@@ -28,7 +28,7 @@ const ProduseCard2 = ({ name, image, price, id }) => {
       <div className="flex flex-col gap-3">
         <p className="mt-1.5 text-md text-gray-700 font-bold">{price}</p>
         <form>
-          <button className="block w-full rounded-lg bg-yellow-400 p-4 text-sm font-medium transition hover:scale-105">
+          <button className="block w-full rounded-lg bg-amber-400 p-4 text-sm font-medium transition hover:scale-105">
             Adauga in cos
           </button>
         </form>

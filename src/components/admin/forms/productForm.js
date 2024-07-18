@@ -16,7 +16,7 @@ import { UploadDropzone } from "@/utils/uploadthing";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { imageRemove } from "../../../../actions/images";
-import { TiDelete } from "react-icons/ti";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const ProductForm = ({ formData, action }) => {
   const form = useForm({
@@ -49,9 +49,9 @@ const ProductForm = ({ formData, action }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold my-8">Creează produs</h1>
-      <div className="max-w-2xl p-8 bg-white rounded-lg shadow-md mb-8">
+      <div className="p-8 bg-white rounded-lg shadow-sm shadow-gray-400 mb-8">
         <Form {...form}>
           <form action={action} className="space-y-4">
             <FormField
@@ -67,19 +67,7 @@ const ProductForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Category" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
             <div className="grid grid-cols-3 gap-4">
               <FormField
                 control={form.control}
@@ -122,37 +110,55 @@ const ProductForm = ({ formData, action }) => {
               />
             </div>
 
-            <div className="my-2">
-              <FormLabel>Imagine Principala</FormLabel>
-              {mainImage ? (
-                <div className="relative">
-                  <Image
-                    className="rounded-lg"
-                    src={mainImage.url}
-                    alt="Main Image"
-                    width={100}
-                    height={100}
+            <div className="grid grid-cols-2 justify-items-center">
+              <div>
+                <FormLabel className="flex justify-center mt-1">
+                  Imagine Principala
+                </FormLabel>
+                {mainImage ? (
+                  <div className="relative ">
+                    <Image
+                      className="rounded-lg mt-[13px] w-52 h-52 border-2  border-gray-500"
+                      src={mainImage.url}
+                      alt="Main Image"
+                      width={200}
+                      height={200}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRemoveMainImage}
+                      className="p-2 absolute right-0 top-0 text-red-500 text-2xl"
+                    >
+                      <RiDeleteBin5Fill />
+                    </button>
+                  </div>
+                ) : (
+                  <UploadDropzone
+                    className="mt-[13px] w-52 h-52 border-solid border-2 border-gray-200"
+                    endpoint="imageUploader"
+                    onClientUploadComplete={(res) => {
+                      setMainImage(res[0]);
+                    }}
+                    onUploadError={(error) => {
+                      // Do something with the error.
+                      alert(`ERROR! ${error.message}`);
+                    }}
                   />
-                  <button
-                    className="absolute top-0 right-0"
-                    type="button"
-                    onClick={handleRemoveMainImage}
-                  >
-                    <TiDelete className="text-red-700 text-3xl" />
-                  </button>
-                </div>
-              ) : (
-                <UploadDropzone
-                  endpoint="imageUploader"
-                  onClientUploadComplete={(res) => {
-                    setMainImage(res[0]);
-                  }}
-                  onUploadError={(error) => {
-                    // Do something with the error.
-                    alert(`ERROR! ${error.message}`);
-                  }}
-                />
-              )}
+                )}
+              </div>
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Category" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <input
                 type="hidden"
@@ -160,14 +166,15 @@ const ProductForm = ({ formData, action }) => {
                 value={JSON.stringify(mainImage)}
               />
             </div>
-
-            <div className="my-2">
-              <FormLabel>Galerie</FormLabel>
+            <FormLabel className="grid grid-cols-2 pt-1 justify-items-center">
+              Galerie
+            </FormLabel>
+            <div className="grid grid-cols-2 justify-items-center">
               {gallery &&
                 gallery.map((image, index) => (
-                  <div key={index}>
+                  <div className="relative" key={index}>
                     <Image
-                      className="rounded-lg mx-auto mb-2"
+                      className="rounded-lg mt-3 w-52 h-52 border-2 border-gray-500"
                       src={image.url}
                       alt="Gallery Image"
                       width={200}
@@ -176,13 +183,15 @@ const ProductForm = ({ formData, action }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveGalleryImage(image)}
-                      className="bg-red-500 hover:bg-red-700 text-white rounded-2xl text-center w-full py-2"
+                      className="p-2 pt-3 absolute right-0 top-0 text-red-500 text-2xl"
                     >
-                      Remove
+                      <RiDeleteBin5Fill />
                     </button>
                   </div>
                 ))}
+
               <UploadDropzone
+                className="w-52 h-52 border-2 border-gray-200 border-solid mt-3"
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                   setGallery((gallery) => [...gallery, res[0]]);
