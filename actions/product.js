@@ -105,7 +105,6 @@ export const duplicateProduct = async (id) => {
     ...product._doc,
     id: `${product.id}-copy`,
     name: `${product.name} (Copy)`,
-    gallery: product.gallery.map((image) => `${image}-copy`),
     _id: undefined,
     __v: undefined,
   };
@@ -113,7 +112,6 @@ export const duplicateProduct = async (id) => {
   while (await Product.findOne({ id: newProduct.id })) {
     newProduct.id = `${newProduct.id}-copy`;
     newProduct.name = `${newProduct.name} (Copy)`;
-    newProduct.gallery = newProduct.gallery.map((image) => `${image}-copy`);
   }
 
   await Product.create(newProduct);
@@ -134,6 +132,8 @@ export const getProduct = async (id) => {
 };
 
 export const updateProduct = async (id, formData) => {
+  console.log("Form data action", formData);
+
   const newProductID = formData.get("id");
   const newProductCategory = formData.get("category");
   const newProductName = formData.get("name");

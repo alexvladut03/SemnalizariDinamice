@@ -12,10 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
-import { useState } from "react";
+import { UploadDropzone } from "@/utils/uploadthing";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { imageRemove } from "../../../../actions/images";
+import { TiDelete } from "react-icons/ti";
 
 const ProductForm = ({ formData, action }) => {
   const form = useForm({
@@ -25,6 +26,11 @@ const ProductForm = ({ formData, action }) => {
 
   const [mainImage, setMainImage] = useState(formData.mainImage);
   const [gallery, setGallery] = useState(formData.gallery);
+
+  useEffect(() => {
+    form.setValue("mainImage", JSON.stringify(mainImage));
+    form.setValue("gallery", JSON.stringify(gallery));
+  }, [mainImage, gallery]);
 
   const handleRemoveMainImage = async () => {
     const res = await imageRemove(mainImage.key);
@@ -119,18 +125,22 @@ const ProductForm = ({ formData, action }) => {
             <div className="my-2">
               <FormLabel>Imagine Principala</FormLabel>
               {mainImage ? (
-                <>
+                <div className="relative">
                   <Image
-                    className="rounded-lg mx-auto mb-2"
+                    className="rounded-lg"
                     src={mainImage.url}
                     alt="Main Image"
-                    width={200}
-                    height={200}
+                    width={100}
+                    height={100}
                   />
-                  <button type="button" onClick={handleRemoveMainImage}>
-                    Remove
+                  <button
+                    className="absolute top-0 right-0"
+                    type="button"
+                    onClick={handleRemoveMainImage}
+                  >
+                    <TiDelete className="text-red-700 text-3xl" />
                   </button>
-                </>
+                </div>
               ) : (
                 <UploadDropzone
                   endpoint="imageUploader"
