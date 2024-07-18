@@ -16,6 +16,7 @@ import { UploadButton, UploadDropzone } from "@/utils/uploadthing";
 import { useState } from "react";
 import Image from "next/image";
 import { imageRemove } from "../../../../actions/images";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const ProductForm = ({ formData, action }) => {
   const form = useForm({
@@ -61,19 +62,7 @@ const ProductForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Category</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Category" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
             <div className="grid grid-cols-3 gap-4">
               <FormField
                 control={form.control}
@@ -116,33 +105,55 @@ const ProductForm = ({ formData, action }) => {
               />
             </div>
 
-            <div className="my-2">
-              <FormLabel>Imagine Principala</FormLabel>
-              {mainImage ? (
-                <>
-                  <Image
-                    className="rounded-lg mx-auto mb-2"
-                    src={mainImage.url}
-                    alt="Main Image"
-                    width={200}
-                    height={200}
+            <div className="grid grid-cols-2 justify-items-center">
+              <div>
+                <FormLabel className="flex justify-center mt-1">
+                  Imagine Principala
+                </FormLabel>
+                {mainImage ? (
+                  <div className="relative ">
+                    <Image
+                      className="rounded-lg mt-[13px] w-56 h-56 border-2 border-gray-500"
+                      src={mainImage.url}
+                      alt="Main Image"
+                      width={200}
+                      height={200}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRemoveMainImage}
+                      className="p-2 absolute right-0 top-0 text-red-500 text-2xl "
+                    >
+                      <RiDeleteBin5Fill />
+                    </button>
+                  </div>
+                ) : (
+                  <UploadDropzone
+                    className="mt-[13px]"
+                    endpoint="imageUploader"
+                    onClientUploadComplete={(res) => {
+                      setMainImage(res[0]);
+                    }}
+                    onUploadError={(error) => {
+                      // Do something with the error.
+                      alert(`ERROR! ${error.message}`);
+                    }}
                   />
-                  <button type="button" onClick={handleRemoveMainImage}>
-                    Remove
-                  </button>
-                </>
-              ) : (
-                <UploadDropzone
-                  endpoint="imageUploader"
-                  onClientUploadComplete={(res) => {
-                    setMainImage(res[0]);
-                  }}
-                  onUploadError={(error) => {
-                    // Do something with the error.
-                    alert(`ERROR! ${error.message}`);
-                  }}
-                />
-              )}
+                )}
+              </div>
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Category" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <input
                 type="hidden"
