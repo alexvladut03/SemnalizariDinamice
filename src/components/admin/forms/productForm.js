@@ -113,7 +113,7 @@ const ProductForm = ({ formData, action }) => {
                 {mainImage ? (
                   <div className="relative ">
                     <Image
-                      className="rounded-lg mt-[13px] w-56 h-56 border-2 border-gray-500"
+                      className="rounded-lg mt-[13px] w-52 h-52 border-2  border-gray-500"
                       src={mainImage.url}
                       alt="Main Image"
                       width={200}
@@ -122,14 +122,14 @@ const ProductForm = ({ formData, action }) => {
                     <button
                       type="button"
                       onClick={handleRemoveMainImage}
-                      className="p-2 absolute right-0 top-0 text-red-500 text-2xl "
+                      className="p-2 absolute right-0 top-0 text-red-500 text-2xl"
                     >
                       <RiDeleteBin5Fill />
                     </button>
                   </div>
                 ) : (
                   <UploadDropzone
-                    className="mt-[13px]"
+                    className="mt-[13px] w-52 h-52 border-solid border-2 border-gray-200"
                     endpoint="imageUploader"
                     onClientUploadComplete={(res) => {
                       setMainImage(res[0]);
@@ -161,14 +161,15 @@ const ProductForm = ({ formData, action }) => {
                 value={JSON.stringify(mainImage)}
               />
             </div>
-
-            <div className="my-2">
-              <FormLabel>Galerie</FormLabel>
+            <FormLabel className="grid grid-cols-2 pt-2 justify-items-center">
+              Galerie
+            </FormLabel>
+            <div className="grid grid-cols-2 justify-items-center">
               {gallery &&
                 gallery.map((image, index) => (
-                  <div key={index}>
+                  <div className="relative" key={index}>
                     <Image
-                      className="rounded-lg mx-auto mb-2"
+                      className="rounded-lg mt-[13px] w-52 h-52 border-2 border-gray-500"
                       src={image.url}
                       alt="Gallery Image"
                       width={200}
@@ -177,13 +178,15 @@ const ProductForm = ({ formData, action }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveGalleryImage(image)}
-                      className="bg-red-500 hover:bg-red-700 text-white rounded-2xl text-center w-full py-2"
+                      className="p-2 pt-5 absolute right-0 top-0 text-red-500 text-2xl"
                     >
-                      Remove
+                      <RiDeleteBin5Fill />
                     </button>
                   </div>
                 ))}
+
               <UploadDropzone
+                className="w-52 h-52 border-2 border-gray-200 border-solid mt-3"
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                   setGallery((gallery) => [...gallery, res[0]]);

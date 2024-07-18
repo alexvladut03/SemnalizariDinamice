@@ -5,7 +5,7 @@ import { FiLogOut } from "react-icons/fi";
 
 const NavbarAdmin = async ({ username, role }) => {
   return (
-    <nav className="flex items-center justify-between p-4 bg-white shadow-md sticky top-0">
+    <nav className="flex items-center justify-between p-4 bg-white shadow-md sticky top-0 z-10">
       <div className="text-xl font-bold">Dashboard</div>
       <div className="flex items-center">
         <Image
