@@ -46,7 +46,7 @@ const ProductForm = ({ formData, action }) => {
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold my-8">Creează produs</h1>
-      <div className="p-8 bg-white rounded-lg shadow-md mb-8">
+      <div className="p-8 bg-white rounded-lg shadow-sm shadow-gray-400 mb-8">
         <Form {...form}>
           <form action={action} className="space-y-4">
             <FormField

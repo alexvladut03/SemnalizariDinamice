@@ -4,7 +4,7 @@ import React from "react";
 export default function DashboardCardBig() {
   return (
     <div className="grid grid-cols-3 gap-4">
-      <div className="bg-white p-4 rounded-lg">
+      <div className="bg-white shadow-sm shadow-gray-400 p-4 rounded-lg">
         <div className="text-lg font-bold">Comenzi Recente</div>
         <ul className="mt-4 space-y-2">
           <li className="flex items-center justify-between">
@@ -77,7 +77,7 @@ export default function DashboardCardBig() {
           </li>
         </ul>
       </div>
-      <div className="bg-white p-4 rounded-lg">
+      <div className="bg-white shadow-sm shadow-gray-400 p-4 rounded-lg">
         <div className="text-lg font-bold">Cele mai vandute produse</div>
         <ul className="mt-4 space-y-2">
           <li className="flex items-center space-x-4">
@@ -140,7 +140,7 @@ export default function DashboardCardBig() {
           </li>
         </ul>
       </div>
-      <div className="bg-white p-4 rounded-lg">
+      <div className="bg-white shadow-sm shadow-gray-400 p-4 rounded-lg">
         <div className="text-lg font-bold">Clienti fideli</div>
         <ul className="mt-4 space-y-2">
           <li className="flex items-center justify-between">

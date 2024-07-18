@@ -20,7 +20,7 @@ const produse = async () => {
         </Link>
       </div>
 
-      <section className="bg-white rounded-lg">
+      <section className="bg-white rounded-lg shadow-sm shadow-gray-400">
         <div className="grid grid-cols-7 p-2 mb-2 rounded-t-lg font-bold bg-gray-400">
           <div>ID</div>
           <div>Imagine</div>

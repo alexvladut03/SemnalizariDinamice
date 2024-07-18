@@ -10,7 +10,7 @@ const DashboardCardSmall = ({
   changeType,
 }) => {
   return (
-    <div className="p-4 bg-white shadow rounded-lg flex items-center">
+    <div className="p-4 bg-white shadow-sm shadow-gray-400 rounded-lg flex items-center">
       <div
         className={`${bgColor} ${iconColor} rounded-lg p-2 w-12 h-12 flex-shrink-0`}
       >
