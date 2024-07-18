@@ -44,9 +44,9 @@ const ProductForm = ({ formData, action }) => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center">
       <h1 className="text-2xl font-bold my-8">Creează produs</h1>
-      <div className="max-w-2xl p-8 bg-white rounded-lg shadow-md mb-8">
+      <div className="p-8 bg-white rounded-lg shadow-md mb-8">
         <Form {...form}>
           <form action={action} className="space-y-4">
             <FormField
@@ -161,7 +161,7 @@ const ProductForm = ({ formData, action }) => {
                 value={JSON.stringify(mainImage)}
               />
             </div>
-            <FormLabel className="grid grid-cols-2 pt-2 justify-items-center">
+            <FormLabel className="grid grid-cols-2 pt-1 justify-items-center">
               Galerie
             </FormLabel>
             <div className="grid grid-cols-2 justify-items-center">
@@ -169,7 +169,7 @@ const ProductForm = ({ formData, action }) => {
                 gallery.map((image, index) => (
                   <div className="relative" key={index}>
                     <Image
-                      className="rounded-lg mt-[13px] w-52 h-52 border-2 border-gray-500"
+                      className="rounded-lg mt-3 w-52 h-52 border-2 border-gray-500"
                       src={image.url}
                       alt="Gallery Image"
                       width={200}
@@ -178,7 +178,7 @@ const ProductForm = ({ formData, action }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveGalleryImage(image)}
-                      className="p-2 pt-5 absolute right-0 top-0 text-red-500 text-2xl"
+                      className="p-2 pt-3 absolute right-0 top-0 text-red-500 text-2xl"
                     >
                       <RiDeleteBin5Fill />
                     </button>

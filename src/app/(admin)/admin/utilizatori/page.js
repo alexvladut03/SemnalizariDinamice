@@ -24,28 +24,26 @@ const page = async () => {
         <div className="grid grid-cols-7 p-2 mb-2 rounded-t-lg font-bold bg-gray-400">
           <div>Nume</div>
           <div>Username</div>
-          <div>Actiuni</div>
+          <div className="col-start-7">Actiuni</div>
         </div>
-        <div>
-          {users.map((user, index) => (
-            <div
-              key={index}
-              className="p-2 border-b border-gray-200 grid grid-cols-7"
-            >
-              <div>{user.name}</div>
-              <div>{user.username}</div>
-              <div className="grid grid-cols-2 gap-3">
-                <Link
-                  href={`/admin/utilizatori/edit/${user.id}`}
-                  className="text-2xl"
-                >
-                  <FaEdit />
-                </Link>
-                <DeleteUserForm id={user.id} />
-              </div>
+        {users.map((user, index) => (
+          <div
+            key={index}
+            className="p-2 border-b border-gray-200 grid grid-cols-7 items-center"
+          >
+            <div>{user.name}</div>
+            <div>{user.username}</div>
+            <div className="flex col-start-7 ">
+              <Link
+                href={`/admin/utilizatori/edit/${user.id}`}
+                className="text-2xl mr-2"
+              >
+                <FaEdit />
+              </Link>
+              <DeleteUserForm id={user.id} />
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </section>
     </main>
   );

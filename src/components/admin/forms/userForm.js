@@ -20,52 +20,57 @@ const UserForm = ({ formData, action }) => {
   });
 
   return (
-    <Form {...form}>
-      <form action={action} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nume</FormLabel>
-              <FormControl>
-                <Input placeholder="Popescu Ionel" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="popescuionel" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Parola</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="tarzan" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button size="lg" variant="default">
-          Salveaza
-        </Button>
-      </form>
-    </Form>
+    <div className="flex flex-col items-center">
+      <h1 className="text-2xl font-bold my-8">Creează utilizator</h1>
+      <div className="p-8 bg-white rounded-lg shadow-md">
+        <Form {...form}>
+          <form action={action} className="space-y-8">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nume</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Popescu Ionel" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Username</FormLabel>
+                  <FormControl>
+                    <Input placeholder="popescuionel" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Parola</FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="tarzan" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button size="lg" variant="default">
+              Salveaza
+            </Button>
+          </form>
+        </Form>
+      </div>
+    </div>
   );
 };
 
