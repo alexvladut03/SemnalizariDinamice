@@ -64,7 +64,7 @@ const UserForm = ({ formData, action }) => {
                 </FormItem>
               )}
             />
-            <Button size="lg" variant="default">
+            <Button className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2">
               Salveaza
             </Button>
           </form>

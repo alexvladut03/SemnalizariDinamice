@@ -103,7 +103,7 @@ const ProductForm = ({ formData, action }) => {
                 {mainImage ? (
                   <div className="relative ">
                     <Image
-                      className="rounded-lg mt-[13px] w-[340px] h-[340px] border-2 border-gray-100 border-solid"
+                      className="rounded-lg mt-[13px] w-[340px] h-[340px] border-2 border-gray-100 hover:border-gray-300 border-solid"
                       src={mainImage.url}
                       alt="Main Image"
                       width={200}
@@ -119,7 +119,7 @@ const ProductForm = ({ formData, action }) => {
                   </div>
                 ) : (
                   <UploadDropzone
-                    className="w-[340px] h-[340px] border-2 border-gray-100 border-solid mt-3 ut-label:hidden ut-allowed-content:hidden ut-button:w-32 ut-button:bg-black ut-upload-icon:text-black"
+                    className="w-[340px] h-[340px] border-2 border-gray-100 hover:border-gray-300 border-solid mt-3 ut-label:hidden ut-allowed-content:hidden ut-button:w-48 ut-button:bg-black ut-upload-icon:text-black"
                     endpoint="imageUploader"
                     onClientUploadComplete={(res) => {
                       setMainImage(res[0]);
@@ -172,7 +172,7 @@ const ProductForm = ({ formData, action }) => {
                 gallery.map((image, index) => (
                   <div className="relative" key={index}>
                     <Image
-                      className="rounded-lg mt-3 w-40 h-40 border-2 border-gray-100"
+                      className="rounded-lg mt-3 w-40 h-40 border-2 border-gray-100 hover:border-gray-300"
                       src={image.url}
                       alt="Gallery Image"
                       width={200}
@@ -189,7 +189,7 @@ const ProductForm = ({ formData, action }) => {
                 ))}
 
               <UploadDropzone
-                className="w-40 h-40 border-2 border-gray-100 border-solid mt-3 ut-label:hidden ut-allowed-content:hidden ut-button:w-32 ut-button:bg-black ut-upload-icon:text-black"
+                className="w-40 h-40 border-2 border-gray-100 hover:border-gray-300 border-solid mt-3 ut-label:hidden ut-allowed-content:hidden ut-button:w-32 ut-button:bg-black ut-upload-icon:text-black"
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                   setGallery((gallery) => [...gallery, res[0]]);
