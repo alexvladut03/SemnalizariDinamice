@@ -14,7 +14,7 @@ const page = async () => {
       </div>
       <div className="flex justify-end mb-4 ">
         <Link href="/admin/utilizatori/nou">
-          <button className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg ">
+          <button className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
             Adauga utilizator
           </button>
         </Link>
@@ -36,7 +36,7 @@ const page = async () => {
             <div className="flex col-start-7 ">
               <Link
                 href={`/admin/utilizatori/edit/${user.id}`}
-                className="text-2xl mr-2"
+                className="text-2xl mr-2 text-emerald-600"
               >
                 <FaEdit />
               </Link>

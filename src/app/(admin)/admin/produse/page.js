@@ -14,7 +14,7 @@ const produse = async () => {
       </div>
       <div className="flex justify-end mb-4">
         <Link href="/admin/produse/nou">
-          <button className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg">
+          <button className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
             Adauga produs
           </button>
         </Link>
@@ -51,7 +51,7 @@ const produse = async () => {
               <div className="flex  gap-3">
                 <Link
                   href={`/admin/produse/edit/${product.id}`}
-                  className="text-2xl"
+                  className="text-2xl text-emerald-600"
                 >
                   <FaEdit />
                 </Link>
