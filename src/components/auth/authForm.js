@@ -1,18 +1,10 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/lib/zod";
 import { login } from "../../../actions/user";
+import { FaUser } from "react-icons/fa";
+import { BsKeyFill } from "react-icons/bs";
 
 const CustomForm = () => {
   const form = useForm({
@@ -22,43 +14,47 @@ const CustomForm = () => {
       password: "",
     },
   });
+
+  const onSubmit = (data) => {
+    const formData = new FormData();
+    formData.append("username", data.username);
+    formData.append("password", data.password);
+
+    return login(formData);
+  };
+
   return (
-    <Form {...form}>
-      <form action={login} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="popescuionel" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      className="space-y-8 text-white"
+    >
+      <div className="bg-black flex items-center border-b-2">
+        <input
+          {...form.register("username")}
+          placeholder="Username"
+          className="w-full mt-4 bg-black text-white placeholder-white outline-none"
         />
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Parola</FormLabel>
-              <FormControl>
-                <Input type="password" placeholder="tarzan" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+        <FaUser className="text-white" />
+      </div>
+      <p className="text-red-500">{form.formState.errors.username?.message}</p>
+
+      <div className="bg-black flex items-center border-b-2">
+        <input
+          type="password"
+          {...form.register("password")}
+          placeholder="Password"
+          className="w-full mt-4 bg-black text-white placeholder-white outline-none"
         />
-        <Button
-          className="bg-black hover:bg-blue-500 text-white rounded-[25px] text-center w-full py-2"
-          type="submit"
-        >
-          Submit
-        </Button>
-      </form>
-    </Form>
+        <BsKeyFill className="text-white rotate-180 text-xl" />
+      </div>
+      <p className="text-red-500">{form.formState.errors.password?.message}</p>
+      <button
+        className="bg-amber-500 text-white rounded-xl text-center w-full py-2 font-semibold"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
   );
 };
 

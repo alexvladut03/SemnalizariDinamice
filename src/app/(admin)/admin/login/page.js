@@ -4,11 +4,11 @@ import React from "react";
 
 const LoginAdmin = () => {
   return (
-    <main className=" h-svh flex items-center justify-center">
-      <div className="border-2 border-black rounded-[25px] p-6 w-[400px] h-[400px] flex flex-col">
+    <main className=" h-screen flex items-center justify-center  bg-gradient-to-b from-amber-400 from-5% via-amber-500 via-20% to-black to-95%">
+      <div className="bg-black rounded-3xl p-6 w-[400px] h-[400]  shadow-md hover:shadow-white ">
         <Image
           src="/logo.png"
-          alt="ABC Control"
+          alt="Logo..."
           width={90}
           height={90}
           className="text-center mx-auto mb-4"
