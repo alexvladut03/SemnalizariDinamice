@@ -49,7 +49,7 @@ const ProductForm = ({ formData, action }) => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center ">
       <h1 className="text-2xl font-bold my-8">Creează produs</h1>
       <div className="p-8 bg-white rounded-lg shadow-sm shadow-gray-400 mb-8">
         <Form {...form}>
@@ -68,7 +68,7 @@ const ProductForm = ({ formData, action }) => {
               )}
             />
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="id"
@@ -84,70 +84,6 @@ const ProductForm = ({ formData, action }) => {
               />
               <FormField
                 control={form.control}
-                name="price"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Price</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Price" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="stock"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Stock</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Stock" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-2 justify-items-center">
-              <div>
-                <FormLabel className="flex justify-center mt-1">
-                  Imagine Principala
-                </FormLabel>
-                {mainImage ? (
-                  <div className="relative ">
-                    <Image
-                      className="rounded-lg mt-[13px] w-52 h-52 border-2  border-gray-500"
-                      src={mainImage.url}
-                      alt="Main Image"
-                      width={200}
-                      height={200}
-                    />
-                    <button
-                      type="button"
-                      onClick={handleRemoveMainImage}
-                      className="p-2 absolute right-0 top-0 text-red-500 text-2xl"
-                    >
-                      <RiDeleteBin5Fill />
-                    </button>
-                  </div>
-                ) : (
-                  <UploadDropzone
-                    className="mt-[13px] w-52 h-52 border-solid border-2 border-gray-200"
-                    endpoint="imageUploader"
-                    onClientUploadComplete={(res) => {
-                      setMainImage(res[0]);
-                    }}
-                    onUploadError={(error) => {
-                      // Do something with the error.
-                      alert(`ERROR! ${error.message}`);
-                    }}
-                  />
-                )}
-              </div>
-              <FormField
-                control={form.control}
                 name="category"
                 render={({ field }) => (
                   <FormItem>
@@ -159,22 +95,84 @@ const ProductForm = ({ formData, action }) => {
                   </FormItem>
                 )}
               />
+            </div>
+
+            <div className="grid grid-cols-2 items-center">
+              <div>
+                <FormLabel className="mt-1">Imagine Principala</FormLabel>
+                {mainImage ? (
+                  <div className="relative ">
+                    <Image
+                      className="rounded-lg mt-[13px] w-[340px] h-[340px] border-2 border-gray-100 border-solid"
+                      src={mainImage.url}
+                      alt="Main Image"
+                      width={200}
+                      height={200}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleRemoveMainImage}
+                      className="pr-4 pt-2 absolute right-0 top-0 text-red-500 text-2xl"
+                    >
+                      <RiDeleteBin5Fill />
+                    </button>
+                  </div>
+                ) : (
+                  <UploadDropzone
+                    className="w-[340px] h-[340px] border-2 border-gray-100 border-solid mt-3 ut-label:hidden ut-allowed-content:hidden ut-button:w-32 ut-button:bg-black ut-upload-icon:text-black"
+                    endpoint="imageUploader"
+                    onClientUploadComplete={(res) => {
+                      setMainImage(res[0]);
+                    }}
+                    onUploadError={(error) => {
+                      // Do something with the error.
+                      alert(`ERROR! ${error.message}`);
+                    }}
+                  />
+                )}
+              </div>
 
               <input
                 type="hidden"
                 {...form.register("mainImage")}
                 value={JSON.stringify(mainImage)}
               />
+              <div className="pl-2 space-y-10">
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Price</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Price" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="stock"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Stock</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Stock" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
-            <FormLabel className="grid grid-cols-2 pt-1 justify-items-center">
-              Galerie
-            </FormLabel>
-            <div className="grid grid-cols-2 justify-items-center">
+            <FormLabel className="flex pt-3">Galerie</FormLabel>
+            <div className="grid grid-cols-4 gap-5 ">
               {gallery &&
                 gallery.map((image, index) => (
                   <div className="relative" key={index}>
                     <Image
-                      className="rounded-lg mt-3 w-52 h-52 border-2 border-gray-500"
+                      className="rounded-lg mt-3 w-40 h-40 border-2 border-gray-100"
                       src={image.url}
                       alt="Gallery Image"
                       width={200}
@@ -183,7 +181,7 @@ const ProductForm = ({ formData, action }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveGalleryImage(image)}
-                      className="p-2 pt-3 absolute right-0 top-0 text-red-500 text-2xl"
+                      className="pt-4 pr-1 absolute right-0 top-0 text-red-500 text-2xl"
                     >
                       <RiDeleteBin5Fill />
                     </button>
@@ -191,7 +189,7 @@ const ProductForm = ({ formData, action }) => {
                 ))}
 
               <UploadDropzone
-                className="w-52 h-52 border-2 border-gray-200 border-solid mt-3"
+                className="w-40 h-40 border-2 border-gray-100 border-solid mt-3 ut-label:hidden ut-allowed-content:hidden ut-button:w-32 ut-button:bg-black ut-upload-icon:text-black"
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                   setGallery((gallery) => [...gallery, res[0]]);
