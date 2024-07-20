@@ -16,7 +16,7 @@ export default function MobileNavBar() {
   return (
     <main>
       <div className="flex justify-between items-center w-full ">
-        <FaCartPlus className="text-2xl text-yellow-500" />
+        <FaCartPlus className="text-2xl text-amber-500" />
         <Image
           src="/logo.png"
           width={120}
@@ -26,9 +26,9 @@ export default function MobileNavBar() {
         />
         <div onClick={checkOpen}>
           {isOpen ? (
-            <MdClose className="text-3xl text-yellow-500" />
+            <MdClose className="text-3xl text-amber-500" />
           ) : (
-            <IoIosMenu className="text-3xl text-yellow-500" />
+            <IoIosMenu className="text-3xl text-amber-500" />
           )}
         </div>
       </div>
@@ -37,7 +37,7 @@ export default function MobileNavBar() {
           isOpen ? "max-h-44" : "max-h-0"
         }`}
       >
-        <nav className="flex flex-col mt-4 gap-4 text-sm font-semibold text-amber-400">
+        <nav className="flex flex-col mt-4 gap-4 text-sm font-semibold text-amber-500">
           <Link href="/#Acasa" className="cursor-pointer" onClick={checkOpen}>
             Acasa
           </Link>

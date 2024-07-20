@@ -6,15 +6,15 @@ const Hero = () => {
   return (
     <section className="relative overflow-hidden bg-black">
       <div className="absolute inset-0 bg-black z-10 animate-waveSlideBlack"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent from-0% via-yellow-500 via-10% to-black to-20% z-10 animate-waveSlideYellow"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent from-0% via-amber-500 via-10% to-black to-20% z-10 animate-waveSlideYellow"></div>
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row px-4 py-10 items-center gap-8 justify-between">
         <div className="text-white text-center lg:text-left">
           <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight mb-10 !leading-[1.5]">
             Accesorii auto{" "}
-            <span className="text-yellow-500">de la Pasionați</span>
+            <span className="text-amber-500">de la Pasionați</span>
             <br />
             <span className="relative whitespace-nowrap leading-relaxed">
-              <span className="absolute bg-yellow-500 -left-1 -top-1 -bottom-1 -right-1 md:-left-1 md:-top-0 md:-bottom-0 md:-right-1 -rotate-1"></span>
+              <span className="absolute bg-amber-500 -left-1 -top-1 -bottom-1 -right-1 md:-left-1 md:-top-0 md:-bottom-0 md:-right-1 -rotate-1"></span>
               <span className="relative">PENTRU PASIONAȚI</span>
             </span>
           </h1>
@@ -81,7 +81,7 @@ const Hero = () => {
               <img
                 className="flex-shrink-0 object-cover w-6 h-6 overflow-hidden rounded-full"
                 src="https://cdn.rareblocks.xyz/collection/clarity/images/hero/1/avatar-female.png"
-                alt=""
+                alt="Loading..."
               />
               <p className="ml-2 text-base font-bold text-yellow-500 font-pj">
                 Micu Mihai

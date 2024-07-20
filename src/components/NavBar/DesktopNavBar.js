@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaCartPlus } from "react-icons/fa6";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 export default function DesktopNavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -29,19 +30,19 @@ export default function DesktopNavBar() {
         className="h-auto w-auto"
       />
       <nav className="flex gap-8 text-white font-semibold">
-        <Link href="/#Acasa" className="hover:text-amber-400 cursor-pointer">
+        <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
           Acasa
         </Link>
-        <Link href="/#Produse" className="hover:text-amber-400 cursor-pointer">
+        <Link href="/#Produse" className="hover:text-amber-500 cursor-pointer">
           Produse
         </Link>
         <Link
           href="/#Despre-noi"
-          className="hover:text-amber-400 cursor-pointer"
+          className="hover:text-amber-500 cursor-pointer"
         >
           Despre Noi
         </Link>
-        <Link href="/#Recenzii" className="hover:text-amber-400 cursor-pointer">
+        <Link href="/#Recenzii" className="hover:text-amber-500 cursor-pointer">
           Recenzii
         </Link>
       </nav>
@@ -54,11 +55,14 @@ export default function DesktopNavBar() {
         <p>Coșul meu</p>
         {isCartOpen && (
           <div className="absolute left-1/2 transform -translate-x-1/2 mt-12 w-64 bg-white border border-gray-200 rounded-lg shadow-sm shadow-amber-500">
-            <div className="p-4">
+            <div className="p-4 flex flex-col items-center">
               <p className="text-gray-700">Nu ai nici-un produs in coș</p>
               <Link href={"/cart"}>
-                <button className="w-full bg-yellow-500 text-white p-2 mt-2 rounded cursor-pointer">
-                  Vezi detalii cos
+                <button className="relative flex items-center justify-center w-full rounded-lg bg-amber-500 p-2 font-semibold transition hover:scale-105 mt-3  text-black">
+                  <div className="absolute left-0 h-full flex items-center justify-center w-12 bg-black rounded-l-lg rounded-br-2xl">
+                    <MdKeyboardDoubleArrowRight className="text-2xl text-white" />
+                  </div>
+                  <span className="ml-12">Vezi Detalii Coș</span>
                 </button>
               </Link>
             </div>

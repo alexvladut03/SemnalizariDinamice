@@ -11,7 +11,7 @@ const ProductPrice = ({ price, id, filteredCategories }) => {
         </p>
       </div>
       <div className="text-gray-700">
-        <span className="text-yellow-400">★ ★ ★ ★ ☆</span>
+        <span className="text-amber-500">★ ★ ★ ★ ☆</span>
         <span> 5.0 (4 recenzii | 100 vandute)</span>
         <p>Cod produs: {id}</p>
         <p>Retur: gratis pana la 15 zile</p>
