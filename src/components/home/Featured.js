@@ -15,7 +15,7 @@ const Featured = () => {
         </div>
         <dl className="grid grid-cols-1 gap-4 sm:grid-cols-4">
           <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
-            <FaUsers className="text-7xl text-yellow-500" />
+            <FaUsers className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Testimoniale de la Clienți</p>
             <p>
               Clienții noștri sunt pe primul loc. Citește ce spun alții despre
@@ -25,7 +25,7 @@ const Featured = () => {
           </div>
 
           <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
-            <FaStar className="text-7xl text-yellow-500" />
+            <FaStar className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Recenzii și Evaluări</p>
             <p>
               Evaluările excelente ne recomandă! Verifică recenziile noastre de
@@ -35,7 +35,7 @@ const Featured = () => {
           </div>
 
           <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
-            <FaShieldAlt className="text-7xl text-yellow-500" />
+            <FaShieldAlt className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Garantie și Politica de Retur</p>
             <p>
               Cumperi fără griji! Beneficiezi de garanție extinsă și o politică
@@ -45,7 +45,7 @@ const Featured = () => {
           </div>
 
           <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
-            <FaCarAlt className="text-7xl text-yellow-500" />
+            <FaCarAlt className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Experiența și Expertiza Echipei</p>
             <p>
               Suntem pasionați de mașini! Echipa noastră are ani de experiență
