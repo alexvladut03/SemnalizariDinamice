@@ -1,33 +1,13 @@
-// This approach is taken from https://github.com/vercel/next.js/tree/canary/examples/with-mongodb
-const { MongoClient, ServerApiVersion } = require("mongodb");
+import mongoose from "mongoose";
 
-if (!process.env.MONGODB_URL) {
-  throw new Error('Invalid/Missing environment variable: "MONGODB_URL"');
-}
+export const connectDB = async () => {
+  if (mongoose.connections[0].readyState) return true;
 
-const uri = process.env.MONGODB_URL;
-const options = {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-};
-
-let client;
-
-if (process.env.NODE_ENV === "development") {
-  // In development mode, use a global variable so that the value
-  // is preserved across module reloads caused by HMR (Hot Module Replacement).
-  if (!global._mongoClient) {
-    global._mongoClient = new MongoClient(uri, options);
+  try {
+    const conn = await mongoose.connect(process.env.MONGODB_URL);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    return true;
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
   }
-  client = global._mongoClient;
-} else {
-  // In production mode, it's best to not use a global variable.
-  client = new MongoClient(uri, options);
-}
-
-// Export a module-scoped MongoClient. By doing this in a
-// separate module, the client can be shared across functions.
-export default client;
+};
