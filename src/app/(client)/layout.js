@@ -3,10 +3,10 @@ import NavBar from "@/components/navBar/NavBar";
 
 export default function ClientLayout({ children }) {
   return (
-    <main>
+    <>
       <NavBar />
-      {children}
+      <main>{children}</main>
       <Footer />
-    </main>
+    </>
   );
 }

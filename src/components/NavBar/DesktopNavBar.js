@@ -56,7 +56,7 @@ export default function DesktopNavBar() {
         {isCartOpen && (
           <div className="absolute left-1/2 transform -translate-x-1/2 mt-12 w-64 bg-white border border-gray-200 rounded-lg shadow-sm shadow-amber-500">
             <div className="p-4 flex flex-col items-center">
-              <p className="text-gray-700">Nu ai nici-un produs in coș</p>
+              <p className="text-gray-700">Nu ai niciun produs in coș</p>
               <Link href={"/cart"}>
                 <button className="relative flex items-center justify-center w-full rounded-lg bg-amber-500 p-2 font-semibold transition hover:scale-105 mt-3  text-black">
                   <div className="absolute left-0 h-full flex items-center justify-center w-12 bg-black rounded-l-lg rounded-br-2xl">

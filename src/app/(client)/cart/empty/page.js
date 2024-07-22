@@ -5,7 +5,7 @@ import { FaCartPlus } from "react-icons/fa";
 
 export default function Page() {
   return (
-    <main className="h-screen flex items-center justify-center relative bg-gray-100">
+    <div className="h-screen flex items-center justify-center relative bg-gray-100">
       <div className="flex flex-col items-center text-center ">
         <FaCartPlus className="text-7xl text-amber-400" />
         <h1 className="text-2xl font-bold text-gray-800">
@@ -21,9 +21,6 @@ export default function Page() {
           </button>
         </Link>
       </div>
-      <div className="absolute text-center right-10">
-        <OrderSummary />
-      </div>
-    </main>
+    </div>
   );
 }
