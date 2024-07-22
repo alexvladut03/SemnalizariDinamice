@@ -8,8 +8,9 @@ const nextConfig = {
     ],
   },
   experimental: {
-    esmExternals: "loose", // <-- add this
-    serverComponentsExternalPackages: ["mongoose"], // <-- and this
+    appDir: true,
+    esmExternals: "loose",
+    serverComponentsExternalPackages: ["mongoose"],
   },
   // and the following to enable top-level await support for Webpack
   webpack: (config) => {
