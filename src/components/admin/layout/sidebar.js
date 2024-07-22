@@ -1,7 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { FaHome, FaProductHunt, FaRegFileAlt, FaUser } from "react-icons/fa";
-import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
+import {
+  MdKeyboardArrowDown,
+  MdKeyboardArrowRight,
+  MdPermMedia,
+} from "react-icons/md";
 import Link from "next/link";
 
 const Sidebar = () => {
@@ -40,7 +44,13 @@ const Sidebar = () => {
             Pagina de produse
           </div>
         </div>
-
+        <Link
+          href={"/admin/media"}
+          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
+        >
+          <MdPermMedia />
+          <div>Media</div>
+        </Link>
         <Link
           href={"/admin/produse"}
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
