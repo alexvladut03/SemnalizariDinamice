@@ -1,11 +1,13 @@
 import { User } from "@/lib/models/User";
 import { connectDB } from "@/lib/mongodb";
 import { userSchema } from "@/lib/zod";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import { compare } from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  adapter: MongoDBAdapter({ connectDB }),
   providers: [
     Credentials({
       name: "Credentials",
