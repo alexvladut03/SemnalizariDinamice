@@ -1,13 +1,13 @@
 import NavbarAdmin from "@/components/admin/layout/navbar";
 import Sidebar from "@/components/admin/layout/sidebar";
 import { getSession } from "@/lib/getSession";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 export default async function AdminLayout({ children }) {
   const session = await getSession();
 
-  if (!session?.user) {
-    notFound();
+  if (!session) {
+    return <div>Please log in to access this page.</div>;
   } else {
     return (
       <main>

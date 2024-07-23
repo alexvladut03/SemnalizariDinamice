@@ -42,7 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/admin/login",
+    signIn: "/login",
   },
   callbacks: {
     async session({ session, token }) {
@@ -62,4 +62,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
   },
+  secret: process.env.AUTH_SECRET,
 });
