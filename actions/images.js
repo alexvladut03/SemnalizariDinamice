@@ -9,3 +9,12 @@ export const imageRemove = async (imageKey) => {
     return { success: false, error: error.message };
   }
 };
+
+export const getUploads = async () => {
+  try {
+    const uploads = await utapi.listFiles();
+    return { success: true, uploads };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
