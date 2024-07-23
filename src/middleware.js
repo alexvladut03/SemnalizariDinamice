@@ -5,6 +5,7 @@ export async function middleware(req) {
   const token = await getToken({ req, secret: process.env.AUTH_SECRET });
 
   console.log(token);
+  console.log(req);
 
   if (!token) {
     // Redirect to login page if the user is not authenticated
