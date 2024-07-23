@@ -1,10 +1,22 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 export default function ProductBoxCart() {
+  let stock = 5;
+
+  const [activeQuantity, setActiveQuantity] = useState(1);
+
+  const setNextQuantity = () => {
+    setActiveQuantity(activeQuantity + 1);
+  };
+  const setPreviousQuantity = () => {
+    setActiveQuantity(activeQuantity - 1);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow p-6 flex flex-row w-2/3 h-auto items-center relative">
+    <div className="bg-white rounded-lg shadow p-6 flex flex-row w-full h-auto items-center relative">
       <Image
         src="/Logo.jpeg"
         alt="Loading..."
@@ -19,27 +31,36 @@ export default function ProductBoxCart() {
           <span className="ml-4 font-medium">Disponibilitate: în stoc</span>
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center ">
+      <div className="flex flex-col items-center space-y-1">
         <div className="text-xl font-semibold text-gray-800">200 RON</div>
-        <div className="flex text-xl items-center space-x-2">
-          <button>
+        <div className="flex text-xl gap-2 ">
+          <button
+            onClick={setPreviousQuantity}
+            disabled={activeQuantity === 1}
+            className={` ${
+              activeQuantity <= 1
+                ? "cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            }`}
+          >
             <CiCircleMinus />
           </button>
-          <p className="font-semibold text-center">1</p>
-          <button>
+
+          <p className="font-semibold text-center">{activeQuantity}</p>
+
+          <button
+            onClick={setNextQuantity}
+            disabled={activeQuantity === stock}
+            className={`${
+              activeQuantity === stock
+                ? "cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            }`}
+          >
             <CiCirclePlus />
           </button>
         </div>
         <button className="text-red-600">Sterge</button>
-      </div>
-      <div className="absolute -bottom-14 left-0 ">
-        <div className="mt-4 text-sm ">Cost produse: 200 RON</div>
-        <div className="text-sm ">Cost livrare si procesare: 20 RON</div>
-      </div>
-      <div className="absolute -bottom-14 right-0 ">
-        <div className="text-xl font-semibold text-gray-800">
-          Subtotal: 220 RON
-        </div>
       </div>
     </div>
   );

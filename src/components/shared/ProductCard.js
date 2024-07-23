@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaCartPlus } from "react-icons/fa";
+import CartButton from "../ui/CartButton";
 
 const ProduseCard2 = ({ name, image, price, id }) => {
   return (
@@ -28,12 +29,7 @@ const ProduseCard2 = ({ name, image, price, id }) => {
       <div className="flex flex-col gap-3">
         <p className="mt-1.5 text-md text-gray-700 font-bold">{price}</p>
         <form>
-          <button className="relative flex items-center justify-center w-full rounded-lg bg-amber-500 p-4 font-semibold transition hover:scale-105 mt-5 text-black">
-            <div className="absolute left-0 h-full flex items-center justify-center w-12 bg-black rounded-l-lg rounded-br-2xl">
-              <FaCartPlus className="text-2xl text-white" />
-            </div>
-            <span className="ml-12">Adauga in Cos</span>
-          </button>
+          <CartButton />
         </form>
       </div>
     </Link>

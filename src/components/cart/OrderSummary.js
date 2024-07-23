@@ -1,5 +1,6 @@
 import React from "react";
-import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
+import ContinueButton from "../ui/ContinueButton";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 export default function OrderSummary() {
   return (
@@ -17,10 +18,10 @@ export default function OrderSummary() {
         <span>Total:</span>
         <div>220 RON</div>
       </div>
-      <button className="w-full py-2 bg-amber-500 hover:bg-amber-400 text-white font-semibold rounded flex items-center justify-center">
-        Continuă
-      </button>
-      <div className="my-4 font-semibold">Ai un voucher sau card cadou?</div>{" "}
+      <ContinueButton />
+      <div className="my-4 font-semibold">
+        Ai un voucher sau card cadou?
+      </div>{" "}
       <div className="flex">
         <input
           type="text"
@@ -28,7 +29,7 @@ export default function OrderSummary() {
           placeholder="Introduceți codul"
         />
         <button className="bg-amber-500 hover:bg-amber-400 text-white px-1 rounded-r text-3xl">
-          <MdOutlineKeyboardDoubleArrowRight />
+          <MdOutlineKeyboardArrowRight />
         </button>
       </div>
     </main>
