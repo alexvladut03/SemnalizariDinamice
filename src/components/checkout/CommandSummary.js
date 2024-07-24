@@ -1,5 +1,6 @@
 import React from "react";
 import ContinueButton from "../ui/ContinueButton";
+import Link from "next/link";
 
 export default function CommandSummary() {
   return (
@@ -16,7 +17,9 @@ export default function CommandSummary() {
       <div className="flex flex-col justify-center items-center">
         <p className="text-2xl font-semibold">Total:220RON</p>
         <div className="w-full">
-          <ContinueButton />
+          <Link href={"/cart/summary"}>
+            <ContinueButton />
+          </Link>
         </div>
       </div>
     </div>
