@@ -7,6 +7,7 @@ import { User } from "@/lib/models/User";
 import { hash } from "bcryptjs";
 import { userSchema } from "@/lib/zod";
 import { connectDB } from "@/lib/mongodb";
+import prisma from "@/lib/prisma";
 
 export const login = async (formData) => {
   const username = formData.get("username");
@@ -44,7 +45,9 @@ export const register = async (formData) => {
   await connectDB();
 
   // Check if username exists
-  const existingUser = await User.findOne({ username });
+  const existingUser = await prisma.user.findUnique({
+    where: { username },
+  });
 
   if (existingUser) {
     throw new Error("User already exists");
@@ -54,31 +57,48 @@ export const register = async (formData) => {
   const hashedPassword = await hash(password, 12);
 
   // Create user
-  await User.create({
-    name,
-    username,
-    password: hashedPassword,
+  await prisma.user.create({
+    data: {
+      name,
+      username,
+      password: hashedPassword,
+    },
   });
+
   console.log("User created");
   redirect("/admin/utilizatori");
 };
 
 export const getUsers = async () => {
-  await connectDB();
-  const users = await User.find();
+  const users = prisma.user.findMany({
+    select: {
+      id: true,
+      name: true,
+      username: true,
+    },
+  });
+
   return users;
 };
 
 export const deleteUser = async (id) => {
-  await connectDB();
-  await User.findByIdAndDelete(id);
+  await prisma.user.delete({
+    where: { id },
+  });
 
   redirect("/admin/utilizatori");
 };
 
 export const getUser = async (id) => {
-  await connectDB();
-  const user = await User.findById(id);
+  const user = await prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      name: true,
+      username: true,
+    },
+  });
+
   if (!user) {
     throw new Error("User not found");
   }
@@ -96,9 +116,9 @@ export const updateUser = async (id, formData) => {
     return result.error.errors[0].message;
   }
 
-  await connectDB();
-
-  const user = await User.findById(id);
+  const user = await prisma.user.findUnique({
+    where: { id },
+  });
 
   if (!user) {
     throw new Error("User not found");
@@ -113,7 +133,10 @@ export const updateUser = async (id, formData) => {
     password: hashedPassword,
   };
 
-  await User.findByIdAndUpdate(id, updatedUser);
+  await prisma.user.update({
+    where: { id },
+    data: updatedUser,
+  });
   console.log("User updated");
   redirect("/admin/utilizatori");
 };
