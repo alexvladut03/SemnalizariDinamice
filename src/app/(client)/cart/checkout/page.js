@@ -1,0 +1,22 @@
+import CommandBillingData from "@/components/checkout/CommandBillingData";
+import CommandDetails from "@/components/checkout/CommandDetails";
+import CommandPaymentMethod from "@/components/checkout/CommandPaymentMethod";
+import CommandSummary from "@/components/checkout/CommandSummary";
+
+import React from "react";
+
+const Checkout = () => {
+  return (
+    <div className="bg-gray-100">
+      <div className="max-w-7xl mx-auto p-6 min-h-screen">
+        <div className="text-2xl font-semibold pb-5">Detalii comanda</div>
+        <CommandDetails />
+        <CommandBillingData />
+        <CommandPaymentMethod />
+        <CommandSummary />
+      </div>
+    </div>
+  );
+};
+
+export default Checkout;
