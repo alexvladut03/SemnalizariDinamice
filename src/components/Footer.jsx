@@ -14,7 +14,7 @@ export default function Footer() {
     <footer id="Recenzii" className="bg-black">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="flex justify-center">
-          <Image src="/Logo.png" alt="Loading..." width={120} height={120} />
+          <Image src="/logo.png" alt="Loading..." width={120} height={120} />
         </div>
 
         <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-white">
