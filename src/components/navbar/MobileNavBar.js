@@ -17,13 +17,7 @@ export default function MobileNavBar() {
     <main>
       <div className="flex justify-between items-center w-full ">
         <FaCartPlus className="text-2xl text-amber-500" />
-        <Image
-          src="/logo.png"
-          width={120}
-          height={120}
-          alt="Logo"
-          className="h-auto w-auto"
-        />
+        <Image src="/logo.png" width={90} height={90} alt="Logo" />
         <div onClick={checkOpen}>
           {isOpen ? (
             <MdClose className="text-3xl text-amber-500" />
