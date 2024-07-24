@@ -2,6 +2,8 @@ import React from "react";
 import { getUploads } from "../../../../../actions/images";
 import Image from "next/image";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import { UploadDropzone } from "@/utils/uploadthing";
+import UploadDropzoneButton from "@/components/custom ui/UploadDropzoneButton";
 
 const Media = async () => {
   const uploads = await getUploads();
@@ -28,6 +30,7 @@ const Media = async () => {
             </button>
           </div>
         ))}
+      <UploadDropzoneButton />
     </div>
   );
 };
