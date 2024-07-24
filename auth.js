@@ -1,9 +1,8 @@
-import { User } from "@/lib/models/User";
-import { connectDB } from "@/lib/mongodb";
 import { userSchema } from "@/lib/zod";
 import { compare } from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import prisma from "@/lib/prisma";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -19,13 +18,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         if (!username || !password)
           throw new Error("Username and password are required");
 
-        await connectDB();
-
-        const user = await User.findOne({ username }).select("+password +name");
+        const user = await prisma.user.findUnique({
+          where: { username },
+          select: { id: true, username: true, name: true, password: true },
+        });
 
         if (!user) throw new Error("Invalid credentials");
-
-        if (!user.password) throw new Error("Invalid credentials");
 
         const isValid = await compare(password, user.password);
 
@@ -34,7 +32,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const userData = {
           username: user.username,
           name: user.name,
-          id: user._id,
+          id: user.id,
         };
 
         return userData;
