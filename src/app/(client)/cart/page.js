@@ -15,7 +15,6 @@ export default function Page() {
           </div>
           <ProductSummary />
         </div>
-
         <div className="pl-10 w-1/3 h-auto">
           <OrderSummary />
         </div>

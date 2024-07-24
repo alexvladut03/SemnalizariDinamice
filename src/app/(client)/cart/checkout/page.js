@@ -8,8 +8,8 @@ import React from "react";
 const Checkout = () => {
   return (
     <div className="bg-gray-100">
-      <div className="max-w-7xl mx-auto p-6 min-h-screen">
-        <div className="text-2xl font-semibold pb-5">Detalii comanda</div>
+      <div className="max-w-4xl mx-auto p-6 min-h-screen">
+        <div className="text-2xl font-semibold pb-4">Detalii comanda</div>
         <CommandDetails />
         <CommandBillingData />
         <CommandPaymentMethod />
