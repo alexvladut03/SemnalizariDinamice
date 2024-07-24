@@ -15,19 +15,8 @@ const CustomForm = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append("username", data.username);
-    formData.append("password", data.password);
-
-    return login(formData);
-  };
-
   return (
-    <form
-      onSubmit={form.handleSubmit(onSubmit)}
-      className="space-y-8 text-white"
-    >
+    <form action={login} className="space-y-8 text-white">
       <div className="bg-black flex items-center border-b-2">
         <input
           {...form.register("username")}
