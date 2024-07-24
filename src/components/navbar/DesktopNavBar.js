@@ -22,7 +22,13 @@ export default function DesktopNavBar() {
 
   return (
     <main className="flex justify-between items-center">
-      <Image src="/logo.png" width={90} height={90} alt="Logo" />
+      <Image
+        src="/logo.png"
+        width={120}
+        height={120}
+        alt="Logo"
+        className="h-auto w-auto"
+      />
       <nav className="flex gap-8 text-white font-semibold">
         <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
           Acasa
