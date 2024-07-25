@@ -39,7 +39,7 @@ const AddToCart = () => {
             {cartItems.items.length > 0 ? (
               <>
                 {cartItems.items.map((item) => (
-                  <div>
+                  <div key={item.id}>
                     <p>{item.name}</p>
                     <p>{item.price}</p>
                     <p>{item.count}</p>
