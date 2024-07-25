@@ -131,6 +131,15 @@ export const getProduct = async (id) => {
   return product;
 };
 
+export const getProductsCategoryExceptProduct = async (id, category) => {
+  await connectDB();
+
+  const products = await Product.find({ category });
+  const productsWithCategory = products.filter((product) => product.id !== id);
+
+  return productsWithCategory;
+};
+
 export const updateProduct = async (id, formData) => {
   console.log("Form data action", formData);
 
