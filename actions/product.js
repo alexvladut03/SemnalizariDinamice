@@ -2,6 +2,7 @@
 
 import { Product } from "@/lib/models/Product";
 import { connectDB } from "@/lib/mongodb";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export const addProduct = async (formData) => {
@@ -60,6 +61,7 @@ export const addProduct = async (formData) => {
   };
 
   await Product.create(product);
+  revalidatePath("/");
   console.log("Product created successfully", product);
   redirect("/admin/produse");
 };
@@ -85,6 +87,7 @@ export const deleteProduct = async (id) => {
   }
 
   console.log("Product deleted successfully");
+  revalidatePath("/");
   redirect("/admin/produse");
 };
 
@@ -116,6 +119,7 @@ export const duplicateProduct = async (id) => {
 
   await Product.create(newProduct);
 
+  revalidatePath("/");
   redirect("/admin/produse");
 };
 
@@ -198,5 +202,6 @@ export const updateProduct = async (id, formData) => {
   await Product.findOneAndUpdate(id, newProduct);
 
   console.log("Product updated successfully");
+  revalidatePath("/");
   redirect("/admin/produse");
 };
