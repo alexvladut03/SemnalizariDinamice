@@ -7,7 +7,7 @@ const Produse = async () => {
   console.log(products);
 
   return (
-    <section id="Produse" className="my-28 max-w-7xl mx-auto px-6 xl:px-0">
+    <section id="Produse" className="my-28 max-w-7xl mx-auto px-4 xl:px-0">
       <div className="pb-12 text-center text-black">
         <p>PRODUSE</p>
         <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight text-black">

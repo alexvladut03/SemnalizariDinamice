@@ -6,7 +6,7 @@ import { FaCarAlt } from "react-icons/fa";
 const Featured = () => {
   return (
     <section id="Despre-noi" className="py-28 bg-black">
-      <div className="max-w-7xl mx-auto px-6 xl:px-0">
+      <div className="max-w-7xl mx-auto px-4 xl:px-0">
         <div className="pb-12 text-center text-white">
           <p>DESPRE NOI</p>
           <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight text-white">

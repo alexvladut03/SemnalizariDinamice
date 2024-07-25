@@ -16,13 +16,15 @@ export default function MobileNavBar() {
   return (
     <main>
       <div className="flex justify-between items-center w-full ">
-        <FaCartPlus className="text-2xl text-amber-500" />
+        <Link href={"/cart"}>
+          <FaCartPlus className="text-2xl text-amber-500 ml-2" />
+        </Link>
         <Image src="/logo.png" width={90} height={90} alt="Logo" />
         <div onClick={checkOpen}>
           {isOpen ? (
-            <MdClose className="text-3xl text-amber-500" />
+            <MdClose className="text-3xl text-amber-500 mr-2" />
           ) : (
-            <IoIosMenu className="text-3xl text-amber-500" />
+            <IoIosMenu className="text-3xl text-amber-500 mr-2" />
           )}
         </div>
       </div>

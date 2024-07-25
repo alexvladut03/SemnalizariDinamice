@@ -27,7 +27,7 @@ const ProduseCard2 = ({ name, image, price, id }) => {
         </div>
       </div>
       <div className="flex flex-col gap-3">
-        <p className="mt-1.5 text-md text-gray-700 font-bold">{price}</p>
+        <p className="mt-1.5 text-md text-gray-700 font-bold">{price} RON</p>
         <form>
           <CartButton />
         </form>

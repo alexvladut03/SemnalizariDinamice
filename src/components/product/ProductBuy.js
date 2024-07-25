@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { MdOutlineLocalShipping, MdOutlineVerifiedUser } from "react-icons/md";
-import { FaCartPlus, FaHeart } from "react-icons/fa6";
 import CartButton from "../ui/CartButton";
 import FavoriteButton from "../ui/FavoriteButton";
 
@@ -17,7 +16,7 @@ const ProductBuy = ({ stock }) => {
   };
 
   return (
-    <div className="flex flex-col items-start text-gray-700 border border-amber-500 p-4 max-w-full lg:max-w-80 rounded-lg">
+    <div className="flex flex-col items-start text-gray-700 border border-amber-500 p-4 lg:w-[366px] w-full rounded-lg">
       <div className="font-semibold">
         <div className="flex mb-2">
           <MdOutlineLocalShipping className="text-xl mr-2" />

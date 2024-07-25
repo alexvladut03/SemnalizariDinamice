@@ -4,7 +4,7 @@ import React from "react";
 
 const ProductPrice = ({ price, id, filteredCategories }) => {
   return (
-    <div className=" w-full lg:w-auto">
+    <div className=" w-full lg:w-auto text-center lg:text-left">
       <div>
         <p className="text-3xl font-semibold text-gray-900">{`${price} RON`}</p>
       </div>
