@@ -19,7 +19,7 @@ export default function Page() {
         <div className="flex-col w-full">
           <div className="space-y-5">
             {cartItems.items.map((item) => (
-              <ProductBoxCart item={item} shipCost={shipCost} />
+              <ProductBoxCart key={item.id} item={item} shipCost={shipCost} />
             ))}
           </div>
           <ProductSummary shipCost={shipCost} totalPrice={countTotalPrice()} />
