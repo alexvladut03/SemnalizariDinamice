@@ -67,25 +67,6 @@ export default function Footer() {
             target="_blank"
             className="text-gray-700  hover:text-amber-400"
           >
-            <span className="sr-only">Twitter</span>
-            <FaTwitter />
-          </Link>
-          <Link
-            href="#"
-            rel="noreferrer"
-            target="_blank"
-            className="text-gray-700  hover:text-amber-400"
-          >
-            <span className="sr-only">GitHub</span>
-
-            <FaGithub />
-          </Link>
-          <Link
-            href="#"
-            rel="noreferrer"
-            target="_blank"
-            className="text-gray-700  hover:text-amber-400"
-          >
             <span className="sr-only ">Dribbble</span>
             <FaTiktok />
           </Link>
