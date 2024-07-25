@@ -27,7 +27,7 @@ const ProductTitle = ({ title }) => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <h1 className="sm:text-4xl font-bold tracking-tight text-black text-left text-3xl mt-2">
+      <h1 className="sm:text-4xl font-bold tracking-tight text-black lg:text-left text-3xl mt-2 text-center">
         {title}
       </h1>
     </section>

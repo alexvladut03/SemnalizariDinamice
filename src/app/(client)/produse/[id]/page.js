@@ -20,7 +20,7 @@ const Page = ({ params }) => {
   );
 
   return (
-    <main className="bg-white">
+    <main className="bg-white px-4">
       <div className="max-w-7xl mx-auto">
         <ProductTitle title={product.name} />
         <section className="grid sm:grid-cols-1 lg:grid-cols-3 justify-items-center pb-5 items-center">
