@@ -4,8 +4,6 @@ import ProductCard from "./ProductCard";
 const Produse = async () => {
   const products = await getProducts();
 
-  console.log(products);
-
   return (
     <section id="Produse" className="my-28 max-w-7xl mx-auto px-4 xl:px-0">
       <div className="pb-12 text-center text-black">

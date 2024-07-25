@@ -3,26 +3,26 @@ import ContinueButton from "../ui/ContinueButton";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
 
-export default function OrderSummary() {
+export default function OrderSummary({ shipCost, totalPrice }) {
   return (
-    <main className="p-6 bg-white rounded-lg shadow w-auto">
+    <div className="p-6 bg-white rounded-lg shadow w-auto">
       <div className="text-xl font-bold mb-4">Sumar comandă</div>
       <div className="flex justify-between mb-2">
         <div>Cost produse:</div>
-        <div>200 RON</div>
+        <div>{`${totalPrice} RON`}</div>
       </div>
       <div className="flex justify-between mb-4">
         <span>Cost livrare:</span>
-        <div>20 RON</div>
+        <div>{`${shipCost} RON`}</div>
       </div>
       <div className="flex justify-between text-xl font-bold text-gray-900 mb-4">
         <span>Total:</span>
-        <div>220 RON</div>
+        <div>{`${totalPrice + shipCost} RON`}</div>
       </div>
       <Link href={"/cart/checkout"}>
         <ContinueButton />
       </Link>
-      <div className="my-4 font-semibold">Ai un voucher sau card cadou?</div>{" "}
+      <div className="my-4 font-semibold">Ai un voucher sau card cadou?</div>
       <div className="flex">
         <input
           type="text"
@@ -34,6 +34,6 @@ export default function OrderSummary() {
           <MdOutlineKeyboardArrowRight />
         </button>
       </div>
-    </main>
+    </div>
   );
 }

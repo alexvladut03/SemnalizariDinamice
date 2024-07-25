@@ -135,6 +135,36 @@ export const getProduct = async (id) => {
   return product;
 };
 
+export const getProductCustom = async (id) => {
+  await connectDB();
+
+  const product = await Product.findOne({ id });
+
+  const customProduct = {
+    id: product.id,
+    image: product.mainImage.url,
+    name: product.name,
+    price: product.price,
+  };
+
+  return customProduct;
+};
+
+export const getProductsWithIdsCustom = async (ids) => {
+  await connectDB();
+
+  const products = await Product.find({ id: { $in: ids } });
+
+  const customProducts = products.map((product) => ({
+    id: product.id,
+    image: product.mainImage.url,
+    name: product.name,
+    price: product.price,
+  }));
+
+  return customProducts;
+};
+
 export const getProductsCategoryExceptProduct = async (id, category) => {
   await connectDB();
 
