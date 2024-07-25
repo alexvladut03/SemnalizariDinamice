@@ -1,7 +1,11 @@
+import { getProducts } from "../../../actions/product";
 import ProductCard from "./ProductCard";
-import products from "../data/products";
 
-const Produse2 = () => {
+const Produse = async () => {
+  const products = await getProducts();
+
+  console.log(products);
+
   return (
     <section id="Produse" className="my-28 max-w-7xl mx-auto px-4 xl:px-0">
       <div className="pb-12 text-center text-black">
@@ -15,7 +19,7 @@ const Produse2 = () => {
           <ProductCard
             key={product.id}
             id={product.id}
-            image={product.imageSrc}
+            image={product.mainImage.url}
             name={product.name}
             price={product.price}
           />
@@ -25,4 +29,4 @@ const Produse2 = () => {
   );
 };
 
-export default Produse2;
+export default Produse;

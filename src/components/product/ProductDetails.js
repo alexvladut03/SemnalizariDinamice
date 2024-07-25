@@ -52,9 +52,7 @@ const ProductDetails = ({ description, fitment, characteristics }) => {
 
       {activeSection === "caracteristici" && (
         <div className="bg-white text-black p-4 rounded-lg">
-          {characteristics.map((characteristic, index) => (
-            <p key={index}>{characteristic}</p>
-          ))}
+          <p>{characteristics}</p>
         </div>
       )}
     </section>

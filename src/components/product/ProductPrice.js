@@ -6,9 +6,7 @@ const ProductPrice = ({ price, id, filteredCategories }) => {
   return (
     <div className=" w-full lg:w-auto text-center lg:text-left">
       <div>
-        <p className="text-3xl font-semibold text-gray-900">
-          {`${price} / 4 buc`}
-        </p>
+        <p className="text-3xl font-semibold text-gray-900">{`${price} RON`}</p>
       </div>
       <div className="text-gray-700">
         <span className="text-amber-500">★ ★ ★ ★ ☆</span>
@@ -22,7 +20,7 @@ const ProductPrice = ({ price, id, filteredCategories }) => {
           filteredCategories.map((catProduct) => (
             <Link href={`/produse/${catProduct.id}`} key={catProduct.id}>
               <Image
-                src={catProduct.imageSrc}
+                src={catProduct.mainImage.url}
                 alt={catProduct.name}
                 width={100}
                 height={100}
@@ -31,7 +29,7 @@ const ProductPrice = ({ price, id, filteredCategories }) => {
             </Link>
           ))
         ) : (
-          <p>No categories found.</p>
+          <></>
         )}
       </div>
     </div>
