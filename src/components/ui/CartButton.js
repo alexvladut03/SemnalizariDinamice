@@ -3,11 +3,15 @@ import { useCart } from "@/app/context/CartProvider";
 import React from "react";
 import { FaCartPlus } from "react-icons/fa";
 
-export default function CartButton({ product }) {
+export default function CartButton({ product, quantity }) {
   const { updateCart } = useCart();
 
   const addToCartClickHandler = () => {
-    updateCart(product, 1);
+    if (quantity) {
+      updateCart(product, quantity);
+    } else {
+      updateCart(product, 1);
+    }
   };
 
   return (

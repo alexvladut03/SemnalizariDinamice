@@ -37,7 +37,13 @@ const Page = async ({ params }) => {
             id={product.id}
             filteredCategories={productsWithCategory}
           />
-          <ProductBuy stock={product.stock} />
+          <ProductBuy
+            stock={product.stock}
+            name={product.name}
+            image={product.image}
+            id={product.id}
+            price={product.price}
+          />
         </section>
 
         <ProductDetails

@@ -5,8 +5,14 @@ import { MdOutlineLocalShipping, MdOutlineVerifiedUser } from "react-icons/md";
 import CartButton from "../ui/CartButton";
 import FavoriteButton from "../ui/FavoriteButton";
 
-const ProductBuy = ({ stock }) => {
+const ProductBuy = ({ stock, name, image, id, price }) => {
   const [activeQuantity, setActiveQuantity] = useState(1);
+  const product = {
+    name,
+    image,
+    id,
+    price,
+  };
 
   const setNextQuantity = () => {
     setActiveQuantity(activeQuantity + 1);
@@ -71,7 +77,7 @@ const ProductBuy = ({ stock }) => {
 
       <p className="pt-2">{`Disponibilitate: În stoc ${stock}`}</p>
 
-      <CartButton />
+      <CartButton product={product} quantity={activeQuantity} />
       <br />
       <FavoriteButton />
     </div>

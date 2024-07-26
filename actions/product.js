@@ -1,5 +1,6 @@
 "use server";
 
+import { Category } from "@/lib/models/Category";
 import { Product } from "@/lib/models/Product";
 import { connectDB } from "@/lib/mongodb";
 import { revalidatePath } from "next/cache";
@@ -16,6 +17,8 @@ export const addProduct = async (formData) => {
   const description = formData.get("description");
   const fitment = formData.get("fitment");
   const characteristics = formData.get("characteristics");
+
+  console.log("Form data action", formData);
 
   await connectDB();
 
@@ -69,7 +72,15 @@ export const addProduct = async (formData) => {
 export const getProducts = async () => {
   await connectDB();
 
-  const products = await Product.find();
+  let products = await Product.find().populate("category");
+
+  products = products.map((product) => {
+    if (!product.category) {
+      product.category = { name: "Fără categorie" };
+    }
+    return product;
+  });
+
   return products;
 };
 
@@ -175,8 +186,6 @@ export const getProductsCategoryExceptProduct = async (id, category) => {
 };
 
 export const updateProduct = async (id, formData) => {
-  console.log("Form data action", formData);
-
   const newProductID = formData.get("id");
   const newProductCategory = formData.get("category");
   const newProductName = formData.get("name");

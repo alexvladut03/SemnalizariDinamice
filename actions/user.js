@@ -3,7 +3,6 @@
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "../auth";
 
-import { User } from "@/lib/models/User";
 import { hash } from "bcryptjs";
 import { userSchema } from "@/lib/zod";
 import { connectDB } from "@/lib/mongodb";

@@ -8,7 +8,7 @@ const produse = async () => {
   const products = await getProducts();
 
   return (
-    <main className="p-4 bg-gray-100">
+    <div className="p-4 bg-gray-100">
       <div className="text-center text-2xl my-8 font-semibold">
         O lista cu produsele adaugate
       </div>
@@ -45,7 +45,7 @@ const produse = async () => {
                 />
               </div>
               <div>{product.name}</div>
-              <div>{product.category}</div>
+              <div>{product.category.name}</div>
               <div>{product.price}</div>
               <div>{product.stock}</div>
               <div className="flex  gap-3">
@@ -62,7 +62,7 @@ const produse = async () => {
           ))}
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

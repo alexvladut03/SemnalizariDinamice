@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { FaHome, FaProductHunt, FaRegFileAlt, FaUser } from "react-icons/fa";
 import {
+  MdCategory,
   MdKeyboardArrowDown,
   MdKeyboardArrowRight,
   MdPermMedia,
@@ -57,6 +58,13 @@ const Sidebar = () => {
         >
           <FaProductHunt />
           <div>Produse</div>
+        </Link>
+        <Link
+          href={"/admin/categorii"}
+          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
+        >
+          <MdCategory />
+          <div>Categorii</div>
         </Link>
         <Link
           href={"/admin/utilizatori"}

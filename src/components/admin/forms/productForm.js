@@ -11,6 +11,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { UploadDropzone } from "@/utils/uploadthing";
 import { useEffect, useState } from "react";
@@ -18,7 +25,7 @@ import Image from "next/image";
 import { imageRemove } from "../../../../actions/images";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
-const ProductForm = ({ formData, action }) => {
+const ProductForm = ({ formData, action, categories }) => {
   const form = useForm({
     resolver: zodResolver(productSchema),
     defaultValues: formData,
@@ -82,16 +89,34 @@ const ProductForm = ({ formData, action }) => {
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name="category"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Category" {...field} />
-                    </FormControl>
-                    <FormMessage />
+                    <Select
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      name={field.name}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue
+                            ref={field.ref}
+                            placeholder="Selecteaza o categorie"
+                          />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {categories.map((category) => (
+                          <SelectItem key={category.id} value={category._id}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </FormItem>
                 )}
               />

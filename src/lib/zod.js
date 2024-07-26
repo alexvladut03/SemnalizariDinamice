@@ -24,3 +24,9 @@ export const productSchema = z.object({
   fitment: z.string().min(1).max(50),
   characteristics: z.string().min(1).max(50),
 });
+
+export const categorySchema = z.object({
+  id: z.string().min(1).max(50),
+  name: z.string().min(1).max(50),
+  description: z.string().min(1).max(50),
+});
