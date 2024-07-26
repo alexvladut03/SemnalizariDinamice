@@ -86,4 +86,6 @@ const RichTextEditorToolbar = ({ editor }) => {
   );
 };
 
+RichTextEditor.displayName = "RichTextEditor";
+
 export default RichTextEditor;
