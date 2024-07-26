@@ -1,4 +1,5 @@
 "use client";
+import DOMPurify from "isomorphic-dompurify";
 import React, { useState } from "react";
 
 const ProductDetails = ({ description, fitment, characteristics }) => {
@@ -11,7 +12,7 @@ const ProductDetails = ({ description, fitment, characteristics }) => {
           onClick={() => setActiveSection("descriere")}
           className={`text-2xl font-bold cursor-pointer p-2 ${
             activeSection === "descriere"
-              ? "font-bold bg-white text-black rounded-lg lg:rounded-t-lg lg:rounded-b-none "
+              ? "font-bold bg-white text-black rounded-lg lg:rounded-t-lg lg:rounded-b-none"
               : ""
           }`}
         >
@@ -31,30 +32,40 @@ const ProductDetails = ({ description, fitment, characteristics }) => {
           onClick={() => setActiveSection("caracteristici")}
           className={`text-2xl font-bold cursor-pointer p-2 ${
             activeSection === "caracteristici"
-              ? "font-bold bg-white text-black rounded-lg lg:rounded-t-lg lg:rounded-b-none "
+              ? "font-bold bg-white text-black rounded-lg lg:rounded-t-lg lg:rounded-b-none"
               : ""
           }`}
         >
           Caracteristici
         </p>
       </div>
-      {activeSection === "descriere" && (
-        <p className="mb-4 bg-white text-black p-4 rounded-b-lg rounded-r-lg lg:rounded-r-none lg:rounded-bl-lg lg:rounded-br-lg">
-          {description}
-        </p>
-      )}
-      {activeSection === "compatibilitate" && (
-        <div
-          className="mb-4 bg-white text-black p-4 rounded-lg"
-          dangerouslySetInnerHTML={{ __html: fitment }}
-        ></div>
-      )}
 
-      {activeSection === "caracteristici" && (
-        <div className="bg-white text-black p-4 rounded-lg">
-          <p>{characteristics}</p>
-        </div>
-      )}
+      <div className="bg-white text-black p-4 rounded-lg">
+        <div
+          className={`${
+            activeSection === "descriere" ? "block" : "hidden"
+          } mb-4 rounded-b-lg rounded-r-lg lg:rounded-r-none lg:rounded-bl-lg lg:rounded-br-lg`}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(description),
+          }}
+        />
+        <div
+          className={`${
+            activeSection === "compatibilitate" ? "block" : "hidden"
+          } mb-4 rounded-lg`}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(fitment),
+          }}
+        />
+        <div
+          className={`${
+            activeSection === "caracteristici" ? "block" : "hidden"
+          } rounded-lg`}
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(characteristics),
+          }}
+        />
+      </div>
     </section>
   );
 };

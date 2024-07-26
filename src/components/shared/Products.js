@@ -1,8 +1,8 @@
-import { getProducts } from "../../../actions/product";
+import { getProductsWithoutDBData } from "../../../actions/product";
 import ProductCard from "./ProductCard";
 
 const Produse = async () => {
-  const products = await getProducts();
+  const products = await getProductsWithoutDBData();
 
   return (
     <section id="Produse" className="my-28 max-w-7xl mx-auto px-4 xl:px-0">
@@ -14,13 +14,7 @@ const Produse = async () => {
       </div>
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-strech">
         {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            image={product.mainImage.url}
-            name={product.name}
-            price={product.price}
-          />
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </section>

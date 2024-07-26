@@ -3,20 +3,15 @@ import Link from "next/link";
 import React from "react";
 import CartButton from "../ui/CartButton";
 
-const ProduseCard2 = ({ name, image, price, id }) => {
-  const product = {
-    name,
-    image,
-    price,
-    id,
-  };
+const ProduseCard2 = ({ product }) => {
+  const { name, mainImage, price, id } = product;
 
   return (
     <div className="group relative border border-grey-500 flex justify-between flex-col rounded-lg p-6 overflow-hidden">
-      <Link href={`/produse/${id}`}>
+      <Link href={`/produse/${id}`} prefetch={true}>
         <div className="relative block">
           <Image
-            src={image}
+            src={mainImage.url}
             alt={name}
             width={200}
             height={200}

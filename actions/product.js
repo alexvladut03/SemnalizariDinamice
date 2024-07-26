@@ -76,12 +76,42 @@ export const getProducts = async () => {
 
   products = products.map((product) => {
     if (!product.category) {
-      product.category = { name: "Fără categorie" };
+      product.category = { id: "fara-categorie", name: "Fără categorie" };
     }
     return product;
   });
 
   return products;
+};
+
+export const getProductsWithoutDBData = async () => {
+  await connectDB();
+
+  const products = await Product.find().populate("category");
+
+  const customProducts = products.map((product) => ({
+    id: product.id,
+    category: {
+      id: product.category.id,
+      name: product.category.name,
+    },
+    name: product.name,
+    price: product.price,
+    stock: product.stock,
+    mainImage: {
+      url: product.mainImage.url,
+      name: product.mainImage.name,
+    },
+    gallery: product.gallery.map((image) => ({
+      url: image.url,
+      name: image.name,
+    })),
+    description: product.description,
+    fitment: product.fitment,
+    characteristics: product.characteristics,
+  }));
+
+  return customProducts;
 };
 
 export const deleteProduct = async (id) => {
@@ -196,6 +226,8 @@ export const updateProduct = async (id, formData) => {
   const newProductDescription = formData.get("description");
   const newProductFitment = formData.get("fitment");
   const newProductCharacteristics = formData.get("characteristics");
+
+  console.log("Form data action", formData);
 
   await connectDB();
 
