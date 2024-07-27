@@ -30,7 +30,7 @@ export default function Page() {
             />
           </div>
         </div>
-        <div className="w-full lg:w-1/3 order-1 lg:order-2 mb-10">
+        <div className="w-full lg:w-1/3 order-1 lg:order-2 mb-5">
           <OrderSummary shipCost={shipCost} totalPrice={countTotalPrice()} />
         </div>
       </div>

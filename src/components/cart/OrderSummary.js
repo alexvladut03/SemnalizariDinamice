@@ -6,7 +6,9 @@ import Link from "next/link";
 export default function OrderSummary({ shipCost, totalPrice }) {
   return (
     <div className="p-6 bg-white rounded-lg shadow w-full">
-      <div className="text-xl font-bold mb-4">Sumar comandă</div>
+      <div className="text-xl font-bold mb-4 flex justify-center lg:block">
+        Sumar comandă
+      </div>
       <div className="flex justify-between mb-2">
         <div>Cost produse:</div>
         <div>{`${totalPrice} RON`}</div>

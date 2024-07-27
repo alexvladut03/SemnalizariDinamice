@@ -21,7 +21,7 @@ export default function ProductBoxCart({ item }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 flex flex-row w-full h-auto items-center relative">
+    <div className="bg-white rounded-lg shadow lg:p-6 p-2 flex flex-row w-full h-auto items-start relative">
       <Image
         src={item.image}
         alt="Loading..."
@@ -30,14 +30,13 @@ export default function ProductBoxCart({ item }) {
         className="w-24 h-24 object-contain"
       />
       <div className="ml-4 flex-1">
-        <h2 className="text-lg font-semibold">{item.name}</h2>
-        <div className="mt-2">
-          <span className="text-amber-500">★ ★ ★ ★ ☆</span>
-          <span className="ml-4 font-medium">Disponibilitate: în stoc</span>
-        </div>
+        <h2 className="text-md font-semibold">{item.name}</h2>
+        <span className="flex font-medium ">în stoc</span>
       </div>
-      <div className="flex flex-col items-center space-y-1">
-        <div className="text-xl font-semibold text-gray-800">{item.price}</div>
+      <div className="flex flex-col items-center space-y-2 pl-2 lg:pl-0 ">
+        <div className="lg:text-lg font-semibold text-gray-800">
+          {item.price} <span>RON</span>
+        </div>
         <div className="flex text-xl gap-2 ">
           <button
             onClick={setPreviousQuantity}
@@ -57,7 +56,10 @@ export default function ProductBoxCart({ item }) {
             <CiCirclePlus />
           </button>
         </div>
-        <button onClick={() => handleProductRemove()} className="text-red-600">
+        <button
+          onClick={() => handleProductRemove()}
+          className="text-red-600 font-medium "
+        >
           Sterge
         </button>
       </div>
