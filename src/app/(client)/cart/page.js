@@ -14,8 +14,11 @@ export default function Page() {
   console.log(cartItems.items);
 
   return cartItems.items.length > 0 ? (
-    <div className="bg-gray-100">
-      <div className="max-w-7xl h-screen flex mx-auto items-center">
+    <div className="bg-gray-100 py-10">
+      <h1 className="flex justify-center text-3xl font-bold text-gray-800 pb-10">
+        Coșul tău de cumpărături
+      </h1>
+      <div className="max-w-7xl flex mx-auto items-start">
         <div className="flex-col w-full">
           <div className="space-y-5">
             {cartItems.items.map((item) => (

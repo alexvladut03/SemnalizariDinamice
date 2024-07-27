@@ -1,7 +1,3 @@
-"use client";
-import { useCart } from "@/app/context/CartProvider";
-import { useState } from "react";
-
 export default function ProductSummary({ shipCost, totalPrice }) {
   return (
     <div className="grid grid-cols-2">
