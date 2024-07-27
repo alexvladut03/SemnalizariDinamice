@@ -27,7 +27,7 @@ export default function CommandDetails() {
         <div className="grid grid-cols-2 gap-4 mb-6 font-medium">
           <button
             onClick={handleDeliveryCourier}
-            className={`p-4 border rounded-lg text-center ${
+            className={`lg:p-4 p-2 border rounded-lg text-center ${
               isDeliveryCourier ? "bg-amber-500 border-black" : ""
             }`}
           >
@@ -36,7 +36,7 @@ export default function CommandDetails() {
 
           <button
             onClick={handleDeliveryPersonal}
-            className={`p-4 border rounded-lg text-center ${
+            className={`lg:p-4 p-2 border rounded-lg text-center ${
               isDeliveryPersonal ? "bg-amber-500 border-black" : ""
             }`}
           >
@@ -45,7 +45,7 @@ export default function CommandDetails() {
         </div>
         {isDeliveryCourier && (
           <div className="p-4 bg-gray-100 rounded-lg">
-            <form className="grid grid-cols-2 gap-4">
+            <form className="lg:grid lg:grid-cols-2 lg:gap-4 space-y-4 lg:space-y-0">
               <div className="col-span-2 font-medium">Persoana de contact</div>
               <div>
                 <label className="text-sm font-medium text-gray-700">

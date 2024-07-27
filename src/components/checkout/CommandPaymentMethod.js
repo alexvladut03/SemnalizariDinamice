@@ -27,7 +27,7 @@ export default function CommandPaymentMethod() {
         <div className="grid grid-cols-2 gap-4 mb-6 font-semibold">
           <button
             onClick={handleRamburs}
-            className={`p-4 border rounded-lg text-center ${
+            className={`lg:p-4 p-2 border rounded-lg text-center ${
               isRamburs ? "bg-amber-500 border-black" : ""
             }`}
           >
@@ -36,7 +36,7 @@ export default function CommandPaymentMethod() {
 
           <button
             onClick={handleCard}
-            className={`p-4 border rounded-lg text-center ${
+            className={`lg:p-4 p-2 border rounded-lg text-center ${
               isCard ? "bg-amber-500 border-black" : ""
             }`}
           >
