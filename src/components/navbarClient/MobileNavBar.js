@@ -5,8 +5,10 @@ import Image from "next/image";
 import { FaCartPlus } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
+import { useCart } from "@/app/context/CartProvider";
 
 export default function MobileNavBar() {
+  const { countCartItems, countTotalPrice, updateCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
 
   const checkOpen = () => {
@@ -16,8 +18,11 @@ export default function MobileNavBar() {
   return (
     <main>
       <div className="flex justify-between items-center w-full ">
-        <Link href={"/cart"}>
+        <Link href={"/cart"} className="relative">
           <FaCartPlus className="text-2xl text-amber-500 ml-2" />
+          <p className="absolute -top-[7px] -right-[8px] bg-red-500 text-white rounded-full w-4 h-4 text-center text-xs">
+            {countCartItems()}
+          </p>
         </Link>
         <Link href="/">
           <Image src="/logo.png" width={90} height={90} alt="Logo" />
