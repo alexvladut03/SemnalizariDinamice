@@ -19,7 +19,9 @@ export default function MobileNavBar() {
         <Link href={"/cart"}>
           <FaCartPlus className="text-2xl text-amber-500 ml-2" />
         </Link>
-        <Image src="/logo.png" width={90} height={90} alt="Logo" />
+        <Link href="/">
+          <Image src="/logo.png" width={90} height={90} alt="Logo" />
+        </Link>
         <div onClick={checkOpen}>
           {isOpen ? (
             <MdClose className="text-3xl text-amber-500 mr-2" />

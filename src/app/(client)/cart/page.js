@@ -18,16 +18,19 @@ export default function Page() {
       <h1 className="flex justify-center text-3xl font-bold text-gray-800 pb-10">
         Coșul tău de cumpărături
       </h1>
-      <div className="max-w-7xl flex mx-auto items-start">
-        <div className="flex-col w-full">
-          <div className="space-y-5">
-            {cartItems.items.map((item) => (
-              <ProductBoxCart key={item.id} item={item} shipCost={shipCost} />
-            ))}
+      <div className="lg:max-w-7xl mx-auto px-4 lg:px-0 flex flex-col lg:flex-row lg:space-x-10 items-start">
+        <div className="w-full lg:w-2/3 flex-col space-y-5 order-2 ">
+          {cartItems.items.map((item) => (
+            <ProductBoxCart key={item.id} item={item} shipCost={shipCost} />
+          ))}
+          <div className="hidden lg:block">
+            <ProductSummary
+              shipCost={shipCost}
+              totalPrice={countTotalPrice()}
+            />
           </div>
-          <ProductSummary shipCost={shipCost} totalPrice={countTotalPrice()} />
         </div>
-        <div className="pl-10 w-1/3 h-auto">
+        <div className="w-full lg:w-1/3 order-1 lg:order-2 mb-10">
           <OrderSummary shipCost={shipCost} totalPrice={countTotalPrice()} />
         </div>
       </div>

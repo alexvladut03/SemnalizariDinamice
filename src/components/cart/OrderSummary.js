@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function OrderSummary({ shipCost, totalPrice }) {
   return (
-    <div className="p-6 bg-white rounded-lg shadow w-auto">
+    <div className="p-6 bg-white rounded-lg shadow w-full">
       <div className="text-xl font-bold mb-4">Sumar comandă</div>
       <div className="flex justify-between mb-2">
         <div>Cost produse:</div>
@@ -29,7 +29,6 @@ export default function OrderSummary({ shipCost, totalPrice }) {
           className="flex-grow p-2 border rounded-l"
           placeholder="Introduceți codul"
         />
-
         <button className="bg-amber-500 hover:bg-amber-400 text-white px-1 rounded-r text-3xl">
           <MdOutlineKeyboardArrowRight />
         </button>

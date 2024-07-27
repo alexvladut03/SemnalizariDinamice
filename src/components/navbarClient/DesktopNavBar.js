@@ -5,7 +5,9 @@ import AddToCart from "./cart/AddToCart";
 export default function DesktopNavBar() {
   return (
     <main className="flex justify-between items-center">
-      <Image src="/logo.png" width={90} height={90} alt="Logo" />
+      <Link href="/">
+        <Image src="/logo.png" width={90} height={90} alt="Logo" />
+      </Link>
       <nav className="flex gap-8 text-white font-semibold">
         <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
           Acasa
