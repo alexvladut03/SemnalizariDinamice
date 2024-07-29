@@ -28,7 +28,6 @@ const CartProvider = ({ children }) => {
 
   const updateCart = (product, qty) => {
     const finalCartItems = [...cartItems];
-    console.log("cartitems", cartItems);
     const index = cartItems.findIndex((item) => item.id === product.id);
 
     if (index === -1) {
@@ -37,7 +36,7 @@ const CartProvider = ({ children }) => {
           id: product.id,
           name: product.name,
           price: product.price,
-          image: product.image,
+          image: product.mainImage.url,
           count: qty,
         });
       }

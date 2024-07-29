@@ -5,11 +5,11 @@ import { MdOutlineLocalShipping, MdOutlineVerifiedUser } from "react-icons/md";
 import CartButton from "../ui/CartButton";
 import FavoriteButton from "../ui/FavoriteButton";
 
-const ProductBuy = ({ stock, name, image, id, price }) => {
+const ProductBuy = ({ stock, name, mainImage, id, price }) => {
   const [activeQuantity, setActiveQuantity] = useState(1);
   const product = {
     name,
-    image,
+    mainImage,
     id,
     price,
   };

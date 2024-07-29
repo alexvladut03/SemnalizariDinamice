@@ -42,7 +42,7 @@ const ProductPage = async ({ params }) => {
           <ProductBuy
             stock={product.stock}
             name={product.name}
-            image={product.mainImage.url}
+            mainImage={product.mainImage}
             id={product.id}
             price={product.price}
           />
