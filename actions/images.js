@@ -18,3 +18,12 @@ export const getUploads = async () => {
     return { success: false, error: error.message };
   }
 };
+
+export const getUploadsCustom = async () => {
+  try {
+    const uploads = (await utapi.listFiles()).files;
+    return { success: true, uploads };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};

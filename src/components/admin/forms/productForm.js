@@ -24,9 +24,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { imageRemove } from "../../../../actions/images";
 import { RiDeleteBin5Fill } from "react-icons/ri";
-import RichTextEditor from "@/components/TextEditor";
 import { Toaster } from "@/components/ui/toaster";
 import DOMPurify from "dompurify";
+import RichTextEditor from "../text-editor/TextEditor";
 
 const ProductForm = ({ formData, action, categories }) => {
   const form = useForm({
