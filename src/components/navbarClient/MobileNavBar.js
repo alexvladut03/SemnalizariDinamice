@@ -28,9 +28,6 @@ export default function MobileNavBar() {
     } else {
       document.body.style.overflow = "";
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
   }, [isCartOpen]);
 
   return (
@@ -101,7 +98,7 @@ export default function MobileNavBar() {
               onClick={toggleCart}
             />
           </div>
-          <div className="p-4 h-[80%]">
+          <div className="p-4 h-[90%]">
             <CartProducts />
           </div>
         </div>
