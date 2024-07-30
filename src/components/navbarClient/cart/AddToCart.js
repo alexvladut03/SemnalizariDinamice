@@ -2,7 +2,7 @@
 import { useCart } from "@/app/context/CartProvider";
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa6";
-import CartProducts from "./CartProducts";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 const AddToCart = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
