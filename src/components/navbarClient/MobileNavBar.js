@@ -7,32 +7,40 @@ import { MdClose } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
 import { useCart } from "@/app/context/CartProvider";
 
+import CartProducts from "./cart/CartProducts";
+
 export default function MobileNavBar() {
   const { countCartItems, countTotalPrice, updateCart } = useCart();
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const checkOpen = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleCart = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
   return (
     <main>
       <div className="flex justify-between items-center w-full ">
-        <Link href={"/cart"} className="relative">
-          <FaCartPlus className="text-2xl text-amber-500 ml-2" />
-          <p className="absolute -top-[7px] -right-[8px] bg-red-500 text-white rounded-full w-4 h-4 text-center text-xs">
-            {countCartItems()}
-          </p>
-        </Link>
+        <div onClick={checkOpen}>
+          {isOpen ? (
+            <MdClose className="text-3xl text-amber-500 ml-2" />
+          ) : (
+            <IoIosMenu className="text-3xl text-amber-500 ml-2" />
+          )}
+        </div>
         <Link href="/">
           <Image src="/logo.png" width={90} height={90} alt="Logo" />
         </Link>
-        <div onClick={checkOpen}>
-          {isOpen ? (
-            <MdClose className="text-3xl text-amber-500 mr-2" />
-          ) : (
-            <IoIosMenu className="text-3xl text-amber-500 mr-2" />
-          )}
+
+        <div className="relative" onClick={toggleCart}>
+          <FaCartPlus className="text-2xl text-amber-500 mr-2 cursor-pointer" />
+          <p className="absolute -top-[7px] right-0 bg-red-500 text-white rounded-full w-4 h-4 text-center text-xs">
+            {countCartItems()}
+          </p>
         </div>
       </div>
       <div
@@ -62,6 +70,24 @@ export default function MobileNavBar() {
             Recenzii
           </Link>
         </nav>
+      </div>
+      <div
+        className={`fixed inset-0 z-50 transition-transform transform ${
+          isCartOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
+          <div className="flex justify-center items-center p-4 border-b border-amber-500 mx-4 relative">
+            <Image src="/logo.png" width={90} height={90} alt="Logo" />
+            <MdClose
+              className="text-3xl cursor-pointer text-white absolute right-0"
+              onClick={toggleCart}
+            />
+          </div>
+          <div className="p-4">
+            <CartProducts />
+          </div>
+        </div>
       </div>
     </main>
   );
