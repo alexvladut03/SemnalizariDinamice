@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaCartPlus } from "react-icons/fa6";
@@ -10,7 +10,7 @@ import { useCart } from "@/app/context/CartProvider";
 import CartProducts from "./cart/CartProducts";
 
 export default function MobileNavBar() {
-  const { countCartItems, countTotalPrice, updateCart } = useCart();
+  const { countCartItems } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -21,6 +21,17 @@ export default function MobileNavBar() {
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
+
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isCartOpen]);
 
   return (
     <main>
@@ -72,11 +83,17 @@ export default function MobileNavBar() {
         </nav>
       </div>
       <div
+        className={`fixed inset-0 z-40 bg-black transition-opacity duration-500 ${
+          isCartOpen ? "opacity-60" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={toggleCart}
+      ></div>
+      <div
         className={`fixed inset-0 z-50 transition-transform transform ${
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="absolute right-0 top-0 w-3/4 bg-black h-lvh shadow-lg shadow-amber-500">
+        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
           <div className="flex justify-center items-center p-4 border-b border-amber-500 mx-4 relative">
             <Image src="/logo.png" width={90} height={90} alt="Logo" />
             <MdClose
