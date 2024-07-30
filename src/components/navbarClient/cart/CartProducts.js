@@ -14,7 +14,7 @@ export default function CartProducts() {
       <div className="h-full lg:p-4 flex flex-col items-center justify-between">
         {cartItems.items.length > 0 ? (
           <>
-            <div className="lg:overflow-y-auto lg:max-h-48 w-full scrollbar-hide">
+            <div className="overflow-y-auto lg:max-h-48 w-full scrollbar-hide">
               {cartItems.items.map((item) => (
                 <div
                   key={item.id}
