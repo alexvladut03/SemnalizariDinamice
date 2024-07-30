@@ -84,7 +84,7 @@ export default function MobileNavBar() {
               onClick={toggleCart}
             />
           </div>
-          <div className="p-4">
+          <div className="p-4 h-[90%]">
             <CartProducts />
           </div>
         </div>

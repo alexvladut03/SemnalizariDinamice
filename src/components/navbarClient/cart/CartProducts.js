@@ -10,8 +10,8 @@ export default function CartProducts() {
   const { countCartItems, countTotalPrice, updateCart } = useCart();
   const cartItems = useCart();
   return (
-    <div className="lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500">
-      <div className="lg:p-4 flex flex-col items-center">
+    <div className="h-full lg:h-auto lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500">
+      <div className="h-full lg:p-4 flex flex-col items-center justify-between">
         {cartItems.items.length > 0 ? (
           <>
             <div className="lg:overflow-y-auto lg:max-h-48 w-full scrollbar-hide">
@@ -58,18 +58,26 @@ export default function CartProducts() {
                 </div>
               ))}
             </div>
-
-            <div className="font-bold lg:text-black text-white flex justify-between w-full mt-2">
-              <p>Total</p>
-              <p>{countTotalPrice()} RON</p>
+            <div className="flex flex-col w-full">
+              <div className="font-bold lg:text-black text-white flex justify-between mt-2">
+                <p>Total</p>
+                <p>{countTotalPrice()} RON</p>
+              </div>
+              <Link href={"/cart"}>
+                <NavCartButton />
+              </Link>
             </div>
           </>
         ) : (
-          <p className="text-gray-700">Nu ai niciun produs in coș</p>
+          <>
+            <p className="lg:text-gray-700 text-white">
+              Nu ai niciun produs in coș
+            </p>
+            <Link href={"/cart"} className="w-full">
+              <NavCartButton />
+            </Link>
+          </>
         )}
-        <Link href={"/cart"} className="w-full">
-          <NavCartButton />
-        </Link>
       </div>
     </div>
   );
