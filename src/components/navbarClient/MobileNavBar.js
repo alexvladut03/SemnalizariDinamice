@@ -24,13 +24,10 @@ export default function MobileNavBar() {
 
   useEffect(() => {
     if (isCartOpen) {
-      document.body.classList.add("overflow-hidden");
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.classList.remove("overflow-hidden");
+      document.body.style.overflow = "";
     }
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
   }, [isCartOpen]);
 
   return (
@@ -84,7 +81,7 @@ export default function MobileNavBar() {
       </div>
       <div
         className={`fixed inset-0 z-40 bg-black transition-opacity duration-500 ${
-          isCartOpen ? "opacity-50" : "opacity-0 pointer-events-none"
+          isCartOpen ? "opacity-70" : "opacity-0 pointer-events-none"
         }`}
         onClick={toggleCart}
       ></div>
