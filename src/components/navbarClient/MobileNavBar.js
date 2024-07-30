@@ -28,11 +28,14 @@ export default function MobileNavBar() {
     } else {
       document.body.style.overflow = "";
     }
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isCartOpen]);
 
   return (
     <main>
-      <div className="flex justify-between items-center w-full">
+      <div className="flex justify-between items-center w-full ">
         <div onClick={checkOpen}>
           {isOpen ? (
             <MdClose className="text-3xl text-amber-500 ml-2" />
@@ -81,7 +84,7 @@ export default function MobileNavBar() {
       </div>
       <div
         className={`fixed inset-0 z-40 bg-black transition-opacity duration-500 ${
-          isCartOpen ? "opacity-70" : "opacity-0 pointer-events-none"
+          isCartOpen ? "opacity-60" : "opacity-0 pointer-events-none"
         }`}
         onClick={toggleCart}
       ></div>
@@ -90,7 +93,7 @@ export default function MobileNavBar() {
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto">
+        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
           <div className="flex justify-center items-center p-4 border-b border-amber-500 mx-4 relative">
             <Image src="/logo.png" width={90} height={90} alt="Logo" />
             <MdClose
@@ -98,7 +101,7 @@ export default function MobileNavBar() {
               onClick={toggleCart}
             />
           </div>
-          <div className="p-4 h-full">
+          <div className="p-4 h-[80%]">
             <CartProducts />
           </div>
         </div>
