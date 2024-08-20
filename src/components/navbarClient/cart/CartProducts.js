@@ -1,6 +1,6 @@
 import NavCartButton from "@/components/ui/NavCartButton";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { FaMinusCircle, FaPlusCircle } from "react-icons/fa";
 import { useCart } from "@/app/context/CartProvider";
 import Link from "next/link";
@@ -9,6 +9,26 @@ import { MdClose } from "react-icons/md";
 export default function CartProducts({ toggleCart }) {
   const { countTotalPrice, updateCart } = useCart();
   const cartItems = useCart();
+
+  useEffect(() => {
+    const preventTouchScroll = (e) => {
+      // Permite scroll-ul doar în interiorul containerului cu produse
+      if (e.target.closest(".scrollable-products")) {
+        return;
+      }
+      e.preventDefault();
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("touchmove", preventTouchScroll, {
+      passive: false,
+    });
+
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("touchmove", preventTouchScroll);
+    };
+  }, []);
 
   return (
     <div className="h-[100svh] lg:h-auto lg:p-4 lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col">
@@ -23,7 +43,7 @@ export default function CartProducts({ toggleCart }) {
 
       {cartItems.items.length > 0 ? (
         <>
-          <div className="overflow-y-auto h-auto lg:max-h-48 scrollbar-hide">
+          <div className="scrollable-products overflow-y-auto flex-grow scrollbar-hide">
             {cartItems.items.map((item) => (
               <div
                 key={item.id}

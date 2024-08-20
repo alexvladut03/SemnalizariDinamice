@@ -1,12 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaCartPlus } from "react-icons/fa6";
 import { MdClose } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
 import { useCart } from "@/app/context/CartProvider";
-
 import CartProducts from "./cart/CartProducts";
 
 export default function MobileNavBar() {
@@ -21,32 +20,6 @@ export default function MobileNavBar() {
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
-
-  useEffect(() => {
-    const preventTouchScroll = (e) => {
-      // Permite scroll-ul în interiorul containerului cu produse
-      if (e.target.closest(".cart-products-container")) {
-        return;
-      }
-      e.preventDefault();
-    };
-
-    if (isCartOpen) {
-      document.body.style.overflow = "hidden";
-
-      // Previne scroll-ul pe mobile în afara containerului cu produse
-      document.addEventListener("touchmove", preventTouchScroll, {
-        passive: false,
-      });
-    } else {
-      document.body.style.overflow = "";
-      document.removeEventListener("touchmove", preventTouchScroll);
-    }
-
-    return () => {
-      document.removeEventListener("touchmove", preventTouchScroll);
-    };
-  }, [isCartOpen]);
 
   return (
     <main>
@@ -108,11 +81,9 @@ export default function MobileNavBar() {
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 ">
+        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
           <div className="p-4 h-full">
-            <div className="cart-products-container h-full overflow-y-auto">
-              <CartProducts toggleCart={toggleCart} />
-            </div>
+            <CartProducts toggleCart={toggleCart} />
           </div>
         </div>
       </div>
