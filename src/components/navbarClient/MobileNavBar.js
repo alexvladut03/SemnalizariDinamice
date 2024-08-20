@@ -23,11 +23,23 @@ export default function MobileNavBar() {
   };
 
   useEffect(() => {
+    const preventTouchScroll = (e) => e.preventDefault();
+
     if (isCartOpen) {
       document.body.style.overflow = "hidden";
+
+      // Previne scroll-ul pe mobile
+      document.addEventListener("touchmove", preventTouchScroll, {
+        passive: false,
+      });
     } else {
       document.body.style.overflow = "";
+      document.removeEventListener("touchmove", preventTouchScroll);
     }
+
+    return () => {
+      document.removeEventListener("touchmove", preventTouchScroll);
+    };
   }, [isCartOpen]);
 
   return (
