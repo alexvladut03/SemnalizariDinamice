@@ -4,6 +4,7 @@ import React from "react";
 import { FaMinusCircle, FaPlusCircle } from "react-icons/fa";
 import { useCart } from "@/app/context/CartProvider";
 import Link from "next/link";
+import { MdClose } from "react-icons/md";
 
 export default function CartProducts() {
   const { countTotalPrice, updateCart } = useCart();
@@ -14,6 +15,10 @@ export default function CartProducts() {
       {cartItems.items.length > 0 ? (
         <>
           <div className="overflow-y-auto h-auto lg:max-h-48 w-full scrollbar-hide flex-grow">
+            <div className="flex justify-center items-center p-4 border-b border-amber-500 mx-4 relative">
+              <Image src="/logo.png" width={90} height={90} alt="Logo" />
+              <MdClose className="text-3xl cursor-pointer text-white absolute right-0" />
+            </div>
             {cartItems.items.map((item) => (
               <div
                 key={item.id}

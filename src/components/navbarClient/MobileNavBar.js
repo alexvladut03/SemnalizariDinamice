@@ -91,13 +91,6 @@ export default function MobileNavBar() {
         }`}
       >
         <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 ">
-          <div className="flex justify-center items-center p-4 border-b border-amber-500 mx-4 relative">
-            <Image src="/logo.png" width={90} height={90} alt="Logo" />
-            <MdClose
-              className="text-3xl cursor-pointer text-white absolute right-0"
-              onClick={toggleCart}
-            />
-          </div>
           <div className="p-4 h-full">
             <CartProducts />
           </div>
