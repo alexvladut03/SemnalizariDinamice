@@ -1,14 +1,12 @@
 "use client";
 import { useCart } from "@/app/context/CartProvider";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaCartPlus } from "react-icons/fa6";
-import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import CartProducts from "./CartProducts";
 
 const AddToCart = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const cartItems = useCart();
-  const { countCartItems, countTotalPrice, updateCart } = useCart();
+  const { countCartItems } = useCart();
   let closeTimeout = null;
 
   const handleMouseEnter = () => {
@@ -21,6 +19,18 @@ const AddToCart = () => {
       setIsCartOpen(false);
     }, 600);
   };
+
+  useEffect(() => {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    if (isCartOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`; // Adaugă padding egal cu lățimea scroll-ului
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = ""; // Resetează padding-ul
+    }
+  }, [isCartOpen]);
 
   return (
     <div
@@ -35,7 +45,7 @@ const AddToCart = () => {
         </p>
       </div>
       <p className="font-semibold">Coșul meu</p>
-      {isCartOpen && <CartProducts />}
+      {isCartOpen && <CartProducts toggleCart={() => setIsCartOpen(false)} />}
     </div>
   );
 };
