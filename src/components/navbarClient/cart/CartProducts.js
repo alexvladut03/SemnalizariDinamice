@@ -11,17 +11,18 @@ export default function CartProducts({ toggleCart }) {
   const cartItems = useCart();
 
   return (
-    <div className="h-screen lg:h-auto lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col">
+    <div className="h-screen lg:h-auto lg:p-4 lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col">
+      <div className="lg:hidden flex justify-center items-center p-4 border-b-2 border-amber-500 relative mb-4">
+        <Image src="/logo.png" width={90} height={90} alt="Logo" />
+        <MdClose
+          className="text-3xl cursor-pointer text-white absolute right-0"
+          onClick={toggleCart}
+        />
+      </div>
+
       {cartItems.items.length > 0 ? (
         <>
           <div className="overflow-y-auto h-auto lg:max-h-48 w-full scrollbar-hide flex-grow">
-            <div className="lg:hidden flex justify-center items-center p-4 border-b-2 border-amber-500 relative mb-4">
-              <Image src="/logo.png" width={90} height={90} alt="Logo" />
-              <MdClose
-                className="text-3xl cursor-pointer text-white absolute right-0"
-                onClick={toggleCart}
-              />
-            </div>
             {cartItems.items.map((item) => (
               <div
                 key={item.id}
