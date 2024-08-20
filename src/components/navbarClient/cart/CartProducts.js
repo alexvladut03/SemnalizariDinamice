@@ -22,7 +22,7 @@ export default function CartProducts({ toggleCart }) {
 
       {cartItems.items.length > 0 ? (
         <>
-          <div className="overflow-y-auto h-auto lg:max-h-48 w-full scrollbar-hide flex-grow">
+          <div className="overflow-y-auto h-auto lg:max-h-48 scrollbar-hide">
             {cartItems.items.map((item) => (
               <div
                 key={item.id}
@@ -66,7 +66,7 @@ export default function CartProducts({ toggleCart }) {
               </div>
             ))}
           </div>
-          <div className="bg-black lg:bg-white py-4 border-t-2 border-amber-500 lg:border-none flex-shrink-0 sticky bottom-0 w-full z-10">
+          <div className="bg-black lg:bg-white py-4 border-t-2 border-amber-500 lg:border-none mb-6 lg:mb-0">
             <div className="font-bold lg:text-black text-white flex justify-between mb-2">
               <p>Total</p>
               <p>{countTotalPrice()} RON</p>
