@@ -26,7 +26,7 @@ export default function CartProducts({ toggleCart }) {
             {cartItems.items.map((item) => (
               <div
                 key={item.id}
-                className="grid grid-cols-4 items-start lg:mb-2 mb-4 border-b border-amber-500 w-full"
+                className="grid grid-cols-4 items-start lg:mb-2  mb-4 border-b border-amber-500 w-full"
               >
                 <Image
                   src={item.image}
@@ -35,7 +35,7 @@ export default function CartProducts({ toggleCart }) {
                   height={64}
                   className="lg:w-14 lg:h-14 rounded-lg w-16 h-16 lg:mb-0 mb-4"
                 />
-                <div className="col-span-2 mt-1">
+                <div className="col-span-2 mt-1 ml-1">
                   <p className="text-xs lg:text-black text-white break-words">
                     {item.name}
                   </p>
