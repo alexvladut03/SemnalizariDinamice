@@ -12,23 +12,13 @@ export default function CartProducts({ toggleCart }) {
   const cartItems = useCart();
 
   useEffect(() => {
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-
-    const preventScroll = (e) => {
-      if (!e.target.closest(".scrollable-products")) {
-        e.preventDefault();
-      }
-    };
-
+    // Blocăm scroll-ul pe fundal
+    const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
-    document.body.style.paddingRight = `${scrollbarWidth}px`;
-    document.addEventListener("touchmove", preventScroll, { passive: false });
 
     return () => {
-      document.body.style.overflow = "";
-      document.body.style.paddingRight = "";
-      document.removeEventListener("touchmove", preventScroll);
+      // Restabilim stilul original când componenta se demontează
+      document.body.style.overflow = originalStyle;
     };
   }, []);
 
@@ -45,7 +35,7 @@ export default function CartProducts({ toggleCart }) {
 
       {cartItems.items.length > 0 ? (
         <>
-          <div className="scrollable-products overflow-y-auto h-auto lg:max-h-48 scrollbar-hide">
+          <div className="scrollable-products overflow-y-auto flex-grow lg:max-h-48 scrollbar-hide">
             {cartItems.items.map((item) => (
               <div
                 key={item.id}
