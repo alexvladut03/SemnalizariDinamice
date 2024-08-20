@@ -1,3 +1,4 @@
+"use client";
 import NavCartButton from "@/components/ui/NavCartButton";
 import Image from "next/image";
 import React, { useEffect } from "react";
@@ -11,22 +12,23 @@ export default function CartProducts({ toggleCart }) {
   const cartItems = useCart();
 
   useEffect(() => {
-    const preventTouchScroll = (e) => {
-      // Permite scroll-ul doar în interiorul containerului cu produse
-      if (e.target.closest(".scrollable-products")) {
-        return;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    const preventScroll = (e) => {
+      if (!e.target.closest(".scrollable-products")) {
+        e.preventDefault();
       }
-      e.preventDefault();
     };
 
     document.body.style.overflow = "hidden";
-    document.addEventListener("touchmove", preventTouchScroll, {
-      passive: false,
-    });
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
+    document.addEventListener("touchmove", preventScroll, { passive: false });
 
     return () => {
       document.body.style.overflow = "";
-      document.removeEventListener("touchmove", preventTouchScroll);
+      document.body.style.paddingRight = "";
+      document.removeEventListener("touchmove", preventScroll);
     };
   }, []);
 
@@ -43,7 +45,7 @@ export default function CartProducts({ toggleCart }) {
 
       {cartItems.items.length > 0 ? (
         <>
-          <div className="scrollable-products overflow-y-auto flex-grow scrollbar-hide">
+          <div className="scrollable-products overflow-y-auto h-auto lg:max-h-48 scrollbar-hide">
             {cartItems.items.map((item) => (
               <div
                 key={item.id}
