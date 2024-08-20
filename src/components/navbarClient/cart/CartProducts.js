@@ -12,6 +12,7 @@ export default function CartProducts({ toggleCart }) {
 
   return (
     <div className="h-screen lg:h-auto lg:p-4 lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col">
+      {/* Secțiunea cu logo-ul și butonul de închidere */}
       <div className="lg:hidden flex justify-center items-center p-4 border-b-2 border-amber-500 relative mb-4">
         <Image src="/logo.png" width={90} height={90} alt="Logo" />
         <MdClose
@@ -26,7 +27,7 @@ export default function CartProducts({ toggleCart }) {
             {cartItems.items.map((item) => (
               <div
                 key={item.id}
-                className="grid grid-cols-4 items-start lg:mb-2  mb-4 border-b border-amber-500 w-full"
+                className="grid grid-cols-4 items-start lg:mb-2 mb-4 border-b border-amber-500 w-full"
               >
                 <Image
                   src={item.image}
@@ -66,7 +67,7 @@ export default function CartProducts({ toggleCart }) {
               </div>
             ))}
           </div>
-          <div className="bg-black lg:bg-white py-4 border-t-2 border-amber-500 lg:border-none mb-6 lg:mb-0">
+          <div className="bg-black lg:bg-white py-4 border-t-2 border-amber-500 lg:border-none flex-shrink-0 sticky bottom-0">
             <div className="font-bold lg:text-black text-white flex justify-between mb-2">
               <p>Total</p>
               <p>{countTotalPrice()} RON</p>
