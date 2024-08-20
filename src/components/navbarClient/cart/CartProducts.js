@@ -11,7 +11,7 @@ export default function CartProducts({ toggleCart }) {
   const cartItems = useCart();
 
   return (
-    <div className="h-screen lg:h-auto lg:p-4 lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col">
+    <div className="h-[100svh] lg:h-auto lg:p-4 lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col">
       {/* Secțiunea cu logo-ul și butonul de închidere */}
       <div className="lg:hidden flex justify-center items-center p-4 border-b-2 border-amber-500 relative mb-4">
         <Image src="/logo.png" width={90} height={90} alt="Logo" />
