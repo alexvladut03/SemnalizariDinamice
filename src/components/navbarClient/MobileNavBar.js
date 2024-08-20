@@ -23,12 +23,18 @@ export default function MobileNavBar() {
   };
 
   useEffect(() => {
-    const preventTouchScroll = (e) => e.preventDefault();
+    const preventTouchScroll = (e) => {
+      // Permite scroll-ul în interiorul containerului cu produse
+      if (e.target.closest(".cart-products-container")) {
+        return;
+      }
+      e.preventDefault();
+    };
 
     if (isCartOpen) {
       document.body.style.overflow = "hidden";
 
-      // Previne scroll-ul pe mobile
+      // Previne scroll-ul pe mobile în afara containerului cu produse
       document.addEventListener("touchmove", preventTouchScroll, {
         passive: false,
       });
@@ -104,7 +110,9 @@ export default function MobileNavBar() {
       >
         <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 ">
           <div className="p-4 h-full">
-            <CartProducts toggleCart={toggleCart} />
+            <div className="cart-products-container h-full overflow-y-auto">
+              <CartProducts toggleCart={toggleCart} />
+            </div>
           </div>
         </div>
       </div>
