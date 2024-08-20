@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaCartPlus } from "react-icons/fa6";
@@ -20,6 +20,23 @@ export default function MobileNavBar() {
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
+
+  useEffect(() => {
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    if (isCartOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
+    };
+  }, [isCartOpen]);
 
   return (
     <main>
@@ -81,7 +98,7 @@ export default function MobileNavBar() {
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
+        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 ">
           <div className="p-4 h-full">
             <CartProducts toggleCart={toggleCart} />
           </div>
