@@ -90,7 +90,7 @@ export default function MobileNavBar() {
           isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto">
+        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 ">
           <div className="flex justify-center items-center p-4 border-b border-amber-500 mx-4 relative">
             <Image src="/logo.png" width={90} height={90} alt="Logo" />
             <MdClose
