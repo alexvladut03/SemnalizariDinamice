@@ -6,7 +6,7 @@ import { useCart } from "@/app/context/CartProvider";
 import Link from "next/link";
 import { MdClose } from "react-icons/md";
 
-export default function CartProducts() {
+export default function CartProducts({ toggleCart }) {
   const { countTotalPrice, updateCart } = useCart();
   const cartItems = useCart();
 
@@ -15,14 +15,17 @@ export default function CartProducts() {
       {cartItems.items.length > 0 ? (
         <>
           <div className="overflow-y-auto h-auto lg:max-h-48 w-full scrollbar-hide flex-grow">
-            <div className="flex justify-center items-center p-4 border-b border-amber-500 mx-4 relative">
+            <div className="lg:hidden flex justify-center items-center p-4 border-b-2 border-amber-500 relative mb-4">
               <Image src="/logo.png" width={90} height={90} alt="Logo" />
-              <MdClose className="text-3xl cursor-pointer text-white absolute right-0" />
+              <MdClose
+                className="text-3xl cursor-pointer text-white absolute right-0"
+                onClick={toggleCart}
+              />
             </div>
             {cartItems.items.map((item) => (
               <div
                 key={item.id}
-                className="grid grid-cols-4 items-start lg:mb-2 mb-4 border-b-2 border-amber-500 w-full"
+                className="grid grid-cols-4 items-start lg:mb-2 mb-4 border-b border-amber-500 w-full"
               >
                 <Image
                   src={item.image}
@@ -62,7 +65,7 @@ export default function CartProducts() {
               </div>
             ))}
           </div>
-          <div className="bg-black lg:bg-white p-4 border-t-2 border-amber-500 lg:border-none flex-shrink-0 sticky bottom-0 w-full z-10">
+          <div className="bg-black lg:bg-white py-4 border-t-2 border-amber-500 lg:border-none flex-shrink-0 sticky bottom-0 w-full z-10">
             <div className="font-bold lg:text-black text-white flex justify-between mb-2">
               <p>Total</p>
               <p>{countTotalPrice()} RON</p>

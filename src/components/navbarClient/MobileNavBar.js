@@ -92,7 +92,7 @@ export default function MobileNavBar() {
       >
         <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 ">
           <div className="p-4 h-full">
-            <CartProducts />
+            <CartProducts toggleCart={toggleCart} />
           </div>
         </div>
       </div>
