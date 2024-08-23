@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaCartPlus } from "react-icons/fa6";
@@ -12,8 +12,6 @@ export default function MobileNavBar() {
   const { countCartItems } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [translateX, setTranslateX] = useState(0);
-  const startX = useRef(0);
 
   const checkOpen = () => {
     setIsOpen(!isOpen);
@@ -21,27 +19,6 @@ export default function MobileNavBar() {
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
-    setTranslateX(0); // Resetăm transformarea când deschidem sau închidem coșul
-  };
-
-  const handleTouchStart = (e) => {
-    startX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchMove = (e) => {
-    const deltaX = e.touches[0].clientX - startX.current;
-    if (deltaX > 0) {
-      setTranslateX(deltaX);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (translateX > 150) {
-      // Distanța minimă pentru a închide
-      toggleCart();
-    } else {
-      setTranslateX(0); // Revine la poziția inițială dacă nu este tras suficient
-    }
   };
 
   return (
@@ -101,12 +78,8 @@ export default function MobileNavBar() {
       ></div>
       <div
         className={`fixed inset-0 z-50 transition-transform transform ${
-          isCartOpen ? `translate-x-0` : `translate-x-full`
+          isCartOpen ? "translate-x-0 " : "translate-x-full"
         }`}
-        style={{ transform: `translateX(${translateX}px)` }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
       >
         <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
           <div className="p-4 h-full">
