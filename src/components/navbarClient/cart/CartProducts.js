@@ -1,47 +1,19 @@
-import { useState, useRef } from "react";
 import { RemoveScroll } from "react-remove-scroll";
+import NavCartButton from "@/components/ui/NavCartButton";
+import Image from "next/image";
+import React from "react";
 import { FaMinusCircle, FaPlusCircle } from "react-icons/fa";
-import { MdClose } from "react-icons/md";
 import { useCart } from "@/app/context/CartProvider";
 import Link from "next/link";
-import Image from "next/image";
-import NavCartButton from "@/components/ui/NavCartButton";
+import { MdClose } from "react-icons/md";
 
 export default function CartProducts({ toggleCart, isCartOpen }) {
   const { countTotalPrice, updateCart } = useCart();
   const cartItems = useCart();
-  const [translateY, setTranslateY] = useState(0);
-  const startY = useRef(0);
-
-  const handleTouchStart = (e) => {
-    startY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchMove = (e) => {
-    const deltaY = e.touches[0].clientY - startY.current;
-    if (deltaY > 0) {
-      setTranslateY(deltaY);
-    }
-  };
-
-  const handleTouchEnd = () => {
-    if (translateY > 150) {
-      // Distanța minimă pentru a închide
-      toggleCart();
-    } else {
-      setTranslateY(0);
-    }
-  };
 
   return (
     <RemoveScroll enabled={isCartOpen}>
-      <div
-        className="h-[100svh] lg:h-auto lg:p-4 lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col transition-transform duration-300 ease-out"
-        style={{ transform: `translateY(${translateY}px)` }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
+      <div className="h-[100svh] lg:h-auto lg:p-4 lg:absolute lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:mt-12 lg:w-72 lg:bg-white bg-black lg:border lg:border-gray-200 lg:rounded-lg lg:shadow-sm lg:shadow-amber-500 flex flex-col">
         <div className="lg:hidden flex justify-center items-center p-4 border-b-2 border-amber-500 relative mb-4">
           <Image src="/logo.png" width={90} height={90} alt="Logo" />
           <MdClose
