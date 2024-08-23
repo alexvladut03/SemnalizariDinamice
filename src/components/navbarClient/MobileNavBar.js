@@ -78,7 +78,7 @@ export default function MobileNavBar() {
       ></div>
       <div
         className={`fixed inset-0 z-50 transition-transform transform ${
-          isCartOpen ? "translate-x-0" : "translate-x-full"
+          isCartOpen ? "translate-x-0 " : "translate-x-full"
         }`}
       >
         <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">

@@ -1,5 +1,3 @@
-import { notFound } from "next/navigation";
-
 import ProductTitle from "@/components/product/ProductTitle";
 import ProductImages from "@/components/product/ProductImages";
 import ProductPrice from "@/components/product/ProductPrice";
