@@ -28,6 +28,7 @@ export default function MobileNavBar() {
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
     setIsSwiping(true);
+    cartRef.current.style.transition = "none"; // Elimină tranziția în timpul swipe-ului
   };
 
   const handleTouchMove = (e) => {
@@ -42,14 +43,15 @@ export default function MobileNavBar() {
     setIsSwiping(false);
     const swipeDistance = currentX.current - startX.current;
 
-    if (swipeDistance > 50) {
+    if (swipeDistance > 100) {
+      // Prag ajustat la 100px
       // Distanța este suficientă pentru a închide
-      cartRef.current.style.transition = "transform 0.3s ease";
+      cartRef.current.style.transition = "transform 0.4s ease"; // Tranziție mai lungă și smooth
       cartRef.current.style.transform = `translateX(100%)`;
-      setIsCartOpen(false);
+      setTimeout(() => setIsCartOpen(false), 400); // Asigură-te că starea este actualizată după tranziție
     } else {
       // Resetează poziția
-      cartRef.current.style.transition = "transform 0.3s ease";
+      cartRef.current.style.transition = "transform 0.4s ease";
       cartRef.current.style.transform = `translateX(0)`;
     }
   };
