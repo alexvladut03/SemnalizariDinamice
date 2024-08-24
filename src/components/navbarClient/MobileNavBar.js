@@ -55,7 +55,7 @@ export default function MobileNavBar() {
     const translateX = Math.max(0, currentX.current - startX.current);
 
     // Adăugăm un prag minim pentru a evita mișcările accidentale
-    if (translateX > 50) {
+    if (translateX > 30) {
       // Prag de 20px pentru a filtra mișcările mici
       cartRef.current.style.transform = `translateX(${translateX}px)`;
     }
