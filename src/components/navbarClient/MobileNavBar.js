@@ -62,8 +62,8 @@ export default function MobileNavBar() {
     cartRef.current.style.willChange = "auto";
     const swipeDistance = currentX.current - startX.current;
 
-    if (swipeDistance > 150) {
-      // Prag de 150px pentru închidere
+    if (swipeDistance > 100) {
+      // Prag de 100px pentru închidere
       closeCart();
     } else {
       cartRef.current.style.transition = "transform 0.2s ease";
