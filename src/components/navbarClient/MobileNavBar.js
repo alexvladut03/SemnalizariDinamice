@@ -29,15 +29,21 @@ export default function MobileNavBar() {
   };
 
   const openCart = () => {
-    cartRef.current.style.transition = "transform 0.5s ease";
-    cartRef.current.style.transform = "translateX(0)";
     setIsCartOpen(true);
+    setTimeout(() => {
+      cartRef.current.style.transition = "transform 0.5s ease";
+      cartRef.current.style.transform = "translateX(0)";
+    }, 50); // Mic delay pentru a asigura tranziția corectă
   };
 
   const closeCart = () => {
     cartRef.current.style.transition = "transform 0.5s ease";
     cartRef.current.style.transform = "translateX(100%)";
-    setIsCartOpen(false);
+    setTimeout(() => {
+      setIsCartOpen(false);
+      cartRef.current.style.transition = "none"; // Eliminăm tranziția pentru deschiderea viitoare
+      cartRef.current.style.transform = "translateX(100%)"; // Asigurăm poziția corectă pentru redeschidere
+    }, 500); // Delay pentru a sincroniza închiderea cu tranziția
   };
 
   const handleTouchStart = (e) => {
@@ -57,9 +63,9 @@ export default function MobileNavBar() {
     const swipeDistance = currentX.current - startX.current;
 
     if (swipeDistance > 100) {
-      closeCart();
+      closeCart(); // Închidere la swipe dacă distanța este suficientă
     } else {
-      cartRef.current.style.transition = "transform 0.5s ease";
+      cartRef.current.style.transition = "transform 0.2s ease"; // Tranziție mai scurtă pentru revenire
       cartRef.current.style.transform = "translateX(0)";
     }
   };
@@ -102,7 +108,7 @@ export default function MobileNavBar() {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
+        <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto">
           <div className="p-4 h-full">
             <CartProducts toggleCart={toggleCart} isCartOpen={isCartOpen} />
           </div>
