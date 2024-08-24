@@ -52,7 +52,7 @@ export default function MobileNavBar() {
     const translateX = Math.max(0, currentX.current - startX.current);
 
     // Asigurăm tranziția smooth chiar dacă mișcarea începe după 50px
-    if (translateX > 50) {
+    if (translateX > 100) {
       cartRef.current.style.transition = "transform 0.1s ease"; // Adăugăm o tranziție scurtă pentru smoothness
     }
 
