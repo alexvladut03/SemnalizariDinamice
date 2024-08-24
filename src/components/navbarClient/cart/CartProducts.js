@@ -18,7 +18,7 @@ export default function CartProducts({ toggleCart, isCartOpen }) {
           <Image src="/logo.png" width={90} height={90} alt="Logo" />
           <MdClose
             className="text-3xl cursor-pointer text-white absolute right-0"
-            onClick={toggleCart}
+            onClick={toggleCart} // Închiderea ferestrei la click pe X
           />
         </div>
 
