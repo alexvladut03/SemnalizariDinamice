@@ -31,23 +31,24 @@ export default function MobileNavBar() {
   const openCart = () => {
     setIsCartOpen(true);
     setTimeout(() => {
-      cartRef.current.style.transition = "transform 0.4s ease";
+      cartRef.current.style.transition = "transform 0.5s ease";
       cartRef.current.style.transform = "translateX(0)";
-    }, 50); // Mică întârziere pentru a se asigura că tranziția funcționează corect
+    }, 50);
   };
 
   const closeCart = () => {
-    cartRef.current.style.transition = "transform 0.4s ease";
+    cartRef.current.style.transition = "transform 0.5s ease";
     cartRef.current.style.transform = "translateX(100%)";
     setTimeout(() => {
       setIsCartOpen(false);
-      cartRef.current.style.transition = "none"; // Eliminăm tranziția pentru deschiderea viitoare
-      cartRef.current.style.transform = "translateX(100%)"; // Asigurăm poziția corectă pentru redeschidere
-    }, 400); // Asigură-te că starea este actualizată după finalizarea tranziției
+      cartRef.current.style.transition = "none";
+      cartRef.current.style.transform = "translateX(100%)";
+    }, 500);
   };
 
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
+    cartRef.current.style.willChange = "transform";
   };
 
   const handleTouchMove = (e) => {
@@ -57,12 +58,13 @@ export default function MobileNavBar() {
   };
 
   const handleTouchEnd = () => {
+    cartRef.current.style.willChange = "auto";
     const swipeDistance = currentX.current - startX.current;
 
     if (swipeDistance > 100) {
       closeCart();
     } else {
-      cartRef.current.style.transition = "transform 0.4s ease";
+      cartRef.current.style.transition = "transform 0.5s ease";
       cartRef.current.style.transform = "translateX(0)";
     }
   };
