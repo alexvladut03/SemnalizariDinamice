@@ -29,26 +29,21 @@ export default function MobileNavBar() {
   };
 
   const openCart = () => {
+    cartRef.current.style.transition = "transform 0.5s ease";
+    cartRef.current.style.transform = "translateX(0)";
     setIsCartOpen(true);
-    setTimeout(() => {
-      cartRef.current.style.transition = "transform 0.5s ease";
-      cartRef.current.style.transform = "translateX(0)";
-    }, 50);
   };
 
   const closeCart = () => {
     cartRef.current.style.transition = "transform 0.5s ease";
     cartRef.current.style.transform = "translateX(100%)";
-    setTimeout(() => {
-      setIsCartOpen(false);
-      cartRef.current.style.transition = "none";
-      cartRef.current.style.transform = "translateX(100%)";
-    }, 500);
+    setIsCartOpen(false);
   };
 
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
-    cartRef.current.style.willChange = "transform";
+    cartRef.current.style.transition = "none"; // Eliminăm tranziția în timpul swipe-ului
+    cartRef.current.style.willChange = "transform"; // Optimizăm performanța pentru swipe
   };
 
   const handleTouchMove = (e) => {
