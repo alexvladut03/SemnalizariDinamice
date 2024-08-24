@@ -7,6 +7,7 @@ import { IoIosMenu } from "react-icons/io";
 import { MdClose } from "react-icons/md";
 import { useCart } from "@/app/context/CartProvider";
 import CartProducts from "./cart/CartProducts";
+import { RemoveScroll } from "react-remove-scroll";
 
 export default function MobileNavBar() {
   const { countCartItems } = useCart();
@@ -163,53 +164,54 @@ export default function MobileNavBar() {
       )}
 
       {/* Meniul de la stânga la dreapta */}
-      <div
-        ref={menuRef}
-        className={`fixed inset-0 z-50 transition-transform transform -translate-x-full`}
-        onTouchStart={handleTouchStartMenu}
-        onTouchMove={handleTouchMoveMenu}
-        onTouchEnd={handleTouchEndMenu}
-      >
-        <div className="absolute left-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto">
-          {/* Logo și butonul de închidere */}
-          <div className="lg:hidden flex justify-center items-center p-2 border-b-2 border-amber-500 relative mb-4">
-            <Image src="/logo.png" width={90} height={90} alt="Logo" />
-            <MdClose
-              className="text-3xl cursor-pointer text-white absolute left-4 top-6"
-              onClick={closeMenu}
-            />
+      <RemoveScroll enabled={isMenuOpen}>
+        <div
+          ref={menuRef}
+          className={`fixed inset-0 z-50 transition-transform transform -translate-x-full`}
+          onTouchStart={handleTouchStartMenu}
+          onTouchMove={handleTouchMoveMenu}
+          onTouchEnd={handleTouchEndMenu}
+        >
+          <div className="absolute left-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto">
+            {/* Logo și butonul de închidere */}
+            <div className="lg:hidden flex justify-center items-center p-2 border-b-2 border-amber-500 relative mb-4">
+              <Image src="/logo.png" width={90} height={90} alt="Logo" />
+              <MdClose
+                className="text-3xl cursor-pointer text-white absolute left-4 top-6"
+                onClick={closeMenu}
+              />
+            </div>
+
+            {/* Link-uri de navigare */}
+            <nav className="flex flex-col gap-8 text-white font-semibold p-4">
+              <Link
+                href="/#Acasa"
+                className="hover:text-amber-500 cursor-pointer"
+              >
+                Acasa
+              </Link>
+              <Link
+                href="/#Produse"
+                className="hover:text-amber-500 cursor-pointer"
+              >
+                Produse
+              </Link>
+              <Link
+                href="/#Despre-noi"
+                className="hover:text-amber-500 cursor-pointer"
+              >
+                Despre Noi
+              </Link>
+              <Link
+                href="/#Recenzii"
+                className="hover:text-amber-500 cursor-pointer"
+              >
+                Recenzii
+              </Link>
+            </nav>
           </div>
-
-          {/* Link-uri de navigare */}
-          <nav className="flex flex-col gap-8 text-white font-semibold p-4">
-            <Link
-              href="/#Acasa"
-              className="hover:text-amber-500 cursor-pointer"
-            >
-              Acasa
-            </Link>
-            <Link
-              href="/#Produse"
-              className="hover:text-amber-500 cursor-pointer"
-            >
-              Produse
-            </Link>
-            <Link
-              href="/#Despre-noi"
-              className="hover:text-amber-500 cursor-pointer"
-            >
-              Despre Noi
-            </Link>
-            <Link
-              href="/#Recenzii"
-              className="hover:text-amber-500 cursor-pointer"
-            >
-              Recenzii
-            </Link>
-          </nav>
         </div>
-      </div>
-
+      </RemoveScroll>
       {/* Fereastra de coș de la dreapta la stânga */}
       <div
         ref={cartRef}
