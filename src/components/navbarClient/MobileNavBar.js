@@ -30,18 +30,18 @@ export default function MobileNavBar() {
 
   const openCart = () => {
     setIsCartOpen(true);
-    cartRef.current.style.transition = "transform 0.8s ease";
+    cartRef.current.style.transition = "transform 0.5s ease";
     cartRef.current.style.transform = "translateX(0)";
   };
 
   const closeCart = () => {
-    cartRef.current.style.transition = "transform 0.8s ease";
+    cartRef.current.style.transition = "transform 0.5s ease";
     cartRef.current.style.transform = "translateX(100%)";
     setTimeout(() => {
       setIsCartOpen(false);
       cartRef.current.style.transition = "none";
       cartRef.current.style.transform = "translateX(100%)";
-    }, 800);
+    }, 500);
   };
 
   const handleTouchStart = (e) => {
@@ -55,7 +55,7 @@ export default function MobileNavBar() {
     const translateX = Math.max(0, currentX.current - startX.current);
 
     // Adăugăm un prag minim pentru a evita mișcările accidentale
-    if (translateX > 30) {
+    if (translateX > 50) {
       // Prag de 20px pentru a filtra mișcările mici
       cartRef.current.style.transform = `translateX(${translateX}px)`;
     }
