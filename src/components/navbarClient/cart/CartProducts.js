@@ -74,7 +74,8 @@ export default function CartProducts({ toggleCart, isCartOpen }) {
                 <p>{countTotalPrice()} RON</p>
               </div>
               <Link href={"/cart"}>
-                <NavCartButton />
+                <NavCartButton onClick={toggleCart} />
+                {/* Închiderea coșului la click */}
               </Link>
             </div>
           </>
@@ -84,7 +85,8 @@ export default function CartProducts({ toggleCart, isCartOpen }) {
               Nu ai niciun produs în coș
             </p>
             <Link href={"/cart"} className="w-full">
-              <NavCartButton />
+              <NavCartButton onClick={toggleCart} />
+              {/* Închiderea coșului la click */}
             </Link>
           </div>
         )}

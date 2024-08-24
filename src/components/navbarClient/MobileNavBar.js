@@ -176,26 +176,30 @@ export default function MobileNavBar() {
               <Link
                 href="/#Acasa"
                 className="hover:text-amber-500 cursor-pointer"
+                onClick={closeMenu} // Închide meniul când se apasă pe link
               >
                 Acasa
               </Link>
               <Link
                 href="/#Produse"
                 className="hover:text-amber-500 cursor-pointer"
+                onClick={closeMenu} // Închide meniul când se apasă pe link
               >
                 Produse
               </Link>
               <Link
                 href="/#Despre-noi"
                 className="hover:text-amber-500 cursor-pointer"
+                onClick={closeMenu} // Închide meniul când se apasă pe link
               >
                 Despre Noi
               </Link>
               <Link
                 href="/#Recenzii"
                 className="hover:text-amber-500 cursor-pointer"
+                onClick={closeMenu} // Închide meniul când se apasă pe link
               >
-                Recenzii
+                Contact
               </Link>
             </nav>
           </div>
