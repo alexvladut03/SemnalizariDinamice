@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { FaCartPlus } from "react-icons/fa6";
@@ -12,6 +12,10 @@ export default function MobileNavBar() {
   const { countCartItems } = useCart();
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSwiping, setIsSwiping] = useState(false);
+  const cartRef = useRef(null);
+  const startX = useRef(0);
+  const currentX = useRef(0);
 
   const checkOpen = () => {
     setIsOpen(!isOpen);
@@ -19,6 +23,35 @@ export default function MobileNavBar() {
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
+  };
+
+  const handleTouchStart = (e) => {
+    startX.current = e.touches[0].clientX;
+    setIsSwiping(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isSwiping) return;
+
+    currentX.current = e.touches[0].clientX;
+    const translateX = Math.max(0, currentX.current - startX.current);
+    cartRef.current.style.transform = `translateX(${translateX}px)`;
+  };
+
+  const handleTouchEnd = () => {
+    setIsSwiping(false);
+    const swipeDistance = currentX.current - startX.current;
+
+    if (swipeDistance > 50) {
+      // Distanța este suficientă pentru a închide
+      cartRef.current.style.transition = "transform 0.3s ease";
+      cartRef.current.style.transform = `translateX(100%)`;
+      setIsCartOpen(false);
+    } else {
+      // Resetează poziția
+      cartRef.current.style.transition = "transform 0.3s ease";
+      cartRef.current.style.transform = `translateX(0)`;
+    }
   };
 
   return (
@@ -42,44 +75,24 @@ export default function MobileNavBar() {
           </p>
         </div>
       </div>
+
+      {isCartOpen && (
+        <div
+          className={`fixed inset-0 z-40 bg-black transition-opacity duration-500 ${
+            isCartOpen ? "opacity-70" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={toggleCart}
+        ></div>
+      )}
+
       <div
-        className={`transition-max-height duration-500 overflow-hidden bg-black ${
-          isOpen ? "max-h-44" : "max-h-0"
-        }`}
-      >
-        <nav className="flex flex-col mt-4 gap-4 text-sm font-semibold text-amber-500">
-          <Link href="/#Acasa" className="cursor-pointer" onClick={checkOpen}>
-            Acasa
-          </Link>
-          <Link href="/#Produse" className="cursor-pointer" onClick={checkOpen}>
-            Produse
-          </Link>
-          <Link
-            href="/#Despre-noi"
-            className="cursor-pointer"
-            onClick={checkOpen}
-          >
-            Despre Noi
-          </Link>
-          <Link
-            href="/#Recenzii"
-            className="cursor-pointer"
-            onClick={checkOpen}
-          >
-            Recenzii
-          </Link>
-        </nav>
-      </div>
-      <div
-        className={`fixed inset-0 z-40 bg-black transition-opacity duration-500 ${
-          isCartOpen ? "opacity-70" : "opacity-0 pointer-events-none"
-        }`}
-        onClick={toggleCart}
-      ></div>
-      <div
+        ref={cartRef}
         className={`fixed inset-0 z-50 transition-transform transform ${
-          isCartOpen ? "translate-x-0 " : "translate-x-full"
+          isCartOpen ? "translate-x-0" : "translate-x-full"
         }`}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
         <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500">
           <div className="p-4 h-full">
