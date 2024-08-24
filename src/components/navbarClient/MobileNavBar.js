@@ -14,9 +14,9 @@ export default function MobileNavBar() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartRef = useRef(null);
   const startX = useRef(0);
-  const startY = useRef(0); // Punctul de start pe axa Y
+  const startY = useRef(0);
   const currentX = useRef(0);
-  const currentY = useRef(0); // Punctul curent pe axa Y
+  const currentY = useRef(0);
 
   const checkOpen = () => {
     setIsOpen(!isOpen);
@@ -44,20 +44,20 @@ export default function MobileNavBar() {
 
   const handleTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
-    startY.current = e.touches[0].clientY; // Setăm punctul de start pe axa Y
+    startY.current = e.touches[0].clientY;
     cartRef.current.style.transition = "none"; // Eliminăm tranziția în timpul swipe-ului
     cartRef.current.style.willChange = "transform"; // Optimizăm performanța pentru swipe
   };
 
   const handleTouchMove = (e) => {
     currentX.current = e.touches[0].clientX;
-    currentY.current = e.touches[0].clientY; // Actualizăm punctul curent pe axa Y
+    currentY.current = e.touches[0].clientY;
 
     const translateX = Math.max(0, currentX.current - startX.current);
     const translateY = Math.abs(currentY.current - startY.current);
 
     // Verificăm dacă mișcarea pe axa X este mai mare decât cea pe axa Y
-    if (translateX > 30 && translateX > translateY) {
+    if (translateX > translateY) {
       cartRef.current.style.transform = `translateX(${translateX}px)`;
     }
   };
