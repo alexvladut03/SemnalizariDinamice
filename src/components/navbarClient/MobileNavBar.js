@@ -37,11 +37,8 @@ export default function MobileNavBar() {
   const closeCart = () => {
     cartRef.current.style.transition = "transform 0.5s ease";
     cartRef.current.style.transform = "translateX(100%)";
-    setTimeout(() => {
-      setIsCartOpen(false);
-      cartRef.current.style.transition = "none";
-      cartRef.current.style.transform = "translateX(100%)";
-    }, 500);
+    setIsCartOpen(false); // Actualizăm starea imediat
+    // Nu mai este nevoie de setTimeout aici
   };
 
   const handleTouchStart = (e) => {
@@ -54,11 +51,12 @@ export default function MobileNavBar() {
     currentX.current = e.touches[0].clientX;
     const translateX = Math.max(0, currentX.current - startX.current);
 
-    // Adăugăm un prag minim pentru a evita mișcările accidentale
+    // Asigurăm tranziția smooth chiar dacă mișcarea începe după 50px
     if (translateX > 50) {
-      // Prag de 20px pentru a filtra mișcările mici
-      cartRef.current.style.transform = `translateX(${translateX}px)`;
+      cartRef.current.style.transition = "transform 0.1s ease"; // Adăugăm o tranziție scurtă pentru smoothness
     }
+
+    cartRef.current.style.transform = `translateX(${translateX}px)`;
   };
 
   const handleTouchEnd = () => {
@@ -66,7 +64,7 @@ export default function MobileNavBar() {
     const swipeDistance = currentX.current - startX.current;
 
     if (swipeDistance > 150) {
-      // Creștem pragul la 150px pentru închidere
+      // Prag de 150px pentru închidere
       closeCart();
     } else {
       cartRef.current.style.transition = "transform 0.2s ease";
