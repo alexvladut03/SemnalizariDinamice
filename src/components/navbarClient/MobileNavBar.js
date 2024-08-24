@@ -30,20 +30,18 @@ export default function MobileNavBar() {
 
   const openCart = () => {
     setIsCartOpen(true);
-    setTimeout(() => {
-      cartRef.current.style.transition = "transform 0.5s ease";
-      cartRef.current.style.transform = "translateX(0)";
-    }, 50); // Mic delay pentru a asigura tranziția corectă
+    cartRef.current.style.transition = "transform 0.8s ease";
+    cartRef.current.style.transform = "translateX(0)";
   };
 
   const closeCart = () => {
-    cartRef.current.style.transition = "transform 0.5s ease";
+    cartRef.current.style.transition = "transform 0.8s ease";
     cartRef.current.style.transform = "translateX(100%)";
     setTimeout(() => {
       setIsCartOpen(false);
-      cartRef.current.style.transition = "none"; // Eliminăm tranziția pentru deschiderea viitoare
-      cartRef.current.style.transform = "translateX(100%)"; // Asigurăm poziția corectă pentru redeschidere
-    }, 500); // Delay pentru a sincroniza închiderea cu tranziția
+      cartRef.current.style.transition = "none";
+      cartRef.current.style.transform = "translateX(100%)";
+    }, 500);
   };
 
   const handleTouchStart = (e) => {
@@ -55,17 +53,23 @@ export default function MobileNavBar() {
   const handleTouchMove = (e) => {
     currentX.current = e.touches[0].clientX;
     const translateX = Math.max(0, currentX.current - startX.current);
-    cartRef.current.style.transform = `translateX(${translateX}px)`;
+
+    // Adăugăm un prag minim pentru a evita mișcările accidentale
+    if (translateX > 50) {
+      // Prag de 20px pentru a filtra mișcările mici
+      cartRef.current.style.transform = `translateX(${translateX}px)`;
+    }
   };
 
   const handleTouchEnd = () => {
     cartRef.current.style.willChange = "auto";
     const swipeDistance = currentX.current - startX.current;
 
-    if (swipeDistance > 100) {
-      closeCart(); // Închidere la swipe dacă distanța este suficientă
+    if (swipeDistance > 150) {
+      // Creștem pragul la 150px pentru închidere
+      closeCart();
     } else {
-      cartRef.current.style.transition = "transform 0.2s ease"; // Tranziție mai scurtă pentru revenire
+      cartRef.current.style.transition = "transform 0.2s ease";
       cartRef.current.style.transform = "translateX(0)";
     }
   };
