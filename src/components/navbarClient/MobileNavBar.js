@@ -50,7 +50,12 @@ export default function MobileNavBar() {
   const handleTouchMove = (e) => {
     currentX.current = e.touches[0].clientX;
     const translateX = Math.max(0, currentX.current - startX.current);
-    cartRef.current.style.transform = `translateX(${translateX}px)`;
+
+    // Adăugăm un prag minim pentru a evita mișcările accidentale
+    if (translateX > 30) {
+      // Prag de 20px pentru a filtra mișcările mici
+      cartRef.current.style.transform = `translateX(${translateX}px)`;
+    }
   };
 
   const handleTouchEnd = () => {
