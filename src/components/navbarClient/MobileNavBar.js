@@ -18,15 +18,10 @@ export default function MobileNavBar() {
   const cartRef = useRef(null);
   const menuRef = useRef(null);
 
-  const startXCart = useRef(0);
-  const startYCart = useRef(0);
-  const currentXCart = useRef(0);
-  const currentYCart = useRef(0);
-
-  const startXMenu = useRef(0);
-  const startYMenu = useRef(0);
-  const currentXMenu = useRef(0);
-  const currentYMenu = useRef(0);
+  const startX = useRef(0);
+  const startY = useRef(0);
+  const currentX = useRef(0);
+  const currentY = useRef(0);
 
   const toggleCart = () => {
     if (isCartOpen) {
@@ -68,66 +63,60 @@ export default function MobileNavBar() {
     setIsMenuOpen(false);
   };
 
-  const handleTouchStartCart = (e) => {
-    startXCart.current = e.touches[0].clientX;
-    startYCart.current = e.touches[0].clientY;
-    cartRef.current.style.transition = "none";
-  };
+  const handleTouchStart = (e, type) => {
+    startX.current = e.touches[0].clientX;
+    startY.current = e.touches[0].clientY;
 
-  const handleTouchMoveCart = (e) => {
-    currentXCart.current = e.touches[0].clientX;
-    currentYCart.current = e.touches[0].clientY;
-
-    const translateX = currentXCart.current - startXCart.current;
-    const translateY = Math.abs(currentYCart.current - startYCart.current);
-
-    // Dacă mișcarea pe axa Y este mai mare decât cea pe axa X, oprim swipe-ul orizontal.
-    if (translateY > translateX) {
-      return;
-    }
-
-    cartRef.current.style.transform = `translateX(${Math.max(
-      0,
-      translateX
-    )}px)`;
-  };
-
-  const handleTouchEndCart = () => {
-    const swipeDistance = currentXCart.current - startXCart.current;
-
-    if (swipeDistance > 100) {
-      closeCart();
-    } else {
-      cartRef.current.style.transition = "transform 0.2s ease";
-      cartRef.current.style.transform = "translateX(0)";
+    if (type === "cart") {
+      cartRef.current.style.transition = "none";
+    } else if (type === "menu") {
+      menuRef.current.style.transition = "none";
     }
   };
 
-  const handleTouchStartMenu = (e) => {
-    startXMenu.current = e.touches[0].clientX;
+  const handleTouchMove = (e, type) => {
+    currentX.current = e.touches[0].clientX;
+    currentY.current = e.touches[0].clientY;
 
-    menuRef.current.style.transition = "none";
+    const translateX = currentX.current - startX.current;
+
+    if (type === "cart") {
+      const translateY = Math.abs(currentY.current - startY.current);
+
+      // Dacă mișcarea pe axa Y este mai mare decât cea pe axa X, oprim swipe-ul orizontal.
+      if (translateY > translateX) {
+        return;
+      }
+
+      cartRef.current.style.transform = `translateX(${Math.max(
+        0,
+        translateX
+      )}px)`;
+    } else if (type === "menu") {
+      menuRef.current.style.transform = `translateX(${Math.min(
+        0,
+        translateX
+      )}px)`;
+    }
   };
 
-  const handleTouchMoveMenu = (e) => {
-    currentXMenu.current = e.touches[0].clientX;
+  const handleTouchEnd = (type) => {
+    const swipeDistance = currentX.current - startX.current;
 
-    const translateX = currentXMenu.current - startXMenu.current;
-
-    menuRef.current.style.transform = `translateX(${Math.min(
-      0,
-      translateX
-    )}px)`;
-  };
-
-  const handleTouchEndMenu = () => {
-    const swipeDistance = currentXMenu.current - startXMenu.current;
-
-    if (swipeDistance < -100) {
-      closeMenu();
-    } else {
-      menuRef.current.style.transition = "transform 0.2s ease";
-      menuRef.current.style.transform = "translateX(0)";
+    if (type === "cart") {
+      if (swipeDistance > 100) {
+        closeCart();
+      } else {
+        cartRef.current.style.transition = "transform 0.2s ease";
+        cartRef.current.style.transform = "translateX(0)";
+      }
+    } else if (type === "menu") {
+      if (swipeDistance < -100) {
+        closeMenu();
+      } else {
+        menuRef.current.style.transition = "transform 0.2s ease";
+        menuRef.current.style.transform = "translateX(0)";
+      }
     }
   };
 
@@ -168,16 +157,16 @@ export default function MobileNavBar() {
         <div
           ref={menuRef}
           className={`fixed inset-0 z-50 transition-transform transform -translate-x-full`}
-          onTouchStart={handleTouchStartMenu}
-          onTouchMove={handleTouchMoveMenu}
-          onTouchEnd={handleTouchEndMenu}
+          onTouchStart={(e) => handleTouchStart(e, "menu")}
+          onTouchMove={(e) => handleTouchMove(e, "menu")}
+          onTouchEnd={() => handleTouchEnd("menu")}
         >
-          <div className="absolute left-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto">
+          <div className="absolute left-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto px-4">
             {/* Logo și butonul de închidere */}
             <div className="lg:hidden flex justify-center items-center p-2 border-b-2 border-amber-500 relative mb-4">
               <Image src="/logo.png" width={90} height={90} alt="Logo" />
               <MdClose
-                className="text-3xl cursor-pointer text-white absolute left-4 top-6"
+                className="text-3xl cursor-pointer text-white absolute left-0 top-6"
                 onClick={closeMenu}
               />
             </div>
@@ -216,9 +205,9 @@ export default function MobileNavBar() {
       <div
         ref={cartRef}
         className={`fixed inset-0 z-50 transition-transform transform translate-x-full`}
-        onTouchStart={handleTouchStartCart}
-        onTouchMove={handleTouchMoveCart}
-        onTouchEnd={handleTouchEndCart}
+        onTouchStart={(e) => handleTouchStart(e, "cart")}
+        onTouchMove={(e) => handleTouchMove(e, "cart")}
+        onTouchEnd={() => handleTouchEnd("cart")}
       >
         <div className="absolute right-0 top-0 w-3/4 bg-black h-full shadow-lg shadow-amber-500 overflow-y-auto">
           <div className="px-4 h-full">
