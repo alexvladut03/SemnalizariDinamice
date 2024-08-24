@@ -41,7 +41,7 @@ export default function MobileNavBar() {
       setIsCartOpen(false);
       cartRef.current.style.transition = "none";
       cartRef.current.style.transform = "translateX(100%)";
-    }, 500);
+    }, 800);
   };
 
   const handleTouchStart = (e) => {
