@@ -8,12 +8,14 @@ const page = async () => {
   const products = await getProductsWithoutDBData();
 
   return (
-    <section id="Produse" className="my-28 max-w-7xl mx-auto">
+    <section id="Produse" className="my-28 max-w-7xl lg:mx-auto mx-4">
       <div className="flex ">
-        <ProductsPageSideBar />
+        <div className="lg:block hidden">
+          <ProductsPageSideBar />
+        </div>
         <main className="w-full">
           <ProductsPageUpperBar />
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">
             {products.map((product) => (
               <ProduseCard2 key={product.id} product={product} />
             ))}
