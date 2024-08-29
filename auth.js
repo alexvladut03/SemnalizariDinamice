@@ -1,8 +1,8 @@
-import { userSchema } from "@/lib/zod";
 import { compare } from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import prisma from "@/lib/prisma";
+import prisma from "./utils/prisma";
+import { loginSchema } from "./utils/zod";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -13,21 +13,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
-        const { username, password } = await userSchema.parse(credentials);
+        const { username, password } = await loginSchema.parse(credentials);
 
         if (!username || !password)
-          throw new Error("Username and password are required");
+          throw new Error("Utilizatorul si parola sunt obligatorii");
 
         const user = await prisma.user.findUnique({
           where: { username },
           select: { id: true, username: true, name: true, password: true },
         });
 
-        if (!user) throw new Error("Invalid credentials");
+        if (!user) throw new Error("Utilizatorul sau parola sunt gresite");
 
         const isValid = await compare(password, user.password);
 
-        if (!isValid) throw new Error("Wrong password");
+        if (!isValid) throw new Error("Utilizatorul sau parola sunt gresite");
 
         const userData = {
           username: user.username,
@@ -51,7 +51,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       return session;
     },
-
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
