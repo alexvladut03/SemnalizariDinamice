@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -58,8 +59,8 @@ export default function FilterMobil({ selectedOptions, onApply }) {
   };
 
   const handleApplyFilters = () => {
-    onApply(localSelectedOptions); // Trimitem opțiunile selectate la componenta părinte
-    toggleFilterModal(); // Închidem modalul după aplicarea filtrelor
+    onApply(localSelectedOptions);
+    toggleFilterModal();
   };
 
   const handleClearFilters = () => {
@@ -74,10 +75,10 @@ export default function FilterMobil({ selectedOptions, onApply }) {
 
   return (
     <div>
-      <div className="lg:hidden flex items-center gap-2">
+      <div className="lg:hidden flex items-center">
         <div onClick={toggleFilterModal}>
           <Select>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[160px]">
               <SelectValue placeholder="Filtreaza" />
             </SelectTrigger>
           </Select>
@@ -120,7 +121,13 @@ export default function FilterMobil({ selectedOptions, onApply }) {
                 <div className="col-span-2 p-4 overflow-y-auto max-h-full scrollbar-hide">
                   <div className="flex flex-col gap-2">
                     {categories[selectedCategory].map((option, index) => (
-                      <div key={index} className="flex items-center">
+                      <div
+                        key={index}
+                        className="flex items-center cursor-pointer"
+                        onClick={() =>
+                          handleCheckboxChange(selectedCategory, option)
+                        } // Add this to handle clicks on the entire div
+                      >
                         <Checkbox
                           id={`${selectedCategory}-${option}`}
                           checked={

@@ -17,16 +17,9 @@ export default function UpperBar({
         selectedOptions={selectedOptions}
         onRemoveFilter={removeFilter}
       />
-      <div className="flex justify-between gap-4">
-        <div className="flex-1">
-          <OrderMobilAndDesktop setSortOrder={setSortOrder} />
-        </div>
-        <div className="flex-1 lg:hidden">
-          <FilterMobil
-            selectedOptions={selectedOptions}
-            onApply={applyFilters}
-          />
-        </div>
+      <div className="flex justify-between ">
+        <OrderMobilAndDesktop setSortOrder={setSortOrder} />
+        <FilterMobil selectedOptions={selectedOptions} onApply={applyFilters} />
       </div>
     </div>
   );

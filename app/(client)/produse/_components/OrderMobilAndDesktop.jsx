@@ -58,10 +58,10 @@ export default function OrderMobilAndDesktop({ setSortOrder }) {
       </div>
 
       <div>
-        <div className="lg:hidden flex items-center gap-2">
+        <div className="lg:hidden flex items-center">
           <div onClick={toggleFilterModal}>
             <Select>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="w-[160px]">
                 <SelectValue placeholder={selectedValue || "Ordoneaza"} />
               </SelectTrigger>
             </Select>
