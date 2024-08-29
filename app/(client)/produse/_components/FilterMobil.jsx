@@ -1,11 +1,10 @@
-"use client";
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
 import { RemoveScroll } from "react-remove-scroll";
+import { Checkbox } from "@/components/ui/checkbox";
 
-export default function FilterMobil() {
+export default function FilterMobil({ selectedOptions, onApply }) {
   const [openFilter, setOpenFilter] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Tip Mașină");
@@ -24,6 +23,9 @@ export default function FilterMobil() {
     Produse: ["Capace", "Semnalizări Dinamice", "Proiectoare Logo", "Embleme"],
   };
 
+  const [localSelectedOptions, setLocalSelectedOptions] =
+    useState(selectedOptions);
+
   const toggleFilterModal = () => {
     if (openFilter) {
       setIsClosing(true);
@@ -36,10 +38,43 @@ export default function FilterMobil() {
     }
   };
 
+  const handleCheckboxChange = (category, option) => {
+    setLocalSelectedOptions((prev) => {
+      const updatedCategoryOptions = prev[category] || [];
+      const isSelected = updatedCategoryOptions.includes(option);
+
+      if (isSelected) {
+        return {
+          ...prev,
+          [category]: updatedCategoryOptions.filter((item) => item !== option),
+        };
+      } else {
+        return {
+          ...prev,
+          [category]: [...updatedCategoryOptions, option],
+        };
+      }
+    });
+  };
+
+  const handleApplyFilters = () => {
+    onApply(localSelectedOptions); // Trimitem opțiunile selectate la componenta părinte
+    toggleFilterModal(); // Închidem modalul după aplicarea filtrelor
+  };
+
+  const handleClearFilters = () => {
+    setLocalSelectedOptions({
+      "Tip Mașină": [],
+      Preț: [],
+      Disponibilitate: [],
+      "Rating minim": [],
+      Produse: [],
+    });
+  };
+
   return (
     <div>
       <div className="lg:hidden flex items-center gap-2">
-        {/* Selectare Filtrare */}
         <div onClick={toggleFilterModal}>
           <Select>
             <SelectTrigger className="w-[180px]">
@@ -49,7 +84,6 @@ export default function FilterMobil() {
         </div>
       </div>
 
-      {/* Pop-up Modal */}
       {openFilter && (
         <RemoveScroll>
           <div className="fixed inset-0 z-50 flex justify-center items-end">
@@ -63,20 +97,17 @@ export default function FilterMobil() {
                   Filtreaza
                 </h2>
                 <button onClick={toggleFilterModal}>
-                  <div className="">
-                    <IoClose className="text-4xl mr-2 text-white" />
-                  </div>
+                  <IoClose className="text-4xl mr-2 text-white" />
                 </button>
               </div>
               <div className="grid grid-cols-3 h-full">
-                {/* Left side with category names */}
                 <div className="col-span-1 bg-gray-100 overflow-y-auto max-h-full scrollbar-hide">
                   {Object.keys(categories).map((category) => (
                     <div
                       key={category}
                       className={`p-3 font-semibold cursor-pointer ${
                         selectedCategory === category
-                          ? " border-l-8 border-amber-500 bg-white"
+                          ? "border-l-8 border-amber-500 bg-white"
                           : "bg-gray-100"
                       }`}
                       onClick={() => setSelectedCategory(category)}
@@ -86,25 +117,43 @@ export default function FilterMobil() {
                   ))}
                 </div>
 
-                {/* Right side with category options */}
                 <div className="col-span-2 p-4 overflow-y-auto max-h-full scrollbar-hide">
                   <div className="flex flex-col gap-2">
                     {categories[selectedCategory].map((option, index) => (
                       <div key={index} className="flex items-center">
-                        <Checkbox />
-                        <label htmlFor={option} className="ml-2 align-baseline">
+                        <Checkbox
+                          id={`${selectedCategory}-${option}`}
+                          checked={
+                            localSelectedOptions[selectedCategory]?.includes(
+                              option
+                            ) || false
+                          }
+                          onCheckedChange={() =>
+                            handleCheckboxChange(selectedCategory, option)
+                          }
+                        />
+                        <label
+                          htmlFor={`${selectedCategory}-${option}`}
+                          className="ml-2 align-baseline"
+                        >
                           {option}
                         </label>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>{" "}
+              </div>
               <div className="absolute bottom-0 left-0 w-full h-16 bg-white border-t-2 border-amber-500 flex flex-row justify-between">
-                <button className="bg-red-500 ml-3 my-3 p-2 rounded-lg w-[28%] font-semibold">
+                <button
+                  onClick={handleClearFilters}
+                  className="bg-red-500 ml-3 my-3 p-2 rounded-lg w-[28%] font-semibold"
+                >
                   Sterge
                 </button>
-                <button className="bg-amber-500 mr-3 my-3 p-2 rounded-lg w-[62%] font-semibold">
+                <button
+                  onClick={handleApplyFilters}
+                  className="bg-amber-500 mr-3 my-3 p-2 rounded-lg w-[62%] font-semibold"
+                >
                   Aplica filtrele
                 </button>
               </div>

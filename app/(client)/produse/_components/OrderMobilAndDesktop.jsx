@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import {
   Select,
@@ -10,16 +9,16 @@ import {
 import { RemoveScroll } from "react-remove-scroll";
 import { IoClose } from "react-icons/io5";
 
-export default function OrderMobilAndDesktop() {
+export default function OrderMobilAndDesktop({ setSortOrder }) {
   const [openFilter, setOpenFilter] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
 
   const categories = [
-    { label: "Pret Crescator", value: "pret crescator" },
-    { label: "Pret Descrescator", value: "pret descrescator" },
-    { label: "Recenzii", value: "recenzii" },
-    { label: "Populare", value: "populare" },
+    { label: "Pret Crescator", value: "Pret Crescator" },
+    { label: "Pret Descrescator", value: "Pret Descrescator" },
+    { label: "Recenzii", value: "Recenzii" },
+    { label: "Populare", value: "Populare" },
   ];
 
   const toggleFilterModal = () => {
@@ -36,15 +35,15 @@ export default function OrderMobilAndDesktop() {
 
   const handleSelect = (label) => {
     setSelectedValue(label);
-    toggleFilterModal(); // Close the modal after selection
+    setSortOrder(label);
+    toggleFilterModal();
   };
 
   return (
     <div className="flex items-center gap-2">
-      {/* Selectare Ordonare */}
       <span className="lg:block hidden">Ordoneaza după:</span>
       <div className="lg:block hidden">
-        <Select onValueChange={setSelectedValue}>
+        <Select onValueChange={setSortOrder}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Ordoneaza" />
           </SelectTrigger>
@@ -60,7 +59,6 @@ export default function OrderMobilAndDesktop() {
 
       <div>
         <div className="lg:hidden flex items-center gap-2">
-          {/* Selectare Ordonare */}
           <div onClick={toggleFilterModal}>
             <Select>
               <SelectTrigger className="w-[180px]">
@@ -70,7 +68,6 @@ export default function OrderMobilAndDesktop() {
           </div>
         </div>
 
-        {/* Pop-up Modal */}
         {openFilter && (
           <RemoveScroll>
             <div className="fixed inset-0 z-50 flex justify-center items-end">
@@ -88,7 +85,6 @@ export default function OrderMobilAndDesktop() {
                   </button>
                 </div>
                 <div className="grid h-full">
-                  {/* Ordering options in the modal */}
                   <div className=" overflow-y-auto max-h-full scrollbar-hide ">
                     {categories.map((category) => (
                       <div
