@@ -4,6 +4,7 @@ import { IoClose } from "react-icons/io5";
 import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RemoveScroll } from "react-remove-scroll";
+import { Bot } from "lucide-react";
 
 export default function ProductsPageFilterMobil() {
   const [openFilter, setOpenFilter] = useState(false);
@@ -99,6 +100,14 @@ export default function ProductsPageFilterMobil() {
                     ))}
                   </div>
                 </div>
+              </div>{" "}
+              <div className="absolute bottom-0 left-0 w-full h-16 bg-white border-t-2 border-amber-500 flex flex-row justify-between">
+                <button className="bg-red-500 ml-3 my-3 p-2 rounded-lg w-[28%] font-semibold">
+                  Sterge
+                </button>
+                <button className="bg-amber-500 mr-3 my-3 p-2 rounded-lg w-[62%] font-semibold">
+                  Aplica filtrele
+                </button>
               </div>
             </div>
           </div>
