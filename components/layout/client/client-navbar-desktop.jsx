@@ -12,7 +12,7 @@ export default function ClientNavbarDesktop() {
         <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
           Acasa
         </Link>
-        <Link href="/#Produse" className="hover:text-amber-500 cursor-pointer">
+        <Link href="/produse" className="hover:text-amber-500 cursor-pointer">
           Produse
         </Link>
         <Link
