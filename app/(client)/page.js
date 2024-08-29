@@ -1,8 +1,8 @@
 import React from "react";
-import Products from "../../components/sections/Products";
-import Hero from "../../components/sections/Hero";
 import Featured from "../../components/sections/Featured";
 import Testimonials from "../../components/sections/Testimonials";
+import Products from "@/components/sections/products";
+import Hero from "@/components/sections/hero";
 
 export default function page() {
   const formData = {
