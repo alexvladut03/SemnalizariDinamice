@@ -1,6 +1,6 @@
 import React from "react";
-import { addCategory } from "@/lib/categories";
 import CategoryForm from "@/components/forms/category-form";
+import { addCategory } from "@/utils/actions/category/add-category";
 
 const AdaugaCategorie = () => {
   const formData = {
