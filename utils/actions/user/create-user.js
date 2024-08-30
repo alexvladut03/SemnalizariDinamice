@@ -1,13 +1,12 @@
 "use server";
 
-import { redirect } from "next/navigation";
-
 import { hash } from "bcryptjs";
 
-import { userSchema } from "@/utils/zod";
+import { registerSchema } from "@/utils/zod";
 import { connectDB } from "@/utils/mongoose";
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
+import { revalidatePath } from "next/cache";
 
 export const createUser = authActionClient
   .use(async ({ next, ctx }) => {
@@ -22,7 +21,7 @@ export const createUser = authActionClient
     return next();
   })
   .metadata({ actionName: "createUser" })
-  .schema(userSchema)
+  .schema(registerSchema)
   .action(
     async ({ parsedInput: { name, username, password }, ctx: { userId } }) => {
       await connectDB();
@@ -33,10 +32,7 @@ export const createUser = authActionClient
       });
 
       if (existingUser) {
-        return {
-          success: false,
-          error: "Deja exista un utilizator cu acest username",
-        };
+        throw new Error("Acest username exista deja");
       }
 
       // Hash password
@@ -51,7 +47,7 @@ export const createUser = authActionClient
         },
       });
 
-      console.log("User created");
-      redirect("/admin/utilizatori");
+      revalidatePath("/admin/utilizatori");
+      return { success: true, name: name };
     }
   );

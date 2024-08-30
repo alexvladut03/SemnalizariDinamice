@@ -6,8 +6,11 @@ import { BsKeyFill } from "react-icons/bs";
 import { login } from "@/utils/actions/auth/login";
 import { useAction } from "next-safe-action/hooks";
 import { loginSchema } from "@/utils/zod";
+import { useToast } from "../ui/use-toast";
+import { DisplayServerActionResponse } from "../custom ui/display-server-actions-response";
 
 const LoginForm = () => {
+  const { toast } = useToast();
   const form = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -16,7 +19,16 @@ const LoginForm = () => {
     },
   });
 
-  const { execute, result, isExecuting } = useAction(login);
+  const { execute, result, isExecuting } = useAction(login, {
+    onSuccess: ({ data }) => {
+      toast({
+        variant: "default",
+        title: "Succes",
+        description: "Te-ai logat cu succes!",
+        duration: 3000,
+      });
+    },
+  });
 
   return (
     <form
@@ -58,7 +70,9 @@ const LoginForm = () => {
       >
         {isExecuting ? "Se incarca..." : "Logeaza-te"}
       </button>
-      <p className="text-red-500">{result.data?.error}</p>
+      {!result.validationErrors && (
+        <DisplayServerActionResponse result={result} />
+      )}
     </form>
   );
 };

@@ -1,5 +1,14 @@
 "use client";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
   Form,
   FormControl,
   FormField,
@@ -12,33 +21,51 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import { userSchema } from "@/utils/zod";
+import { registerSchema } from "@/utils/zod";
 import { useAction } from "next-safe-action/hooks";
-import { toast } from "../ui/use-toast";
-import { DisplayServerActionResponse } from "../custom ui/display-server-actions-response";
+import { toast } from "@/components/ui/use-toast";
+import { DisplayServerActionResponse } from "@/components/custom ui/display-server-actions-response";
+import { createUser } from "@/utils/actions/user/create-user";
+import { useState } from "react";
 
-const UserForm = ({ formData, action }) => {
-  const form = useForm({
-    resolver: zodResolver(userSchema),
-    defaultValues: formData,
+const AddUser = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const { reset, ...form } = useForm({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      username: "",
+      password: "",
+    },
   });
 
-  const { execute, result, isExecuting } = useAction(action, {
+  const { execute, result, isExecuting } = useAction(createUser, {
     onSuccess: ({ data }) => {
+      setIsOpen(false);
+      reset();
       toast({
         variant: "default",
         title: "Succes",
-        description: "Utilizatorul a fost creat cu succes!",
+        description: `Utilizatorul ${data.name} a fost creat cu succes!`,
         duration: 3000,
       });
     },
   });
 
   return (
-    <div className="flex flex-col items-center ">
-      <h1 className="text-2xl font-bold my-8">Creează utilizator</h1>
-      <div className="p-8 bg-white rounded-lg shadow-sm shadow-gray-400">
-        <Form {...form}>
+    <Form {...form}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
+          Adauga utilizator
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Creeaza un utilizator</DialogTitle>
+            <DialogDescription>
+              Completeaza campurile de jos. Apasa pe "Salvare" pentru a salva.
+            </DialogDescription>
+          </DialogHeader>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -97,17 +124,22 @@ const UserForm = ({ formData, action }) => {
             {result.validationErrors?.password && (
               <p>{result.validationErrors?.password._errors[0]}</p>
             )}
-            <Button className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2">
-              Salveaza
-            </Button>
             {!result.validationErrors && (
               <DisplayServerActionResponse result={result} />
             )}
+            <DialogFooter>
+              <Button
+                type="submit"
+                className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2"
+              >
+                {isExecuting ? "Se creează..." : "Creează"}
+              </Button>
+            </DialogFooter>
           </form>
-        </Form>
-      </div>
-    </div>
+        </DialogContent>
+      </Dialog>
+    </Form>
   );
 };
 
-export default UserForm;
+export default AddUser;

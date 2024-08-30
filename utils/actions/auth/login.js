@@ -14,15 +14,13 @@ export const login = actionClient
         password,
         redirectTo: "/admin",
       });
-      console.log("Sign in result:", result);
 
-      return { success: true };
+      return { success: true, data: result };
     } catch (error) {
       if (isRedirectError(error)) throw error;
 
       if (error) {
-        console.error("Sign in error:", error);
-        return { success: false, error: error.cause?.err?.message };
+        throw new Error("Utilizatorul sau parola sunt gresite");
       }
     }
   });
