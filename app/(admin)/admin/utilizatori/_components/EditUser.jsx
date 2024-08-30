@@ -1,5 +1,14 @@
 "use client";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import {
   Form,
   FormControl,
   FormField,
@@ -10,42 +19,59 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-
 import { Button } from "@/components/ui/button";
 import { userSchema } from "@/utils/zod";
 import { useAction } from "next-safe-action/hooks";
-import { toast } from "../ui/use-toast";
-import { DisplayServerActionResponse } from "../custom ui/display-server-actions-response";
+import { toast } from "@/components/ui/use-toast";
+import { DisplayServerActionResponse } from "@/components/custom ui/display-server-actions-response";
+import { updateUser } from "@/utils/actions/user/update-user";
+import { useState } from "react";
+import { FaEdit } from "react-icons/fa";
 
-const UserForm = ({ formData, action }) => {
-  const form = useForm({
+const EditUser = ({ user }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const { reset, ...form } = useForm({
     resolver: zodResolver(userSchema),
-    defaultValues: formData,
+    defaultValues: {
+      name: user.name,
+      username: user.username,
+      password: "",
+    },
   });
 
-  const { execute, result, isExecuting } = useAction(action, {
+  const { execute, result, isExecuting } = useAction(updateUser, {
     onSuccess: ({ data }) => {
+      setIsOpen(false);
+      reset();
       toast({
         variant: "default",
         title: "Succes",
-        description: "Utilizatorul a fost creat cu succes!",
+        description: `Utilizatorul ${data.name} a fost editat cu succes!`,
         duration: 3000,
       });
     },
   });
 
   return (
-    <div className="flex flex-col items-center ">
-      <h1 className="text-2xl font-bold my-8">Creează utilizator</h1>
-      <div className="p-8 bg-white rounded-lg shadow-sm shadow-gray-400">
-        <Form {...form}>
+    <Form {...form}>
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger className="text-2xl mr-2 text-emerald-600">
+          <FaEdit />
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Creeaza un utilizator</DialogTitle>
+            <DialogDescription>
+              Completeaza campurile de jos. Apasa pe Salvare pentru a salva.
+            </DialogDescription>
+          </DialogHeader>
           <form
             onSubmit={(e) => {
               e.preventDefault();
               const name = form.getValues("name");
               const username = form.getValues("username");
               const password = form.getValues("password");
-              execute({ name, username, password });
+              execute({ name, username, password, id: user.id });
             }}
             className="space-y-8"
           >
@@ -97,17 +123,22 @@ const UserForm = ({ formData, action }) => {
             {result.validationErrors?.password && (
               <p>{result.validationErrors?.password._errors[0]}</p>
             )}
-            <Button className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2">
-              Salveaza
-            </Button>
             {!result.validationErrors && (
               <DisplayServerActionResponse result={result} />
             )}
+            <DialogFooter>
+              <Button
+                type="submit"
+                className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2"
+              >
+                {isExecuting ? "Se salveaza..." : "Salveaza"}
+              </Button>
+            </DialogFooter>
           </form>
-        </Form>
-      </div>
-    </div>
+        </DialogContent>
+      </Dialog>
+    </Form>
   );
 };
 
-export default UserForm;
+export default EditUser;
