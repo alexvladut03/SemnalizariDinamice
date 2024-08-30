@@ -67,6 +67,7 @@ const AdminSidebar = () => {
           <div>Categorii</div>
         </Link>
         <Link
+          prefetch={true}
           href={"/admin/utilizatori"}
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >

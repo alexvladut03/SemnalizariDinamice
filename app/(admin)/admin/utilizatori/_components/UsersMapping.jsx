@@ -26,7 +26,6 @@ const UsersMapping = ({ users }) => {
       return state.filter((user) => user.id !== id);
     },
     onSuccess: ({ data }) => {
-      setIsOpen(false);
       toast({
         variant: "default",
         title: "Succes",
@@ -70,6 +69,7 @@ const UsersMapping = ({ users }) => {
               <AlertDialogAction
                 onClick={(e) => {
                   e.preventDefault();
+                  setIsOpen(false);
                   execute({ id: user.id });
                 }}
               >

@@ -1,6 +1,3 @@
-import React from "react";
-import Link from "next/link";
-
 import { getAllUsers } from "@/utils/functions/user/get-all-users";
 import UsersMapping from "./_components/UsersMapping";
 import AddUser from "./_components/AddUser";
