@@ -62,7 +62,7 @@ const EditUser = ({ user }) => {
           <DialogHeader>
             <DialogTitle>Creeaza un utilizator</DialogTitle>
             <DialogDescription>
-              Completeaza campurile de jos. Apasa pe "Salvare" pentru a salva.
+              Completeaza campurile de jos. Apasa pe Salvare pentru a salva.
             </DialogDescription>
           </DialogHeader>
           <form
