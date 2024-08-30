@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { categorySchema } from "@/lib/zod";
+import { categorySchema } from "@/utils/zod";
 
 const CategoryForm = ({ formData, action }) => {
   const form = useForm({

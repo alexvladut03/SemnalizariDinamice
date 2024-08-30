@@ -1,13 +1,13 @@
 "use client";
+
 import React, { useState } from "react";
 import { FaCartPlus } from "react-icons/fa6";
-import CartProducts from "./client-navbar-cartproducts";
-import { useCart } from "../../../utils/context/cart-provider";
+import { useCart } from "@/utils/context/cart-provider";
+import ClientNavbarCartProducts from "./client-navbar-cartproducts";
 
-const ClientNavbarAddToCart = () => {
+const AddToCart = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const cartItems = useCart();
-  const { countCartItems, countTotalPrice, updateCart } = useCart();
+  const { countCartItems } = useCart();
   let closeTimeout = null;
 
   const handleMouseEnter = () => {
@@ -34,9 +34,15 @@ const ClientNavbarAddToCart = () => {
         </p>
       </div>
       <p className="font-semibold">Coșul meu</p>
-      {isCartOpen && <CartProducts />}
+      {isCartOpen && (
+        <ClientNavbarCartProducts
+          toggleCart={() => setIsCartOpen(false)}
+          isCartOpen={isCartOpen}
+          isMobile={false}
+        />
+      )}
     </div>
   );
 };
 
-export default ClientNavbarAddToCart;
+export default AddToCart;
