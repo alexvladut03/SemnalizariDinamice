@@ -16,9 +16,19 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "@/components/ui/use-toast";
 import EditUser from "./EditUser";
+import { useQuery } from "@tanstack/react-query";
+import { getAllUsers } from "@/utils/functions/user/get-all-users";
 
-const UsersMapping = ({ users }) => {
+const UsersMapping = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const {
+    data: users,
+    error,
+    isFetched,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: getAllUsers,
+  });
 
   const { execute, result, optimisticState } = useOptimisticAction(deleteUser, {
     currentState: users,
@@ -43,12 +53,6 @@ const UsersMapping = ({ users }) => {
       <div>{user.name}</div>
       <div>{user.username}</div>
       <div className="flex col-start-7">
-        {/*<Link
-          href={`/admin/utilizatori/edit/${user.id}`}
-          className="text-2xl mr-2 text-emerald-600"
-        >
-          <FaEdit />
-        </Link> */}
         <EditUser user={user} />
         <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
           <AlertDialogTrigger>
