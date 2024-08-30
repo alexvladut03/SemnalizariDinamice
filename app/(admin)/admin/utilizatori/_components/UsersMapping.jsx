@@ -16,19 +16,9 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "@/components/ui/use-toast";
 import EditUser from "./EditUser";
-import { useQuery } from "@tanstack/react-query";
-import { getAllUsers } from "@/utils/functions/user/get-all-users";
 
-const UsersMapping = () => {
+const UsersMapping = ({ users }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const {
-    data: users,
-    error,
-    isFetched,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: getAllUsers,
-  });
 
   const { execute, result, optimisticState } = useOptimisticAction(deleteUser, {
     currentState: users,
