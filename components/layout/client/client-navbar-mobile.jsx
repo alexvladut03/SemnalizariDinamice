@@ -188,14 +188,14 @@ export default function ClientNavBarMobile() {
                 Produse
               </Link>
               <Link
-                href="/#Despre-noi"
+                href="/despre-noi"
                 className="hover:text-amber-500 cursor-pointer"
                 onClick={closeMenu} // Închide meniul când se apasă pe link
               >
                 Despre Noi
               </Link>
               <Link
-                href="/#Recenzii"
+                href="/contact"
                 className="hover:text-amber-500 cursor-pointer"
                 onClick={closeMenu} // Închide meniul când se apasă pe link
               >

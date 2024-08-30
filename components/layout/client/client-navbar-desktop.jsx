@@ -16,13 +16,13 @@ export default function ClientNavbarDesktop() {
           Produse
         </Link>
         <Link
-          href="/#Despre-noi"
+          href="/despre-noi"
           className="hover:text-amber-500 cursor-pointer"
         >
           Despre Noi
         </Link>
-        <Link href="/#Recenzii" className="hover:text-amber-500 cursor-pointer">
-          Recenzii
+        <Link href="/contact" className="hover:text-amber-500 cursor-pointer">
+          Contact
         </Link>
       </nav>
       <ClientNavbarAddToCart />
