@@ -47,6 +47,52 @@ module.exports = withUt({
             opacity: "0",
           },
         },
+        bounceInInputSearch: {
+          "0%": {
+            transform: "scale(0)",
+            animationTimingFunction: "ease-in",
+            opacity: "0",
+          },
+          "38%": {
+            transform: "scale(1)",
+            animationTimingFunction: "ease-out",
+            opacity: "1",
+          },
+          "55%": {
+            transform: "scale(0.85)",
+            animationTimingFunction: "ease-in",
+          },
+          "72%": {
+            transform: "scale(1)",
+            animationTimingFunction: "ease-out",
+          },
+          "81%": {
+            transform: "scale(0.92)",
+            animationTimingFunction: "ease-in",
+          },
+          "89%": {
+            transform: "scale(1)",
+            animationTimingFunction: "ease-out",
+          },
+          "95%": {
+            transform: "scale(0.98)",
+            animationTimingFunction: "ease-in",
+          },
+          "100%": {
+            transform: "scale(1)",
+            animationTimingFunction: "ease-out",
+          },
+        },
+        bounceOutInputSearch: {
+          "0%": {
+            transform: "translateZ(0)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "translateZ(-1100px)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         waveSlideYellow: "waveSlideYellow 1.4s ease-in-out forwards",
@@ -55,6 +101,9 @@ module.exports = withUt({
           "slideInBottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
         slideOutBottom:
           "slideOutBottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+        bounceInInputSearch: "bounceInInputSearch 1s both",
+        bounceOutInputSearch:
+          "bounceOutInputSearch 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
       },
     },
   },
