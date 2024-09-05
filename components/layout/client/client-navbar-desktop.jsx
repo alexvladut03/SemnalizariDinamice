@@ -19,14 +19,14 @@ export default function ClientNavbarDesktop() {
       setTimeout(() => {
         setIsSearchOpen(false); // Inchidem search
         setIsAnimatingOut(false);
-      }, 500);
+      }, 400);
     } else {
       // Bagam animatia de iesire pentru nav
       setIsNavAnimatingOut(true);
       setTimeout(() => {
         setIsSearchOpen(true); // Deschidem bara de cautare dupa animatia nav-ului
         setIsNavAnimatingOut(false);
-      }, 500);
+      }, 400);
     }
   };
 
@@ -38,9 +38,7 @@ export default function ClientNavbarDesktop() {
       {!isSearchOpen && !isAnimatingOut && (
         <nav
           className={`flex gap-8 text-white font-semibold ${
-            isNavAnimatingOut
-              ? "animate-bounceOutInputSearch"
-              : "animate-bounceInInputSearch"
+            isNavAnimatingOut ? "animate-puffOutCenter" : "animate-puffInCenter"
           }`}
         >
           <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
@@ -72,8 +70,8 @@ export default function ClientNavbarDesktop() {
           <div
             className={`relative w-1/2 text-white ${
               isSearchOpen && !isAnimatingOut
-                ? "animate-bounceInInputSearch"
-                : "animate-bounceOutInputSearch"
+                ? "animate-puffInCenter"
+                : "animate-puffOutCenter"
             }`}
           >
             <input

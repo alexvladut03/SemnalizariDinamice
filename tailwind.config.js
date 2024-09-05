@@ -47,50 +47,28 @@ module.exports = withUt({
             opacity: "0",
           },
         },
-        bounceInInputSearch: {
+        puffOutCenter: {
           "0%": {
-            transform: "scale(0)",
-            animationTimingFunction: "ease-in",
-            opacity: "0",
-          },
-          "38%": {
             transform: "scale(1)",
-            animationTimingFunction: "ease-out",
+            filter: "blur(0px)",
             opacity: "1",
           },
-          "55%": {
-            transform: "scale(0.85)",
-            animationTimingFunction: "ease-in",
-          },
-          "72%": {
-            transform: "scale(1)",
-            animationTimingFunction: "ease-out",
-          },
-          "81%": {
-            transform: "scale(0.92)",
-            animationTimingFunction: "ease-in",
-          },
-          "89%": {
-            transform: "scale(1)",
-            animationTimingFunction: "ease-out",
-          },
-          "95%": {
-            transform: "scale(0.98)",
-            animationTimingFunction: "ease-in",
-          },
           "100%": {
-            transform: "scale(1)",
-            animationTimingFunction: "ease-out",
+            transform: "scale(1.2)",
+            filter: "blur(4px)",
+            opacity: "0",
           },
         },
-        bounceOutInputSearch: {
+        puffInCenter: {
           "0%": {
-            transform: "translateZ(0)",
-            opacity: "1",
+            transform: "scale(1.2)",
+            filter: "blur(4px)",
+            opacity: "0",
           },
           "100%": {
-            transform: "translateZ(-1100px)",
-            opacity: "0",
+            transform: "scale(1)",
+            filter: "blur(0px)",
+            opacity: "1",
           },
         },
       },
@@ -101,9 +79,10 @@ module.exports = withUt({
           "slideInBottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
         slideOutBottom:
           "slideOutBottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
-        bounceInInputSearch: "bounceInInputSearch 1s both",
-        bounceOutInputSearch:
-          "bounceOutInputSearch 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both",
+        puffInCenter:
+          "puffInCenter 0.6s cubic-bezier(0.470, 0.000, 0.745, 0.715) both",
+        puffOutCenter:
+          "puffOutCenter 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both",
       },
     },
   },
