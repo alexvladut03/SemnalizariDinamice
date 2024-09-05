@@ -80,9 +80,9 @@ module.exports = withUt({
         slideOutBottom:
           "slideOutBottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
         puffInCenter:
-          "puffInCenter 0.6s cubic-bezier(0.470, 0.000, 0.745, 0.715) both",
+          "puffInCenter 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both",
         puffOutCenter:
-          "puffOutCenter 0.6s cubic-bezier(0.165, 0.840, 0.440, 1.000) both",
+          "puffOutCenter 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both",
       },
     },
   },

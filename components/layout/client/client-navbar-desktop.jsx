@@ -19,14 +19,14 @@ export default function ClientNavbarDesktop() {
       setTimeout(() => {
         setIsSearchOpen(false); // Inchidem search
         setIsAnimatingOut(false);
-      }, 400);
+      }, 300);
     } else {
       // Bagam animatia de iesire pentru nav
       setIsNavAnimatingOut(true);
       setTimeout(() => {
         setIsSearchOpen(true); // Deschidem bara de cautare dupa animatia nav-ului
         setIsNavAnimatingOut(false);
-      }, 400);
+      }, 300);
     }
   };
 
@@ -58,13 +58,7 @@ export default function ClientNavbarDesktop() {
           </Link>
         </nav>
       )}
-      <div className="text-amber-500 flex items-center">
-        <FaSearch
-          onClick={handleSearchToggle}
-          className="text-2xl cursor-pointer"
-        />
-        <ClientNavbarAddToCart />
-      </div>
+
       {(isSearchOpen || isAnimatingOut) && (
         <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center">
           <div
@@ -86,6 +80,13 @@ export default function ClientNavbarDesktop() {
           </div>
         </div>
       )}
+      <div className="text-amber-500 flex items-center">
+        <FaSearch
+          onClick={handleSearchToggle}
+          className="text-2xl cursor-pointer"
+        />
+        <ClientNavbarAddToCart />
+      </div>
     </main>
   );
 }
