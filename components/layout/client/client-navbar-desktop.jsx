@@ -38,7 +38,9 @@ export default function ClientNavbarDesktop() {
       {!isSearchOpen && !isAnimatingOut && (
         <nav
           className={`flex gap-8 text-white font-semibold ${
-            isNavAnimatingOut ? "animate-puffOutCenter" : "animate-puffInCenter"
+            isNavAnimatingOut
+              ? "animate-puffOutCenterSearchInput"
+              : "animate-puffInCenterSearchInput"
           }`}
         >
           <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
@@ -64,8 +66,8 @@ export default function ClientNavbarDesktop() {
           <div
             className={`relative w-1/2 text-white ${
               isSearchOpen && !isAnimatingOut
-                ? "animate-puffInCenter"
-                : "animate-puffOutCenter"
+                ? "animate-puffInCenterSearchInput"
+                : "animate-puffOutCenterSearchInput"
             }`}
           >
             <input
