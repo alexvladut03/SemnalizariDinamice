@@ -5,12 +5,14 @@ import ClientNavbarAddToCart from "./client-navbar-addtocart";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 export default function ClientNavbarDesktop() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const [isNavAnimatingOut, setIsNavAnimatingOut] = useState(false);
-
+  const [searchValue, setSearchValue] = useState("");
+  const router = useRouter();
   const handleSearchToggle = () => {
     if (isSearchOpen) {
       // Bagam animatia de search
@@ -28,6 +30,12 @@ export default function ClientNavbarDesktop() {
         setIsNavAnimatingOut(false);
       }, 300);
     }
+  };
+
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    router.push(`/produse`);
+    console.log(searchValue);
   };
 
   return (
@@ -70,11 +78,15 @@ export default function ClientNavbarDesktop() {
                 : "animate-puffOutCenterSearchInput"
             }`}
           >
-            <input
-              type="text"
-              placeholder="Cauta produsul dorit..."
-              className="w-full pl-4 pr-10 py-2 border-2 border-amber-500 rounded-full bg-transparent placeholder:text-white focus:outline-none"
-            />
+            <form onSubmit={handleSearchChange}>
+              <input
+                type="text"
+                placeholder="Cauta produsul dorit..."
+                className="w-full pl-4 pr-10 py-2 border-2 border-amber-500 rounded-full bg-transparent placeholder:text-white focus:outline-none"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </form>
             <MdClose
               onClick={handleSearchToggle}
               className="absolute right-3 top-2 text-2xl cursor-pointer"
