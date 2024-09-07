@@ -13,10 +13,10 @@ import { MdSubject } from "react-icons/md";
 
 export default function ContactUs() {
   return (
-    <section className="bg-white lg:w-full max-w-7xl lg:mx-auto mx-6 py-20">
+    <section className="">
       <div>
         <h2 className="lg:text-3xl text-2xl font-bold leading-relaxed grid-about-3 mb-4 text-center">
-          Ai nelamuriri? Contacteaza-ne!
+          Ai o sugestie sau o problemă? Contactează-ne!
         </h2>
         <form className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
