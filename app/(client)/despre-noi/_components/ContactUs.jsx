@@ -67,7 +67,7 @@ export default function ContactUs() {
             <FaEdit className="absolute top-3 left-4 text-gray-400 text-xl" />
             <textarea
               placeholder="Mesajul tau"
-              className="w-full pl-10 pr-4 py-3 border rounded-xl font-semibold text-gray-400 border-gray-200 focus:outline-none focus:border-amber-500"
+              className="w-full h-[115.5px] pl-10 pr-4 py-3 border rounded-xl font-semibold text-gray-400 border-gray-200 focus:outline-none focus:border-amber-500"
             ></textarea>
           </div>
         </form>
