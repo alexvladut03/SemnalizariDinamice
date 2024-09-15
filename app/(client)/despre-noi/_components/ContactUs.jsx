@@ -56,9 +56,9 @@ export default function ContactUs() {
                   />
                 </SelectTrigger>
                 <SelectContent className="font-semibold text-gray-400">
-                  <SelectItem value="semnalizari">Semnalizari</SelectItem>
-                  <SelectItem value="capace">Capace</SelectItem>
-                  <SelectItem value="embleme">Embleme</SelectItem>
+                  <SelectItem value="semnalizari">Adauga o recenzie</SelectItem>
+                  <SelectItem value="capace">Probleme de montaj</SelectItem>
+                  <SelectItem value="embleme">Produs defect</SelectItem>
                 </SelectContent>
               </Select>
             </div>
