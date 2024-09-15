@@ -1,66 +1,57 @@
-"use client";
 import DOMPurify from "isomorphic-dompurify";
-import React, { useState } from "react";
 
 const ProductDetails = ({ description, fitment, characteristics }) => {
-  const [activeSection, setActiveSection] = useState("descriere");
-
   return (
-    <section className="bg-black text-white p-4 rounded-lg mb-10">
-      <div className="flex flex-col lg:flex-row items-center lg:justify-start gap-4 mb-4 lg:mb-0">
-        <p
-          onClick={() => setActiveSection("descriere")}
-          className={`text-2xl font-bold cursor-pointer p-2 ${
-            activeSection === "descriere"
-              ? "font-bold bg-white text-black rounded-lg lg:rounded-t-lg lg:rounded-b-none"
-              : ""
-          }`}
-        >
-          Descriere
-        </p>
-        <p
-          onClick={() => setActiveSection("compatibilitate")}
-          className={`text-2xl font-bold cursor-pointer p-2 ${
-            activeSection === "compatibilitate"
-              ? "font-bold bg-white text-black rounded-lg lg:rounded-t-lg lg:rounded-b-none"
-              : ""
-          }`}
-        >
-          Compatibilitate
-        </p>
-        <p
-          onClick={() => setActiveSection("caracteristici")}
-          className={`text-2xl font-bold cursor-pointer p-2 ${
-            activeSection === "caracteristici"
-              ? "font-bold bg-white text-black rounded-lg lg:rounded-t-lg lg:rounded-b-none"
-              : ""
-          }`}
-        >
-          Caracteristici
-        </p>
+    <section className="bg-black text-white p-4 lg:pt-6 rounded-lg mb-10 lg:block flex flex-col">
+      {/* Tab-uri */}
+      <input
+        id="tab1"
+        type="radio"
+        name="tabs"
+        className="peer/tab1 hidden"
+        defaultChecked
+      />
+      <label
+        htmlFor="tab1"
+        className="text-2xl font-bold cursor-pointer p-2 lg:mr-2 peer-checked/tab1:bg-white peer-checked/tab1:text-black 
+        peer-checked/tab1:rounded-lg lg:peer-checked/tab1:rounded-t-lg lg:peer-checked/tab1:rounded-b-none"
+      >
+        Descriere
+      </label>
+
+      <input id="tab2" type="radio" name="tabs" className="peer/tab2 hidden" />
+      <label
+        htmlFor="tab2"
+        className="text-2xl font-bold cursor-pointer p-2 lg:mr-2 peer-checked/tab2:bg-white peer-checked/tab2:text-black 
+        peer-checked/tab2:rounded-lg lg:peer-checked/tab2:rounded-t-lg lg:peer-checked/tab2:rounded-b-none"
+      >
+        Compatibilitate
+      </label>
+
+      <input id="tab3" type="radio" name="tabs" className="peer/tab3 hidden" />
+      <label
+        htmlFor="tab3"
+        className="text-2xl font-bold cursor-pointer p-2 lg:m-0 mb-4 peer-checked/tab3:bg-white peer-checked/tab3:text-black 
+        peer-checked/tab3:rounded-lg lg:peer-checked/tab3:rounded-t-lg lg:peer-checked/tab3:rounded-b-none"
+      >
+        Caracteristici
+      </label>
+
+      {/* Conținut */}
+      <div className="hidden peer-checked/tab1:block bg-white text-black p-4 rounded-lg ">
+        <div
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description) }}
+        />
       </div>
 
-      <div className="bg-white text-black p-4 rounded-lg">
+      <div className="hidden peer-checked/tab2:block bg-white text-black p-4 rounded-lg ">
         <div
-          className={`${
-            activeSection === "descriere" ? "block" : "hidden"
-          } mb-4 rounded-b-lg rounded-r-lg lg:rounded-r-none lg:rounded-bl-lg lg:rounded-br-lg`}
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(description),
-          }}
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(fitment) }}
         />
+      </div>
+
+      <div className="hidden peer-checked/tab3:block bg-white text-black p-4 rounded-lg ">
         <div
-          className={`${
-            activeSection === "compatibilitate" ? "block" : "hidden"
-          } mb-4 rounded-lg`}
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(fitment),
-          }}
-        />
-        <div
-          className={`${
-            activeSection === "caracteristici" ? "block" : "hidden"
-          } rounded-lg`}
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(characteristics),
           }}
@@ -69,5 +60,4 @@ const ProductDetails = ({ description, fitment, characteristics }) => {
     </section>
   );
 };
-
 export default ProductDetails;
