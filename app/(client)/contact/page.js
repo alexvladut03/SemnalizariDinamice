@@ -1,6 +1,6 @@
 import React from "react";
-import ContactUs from "../despre-noi/_components/ContactUs";
-import ContactUsInfo from "../despre-noi/_components/ContactUsInfo";
+import ContactUs from "./_components/ContactUs";
+import ContactUsInfo from "./_components/ContactUsInfo";
 
 export default function page() {
   return (

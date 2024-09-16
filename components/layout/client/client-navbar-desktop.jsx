@@ -57,11 +57,8 @@ export default function ClientNavbarDesktop() {
           <Link href="/produse" className="hover:text-amber-500 cursor-pointer">
             Produse
           </Link>
-          <Link
-            href="/despre-noi"
-            className="hover:text-amber-500 cursor-pointer"
-          >
-            Despre Noi
+          <Link href="/blog" className="hover:text-amber-500 cursor-pointer">
+            Blog
           </Link>
           <Link href="/contact" className="hover:text-amber-500 cursor-pointer">
             Contact

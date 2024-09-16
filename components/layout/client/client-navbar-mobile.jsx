@@ -198,11 +198,11 @@ export default function ClientNavBarMobile() {
                 Produse
               </Link>
               <Link
-                href="/despre-noi"
+                href="/blog"
                 className="hover:text-amber-500 cursor-pointer"
                 onClick={closeMenu} // Închide meniul când se apasă pe link
               >
-                Despre Noi
+                Blog
               </Link>
               <Link
                 href="/contact"
