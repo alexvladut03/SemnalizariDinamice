@@ -6,7 +6,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 const blogs = [
   {
     id: 1,
-    image: "/hero-img.jpg",
+    image: "/logo.png",
     author: "Andrei Mocanu",
     date: "6 Iulie, 2024",
     readTime: "15 minute",
@@ -16,7 +16,7 @@ const blogs = [
   },
   {
     id: 2,
-    image: "/hero-img.jpg",
+    image: "/logo.png",
     author: "Andrei Mocanu",
     date: "25 Iulie, 2024",
     readTime: "10 minute",
@@ -26,7 +26,7 @@ const blogs = [
   },
   {
     id: 3,
-    image: "/hero-img.jpg",
+    image: "/logo.png",
     author: "Andrei Mocanu",
     date: "23 August, 2024",
     readTime: "20 minute",
@@ -36,7 +36,7 @@ const blogs = [
   },
   {
     id: 4,
-    image: "/hero-img.jpg",
+    image: "/logo.png",
     author: "Andrei Mocanu",
     date: "30 August, 2024",
     readTime: "5 minute",
@@ -46,7 +46,7 @@ const blogs = [
   },
   {
     id: 5,
-    image: "/hero-img.jpg",
+    image: "/logo.png",
     author: "Andrei Mocanu",
     date: "2 Septembrie, 2024",
     readTime: "10 minute",
@@ -56,7 +56,7 @@ const blogs = [
   },
   {
     id: 6,
-    image: "/hero-img.jpg",
+    image: "/logo.png",
     author: "Andrei Mocanu",
     date: "9 Septembrie, 2024",
     readTime: "15 minute",
@@ -73,16 +73,16 @@ export default function BlogCards() {
           <Link
             key={blog.id}
             href={blog.link}
-            className="bg-white rounded-lg shadow-lg flex flex-col"
+            className="bg-white rounded-lg shadow-lg flex flex-col "
           >
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden rounded-t-lg">
               {/* Imaginea principală */}
               <Image
                 src={blog.image}
                 alt={blog.title}
                 width={960}
                 height={320}
-                className="w-full h-56 object-cover rounded-t-lg transition-transform duration-500 hover:scale-105 "
+                className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105 hover:animate-blink2 bg-black"
               />
             </div>
             <div className="flex flex-col justify-between p-6 flex-grow">

@@ -32,7 +32,7 @@ export default function BlogPost() {
         <div className="bg-gray-100 mb-6 rounded-lg">
           <div className="relative overflow-hidden group">
             <Image
-              src="/hero-img.jpg"
+              src="/logo.png"
               alt="Avantajele închiderii terasei cu folie transparentă: O soluție practică și accesibilă"
               width={960}
               height={320}
@@ -327,7 +327,7 @@ export default function BlogPost() {
       </article>
 
       {/* Bara laterală - Postări Recente */}
-      <RecentPosts exclude={2} />
+      <RecentPosts exclude={[4, 3, 5]} />
     </div>
   );
 }

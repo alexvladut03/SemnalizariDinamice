@@ -83,6 +83,21 @@ module.exports = withUt({
             opacity: "1",
           },
         },
+
+        blink2: {
+          "0%": {
+            opacity: "1",
+            backgroundColor: "black",
+          },
+          "50%": {
+            opacity: "0.9",
+            backgroundColor: "black",
+          },
+          "100%": {
+            opacity: "1",
+            backgroundColor: "black",
+          },
+        },
       },
       animation: {
         waveSlideYellow: "waveSlideYellow 1.4s ease-in-out forwards",
@@ -97,6 +112,7 @@ module.exports = withUt({
           "puffOutCenterSearchInput 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both",
         swingInTopBckNavProducts:
           "swingInTopBckNavProducts 0.8s cubic-bezier(0.175, 0.885, 0.320, 1.275) both",
+        blink2: "blink2 0.9s both",
       },
     },
   },

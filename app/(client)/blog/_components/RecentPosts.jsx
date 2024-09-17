@@ -3,11 +3,11 @@ import Link from "next/link";
 import React from "react";
 import { FaCalendarAlt } from "react-icons/fa";
 
-export default function RecentPosts({ exclude }) {
+export default function RecentPosts({ exclude = [] }) {
   const blogs = [
     {
       id: 1,
-      image: "/hero-img.jpg",
+      image: "/logo.png",
       author: "Andrei Mocanu",
       date: "6 Iulie, 2024",
       readTime: "15 minute",
@@ -17,7 +17,7 @@ export default function RecentPosts({ exclude }) {
     },
     {
       id: 2,
-      image: "/hero-img.jpg",
+      image: "/logo.png",
       author: "Andrei Mocanu",
       date: "25 Iulie, 2024",
       readTime: "10 minute",
@@ -27,7 +27,7 @@ export default function RecentPosts({ exclude }) {
     },
     {
       id: 3,
-      image: "/hero-img.jpg",
+      image: "/logo.png",
       author: "Andrei Mocanu",
       date: "23 August, 2024",
       readTime: "20 minute",
@@ -37,7 +37,7 @@ export default function RecentPosts({ exclude }) {
     },
     {
       id: 4,
-      image: "/hero-img.jpg",
+      image: "/logo.png",
       author: "Andrei Mocanu",
       date: "30 August, 2024",
       readTime: "5 minute",
@@ -47,7 +47,7 @@ export default function RecentPosts({ exclude }) {
     },
     {
       id: 5,
-      image: "/hero-img.jpg",
+      image: "/logo.png",
       author: "Andrei Mocanu",
       date: "2 Septembrie, 2024",
       readTime: "10 minute",
@@ -57,7 +57,7 @@ export default function RecentPosts({ exclude }) {
     },
     {
       id: 6,
-      image: "/hero-img.jpg",
+      image: "/logo.png",
       author: "Andrei Mocanu",
       date: "9 Septembrie, 2024",
       readTime: "15 minute",
@@ -66,7 +66,9 @@ export default function RecentPosts({ exclude }) {
       link: "/blog/semnalizarile-dinamice-vs-semnalizarile-standard",
     },
   ];
-  const filteredPosts = blogs.filter((post) => post.id !== exclude);
+
+  // Filtrează postările excluse
+  const filteredPosts = blogs.filter((post) => !exclude.includes(post.id));
 
   return (
     <div className="w-full lg:w-1/4 lg:block hidden">
@@ -82,9 +84,8 @@ export default function RecentPosts({ exclude }) {
                     alt={post.title}
                     layout="fill"
                     objectFit="cover"
-                    className="w-20 h-20 object-cover rounded-lg transition-transform duration-500 group-hover:scale-105"
+                    className="w-20 h-20 object-cover transition-transform duration-500 group-hover:scale-105 hover:animate-blink2"
                   />
-                  <div className="vertical-rect"></div>
                 </div>
               </div>
               <div className="ml-4">
