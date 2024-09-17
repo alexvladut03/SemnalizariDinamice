@@ -35,7 +35,7 @@ export default function SideBar({ selectedOptions, onFilterChange }) {
   };
 
   return (
-    <aside className="sticky h-full w-60 mr-8">
+    <aside className="sticky h-full w-56 ">
       {Object.keys(categories).map((category, index) => (
         <div key={index} className="rounded-lg mb-4 flex flex-col gap-1">
           <h3 className="text-xl font-bold mb-2">{category}</h3>
