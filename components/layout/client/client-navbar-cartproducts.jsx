@@ -74,7 +74,12 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
                 <p>{countTotalPrice()} RON</p>
               </div>
               <Link href={"/cos"}>
-                <GeneralButton text={"Vezi Detalii Coș"} onClick={toggleCart} />
+                <GeneralButton
+                  text={"Vezi Detalii Coș"}
+                  customPadding="p-2"
+                  customMargin="ml-10"
+                  onClick={toggleCart}
+                />
                 {/* Închiderea coșului la click */}
               </Link>
             </div>
@@ -85,7 +90,12 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
               Nu ai niciun produs în coș
             </p>
             <Link href={"/cos"} className="w-full">
-              <GeneralButton text={"Vezi Detalii Coș"} onClick={toggleCart} />
+              <GeneralButton
+                text={"Vezi Detalii Coș"}
+                customPadding="p-2"
+                customMargin="ml-10"
+                onClick={toggleCart}
+              />
               {/* Închiderea coșului la click */}
             </Link>
           </div>

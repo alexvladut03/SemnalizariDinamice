@@ -79,7 +79,11 @@ const ProductBuy = ({ stock, name, mainImage, id, price }) => {
 
       <CartButton product={product} quantity={activeQuantity} />
       <br />
-      <GeneralButton text="Cumpara acum" />
+      <GeneralButton
+        text="Cumpara acum"
+        customPadding="p-3"
+        customMargin="ml-12"
+      />
     </div>
   );
 };

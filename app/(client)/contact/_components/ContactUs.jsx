@@ -73,7 +73,11 @@ export default function ContactUs() {
           </div>
         </form>
       </div>
-      <GeneralButton text="Trimite mesajul" />
+      <GeneralButton
+        text="Trimite mesajul"
+        customPadding="p-3"
+        customMargin="ml-12"
+      />
     </section>
   );
 }

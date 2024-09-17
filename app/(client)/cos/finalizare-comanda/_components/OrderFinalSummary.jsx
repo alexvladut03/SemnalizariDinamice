@@ -28,7 +28,11 @@ export default function OrderFinalSummary() {
           </div>
           <div className="w-full ">
             <Link href={"/cos/rezumat-comanda"}>
-              <GeneralButton text="Continua" />
+              <GeneralButton
+                text="Continua"
+                customPadding="p-2"
+                customMargin="ml-10"
+              />
             </Link>
           </div>
         </div>

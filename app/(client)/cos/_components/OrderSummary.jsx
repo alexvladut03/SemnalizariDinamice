@@ -22,7 +22,11 @@ export default function OrderSummary({ shipCost, totalPrice }) {
         <div>{`${totalPrice + shipCost} RON`}</div>
       </div>
       <Link href={"/cos/finalizare-comanda"}>
-        <GeneralButton text="Finalizare comandă" />
+        <GeneralButton
+          text="Finalizare comandă"
+          customPadding="p-3"
+          customMargin="ml-[50px]"
+        />
       </Link>
       <Link href={"/cart/checkout"}></Link>
       <div className="my-4 font-semibold">Ai un voucher sau card cadou?</div>

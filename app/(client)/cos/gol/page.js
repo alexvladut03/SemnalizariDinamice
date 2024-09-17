@@ -15,8 +15,12 @@ export default function Page() {
           Încă avem sute de produse care te așteaptă!
         </p>
         <p className="mt-2 text-gray-600">Vezi care ți se potrivește!</p>
-        <Link href={"/"} className="mt-2">
-          <GeneralButton text="Continuă Cumpărăturile" />
+        <Link href="/" className="mt-2 inline-block">
+          <GeneralButton
+            text="Continuă Cumpărăturile"
+            customPadding="p-3"
+            customMargin="ml-12"
+          />
         </Link>
       </div>
     </div>
