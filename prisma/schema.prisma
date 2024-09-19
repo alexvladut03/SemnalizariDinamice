@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
+// This is your Prisma schema file
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 datasource db {
   provider = "mongodb"
@@ -18,4 +15,67 @@ model User {
   username String  @unique
   name     String?
   password String
+}
+
+model Attribute {
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  name     String   @unique
+  slug     String   @unique
+  values   String[] // An array of possible values for the attribute
+
+  // Linking with ProductAttribute
+  productAttributes ProductAttribute[]
+}
+
+model Product {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  sku           String     @unique
+  name          String
+  slug          String
+  price         Float
+  stock         Int
+  mainImage     String
+  gallery       String[]   // Array of image URLs
+  description   String?
+
+  // Main Category
+  categoryId    String?    @db.ObjectId
+  category      Category?  @relation("ProductCategory", fields: [categoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  // Subcategory
+  subcategoryId String?    @db.ObjectId
+  subcategory   Category?  @relation("ProductSubcategory", fields: [subcategoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  // Relation to ProductAttribute
+  attributes    ProductAttribute[] // Add this line
+
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+
+model Category {
+  id          String    @id @map("_id") @default(auto()) @db.ObjectId
+  name        String    @unique
+  description String?
+  slug        String    @unique
+  parentId    String?   @map("parent_id") @db.ObjectId
+  parent      Category? @relation("CategoryParent", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  children    Category[] @relation("CategoryParent")
+
+  // Relation to Product (main and subcategory)
+  products    Product[]  @relation("ProductCategory")
+  subProducts Product[]  @relation("ProductSubcategory")
+}
+
+
+model ProductAttribute {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  attributeId String     @db.ObjectId
+  productId   String     @db.ObjectId
+  values      String[]   // Array of values for the attribute (e.g., Red, Yellow)
+
+  // Relations
+  attribute   Attribute  @relation(fields: [attributeId], references: [id], onDelete: Cascade)
+  product     Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
 }

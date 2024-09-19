@@ -16,12 +16,15 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "@/components/ui/use-toast";
 import EditUser from "./EditUser";
+import { useGetAllUsers } from "@/utils/hooks/user/useGetAllUsers";
 
-const UsersMapping = ({ users }) => {
+const UsersMapping = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { data, error, isPending } = useGetAllUsers();
+
   const { execute, result, optimisticState } = useOptimisticAction(deleteUser, {
-    currentState: users,
+    currentState: data,
     updateFn: (state, { id }) => {
       return state.filter((user) => user.id !== id);
     },
@@ -35,9 +38,9 @@ const UsersMapping = ({ users }) => {
     },
   });
 
-  return optimisticState.map((user, index) => (
+  return optimisticState.map((user) => (
     <div
-      key={index}
+      key={user.id}
       className="p-2 border-b border-gray-200 grid grid-cols-7 items-center"
     >
       <div>{user.name}</div>

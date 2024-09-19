@@ -5,18 +5,18 @@ import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
 import { revalidatePath } from "next/cache";
 
-export const updateCategory = authActionClient
+export const createCategory = authActionClient
   .use(async ({ next, ctx }) => {
     if (!ctx.userId) {
       throw new ActionError("Only admins can perform this action.");
     }
     return next();
   })
-  .metadata({ actionName: "updateCategory" })
+  .metadata({ actionName: "createCategory" })
   .schema(categorySchema)
   .action(
     async ({
-      parsedInput: { name, description, slug, parentId, id },
+      parsedInput: { name, description, slug, parentId },
       ctx: { userId },
     }) => {
       const formatedSlug = slug
@@ -24,26 +24,25 @@ export const updateCategory = authActionClient
         : name.toLowerCase().replace(/ /g, "-");
 
       // Check for existing category by name
-      const existingCategoryByName = await prisma.category.findFirst({
-        where: { name, NOT: { id } },
+      const existingCategoryByName = await prisma.category.findUnique({
+        where: { name },
       });
 
       if (existingCategoryByName) {
-        throw new Error("O categorie cu acest nume exista deja");
+        throw new Error("A category with this name already exists");
       }
 
       // Check for existing category by slug
-      const existingCategoryBySlug = await prisma.category.findFirst({
-        where: { slug: formatedSlug, NOT: { id } },
+      const existingCategoryBySlug = await prisma.category.findUnique({
+        where: { slug: formatedSlug },
       });
 
       if (existingCategoryBySlug) {
-        throw new Error("O categorie cu acest slug exista deja");
+        throw new Error("A category with this slug already exists");
       }
 
-      // Update the category
-      const updatedCategory = await prisma.category.update({
-        where: { id },
+      // Create the new category
+      const newCategory = await prisma.category.create({
         data: {
           name,
           description,
@@ -54,6 +53,6 @@ export const updateCategory = authActionClient
 
       // Refresh the path or page
       revalidatePath("/admin/categorii");
-      return { success: true, category: updatedCategory };
+      return { success: true, category: newCategory };
     }
   );

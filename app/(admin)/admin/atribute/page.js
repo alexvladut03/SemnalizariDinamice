@@ -1,12 +1,10 @@
+import { getAllAttributes } from "@/utils/functions/attribute/get-all-attributes";
 import React from "react";
-import { getAllCategories } from "@/utils/functions/category/get-all-categories";
-import CategoriesMapping from "./_components/CategoriesMapping";
-import AddCategory from "./_components/AddCategory";
+import AttributeMapping from "./_components/AttributeMapping";
+import AddAttribute from "./_components/AddAttribute";
 
-const Categorii = async () => {
-  const categories = await getAllCategories();
-
-  const filteredCategories = categories.map(({ children, ...rest }) => rest); // nu am nevoie de children in lista de categorii
+const Attributes = async () => {
+  const attributes = await getAllAttributes();
 
   return (
     <div className="p-4 bg-gray-100">
@@ -14,21 +12,21 @@ const Categorii = async () => {
         O lista cu categoriile adaugate
       </div>
       <div className="flex justify-end mb-4">
-        <AddCategory categories={filteredCategories} />
+        <AddAttribute />
       </div>
       <section className="bg-white rounded-lg shadow-sm shadow-gray-400">
         <div className="grid grid-cols-4 p-2 mb-2 rounded-t-lg font-bold bg-gray-400">
           <div>Nume</div>
-          <div>Descriere</div>
           <div>Slug</div>
+          <div>Valori</div>
           <div>Actiuni</div>
         </div>
         <div>
-          <CategoriesMapping categories={categories} />
+          <AttributeMapping attributes={attributes} />
         </div>
       </section>
     </div>
   );
 };
 
-export default Categorii;
+export default Attributes;
