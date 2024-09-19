@@ -6,6 +6,7 @@ import OrderSummaryDetails from "./_components/OrderSummaryDetails";
 import OrderSummaryBillingData from "./_components/OrderSummaryBillingData";
 import OrderSummaryPaymentMethod from "./_components/OrderSummaryPaymentMethod";
 import OrderSummaryBoughtProducts from "./_components/OrderSummaryBoughtProducts";
+import GeneralButton from "@/components/custom ui/general-button";
 
 export default function Summary() {
   return (
@@ -33,12 +34,13 @@ export default function Summary() {
               </Link>
               .
             </p>
-            <button className="relative flex items-center justify-center  rounded-lg bg-amber-500 p-2 font-semibold transition hover:scale-105 mt-3  text-black">
-              <div className="absolute left-0 h-full flex items-center justify-center w-12 bg-black rounded-l-lg rounded-br-2xl">
-                <MdKeyboardDoubleArrowRight className="text-2xl text-white" />
-              </div>
-              <span className="ml-12">Trimite comanda</span>
-            </button>
+            <div className="w-56">
+              <GeneralButton
+                text="Trimite comanda"
+                customPadding="p-3"
+                customMargin="ml-12"
+              />
+            </div>
           </div>
         </div>
       </div>

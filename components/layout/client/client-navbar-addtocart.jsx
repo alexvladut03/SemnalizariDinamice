@@ -23,17 +23,17 @@ const AddToCart = () => {
 
   return (
     <div
-      className="flex relative p-2 text-amber-500"
+      className="flex relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="relative pr-2">
+      <div className="relative px-2 cursor-pointer">
         <FaCartPlus className="text-2xl" />
         <p className="absolute -top-[7px] right-[1px] bg-red-500 text-white rounded-full w-[15px] h-[15px] text-center text-xs">
           {countCartItems()}
         </p>
       </div>
-      <p className="font-semibold">Coșul meu</p>
+      <p className="font-semibold cursor-pointer">Coșul meu</p>
       {isCartOpen && (
         <ClientNavbarCartProducts
           toggleCart={() => setIsCartOpen(false)}

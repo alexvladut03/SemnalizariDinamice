@@ -9,9 +9,9 @@ export default function MainContent({ products }) {
   const [selectedOptions, setSelectedOptions] = useState({
     "Tip Mașină": [],
     Preț: [],
+    Produse: [],
     Disponibilitate: [],
     "Rating minim": [],
-    Produse: [],
   });
   const [sortOrder, setSortOrder] = useState("");
 

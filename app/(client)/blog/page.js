@@ -1,10 +1,9 @@
 import React from "react";
-import ContactUs from "./_components/ContactUs";
-
+import BlogCards from "./_components/BlogCards";
 export default function page() {
   return (
     <div>
-      <ContactUs />
+      <BlogCards />
     </div>
   );
 }

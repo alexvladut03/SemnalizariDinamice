@@ -8,6 +8,7 @@ import { MdClose } from "react-icons/md";
 import { RemoveScroll } from "react-remove-scroll";
 import { useCart } from "@/utils/context/cart-provider";
 import ClientNavbarCartProducts from "./client-navbar-cartproducts";
+import { FaSearch } from "react-icons/fa";
 
 export default function ClientNavBarMobile() {
   const { countCartItems } = useCart();
@@ -137,6 +138,15 @@ export default function ClientNavBarMobile() {
           </p>
         </div>
       </div>
+      {/* Meniul de search. */}
+      <div className="relative w-full text-white mt-2">
+        <input
+          type="text"
+          placeholder="Cauta produsul dorit..."
+          className="w-full pl-2 pr-10 py-1 border-2 border-amber-500 rounded-full bg-transparent placeholder:text-white focus:outline-none"
+        />
+        <FaSearch className="absolute right-3 top-2 text-xl cursor-pointer" />
+      </div>
 
       {(isCartOpen || isMenuOpen) && (
         <div
@@ -188,11 +198,11 @@ export default function ClientNavBarMobile() {
                 Produse
               </Link>
               <Link
-                href="/despre-noi"
+                href="/blog"
                 className="hover:text-amber-500 cursor-pointer"
                 onClick={closeMenu} // Închide meniul când se apasă pe link
               >
-                Despre Noi
+                Blog
               </Link>
               <Link
                 href="/contact"

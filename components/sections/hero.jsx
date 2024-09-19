@@ -7,7 +7,7 @@ const Hero = () => {
     <section className="relative overflow-hidden bg-black">
       <div className="absolute inset-0 bg-black z-10 animate-waveSlideBlack"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-transparent from-0% via-amber-500 via-10% to-black to-20% z-10 animate-waveSlideYellow"></div>
-      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row px-4 py-10 items-center gap-8 justify-between">
+      <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row lg:px-0 px-4 py-10 items-center gap-8 justify-between">
         <div className="text-white text-center lg:text-left">
           <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight mb-10 !leading-[1.5]">
             Accesorii auto{" "}

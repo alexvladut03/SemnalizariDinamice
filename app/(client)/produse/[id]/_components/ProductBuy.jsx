@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { MdOutlineLocalShipping, MdOutlineVerifiedUser } from "react-icons/md";
 import CartButton from "../../../../../components/custom ui/add-to-cart-button";
-import FavoriteButton from "../../../../../components/custom ui/general-button";
 import GeneralButton from "../../../../../components/custom ui/general-button";
 
 const ProductBuy = ({ stock, name, mainImage, id, price }) => {
@@ -80,7 +79,11 @@ const ProductBuy = ({ stock, name, mainImage, id, price }) => {
 
       <CartButton product={product} quantity={activeQuantity} />
       <br />
-      <GeneralButton text="Cumpara acum" />
+      <GeneralButton
+        text="Cumpara acum"
+        customPadding="p-3"
+        customMargin="ml-12"
+      />
     </div>
   );
 };

@@ -11,17 +11,31 @@ export default function FilterMobil({ selectedOptions, onApply }) {
   const [selectedCategory, setSelectedCategory] = useState("Tip Mașină");
 
   const categories = {
-    "Tip Mașină": ["Audi", "BMW", "Mercedes"],
-    Preț: ["Sub 50", "50-100", "100-200", "200-500", "500-1000"],
-    Disponibilitate: ["In Stoc", "Noutăți", "Resigilate"],
-    "Rating minim": [
-      "★★★★★ (731)",
-      "★★★★☆ (1179)",
-      "★★★☆☆ (1360)",
-      "★★☆☆☆ (1457)",
-      "★☆☆☆☆ (1579)",
+    "Tip Mașină": ["Audi", "BMW", "Mercedes", "Volkswagen"],
+    Preț: [
+      "Sub 50",
+      "50-100",
+      "100-200",
+      "200-500",
+      "500-1000",
+      "Interval (Urmeaza)",
     ],
-    Produse: ["Capace", "Semnalizări Dinamice", "Proiectoare Logo", "Embleme"],
+    Produse: [
+      "Capace",
+      "Semnalizări Dinamice",
+      "Proiectoare Logo",
+      "Embleme",
+      "Schimbătoare",
+      "Pedale",
+    ],
+    Disponibilitate: ["In Stoc", "Noutăți"],
+    "Rating minim": [
+      { label: "★★★★★ (56)", value: "5-stele" },
+      { label: "★★★★☆ (34)", value: "4-stele" },
+      { label: "★★★☆☆ (23)", value: "3-stele" },
+      { label: "★★☆☆☆ (10)", value: "2-stele" },
+      { label: "★☆☆☆☆ (2)", value: "1-stea" },
+    ],
   };
 
   const [localSelectedOptions, setLocalSelectedOptions] =

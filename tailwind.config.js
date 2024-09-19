@@ -47,6 +47,57 @@ module.exports = withUt({
             opacity: "0",
           },
         },
+        puffOutCenterSearchInput: {
+          "0%": {
+            transform: "scale(1)",
+            filter: "blur(0px)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "scale(1.1)",
+            filter: "blur(4px)",
+            opacity: "0",
+          },
+        },
+        puffInCenterSearchInput: {
+          "0%": {
+            transform: "scale(1.1)",
+            filter: "blur(4px)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "scale(1)",
+            filter: "blur(0px)",
+            opacity: "1",
+          },
+        },
+        swingInTopBckNavProducts: {
+          "0%": {
+            transform: "rotateX(100deg)",
+            transformOrigin: "top",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "rotateX(0deg)",
+            transformOrigin: "top",
+            opacity: "1",
+          },
+        },
+
+        blink2: {
+          "0%": {
+            opacity: "1",
+            backgroundColor: "black",
+          },
+          "50%": {
+            opacity: "0.9",
+            backgroundColor: "black",
+          },
+          "100%": {
+            opacity: "1",
+            backgroundColor: "black",
+          },
+        },
       },
       animation: {
         waveSlideYellow: "waveSlideYellow 1.4s ease-in-out forwards",
@@ -55,6 +106,13 @@ module.exports = withUt({
           "slideInBottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
         slideOutBottom:
           "slideOutBottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+        puffInCenterSearchInput:
+          "puffInCenterSearchInput 0.5s cubic-bezier(0.470, 0.000, 0.745, 0.715) both",
+        puffOutCenterSearchInput:
+          "puffOutCenterSearchInput 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000) both",
+        swingInTopBckNavProducts:
+          "swingInTopBckNavProducts 0.8s cubic-bezier(0.175, 0.885, 0.320, 1.275) both",
+        blink2: "blink2 0.9s both",
       },
     },
   },
