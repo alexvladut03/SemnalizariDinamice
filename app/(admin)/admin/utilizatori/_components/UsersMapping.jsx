@@ -21,7 +21,7 @@ import { useGetAllUsers } from "@/utils/hooks/user/useGetAllUsers";
 const UsersMapping = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data, error, isPending } = useGetAllUsers();
+  const { data } = useGetAllUsers();
 
   const { execute, result, optimisticState } = useOptimisticAction(deleteUser, {
     currentState: data,
