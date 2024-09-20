@@ -19,7 +19,7 @@ const AdminSidebar = () => {
       <div className="w-72 bg-gray-800 text-white flex flex-col p-4 ">
         <p className="p-4 text-2xl font-bold">Admin Dashboard</p>
         <Link
-          href={"/admin"}
+          href="/admin"
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <FaHome />
@@ -46,7 +46,7 @@ const AdminSidebar = () => {
           </div>
         </div>
         <Link
-          href={"/admin/media"}
+          href="/admin/media"
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <MdPermMedia />
@@ -60,14 +60,14 @@ const AdminSidebar = () => {
           <div>Produse</div>
         </Link>
         <Link
-          href={"/admin/categorii"}
+          href="/admin/categorii"
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <MdCategory />
           <div>Categorii</div>
         </Link>
         <Link
-          href={"/admin/atribute"}
+          href="/admin/atribute"
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <MdCategory />
@@ -75,7 +75,7 @@ const AdminSidebar = () => {
         </Link>
         <Link
           prefetch={true}
-          href={"/admin/utilizatori"}
+          href="/admin/utilizatori"
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <FaUser />

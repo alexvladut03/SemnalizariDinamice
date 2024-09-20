@@ -11,20 +11,17 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../../../../components/ui/breadcrumb";
+import { getProductBySlug } from "@/utils/functions/product/get-product-by-slug";
 
 const ProductPage = async ({ params }) => {
-  const { id } = params;
-  const productPromise = getProduct(id);
+  const { slug } = params;
 
   const ProductContent = async () => {
-    const product = await productPromise;
+    const product = await getProductBySlug(slug);
     if (!product) {
       return <div>Product not found</div>;
     }
-    const productsWithCategory = await getProductsCategoryExceptProduct(
-      id,
-      product.category
-    );
+
     const productGallery = [
       product.mainImage.url,
       ...product.gallery.map((image) => image.url),
@@ -57,7 +54,7 @@ const ProductPage = async ({ params }) => {
           <ProductPrice
             price={product.price}
             id={product.id}
-            filteredCategories={productsWithCategory}
+            filteredCategories={product}
           />
           <ProductBuy
             stock={product.stock}
