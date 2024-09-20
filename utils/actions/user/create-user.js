@@ -3,7 +3,7 @@
 import { hash } from "bcryptjs";
 
 import { registerSchema } from "@/utils/zod";
-import { connectDB } from "@/utils/mongoose";
+
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
 import { revalidatePath } from "next/cache";
@@ -24,8 +24,6 @@ export const createUser = authActionClient
   .schema(registerSchema)
   .action(
     async ({ parsedInput: { name, username, password }, ctx: { userId } }) => {
-      await connectDB();
-
       // Check if username exists
       const existingUser = await prisma.user.findUnique({
         where: { username },

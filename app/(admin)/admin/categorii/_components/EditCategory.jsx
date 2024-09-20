@@ -16,37 +16,45 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { updateCategory } from "@/utils/actions/category/update-category";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { userSchema } from "@/utils/zod";
+import { categorySchema } from "@/utils/zod";
 import { useAction } from "next-safe-action/hooks";
 import { toast } from "@/components/ui/use-toast";
 import { DisplayServerActionResponse } from "@/components/custom ui/display-server-actions-response";
-import { updateUser } from "@/utils/actions/user/update-user";
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 
-const EditUser = ({ user }) => {
+const EditCategory = ({ category, categories }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { reset, ...form } = useForm({
-    resolver: zodResolver(userSchema),
+    resolver: zodResolver(categorySchema),
     defaultValues: {
-      name: user.name,
-      username: user.username,
-      password: "",
+      name: category.name,
+      description: category.description,
+      slug: "",
+      parentId: category.parentId,
     },
   });
 
-  const { execute, result, isExecuting } = useAction(updateUser, {
+  const { execute, result, isExecuting } = useAction(updateCategory, {
     onSuccess: ({ data }) => {
       setIsOpen(false);
       reset();
       toast({
         variant: "default",
         title: "Succes",
-        description: `Utilizatorul ${data.name} a fost editat cu succes!`,
+        description: `Categoria ${category.name} a fost editata cu succes!`,
         duration: 3000,
       });
     },
@@ -54,7 +62,7 @@ const EditUser = ({ user }) => {
       toast({
         variant: "destructive",
         title: "Eroare",
-        description: "A intervenit o eroare la editarea utilizatorului.",
+        description: "A intervenit o eroare la editarea categoriei.",
         duration: 3000,
       });
     },
@@ -68,7 +76,7 @@ const EditUser = ({ user }) => {
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Editeaza un utilizator</DialogTitle>
+            <DialogTitle>Editeaza o categorie</DialogTitle>
             <DialogDescription>
               Completeaza campurile de jos. Apasa pe Salvare pentru a salva.
             </DialogDescription>
@@ -77,9 +85,10 @@ const EditUser = ({ user }) => {
             onSubmit={(e) => {
               e.preventDefault();
               const name = form.getValues("name");
-              const username = form.getValues("username");
-              const password = form.getValues("password");
-              execute({ name, username, password, id: user.id });
+              const description = form.getValues("description");
+              const slug = form.getValues("slug");
+              const parentId = form.getValues("parentId");
+              execute({ name, description, slug, parentId, id: category.id });
             }}
             className="space-y-8"
           >
@@ -90,7 +99,7 @@ const EditUser = ({ user }) => {
                 <FormItem>
                   <FormLabel>Nume</FormLabel>
                   <FormControl>
-                    <Input placeholder="Popescu Ionel" {...field} />
+                    <Input placeholder="Capace" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -101,35 +110,70 @@ const EditUser = ({ user }) => {
             )}
             <FormField
               control={form.control}
-              name="username"
+              name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Descriere</FormLabel>
                   <FormControl>
-                    <Input placeholder="popescuionel" {...field} />
+                    <Input placeholder="Capacele sunt au mere" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {result.validationErrors?.username && (
-              <p>{result.validationErrors?.username._errors[0]}</p>
+            {result.validationErrors?.description && (
+              <p>{result.validationErrors?.description._errors[0]}</p>
             )}
             <FormField
               control={form.control}
-              name="password"
+              name="slug"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Parola</FormLabel>
+                  <FormLabel>Slug</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="tarzan" {...field} />
+                    <Input placeholder="capace-termice" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {result.validationErrors?.password && (
-              <p>{result.validationErrors?.password._errors[0]}</p>
+            {result.validationErrors?.slug && (
+              <p>{result.validationErrors?.slug._errors[0]}</p>
+            )}
+            <FormField
+              control={form.control}
+              name="parentId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Categorie Principala</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    name={field.name}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          ref={field.ref}
+                          placeholder="Fara categorie principala"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {categories
+                        .filter((cat) => cat.id !== category.id)
+                        .map((category) => (
+                          <SelectItem key={category.id} value={category.id}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+            {result.validationErrors?.parentId && (
+              <p>{result.validationErrors?.parentId._errors[0]}</p>
             )}
             {!result.validationErrors && (
               <DisplayServerActionResponse result={result} />
@@ -139,7 +183,7 @@ const EditUser = ({ user }) => {
                 type="submit"
                 className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2"
               >
-                {isExecuting ? "Se salveaza..." : "Salveaza"}
+                {isExecuting ? "Se editeaza..." : "Editeaza"}
               </Button>
             </DialogFooter>
           </form>
@@ -149,4 +193,4 @@ const EditUser = ({ user }) => {
   );
 };
 
-export default EditUser;
+export default EditCategory;

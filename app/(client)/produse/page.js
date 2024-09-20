@@ -1,10 +1,10 @@
 import React from "react";
 
-import { getProductsWithoutDBData } from "@/utils/actions/product/get-products";
 import MainContent from "./_components/MainContent";
+import { getAllProducts } from "@/utils/functions/product/get-all-products";
 
 const Page = async () => {
-  const products = await getProductsWithoutDBData();
+  const products = await getAllProducts();
 
   return <MainContent products={products} />;
 };

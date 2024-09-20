@@ -122,11 +122,9 @@ const ProductForm = ({ formData, action, categories }) => {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          {categories.map((category) => (
-                            <SelectItem key={category.id} value={category._id}>
-                              {category.name}
-                            </SelectItem>
-                          ))}
+                          {categories.map((category, index) =>
+                            console.log("Category", category)
+                          )}
                         </SelectContent>
                       </Select>
                     </FormItem>
@@ -265,52 +263,6 @@ const ProductForm = ({ formData, action, categories }) => {
                 type="hidden"
                 {...form.register("description")}
                 value={JSON.stringify(DOMPurify.sanitize(description))}
-              />
-
-              <FormField
-                control={form.control}
-                name="fitment"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Fitment</FormLabel>
-                    <FormControl>
-                      <RichTextEditor
-                        {...field}
-                        onChange={(value) => setFitment(value)}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <input
-                type="hidden"
-                {...form.register("fitment")}
-                value={JSON.stringify(DOMPurify.sanitize(fitment))}
-              />
-
-              <FormField
-                control={form.control}
-                name="characteristics"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Characteristics</FormLabel>
-                    <FormControl>
-                      <RichTextEditor
-                        {...field}
-                        onChange={(value) => setCharacteristics(value)}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <input
-                type="hidden"
-                {...form.register("characteristics")}
-                value={JSON.stringify(DOMPurify.sanitize(characteristics))}
               />
 
               <Button

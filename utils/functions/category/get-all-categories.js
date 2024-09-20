@@ -1,9 +1,18 @@
-import { Category } from "@/utils/models/category";
-import { connectDB } from "@/utils/mongoose";
+import prisma from "@/utils/prisma";
 
 export const getAllCategories = async () => {
-  await connectDB();
-
-  const categories = await Category.find({});
+  const categories = await prisma.category.findMany({
+    include: {
+      children: {
+        include: {
+          children: {
+            include: {
+              children: true, // You can keep going deeper if needed
+            },
+          },
+        },
+      },
+    },
+  });
   return categories;
 };

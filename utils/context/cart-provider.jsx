@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getProductsWithIdsCustom } from "../actions/product/get-products";
+import { getProductsByIds } from "../actions/product/get-all-products";
 
 const fetchCartItems = async (ids) => {
-  const product = await getProductsWithIdsCustom(ids);
+  const product = await getProductsByIds(ids);
   return product;
 };
 
@@ -36,7 +36,7 @@ const CartProvider = ({ children }) => {
           id: product.id,
           name: product.name,
           price: product.price,
-          image: product.mainImage.url,
+          image: product.mainImage,
           count: qty,
         });
       }

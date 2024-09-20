@@ -51,6 +51,14 @@ const AddUser = () => {
         duration: 3000,
       });
     },
+    onError: () => {
+      toast({
+        variant: "destructive",
+        title: "Eroare",
+        description: "A intervenit o eroare la crearea utilizatorului.",
+        duration: 3000,
+      });
+    },
   });
 
   return (

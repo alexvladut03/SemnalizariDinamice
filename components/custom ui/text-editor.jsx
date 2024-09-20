@@ -31,12 +31,12 @@ import {
 } from "@/components/ui/dialog";
 import MediaPopUp from "./media-pop-up";
 
-const RichTextEditor = forwardRef(({ value, onChange }, ref) => {
+const RichTextEditor = forwardRef(({ uploads, value, onChange }, ref) => {
   const editor = useEditor({
     editorProps: {
       attributes: {
         class:
-          "min-h-[150px] w-[700px] rounded-md rounded-br-none rounded-bl-none border border-input bg-transparent px-3 py-2 border-b-0 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto",
+          "min-h-[150px] rounded-md rounded-br-none rounded-bl-none border border-input bg-transparent px-3 py-2 border-b-0 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 overflow-auto",
       },
     },
     immediatelyRender: false,
@@ -89,12 +89,14 @@ const RichTextEditor = forwardRef(({ value, onChange }, ref) => {
   return (
     <>
       <EditorContent editor={editor} ref={ref} />
-      {editor ? <RichTextEditorToolbar editor={editor} /> : null}
+      {editor ? (
+        <RichTextEditorToolbar uploads={uploads} editor={editor} />
+      ) : null}
     </>
   );
 });
 
-const RichTextEditorToolbar = ({ editor }) => {
+const RichTextEditorToolbar = ({ uploads, editor }) => {
   return (
     <div className="border border-input bg-transparent rounded-br-md rounded-bl-md p-1 flex flex-row items-center gap-1">
       <Toggle
@@ -195,7 +197,7 @@ const RichTextEditorToolbar = ({ editor }) => {
           <DialogHeader>
             <DialogTitle>Images</DialogTitle>
             <DialogDescription>
-              <MediaPopUp editor={editor} />
+              <MediaPopUp uploads={uploads} editor={editor} />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

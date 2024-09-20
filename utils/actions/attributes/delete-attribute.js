@@ -1,4 +1,5 @@
 "use server";
+
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
 import { revalidatePath } from "next/cache";
@@ -8,7 +9,7 @@ const schema = z.object({
   id: z.string(),
 });
 
-export const deleteProduct = authActionClient
+export const deleteAttribute = authActionClient
   .use(async ({ next, ctx }) => {
     // `userId` comes from the context set in the previous middleware function.
     if (!ctx.userId) {
@@ -18,19 +19,20 @@ export const deleteProduct = authActionClient
     // to add data to the context here.
     return next();
   })
-  .metadata({ actionName: "deleteProduct" })
+  .metadata({ actionName: "deleteAttribute" })
   .schema(schema)
   .action(async ({ parsedInput: { id } }) => {
-    const product = await prisma.product.findUnique({ where: { id } });
+    const attribute = await prisma.attribute.findUnique({ where: { id } });
 
-    if (!product) {
-      throw new Error("Produsul nu a fost gasit");
+    if (!attribute) {
+      throw new Error("Atributul nu a fost gasit");
     }
 
-    await prisma.product.delete({
+    await prisma.attribute.delete({
       where: { id },
     });
 
-    revalidatePath("/admin/produse");
-    return { success: true, product: product.name };
+    revalidatePath("/admin/attributes");
+
+    return { success: true, attribute: attribute.name };
   });

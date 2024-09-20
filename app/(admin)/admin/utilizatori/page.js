@@ -1,10 +1,7 @@
-import { getAllUsers } from "@/utils/functions/user/get-all-users";
 import UsersMapping from "./_components/UsersMapping";
 import AddUser from "./_components/AddUser";
 
 const page = async () => {
-  const users = await getAllUsers();
-
   return (
     <main className="p-4 bg-gray-100 ">
       <div className="text-center text-2xl my-8 font-semibold">
@@ -20,7 +17,7 @@ const page = async () => {
           <div>Username</div>
           <div className="col-start-7">Actiuni</div>
         </div>
-        <UsersMapping users={users} />
+        <UsersMapping />
       </section>
     </main>
   );

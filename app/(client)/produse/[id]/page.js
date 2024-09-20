@@ -4,10 +4,6 @@ import ProductPrice from "./_components/ProductPrice";
 import ProductBuy from "./_components/ProductBuy";
 import ProductDetails from "./_components/ProductDetails";
 import {
-  getProduct,
-  getProductsCategoryExceptProduct,
-} from "../../../../utils/actions/product/get-products";
-import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,

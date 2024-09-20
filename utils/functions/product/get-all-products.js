@@ -1,17 +1,12 @@
-import { Product } from "../../models/product";
-import { connectDB } from "../../mongoose";
+import prisma from "@/utils/prisma";
 
-export const getProducts = async () => {
-  await connectDB();
-
-  let products = await Product.find().populate("category");
-
-  products = products.map((product) => {
-    if (!product.category) {
-      product.category = { id: "fara-categorie", name: "Fără categorie" };
-    }
-    return product;
+export const getAllProducts = async () => {
+  const products = await prisma.product.findMany({
+    include: {
+      category: true,
+      subcategory: true,
+      attributes: true,
+    },
   });
-
   return products;
 };

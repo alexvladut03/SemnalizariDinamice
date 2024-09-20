@@ -4,14 +4,14 @@ import { authActionClient } from "@/utils/safe-action";
 import { ProductSchema } from "@/utils/zod";
 import { revalidatePath } from "next/cache";
 
-export const updateProduct = authActionClient
+export const createProduct = authActionClient
   .use(async ({ next, ctx }) => {
     if (!ctx.userId) {
       throw new ActionError("Only admins can perform this action.");
     }
     return next();
   })
-  .metadata({ actionName: "updateProduct" })
+  .metadata({ actionName: "createProduct" })
   .schema(ProductSchema)
   .action(
     async ({
@@ -27,7 +27,6 @@ export const updateProduct = authActionClient
         categoryId,
         subcategoryId,
         attributes,
-        id,
       },
       ctx: { userId },
     }) => {
@@ -37,7 +36,7 @@ export const updateProduct = authActionClient
 
       // Check for existing product by name
       const existingProductByName = await prisma.product.findFirst({
-        where: { name, NOT: { id } },
+        where: { name },
       });
 
       if (existingProductByName) {
@@ -46,7 +45,7 @@ export const updateProduct = authActionClient
 
       // Check for existing product by slug
       const existingProductBySlug = await prisma.product.findFirst({
-        where: { slug: formatedSlug, NOT: { id } },
+        where: { slug: formatedSlug },
       });
 
       if (existingProductBySlug) {
@@ -55,7 +54,7 @@ export const updateProduct = authActionClient
 
       // Check for existing product by SKU
       const existingProductBySKU = await prisma.product.findUnique({
-        where: { sku, NOT: { id } },
+        where: { sku },
       });
 
       if (existingProductBySKU) {
@@ -64,25 +63,15 @@ export const updateProduct = authActionClient
 
       // Check for duplicate attributes
       const duplicateAttributes = attributes.filter(
-        (v, i, a) => a.findIndex((t) => t.attributeId === v.attributeId) !== i
+        (attribute, index) => attributes.indexOf(attribute) !== index
       );
 
       if (duplicateAttributes.length) {
         throw new Error(`Atribut duplicat : ${duplicateAttributes.join(", ")}`);
       }
 
-      // Check for existing product
-      const product = await prisma.product.findUnique({
-        where: { id: id },
-      });
-
-      if (!product) {
-        throw new Error("Produsul nu exista");
-      }
-
-      // Update the product
-      const updatedProduct = await prisma.product.update({
-        where: { id },
+      // Create the new product
+      const newProduct = await prisma.product.create({
         data: {
           name,
           sku,
@@ -95,7 +84,6 @@ export const updateProduct = authActionClient
           categoryId,
           subcategoryId: subcategoryId || null,
           attributes: {
-            deleteMany: {}, // Remove all existing attributes
             create: attributes.map((attr) => ({
               attributeId: attr.attributeId,
               values: {
@@ -108,6 +96,6 @@ export const updateProduct = authActionClient
 
       // Refresh the path or page
       revalidatePath("/admin/produse");
-      return { success: true, product: updatedProduct.name };
+      return { success: true, product: newProduct.name };
     }
   );

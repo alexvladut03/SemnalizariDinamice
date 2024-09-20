@@ -1,8 +1,8 @@
-import { getProductsWithoutDBData } from "../../utils/actions/product/get-products";
+import { getAllProducts } from "@/utils/functions/product/get-all-products";
 import ProductsCard from "./products-card";
 
 const Products = async () => {
-  const products = await getProductsWithoutDBData();
+  const products = await getAllProducts();
 
   return (
     <section id="Produse" className="my-28 max-w-7xl mx-auto px-4 xl:px-0">
