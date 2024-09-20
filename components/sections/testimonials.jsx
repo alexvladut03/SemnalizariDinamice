@@ -1,222 +1,129 @@
-import React from "react";
+"use client";
+import { motion, useMotionValue, animate } from "framer-motion";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import useMeasure from "react-use-measure";
 
-const Testimonials = () => {
+// Masonry Card Component
+const Card = ({ content, height, color }) => {
   return (
-    <section id="Recenzii" className="py-28">
-      <div className="max-w-7xl mx-auto px-4 xl:px-0">
+    <div className={`${color} ${height} w-full rounded-lg shadow-lg`}>
+      <p className="text-center text-white">{content}</p>
+    </div>
+  );
+};
+
+// Testimonials Component
+export default function Testimonials() {
+  const items = [
+    { id: 1, content: "Medium", height: "h-72", color: "bg-red-400" },
+    { id: 2, content: "Small", height: "h-48", color: "bg-blue-400" },
+    { id: 3, content: "Large", height: "h-96", color: "bg-yellow-400" },
+    { id: 4, content: "Small", height: "h-36", color: "bg-purple-400" },
+    { id: 5, content: "Medium", height: "h-60", color: "bg-green-400" },
+    { id: 6, content: "Small", height: "h-36", color: "bg-pink-400" },
+  ];
+
+  const [ref, { width }] = useMeasure(); // Measures the width of the container
+  const xTranslation = useMotionValue(0);
+  const FAST_DURATION = 10;
+  const SLOW_DURATION = 75;
+
+  const [duration, setDuration] = useState(FAST_DURATION);
+
+  const [mustFinish, setMustFinish] = useState(false);
+  const [rerender, setRerender] = useState(false);
+
+  useEffect(() => {
+    let controls;
+    const finalPosition = -width / 2 - 10;
+
+    if (mustFinish) {
+      controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
+        ease: "linear",
+        duration: duration * (1 - xTranslation.get() / finalPosition),
+        onComplete: () => {
+          setMustFinish(false);
+          setRerender(!rerender);
+        },
+      });
+    } else {
+      controls = animate(xTranslation, [0, finalPosition], {
+        ease: "linear",
+        duration: duration,
+        repeat: Infinity,
+        repeatType: "loop",
+        repeatDelay: 0,
+      });
+    }
+
+    return controls?.stop;
+  }, [xTranslation, width, duration, rerender]);
+
+  return (
+    <section className="py-28 h-screen">
+      <div className="max-w-7xl mx-auto overflow-hidden">
         <div className="pb-12 text-center text-black">
           <p>TESTIMONIALE</p>
           <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight">
             Citiți Recenzii de Încredere de la Clienții Noștri Auto
           </h2>
         </div>
-        <div className="mt-8 [column-fill:_balance] sm:columns-2 sm:gap-6 lg:columns-3 lg:gap-8">
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-amber-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
-                sit rerum incidunt, a consequuntur recusandae ab saepe illo est
-                quia obcaecati neque quibusdam eius accusamus error officiis
-                atque voluptates magnam!
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-amber-500 text-xl">★ ★ ★ ★ ★</span>
 
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
+        <motion.div
+          className=" left-0 flex gap-4 w-[200vw] "
+          style={{ x: xTranslation }}
+          ref={ref}
+          onHoverStart={() => {
+            setMustFinish(true);
+            setDuration(SLOW_DURATION);
+          }}
+          onHoverEnd={() => {
+            setMustFinish(true);
+            setDuration(FAST_DURATION);
+          }}
+        >
+          {/* Original Columns - Mapped */}
+          {[...Array(2)].map((_, idx) => (
+            <div key={idx} className="grid grid-cols-3 gap-6 w-screen ">
+              {/* Left Column */}
+              <div className="space-y-6">
+                {items.slice(0, 2).map((item) => (
+                  <Card
+                    key={item.id}
+                    content={item.content}
+                    height={item.height}
+                    color={item.color}
+                  />
+                ))}
               </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad
-                mollitia rerum quo unde neque atque molestias quas pariatur!
-                Sint, maxime?
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-emerald-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
+
+              {/* Middle Column */}
+              <div className="space-y-6">
+                {items.slice(2, 4).map((item) => (
+                  <Card
+                    key={item.id}
+                    content={item.content}
+                    height={item.height}
+                    color={item.color}
+                  />
+                ))}
               </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Reprehenderit esse delectus, maiores fugit, reiciendis culpa
-                inventore sint accusantium libero dolore eos quasi a ex aliquam
-                molestiae. Tenetur hic delectus maxime.
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-emerald-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
+
+              {/* Right Column */}
+              <div className="space-y-6">
+                {items.slice(4, 6).map((item) => (
+                  <Card
+                    key={item.id}
+                    content={item.content}
+                    height={item.height}
+                    color={item.color}
+                  />
+                ))}
               </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit,
-                fuga?
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-amber-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Cupiditate officia natus blanditiis rerum incidunt ex autem
-                repudiandae doloribus eveniet quia? Culpa commodi quae atque
-                perspiciatis? Provident, magni beatae saepe porro aspernatur
-                facere neque sunt possimus assumenda perspiciatis aperiam
-                quisquam animi libero voluptatem fuga. Repudiandae, facere? Nemo
-                reprehenderit quas ratione quis.
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-emerald-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non,
-                rerum. Nobis laborum praesentium necessitatibus vero.
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-amber-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Maiores quaerat quasi ipsa repellendus quam! Beatae pariatur
-                quia distinctio fugit repellendus repudiandae nostrum
-                consectetur quibusdam quo.
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-emerald-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit,
-                modi!
-              </p>
-            </blockquote>
-          </div>
-          <div className="mb-8 sm:break-inside-avoid">
-            <blockquote className="rounded-lg bg-gray-50 p-6 shadow-sm sm:p-8">
-              <div className="flex items-center gap-4">
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-                  className="size-14 rounded-full object-cover"
-                />
-                <div>
-                  <span className="text-amber-500 text-xl">★ ★ ★ ★ ★</span>
-                  <p className="mt-0.5 text-lg font-medium text-gray-900">
-                    Paul Starr
-                  </p>
-                </div>
-              </div>
-              <p className="mt-4 text-gray-700">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam
-                numquam, unde molestiae commodi temporibus dicta.
-              </p>
-            </blockquote>
-          </div>
-        </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
-};
-
-export default Testimonials;
+}
