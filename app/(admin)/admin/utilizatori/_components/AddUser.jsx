@@ -44,8 +44,8 @@ const AddUser = () => {
 
   const { execute, result, isExecuting } = useAction(createUser, {
     onSuccess: ({ data }) => {
-      setIsOpen(false);
       queryClient.invalidateQueries({ queryKey: ["users"] });
+      setIsOpen(false);
       reset();
       toast({
         variant: "default",
