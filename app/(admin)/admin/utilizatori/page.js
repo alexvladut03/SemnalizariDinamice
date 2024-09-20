@@ -1,7 +1,7 @@
 import UsersMapping from "./_components/UsersMapping";
 import AddUser from "./_components/AddUser";
 
-const page = async () => {
+const page = () => {
   return (
     <main className="p-4 bg-gray-100 ">
       <div className="text-center text-2xl my-8 font-semibold">

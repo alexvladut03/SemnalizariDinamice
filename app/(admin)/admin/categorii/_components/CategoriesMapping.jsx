@@ -16,8 +16,11 @@ import EditCategory from "./EditCategory";
 import { deleteCategory } from "@/utils/actions/category/delete-category";
 import { useOptimisticAction } from "next-safe-action/hooks";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import { useGetAllCategories } from "@/utils/hooks/categories/useGetAllCategories";
 
-const CategoriesMapping = ({ categories }) => {
+const CategoriesMapping = () => {
+  const { data: categories } = useGetAllCategories();
+
   const [openDialogId, setOpenDialogId] = useState(null);
   const filteredCategories = categories.map(({ children, ...rest }) => rest); // am sters children din lista de categorii ca n am nevoie de ele
 

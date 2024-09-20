@@ -17,9 +17,19 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import EditProduct from "./EditProduct";
 import { deleteProduct } from "@/utils/actions/product/delete-product";
 import Image from "next/image";
+import { useGetAllProducts } from "@/utils/hooks/products/useGetAllProducts";
+import { useGetAllCategories } from "@/utils/hooks/categories/useGetAllCategories";
+import { useGetAllAttributes } from "@/utils/hooks/attributes/useGetAllAttributes";
+import { useGetAllUploads } from "@/utils/hooks/uploads/useGetAllUploads";
 
-const ProductMapping = ({ products, uploads, categories, attributes }) => {
-  console.log(products);
+const ProductMapping = () => {
+  const { data: products } = useGetAllProducts();
+  const { data: categories } = useGetAllCategories();
+  const { data: attributes } = useGetAllAttributes();
+  const { data: uploads } = useGetAllUploads();
+
+  console.log("products", products);
+
   const [openDialogId, setOpenDialogId] = useState(null);
   const { execute, optimisticState } = useOptimisticAction(deleteProduct, {
     currentState: products,

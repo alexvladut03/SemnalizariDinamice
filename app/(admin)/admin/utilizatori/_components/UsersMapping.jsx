@@ -17,15 +17,20 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import EditUser from "./EditUser";
 import { useGetAllUsers } from "@/utils/hooks/user/useGetAllUsers";
+import getQueryClient from "@/utils/getQueryClient";
 
 const UsersMapping = () => {
+  const queryClient = getQueryClient();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { data, error, isPending } = useGetAllUsers();
+  const { data } = useGetAllUsers();
+
+  console.log(data);
 
   const { execute, result, optimisticState } = useOptimisticAction(deleteUser, {
     currentState: data,
     updateFn: (state, { id }) => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
       return state.filter((user) => user.id !== id);
     },
     onSuccess: ({ data }) => {
