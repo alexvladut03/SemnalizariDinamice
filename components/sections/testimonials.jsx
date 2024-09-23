@@ -17,14 +17,18 @@ const StarRating = ({ stars }) => (
 // Carduri Masonry diferite
 // LargeCard component
 const LargeCard = ({ videoSrc, name, stars, review, height }) => (
-  <div className={`${height} bg-black p-4 rounded-lg shadow-lg flex w-full`}>
-    <div className="w-1/2 p-4">
-      <h3 className="text-white text-lg font-bold">{name}</h3>
+  <div
+    className={`${height} bg-black p-4 rounded-lg flex w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
+  >
+    <div className="w-1/2 mr-4">
+      <div className="flex justify-between items-center">
+        <h3 className="text-white text-lg font-bold">{name}</h3>
+        <h3 className="text-white text-sm font-bold">20/09/2024</h3>
+      </div>
       <StarRating stars={stars} />
-      <p className="text-white">{review}</p>
+      <p className="text-white mt-2">{review}</p>
     </div>
     <div className="w-1/2 h-full">
-      {/* Use the Video component here */}
       <Video
         url={videoSrc}
         className="w-full h-full object-cover"
@@ -36,26 +40,35 @@ const LargeCard = ({ videoSrc, name, stars, review, height }) => (
 
 const MediumCard = ({ imageSrc, name, stars, review, height }) => (
   <div
-    className={`${height} bg-black p-4 rounded-lg shadow-md shadow-amber-500 w-full `}
+    className={`${height} bg-black p-4 rounded-lg w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
   >
     <Image
       src={imageSrc}
       alt={name}
       width={200}
       height={200}
-      className="w-full h-32 object-cover mb-4 rounded-lg"
+      className="w-full h-32 object-cover rounded-lg"
     />
-    <h3 className="text-white text-lg font-bold">{name}</h3>
+
+    <div className="flex justify-between items-center mt-2">
+      <h3 className="text-white text-lg font-bold">{name}</h3>
+      <h3 className="text-white text-sm font-bold">20/09/2024</h3>
+    </div>
     <StarRating stars={stars} />
-    <p className="text-white">{review}</p>
+    <p className="text-white mt-2">{review}</p>
   </div>
 );
 
 const SmallCard = ({ name, stars, review, height }) => (
-  <div className={`${height} bg-black p-4 rounded-lg shadow-lg w-full`}>
-    <h3 className="text-white text-lg font-bold">{name}</h3>
+  <div
+    className={`${height} bg-black p-4 rounded-lg w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
+  >
+    <div className="flex justify-between items-center">
+      <h3 className="text-white text-lg font-bold">{name}</h3>
+      <h3 className="text-white text-sm font-bold">20/09/2024</h3>
+    </div>
     <StarRating stars={stars} />
-    <p className="text-white">{review}</p>
+    <p className="text-white mt-2">{review}</p>
   </div>
 );
 
@@ -69,7 +82,7 @@ export default function Testimonials() {
       name: "Marian Florin",
       stars: 5,
       review:
-        "Am cumparat de la acest magazin de 2 ori niste capace de jante si sunt foarte multumit",
+        "Am cumpărat de la acest magazin de două ori niște capace de jante și am fost super multumit de ele. Capacele sunt de calitate si se potrivesc perfect.",
       height: "h-72",
     },
 
@@ -77,9 +90,9 @@ export default function Testimonials() {
       id: 1,
       type: "small",
       name: "Octavian Popescu",
-      stars: 5,
+      stars: 4,
       review:
-        "Semnalizarile dinamice sunt foarte bune , per total sunt multumit",
+        "Schimbătorul e destul de ok (ca si calitate) , mi s-a parut cam greu de montat, dar transportul a fost super rapid , mi-a ajuns in 4 zile.",
       height: "h-48",
     },
 
@@ -88,9 +101,9 @@ export default function Testimonials() {
       type: "large",
       videoSrc: "/videos/video-hero.mp4",
       name: "Vlad Dragomir",
-      stars: 4,
+      stars: 5,
       review:
-        "Schimbarea pe care mi-au adus-o semnalizarile dinamice este uimitoare , sunt super multumit si de trasnport a ajuns foarte repede!",
+        "Semnalizările dinamice sunt chiar super mișto, iar instalarea a fost destul de ușoară, am reușit să le montez fără probleme.Livrarea a durat doar 2 zile, ceea ce mi s-a părut rapid, și produsul a venit super bine împachetat, cu siguranta voi recomanda si altor prieteni!",
       height: "h-96",
     },
     // a 2-a coloana
@@ -99,7 +112,8 @@ export default function Testimonials() {
       type: "small",
       name: " Andrei Ionescu",
       stars: 5,
-      review: "Transport rapid si produse de calitate",
+      review:
+        "Transportul a fost rapid, iar proiectoarele de logo sunt misto , le-am instalat in 5 minute.",
       height: "h-36",
     },
 
@@ -109,8 +123,10 @@ export default function Testimonials() {
       type: "medium",
       imageSrc: "/logo.png",
       name: "Mihai Alexandru",
-      stars: 3,
-      review: "Capacele de jante sunt ok , dar transportul a durat prea mult",
+      stars: 5,
+      review:
+        "Semnalizările dinamice sunt foarte bune.Per total sunt foarte mulțumit de calitatea lor și de transport , recomand!",
+
       height: "h-64",
     },
     // a-3 a coloana
@@ -118,8 +134,9 @@ export default function Testimonials() {
       id: 5,
       type: "small",
       name: "Vlad Lina",
-      stars: 1,
-      review: "Dezamagit de produse , nu recomand",
+      stars: 4,
+      review:
+        "Semnalizările dinamice arată foarte bine pe mașină.Montajul mi se pare cam greu, dar a reusit sa mi le monteze mecanicul.",
       height: "h-40",
     },
   ];
@@ -135,7 +152,10 @@ export default function Testimonials() {
 
   useEffect(() => {
     let controls;
-    const finalPosition = -width / 2 - 10;
+    const finalPosition = -width / 2 - 12;
+
+    console.log("finalPosition", finalPosition);
+    console.log("width", width);
 
     if (mustFinish) {
       controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
@@ -170,7 +190,7 @@ export default function Testimonials() {
         </div>
 
         <motion.div
-          className="left-0 flex gap-4 w-[200vw]"
+          className="left-0 flex gap-6 w-[200vw]"
           style={{ x: xTranslation }}
           ref={ref}
           onHoverStart={() => {
