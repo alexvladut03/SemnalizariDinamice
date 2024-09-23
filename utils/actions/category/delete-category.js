@@ -2,7 +2,7 @@
 
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 const schema = z.object({
@@ -46,7 +46,7 @@ export const deleteCategory = authActionClient
         where: { id },
       });
 
-      revalidatePath("/admin/categorii");
+      revalidateTag("categories");
 
       return { success: true, category: category.name };
     });

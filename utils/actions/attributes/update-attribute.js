@@ -3,7 +3,7 @@
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
 import { attributeSchema } from "@/utils/zod";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export const updateAttribute = authActionClient
   .use(async ({ next, ctx }) => {
@@ -60,7 +60,7 @@ export const updateAttribute = authActionClient
       });
 
       // Refresh the path or page
-      revalidatePath("/admin/atribute");
+      revalidateTag("attributes");
       return { success: true, attribute: updatedAttribute };
     }
   );

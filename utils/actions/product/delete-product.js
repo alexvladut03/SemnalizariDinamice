@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 const schema = z.object({
@@ -31,6 +31,6 @@ export const deleteProduct = authActionClient
       where: { id },
     });
 
-    revalidatePath("/admin/produse");
+    revalidateTag("products");
     return { success: true, product: product.name };
   });

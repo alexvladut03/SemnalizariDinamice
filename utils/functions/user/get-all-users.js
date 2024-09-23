@@ -1,13 +1,26 @@
 import prisma from "@/utils/prisma";
+import { unstable_cache } from "next/cache";
 
-export const getAllUsers = async () => {
-  const users = prisma.user.findMany({
-    select: {
-      id: true,
-      name: true,
-      username: true,
-    },
-  });
-
-  return users;
+export const preload = () => {
+  void getAllUsers();
 };
+
+export const getAllUsers = unstable_cache(
+  async () => {
+    const users = prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        username: true,
+      },
+    });
+
+    if (!users) {
+      throw new Error("Nu exista utilizatori in baza de date.");
+    }
+
+    return users;
+  },
+  ["users"],
+  { tags: ["users"] }
+);

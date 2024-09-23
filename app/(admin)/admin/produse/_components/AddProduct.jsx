@@ -41,15 +41,8 @@ import MediaPopUp from "@/components/custom ui/media-pop-up";
 import DOMPurify from "dompurify";
 import { DisplayServerActionResponse } from "@/components/custom ui/display-server-actions-response";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useGetAllCategories } from "@/utils/hooks/categories/useGetAllCategories";
-import { useGetAllAttributes } from "@/utils/hooks/attributes/useGetAllAttributes";
-import { useGetAllUploads } from "@/utils/hooks/uploads/useGetAllUploads";
 
-const AddProduct = () => {
-  const { data: categories } = useGetAllCategories();
-  const { data: attributes } = useGetAllAttributes();
-  const { data: uploads } = useGetAllUploads();
-
+const AddProduct = ({ categories, attributes, uploads }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [mainImage, setMainImage] = useState(null);
   const [gallery, setGallery] = useState([]);

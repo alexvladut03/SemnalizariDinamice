@@ -2,7 +2,7 @@
 
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 const schema = z.object({
@@ -32,7 +32,6 @@ export const deleteUser = authActionClient
       where: { id },
     });
 
-    revalidatePath("/admin/utilizatori");
-
+    revalidateTag("users");
     return { success: true, username: user.name };
   });

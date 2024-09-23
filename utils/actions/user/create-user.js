@@ -6,7 +6,7 @@ import { registerSchema } from "@/utils/zod";
 
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export const createUser = authActionClient
   .use(async ({ next, ctx }) => {
@@ -45,7 +45,7 @@ export const createUser = authActionClient
         },
       });
 
-      revalidatePath("/admin/utilizatori");
+      revalidateTag("users");
       return { success: true, name: name };
     }
   );

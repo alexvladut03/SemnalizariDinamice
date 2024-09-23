@@ -34,13 +34,8 @@ import { toast } from "@/components/ui/use-toast";
 import { DisplayServerActionResponse } from "@/components/custom ui/display-server-actions-response";
 import { useState } from "react";
 import { createCategory } from "@/utils/actions/category/create-category";
-import { useGetAllCategories } from "@/utils/hooks/categories/useGetAllCategories";
 
-const AddCategory = () => {
-  const { data } = useGetAllCategories();
-
-  const categories = data.map(({ children, ...rest }) => rest);
-
+const AddCategory = ({ categories }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { reset, ...form } = useForm({
