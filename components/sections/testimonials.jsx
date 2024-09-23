@@ -18,15 +18,19 @@ const StarRating = ({ stars }) => (
 // LargeCard component
 const LargeCard = ({ videoSrc, name, stars, review, height }) => (
   <div
-    className={`${height} bg-black p-4 rounded-lg flex w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
+    className={`lg:${height} h-auto bg-black p-4 rounded-lg flex w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
   >
     <div className="w-1/2 mr-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-white text-lg font-bold">{name}</h3>
-        <h3 className="text-white text-sm font-bold">20/09/2024</h3>
+        <h3 className="text-white lg:text-lg text-base lg:font-bold font-semibold">
+          {name}
+        </h3>
+        <h3 className="text-white text-sm lg:font-bold font-semibold">
+          20/09/2024
+        </h3>
       </div>
       <StarRating stars={stars} />
-      <p className="text-white mt-2">{review}</p>
+      <p className="text-white mt-2 lg:text-base text-sm">{review}</p>
     </div>
     <div className="w-1/2 h-full">
       <Video
@@ -40,7 +44,7 @@ const LargeCard = ({ videoSrc, name, stars, review, height }) => (
 
 const MediumCard = ({ imageSrc, name, stars, review, height }) => (
   <div
-    className={`${height} bg-black p-4 rounded-lg w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
+    className={`lg:${height} h-auto bg-black p-4 rounded-lg w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
   >
     <Image
       src={imageSrc}
@@ -51,24 +55,32 @@ const MediumCard = ({ imageSrc, name, stars, review, height }) => (
     />
 
     <div className="flex justify-between items-center mt-2">
-      <h3 className="text-white text-lg font-bold">{name}</h3>
-      <h3 className="text-white text-sm font-bold">20/09/2024</h3>
+      <h3 className="text-white lg:text-lg text-base lg:font-bold font-semibold">
+        {name}
+      </h3>
+      <h3 className="text-white text-sm lg:font-bold font-semibold">
+        20/09/2024
+      </h3>
     </div>
     <StarRating stars={stars} />
-    <p className="text-white mt-2">{review}</p>
+    <p className="text-white mt-2 lg:text-base text-sm">{review}</p>
   </div>
 );
 
 const SmallCard = ({ name, stars, review, height }) => (
   <div
-    className={`${height} bg-black p-4 rounded-lg w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
+    className={`lg:${height} h-auto bg-black p-4 rounded-lg w-full transition duration-500 hover:scale-[1.02] shadow-md hover:shadow-amber-500`}
   >
     <div className="flex justify-between items-center">
-      <h3 className="text-white text-lg font-bold">{name}</h3>
-      <h3 className="text-white text-sm font-bold">20/09/2024</h3>
+      <h3 className="text-white lg:text-lg text-base lg:font-bold font-semibold">
+        {name}
+      </h3>
+      <h3 className="text-white text-sm lg:font-bold font-semibold">
+        20/09/2024
+      </h3>
     </div>
     <StarRating stars={stars} />
-    <p className="text-white mt-2">{review}</p>
+    <p className="text-white mt-2 lg:text-base text-sm">{review}</p>
   </div>
 );
 
@@ -127,7 +139,7 @@ export default function Testimonials() {
       review:
         "Semnalizările dinamice sunt foarte bune.Per total sunt foarte mulțumit de calitatea lor și de transport , recomand!",
 
-      height: "h-64",
+      height: "h-68",
     },
     // a-3 a coloana
     {
@@ -143,8 +155,8 @@ export default function Testimonials() {
 
   const [ref, { width }] = useMeasure(); // Măsoară lățimea containerului
   const xTranslation = useMotionValue(0);
-  const FAST_DURATION = 20;
-  const SLOW_DURATION = 70;
+  const FAST_DURATION = 25;
+  const SLOW_DURATION = 75;
 
   const [duration, setDuration] = useState(FAST_DURATION);
   const [mustFinish, setMustFinish] = useState(false);
@@ -181,7 +193,7 @@ export default function Testimonials() {
 
   return (
     <section className="py-28 h-full">
-      <div className="max-w-7xl mx-auto overflow-hidden">
+      <div className="lg:max-w-7xl mx-auto overflow-hidden">
         <div className="pb-12 text-center text-black">
           <p>TESTIMONIALE</p>
           <h2 className="text-center text-3xl sm:text-4xl font-bold tracking-tight">
@@ -190,7 +202,7 @@ export default function Testimonials() {
         </div>
 
         <motion.div
-          className="left-0 flex gap-6 w-[200vw]"
+          className="left-0 flex gap-6 lg:w-[200vw] w-[600vw]"
           style={{ x: xTranslation }}
           ref={ref}
           onHoverStart={() => {
@@ -203,9 +215,12 @@ export default function Testimonials() {
           }}
         >
           {[...Array(2)].map((_, idx) => (
-            <div key={idx} className="grid grid-cols-3 gap-6 w-screen">
+            <div
+              key={idx}
+              className="lg:grid lg:grid-cols-3 gap-6 lg:w-screen flex w-full"
+            >
               {/* Coloană Stânga */}
-              <div className="space-y-6">
+              <div className="space-y-6 w-full">
                 <MediumCard
                   imageSrc={items[0].imageSrc}
                   name={items[0].name}
@@ -222,7 +237,7 @@ export default function Testimonials() {
               </div>
 
               {/* Coloană Mijloc */}
-              <div className="space-y-6">
+              <div className="space-y-6 w-full">
                 <LargeCard
                   videoSrc={items[2].videoSrc}
                   name={items[2].name}
@@ -239,7 +254,7 @@ export default function Testimonials() {
               </div>
 
               {/* Coloană Dreapta */}
-              <div className="space-y-6">
+              <div className="space-y-6 w-full">
                 <MediumCard
                   imageSrc={items[4].imageSrc}
                   name={items[4].name}
