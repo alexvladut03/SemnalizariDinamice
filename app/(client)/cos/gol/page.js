@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <div className="h-screen flex items-center justify-center relative bg-gray-100">
       <div className="flex flex-col items-center text-center ">
-        <FaCartPlus className="text-7xl text-amber-400" />
+        <FaCartPlus className="text-7xl text-amber-500" />
         <h1 className="text-2xl font-bold text-gray-800">
           Coșul tău de cumpărături a rămas fără produse!
         </h1>

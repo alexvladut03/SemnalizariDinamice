@@ -82,33 +82,57 @@ export default function ClientFooter() {
           <h3 className="font-semibold mb-4 text-lg">Link-uri Legale</h3>
           <ul className="space-y-2">
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link
+                href="/politica-de-confidentialitate"
+                className="hover:text-amber-500"
+              >
                 Politica de Confidențialitate
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link
+                href="/termeni-si-conditii"
+                className="hover:text-amber-500"
+              >
                 Termeni și Condiții
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link
+                href="/politica-de-cookies"
+                className="hover:text-amber-500"
+              >
                 Politica de Cookies
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="hover:text-amber-500">
+                Garantie
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="hover:text-amber-500">
+                Politica de retur
               </Link>
             </li>
           </ul>
         </div>
         <div className="mb-4">
-          <h3 className="font-semibold mb-4 text-lg">Servicii</h3>
+          <h3 className="font-semibold mb-4 text-lg">Comenzi si Livrare</h3>
           <ul className="space-y-2">
             <li>
               <Link href="#" className="hover:text-amber-500">
-                Livrare rapida
+                Cum cumpar?
               </Link>
             </li>
             <li>
               <Link href="#" className="hover:text-amber-500">
-                Politica de returnare
+                Cum platesc?
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="hover:text-amber-500">
+                Cum se livreaza?
               </Link>
             </li>
           </ul>
