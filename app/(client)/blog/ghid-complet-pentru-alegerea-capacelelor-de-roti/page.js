@@ -152,7 +152,7 @@ export default function BlogPost() {
           </p>
         </div>
 
-        <div className="bg-black rounded-lg p-8 mb-6">
+        <div className="bg-black rounded-lg p-8">
           <h2 className="lg:text-2xl text-xl font-bold mb-4 text-white">
             Concluzii
           </h2>

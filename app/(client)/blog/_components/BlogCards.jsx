@@ -68,7 +68,7 @@ const blogs = [
 export default function BlogCards() {
   return (
     <main>
-      <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 lg:mx-auto mx-10 max-w-7xl py-20">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-8 lg:mx-auto mx-10 max-w-7xl ">
         {blogs.map((blog) => (
           <Link
             key={blog.id}

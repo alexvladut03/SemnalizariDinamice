@@ -144,7 +144,7 @@ export default function BlogPost() {
           </p>
         </div>
 
-        <div className="bg-black rounded-lg p-8 mb-6 text-white">
+        <div className="bg-black rounded-lg p-8  text-white">
           <h2 className="lg:text-2xl text-xl font-bold mb-4">Concluzii</h2>
           <p className="lg:text-lg text-base">
             Proiectoarele de logo reprezintă un accesoriu modern și practic care

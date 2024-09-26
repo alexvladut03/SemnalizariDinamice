@@ -72,7 +72,7 @@ export default function RecentPosts({ exclude = [] }) {
 
   return (
     <div className="w-full lg:w-1/4 lg:block hidden">
-      <div className="sticky top-20 bg-black p-4 rounded-lg">
+      <div className="sticky top-24 bg-black p-4 rounded-lg">
         <h3 className="text-xl font-semibold mb-4">Alte Postări</h3>
         <ul>
           {filteredPosts.map((post, index) => (
