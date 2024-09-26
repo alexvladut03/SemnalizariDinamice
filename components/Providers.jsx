@@ -9,9 +9,7 @@ const queryClient = getQueryClient();
 
 const Providers = ({ children }) => {
   return (
-    <CartProvider>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </CartProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };
 

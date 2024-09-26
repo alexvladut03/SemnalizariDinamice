@@ -17,19 +17,8 @@ import { RiDeleteBin5Fill } from "react-icons/ri";
 import EditProduct from "./EditProduct";
 import { deleteProduct } from "@/utils/actions/product/delete-product";
 import Image from "next/image";
-import { useGetAllProducts } from "@/utils/hooks/products/useGetAllProducts";
-import { useGetAllCategories } from "@/utils/hooks/categories/useGetAllCategories";
-import { useGetAllAttributes } from "@/utils/hooks/attributes/useGetAllAttributes";
-import { useGetAllUploads } from "@/utils/hooks/uploads/useGetAllUploads";
 
-const ProductMapping = () => {
-  const { data: products } = useGetAllProducts();
-  const { data: categories } = useGetAllCategories();
-  const { data: attributes } = useGetAllAttributes();
-  const { data: uploads } = useGetAllUploads();
-
-  console.log("products", products);
-
+const ProductMapping = ({ products, categories, attributes, uploads }) => {
   const [openDialogId, setOpenDialogId] = useState(null);
   const { execute, optimisticState } = useOptimisticAction(deleteProduct, {
     currentState: products,
@@ -40,7 +29,7 @@ const ProductMapping = () => {
       toast({
         variant: "default",
         title: "Succes",
-        description: `Produsul ${data.attribute} a fost sters cu succes!`,
+        description: `Produsul ${data.product} a fost sters cu succes!`,
         duration: 3000,
       });
     },

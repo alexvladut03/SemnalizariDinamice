@@ -2,7 +2,7 @@
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
 import { ProductSchema } from "@/utils/zod";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export const createProduct = authActionClient
   .use(async ({ next, ctx }) => {
@@ -95,7 +95,7 @@ export const createProduct = authActionClient
       });
 
       // Refresh the path or page
-      revalidatePath("/admin/produse");
+      revalidateTag("products");
       return { success: true, product: newProduct.name };
     }
   );

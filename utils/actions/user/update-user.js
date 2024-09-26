@@ -6,7 +6,7 @@ import { hash } from "bcryptjs";
 import { userSchema } from "@/utils/zod";
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export const updateUser = authActionClient
   .use(async ({ next, ctx }) => {
@@ -51,7 +51,7 @@ export const updateUser = authActionClient
         data: updatedUser,
       });
 
-      revalidatePath("/admin/utilizatori");
+      revalidateTag("users");
       return { success: true, name: name };
     }
   );

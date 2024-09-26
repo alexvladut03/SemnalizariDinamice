@@ -2,7 +2,7 @@
 
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
 const schema = z.object({
@@ -32,7 +32,7 @@ export const deleteAttribute = authActionClient
       where: { id },
     });
 
-    revalidatePath("/admin/attributes");
-
+    // Refresh the path or page
+    revalidateTag("attributes");
     return { success: true, attribute: attribute.name };
   });

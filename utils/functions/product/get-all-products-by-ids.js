@@ -1,8 +1,6 @@
-"use server";
-
 import prisma from "@/utils/prisma";
 
-export const getProductsByIds = async (ids) => {
+export const getAllProductsByIds = async (ids) => {
   const products = await prisma.product.findMany({
     where: {
       id: {

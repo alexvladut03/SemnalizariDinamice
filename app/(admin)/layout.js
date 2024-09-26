@@ -3,45 +3,11 @@ import NavbarAdmin from "../../components/layout/admin/admin-navbar";
 import Link from "next/link";
 import { FaHome, FaProductHunt, FaUser } from "react-icons/fa";
 import { MdCategory, MdPermMedia } from "react-icons/md";
-import getQueryClient from "@/utils/getQueryClient";
-import { getAllUsers } from "@/utils/functions/user/get-all-users";
-import { getAllProducts } from "@/utils/functions/product/get-all-products";
-import { getAllCategories } from "@/utils/functions/category/get-all-categories";
-import { getAllAttributes } from "@/utils/functions/attribute/get-all-attributes";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
-import { getImagesCustom } from "@/utils/actions/images/get-images";
 
 export default async function AdminLayout({ children }) {
   const session = await getSession();
 
   if (!session) return <div>Nu esti authentificat.</div>;
-
-  const queryClient = getQueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ["users"],
-    queryFn: getAllUsers,
-  });
-
-  await queryClient.prefetchQuery({
-    queryKey: ["products"],
-    queryFn: getAllProducts,
-  });
-
-  await queryClient.prefetchQuery({
-    queryKey: ["categories"],
-    queryFn: getAllCategories,
-  });
-
-  await queryClient.prefetchQuery({
-    queryKey: ["attributes"],
-    queryFn: getAllAttributes,
-  });
-
-  await queryClient.prefetchQuery({
-    queryKey: ["uploads"],
-    queryFn: getImagesCustom,
-  });
 
   return (
     <main>
@@ -99,9 +65,7 @@ export default async function AdminLayout({ children }) {
             username={session?.user?.name}
             role={session?.user?.role}
           />
-          <HydrationBoundary state={dehydrate(queryClient)}>
-            {children}
-          </HydrationBoundary>
+          {children}
         </div>
       </div>
     </main>

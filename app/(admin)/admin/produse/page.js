@@ -1,14 +1,27 @@
+import { getAllProducts } from "@/utils/functions/product/get-all-products";
 import AddProduct from "./_components/AddProduct";
 import ProductMapping from "./_components/ProductMapping";
+import { getAllCategories } from "@/utils/functions/category/get-all-categories";
+import { getAllAttributes } from "@/utils/functions/attribute/get-all-attributes";
+import { getImagesCustom } from "@/utils/actions/images/get-images";
 
-const produse = () => {
+const produse = async () => {
+  const products = await getAllProducts();
+  const categories = await getAllCategories();
+  const attributes = await getAllAttributes();
+  const uploads = await getImagesCustom();
+
   return (
     <div className="p-4 bg-gray-100">
       <div className="text-center text-2xl my-8 font-semibold">
         O lista cu produsele adaugate
       </div>
       <div className="flex justify-end mb-4">
-        <AddProduct />
+        <AddProduct
+          categories={categories}
+          attributes={attributes}
+          uploads={uploads}
+        />
       </div>
 
       <section className="bg-white rounded-lg shadow-sm shadow-gray-400">
@@ -22,7 +35,12 @@ const produse = () => {
           <div>Actiuni</div>
         </div>
         <div>
-          <ProductMapping />
+          <ProductMapping
+            products={products}
+            categories={categories}
+            attributes={attributes}
+            uploads={uploads}
+          />
         </div>
       </section>
     </div>

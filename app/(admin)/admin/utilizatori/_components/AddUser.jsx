@@ -27,10 +27,8 @@ import { toast } from "@/components/ui/use-toast";
 import { DisplayServerActionResponse } from "@/components/custom ui/display-server-actions-response";
 import { createUser } from "@/utils/actions/user/create-user";
 import { useState } from "react";
-import getQueryClient from "@/utils/getQueryClient";
 
 const AddUser = () => {
-  const queryClient = getQueryClient();
   const [isOpen, setIsOpen] = useState(false);
 
   const { reset, ...form } = useForm({
@@ -44,7 +42,6 @@ const AddUser = () => {
 
   const { execute, result, isExecuting } = useAction(createUser, {
     onSuccess: ({ data }) => {
-      queryClient.invalidateQueries({ queryKey: ["users"] });
       setIsOpen(false);
       reset();
       toast({

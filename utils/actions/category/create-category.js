@@ -3,7 +3,7 @@
 import { categorySchema } from "@/utils/zod";
 import prisma from "@/utils/prisma";
 import { authActionClient } from "@/utils/safe-action";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 
 export const createCategory = authActionClient
   .use(async ({ next, ctx }) => {
@@ -52,7 +52,7 @@ export const createCategory = authActionClient
       });
 
       // Refresh the path or page
-      revalidatePath("/admin/categorii");
+      revalidateTag("categories");
       return { success: true, category: newCategory };
     }
   );

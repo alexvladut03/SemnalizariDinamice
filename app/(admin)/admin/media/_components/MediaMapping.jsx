@@ -1,12 +1,9 @@
 "use client";
-import { useGetAllUploads } from "@/utils/hooks/uploads/useGetAllUploads";
 import Image from "next/image";
 import React from "react";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
-export const MediaMapping = () => {
-  const { data: uploads } = useGetAllUploads();
-
+export const MediaMapping = ({ uploads }) => {
   const images = uploads.uploads;
 
   return (
