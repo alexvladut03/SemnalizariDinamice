@@ -72,7 +72,7 @@ export default function RecentPosts({ exclude = [] }) {
 
   return (
     <div className="w-full lg:w-1/4 lg:block hidden">
-      <div className="sticky top-20 bg-gray-100 p-4 rounded-lg">
+      <div className="sticky top-24 bg-black p-4 rounded-lg">
         <h3 className="text-xl font-semibold mb-4">Alte Postări</h3>
         <ul>
           {filteredPosts.map((post, index) => (
@@ -89,13 +89,13 @@ export default function RecentPosts({ exclude = [] }) {
                 </div>
               </div>
               <div className="ml-4">
-                <span className="flex items-center text-gray-600 text-sm mb-1">
+                <span className="flex items-center text-white text-sm mb-1">
                   <FaCalendarAlt className="text-orange-500 mr-2" />
                   {post.date}
                 </span>
                 <Link
                   href={post.link}
-                  className="text-gray-800 hover:text-orange-500 font-medium"
+                  className="text-white hover:text-orange-500 font-medium"
                 >
                   {post.title}
                 </Link>

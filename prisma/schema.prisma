@@ -1,8 +1,8 @@
 // This is your Prisma schema file
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -11,14 +11,14 @@ generator client {
 }
 
 model User {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  id       String  @id @default(uuid()) // Use uuid for PostgreSQL
   username String  @unique
   name     String?
   password String
 }
 
 model Attribute {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  id       String   @id @default(uuid()) // Use uuid for PostgreSQL
   name     String   @unique
   slug     String   @unique
   values   String[] // An array of possible values for the attribute
@@ -28,7 +28,7 @@ model Attribute {
 }
 
 model Product {
-  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  id            String     @id @default(uuid()) // Use uuid for PostgreSQL
   sku           String     @unique
   name          String
   slug          String
@@ -39,27 +39,26 @@ model Product {
   description   String?
 
   // Main Category
-  categoryId    String?    @db.ObjectId
+  categoryId    String?    // Removed @db.ObjectId since PostgreSQL uses plain String
   category      Category?  @relation("ProductCategory", fields: [categoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
   // Subcategory
-  subcategoryId String?    @db.ObjectId
+  subcategoryId String?    // Removed @db.ObjectId since PostgreSQL uses plain String
   subcategory   Category?  @relation("ProductSubcategory", fields: [subcategoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
   // Relation to ProductAttribute
-  attributes    ProductAttribute[] // Add this line
+  attributes    ProductAttribute[]
 
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
 
-
 model Category {
-  id          String    @id @map("_id") @default(auto()) @db.ObjectId
+  id          String    @id @default(uuid()) // Use uuid for PostgreSQL
   name        String    @unique
   description String?
   slug        String    @unique
-  parentId    String?   @map("parent_id") @db.ObjectId
+  parentId    String?   // Removed @db.ObjectId since PostgreSQL uses plain String
   parent      Category? @relation("CategoryParent", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   children    Category[] @relation("CategoryParent")
 
@@ -68,11 +67,10 @@ model Category {
   subProducts Product[]  @relation("ProductSubcategory")
 }
 
-
 model ProductAttribute {
-  id          String     @id @default(auto()) @map("_id") @db.ObjectId
-  attributeId String     @db.ObjectId
-  productId   String     @db.ObjectId
+  id          String     @id @default(uuid()) // Use uuid for PostgreSQL
+  attributeId String     // Removed @db.ObjectId since PostgreSQL uses plain String
+  productId   String     // Removed @db.ObjectId since PostgreSQL uses plain String
   values      String[]   // Array of values for the attribute (e.g., Red, Yellow)
 
   // Relations
