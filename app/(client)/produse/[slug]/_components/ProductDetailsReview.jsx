@@ -3,6 +3,16 @@ import GeneralButton from "@/components/custom ui/general-button";
 import { Verified } from "lucide-react";
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function ProductDetailsReview() {
   const reviews = [
@@ -80,9 +90,16 @@ export default function ProductDetailsReview() {
       case 5:
         return "Excelent";
       default:
-        return "acorda o nota";
+        return "Acorda o nota";
     }
   };
+
+  const [openDialog, setOpenDialog] = useState(false); // Adăugăm starea pentru dialog
+
+  const handleAddReview = () => {
+    setOpenDialog(true); // Deschidem dialogul când se apasă pe buton
+  };
+
   return (
     <div>
       <div className="lg:flex lg:flex-row lg:gap-10 grid grid-rows-2 border-b-2 border-amber-500 pb-2">
@@ -221,15 +238,15 @@ export default function ProductDetailsReview() {
               {getRatingText(hoveredStar)}
             </span>
           </div>
-
-          <GeneralButton
-            text="Scrie un review"
-            customPadding="p-2"
-            width="w-52"
-          />
+          <div onClick={handleAddReview}>
+            <GeneralButton
+              text="Scrie un review"
+              customPadding="p-2"
+              width="w-52"
+            />
+          </div>
         </div>
       </div>
-
       <div className="flex flex-col w-full">
         {reviews.map((review, index) => (
           <div key={index} className="border-b-2 border-amber-500 py-2">
@@ -261,6 +278,95 @@ export default function ProductDetailsReview() {
           </div>
         ))}
       </div>
+      {openDialog && (
+        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+          <DialogContent className="w-full max-w-4xl">
+            <DialogHeader className="flex flex-row gap-4">
+              <Image src="/logo.png" width={100} height={100} alt="Logo" />
+              <div>
+                <DialogTitle>Adaugă un review pentru:</DialogTitle>
+                <DialogDescription>Semnalizari dinamice</DialogDescription>
+              </div>
+            </DialogHeader>
+
+            <div className="space-y-4">
+              {/* Secțiunea pentru rating */}
+              <div>
+                <span className="font-semibold text-lg">
+                  {getRatingText(hoveredStar)}
+                </span>
+                <div className="flex space-x-1">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <FaStar
+                      key={index}
+                      className={`w-7 h-7 ${
+                        hoveredStar >= index + 1
+                          ? "text-amber-500"
+                          : "text-gray-200"
+                      } hover:text-amber-500`}
+                      onMouseEnter={() => setHoveredStar(index + 1)} // Setăm steaua pe hover
+                      onMouseLeave={() => setHoveredStar(0)} // Resetăm steaua când mouse-ul părăsește
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Câmp pentru titlu review */}
+              <div>
+                <h4 className="text-md font-semibold mb-2">
+                  Titlu review: (optional)
+                </h4>
+                <input
+                  type="text"
+                  placeholder="Scrie propriul tău titlu"
+                  className="w-full p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-amber-500"
+                />
+              </div>
+
+              {/* Câmp pentru review */}
+              <div>
+                <h4 className="text-md font-semibold mb-2">Recenzia ta</h4>
+                <textarea
+                  rows="3"
+                  className="w-full p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-amber-500"
+                  placeholder={`Spune-ne dacă ești mulțumit de achiziția ta.\nA fost produsul conform așteptărilor tale?\nL-ai recomanda și altor persoane?`}
+                />
+              </div>
+
+              {/* Câmp pentru încărcarea imaginilor */}
+              <div>
+                <h4 className="text-md font-semibold mb-2">
+                  Încarcă imagini cu produsul pentru a oferi mai multe
+                  informații și altor clienți! (optional)
+                </h4>
+                <div className="border-2 border-gray-200 p-6 text-center rounded-lg">
+                  <button className="text-amber-500">
+                    Apasă aici pentru a încărca imaginile
+                  </button>
+                </div>
+              </div>
+
+              {/* Linkuri suplimentare */}
+              <div className="text-sm text-amber-500 mt-2">
+                Prin publicarea review-ului, esti de acord cu{" "}
+                <Link
+                  href="/termeni-si-conditii"
+                  className="font-semibold"
+                  target="_blank"
+                >
+                  termenii si conditiile{" "}
+                </Link>
+                site-ului
+              </div>
+
+              {/* Buton de trimitere */}
+              <div className="flex justify-end">
+                <GeneralButton text="Adaugă review" customPadding="p-2" />
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 }
