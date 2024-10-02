@@ -2,9 +2,6 @@
   "name": "semnalizari_dinamice",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "22.x"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "npx prisma generate && next build",
