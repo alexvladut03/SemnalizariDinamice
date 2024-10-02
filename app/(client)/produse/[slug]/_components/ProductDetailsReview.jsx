@@ -11,7 +11,7 @@ export default function ProductDetailsReview() {
       date: "16.08.2024",
       verified: true,
       title: "Recomand",
-      rating: 5,
+      rating: 3,
       review:
         "Semnalizările dinamice arată foarte bine pe mașină.Montajul mi se pare cam greu, dar a reusit sa mi le monteze mecanicul.",
     },

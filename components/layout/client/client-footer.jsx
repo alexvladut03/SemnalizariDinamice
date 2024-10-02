@@ -106,12 +106,12 @@ export default function ClientFooter() {
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link href="/garantie" className="hover:text-amber-500">
                 Garantie
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link href="/politica-de-retur" className="hover:text-amber-500">
                 Politica de retur
               </Link>
             </li>
