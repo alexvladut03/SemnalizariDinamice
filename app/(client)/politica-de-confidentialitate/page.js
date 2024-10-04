@@ -2,7 +2,7 @@ import React from "react";
 
 export default function page() {
   return (
-    <div className="max-w-7xl mx-auto py-10 space-y-8">
+    <div className="max-w-7xl lg:mx-auto py-10 space-y-8 mx-6">
       <h1 className="text-4xl font-bold text-center">
         Politica de Confidențialitate
       </h1>
