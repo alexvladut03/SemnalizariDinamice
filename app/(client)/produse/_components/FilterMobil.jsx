@@ -106,7 +106,7 @@ export default function FilterMobil({ selectedOptions, onApply }) {
       <div className="lg:hidden flex items-center">
         <div onClick={toggleFilterModal}>
           <Select>
-            <SelectTrigger className="w-[160px]">
+            <SelectTrigger className="w-[170px]">
               <SelectValue placeholder="Filtreaza" />
             </SelectTrigger>
           </Select>
