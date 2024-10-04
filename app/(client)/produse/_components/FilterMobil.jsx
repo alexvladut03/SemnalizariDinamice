@@ -1,9 +1,9 @@
-"use client";
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RemoveScroll } from "react-remove-scroll";
 import { Checkbox } from "@/components/ui/checkbox";
+import { FaStar } from "react-icons/fa";
 
 export default function FilterMobil({ selectedOptions, onApply }) {
   const [openFilter, setOpenFilter] = useState(false);
@@ -30,11 +30,11 @@ export default function FilterMobil({ selectedOptions, onApply }) {
     ],
     Disponibilitate: ["In Stoc", "Noutăți"],
     "Rating minim": [
-      { label: "★★★★★ (56)", value: "5-stele" },
-      { label: "★★★★☆ (34)", value: "4-stele" },
-      { label: "★★★☆☆ (23)", value: "3-stele" },
-      { label: "★★☆☆☆ (10)", value: "2-stele" },
-      { label: "★☆☆☆☆ (2)", value: "1-stea" },
+      { stars: 5, count: 56, value: "5-stele" },
+      { stars: 4, count: 34, value: "4-stele" },
+      { stars: 3, count: 23, value: "3-stele" },
+      { stars: 2, count: 10, value: "2-stele" },
+      { stars: 1, count: 2, value: "1-stea" },
     ],
   };
 
@@ -85,6 +85,20 @@ export default function FilterMobil({ selectedOptions, onApply }) {
       "Rating minim": [],
       Produse: [],
     });
+  };
+
+  // Funție pentru generarea stelelor cu FaStar
+  const renderStars = (starsCount) => {
+    return (
+      <div className="flex items-center">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <FaStar
+            key={index}
+            className={index < starsCount ? "text-amber-500" : "text-gray-200"}
+          />
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -139,25 +153,40 @@ export default function FilterMobil({ selectedOptions, onApply }) {
                         key={index}
                         className="flex items-center cursor-pointer"
                         onClick={() =>
-                          handleCheckboxChange(selectedCategory, option)
-                        } // Add this to handle clicks on the entire div
+                          handleCheckboxChange(
+                            selectedCategory,
+                            option.value || option
+                          )
+                        }
                       >
                         <Checkbox
-                          id={`${selectedCategory}-${option}`}
+                          id={`${selectedCategory}-${option.value || option}`}
                           checked={
                             localSelectedOptions[selectedCategory]?.includes(
-                              option
+                              option.value || option
                             ) || false
                           }
                           onCheckedChange={() =>
-                            handleCheckboxChange(selectedCategory, option)
+                            handleCheckboxChange(
+                              selectedCategory,
+                              option.value || option
+                            )
                           }
                         />
                         <label
-                          htmlFor={`${selectedCategory}-${option}`}
-                          className="ml-2 align-baseline"
+                          htmlFor={`${selectedCategory}-${
+                            option.value || option
+                          }`}
+                          className="ml-2 align-baseline flex items-center"
                         >
-                          {option}
+                          {selectedCategory === "Rating minim" ? (
+                            <>
+                              {renderStars(option.stars)}
+                              <span className="ml-2">({option.count})</span>
+                            </>
+                          ) : (
+                            option
+                          )}
                         </label>
                       </div>
                     ))}
