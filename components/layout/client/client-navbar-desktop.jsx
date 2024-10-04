@@ -34,8 +34,7 @@ export default function ClientNavbarDesktop() {
 
   const handleSearchChange = (e) => {
     e.preventDefault();
-    router.push(`/produse`);
-    console.log(searchValue);
+    router.push(`/produse?search=${encodeURIComponent(searchValue)}`);
   };
 
   return (
