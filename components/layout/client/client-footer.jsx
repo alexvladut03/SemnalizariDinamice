@@ -121,17 +121,17 @@ export default function ClientFooter() {
           <h3 className="font-semibold mb-4 text-lg">Comenzi si Livrare</h3>
           <ul className="space-y-2">
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link href="cum-cumpar" className="hover:text-amber-500">
                 Cum cumpar?
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link href="cum-platesc" className="hover:text-amber-500">
                 Cum platesc?
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:text-amber-500">
+              <Link href="cum-se-livreaza" className="hover:text-amber-500">
                 Cum se livreaza?
               </Link>
             </li>
