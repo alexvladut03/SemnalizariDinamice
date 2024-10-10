@@ -42,7 +42,7 @@ import DOMPurify from "dompurify";
 import { DisplayServerActionResponse } from "@/components/custom ui/display-server-actions-response";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-const AddProduct = ({ categories, attributes, uploads }) => {
+const AddProduct = ({ categories, attributes, images }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [mainImage, setMainImage] = useState(null);
   const [gallery, setGallery] = useState([]);
@@ -101,17 +101,17 @@ const AddProduct = ({ categories, attributes, uploads }) => {
     setMainImage(null);
   };
 
-  const handleAddMainImage = (url) => {
-    setMainImage({ url });
+  const handleAddMainImage = (image) => {
+    setMainImage(image);
   };
 
   const handleRemoveGalleryImage = (image) => {
     setGallery(gallery.filter((img) => img !== image));
   };
 
-  const handleAddGalleryImage = (url) => {
+  const handleAddGalleryImage = (id) => {
     setGallery((prevGallery) => {
-      const updatedGallery = [...prevGallery, url];
+      const updatedGallery = [...prevGallery, id];
       return updatedGallery;
     });
   };
@@ -185,7 +185,7 @@ const AddProduct = ({ categories, attributes, uploads }) => {
                   price: parseFloat(values.price),
                   stock: parseInt(values.stock),
                   attributes: selectedAttrValues,
-                  mainImage: mainImage ? mainImage.url : "", // Ensure this is passed correctly
+                  mainImage: mainImage ? mainImage : "", // Ensure this is passed correctly
                   gallery: gallery, // Pass the gallery directly as an array
                   description: DOMPurify.sanitize(description), // Sanitize without stringifying
                 });
@@ -271,7 +271,7 @@ const AddProduct = ({ categories, attributes, uploads }) => {
                               value={
                                 selectedChildCategory
                                   ? selectedChildCategory.id
-                                  : ""
+                                  : null
                               }
                               name={field.name}
                             >
@@ -501,7 +501,7 @@ const AddProduct = ({ categories, attributes, uploads }) => {
                             Select an image for the main image.
                           </DialogDescription>
                           <MediaPopUp
-                            uploads={uploads}
+                            images={images}
                             onImageSelect={handleAddMainImage}
                           />
                         </DialogHeader>
@@ -534,7 +534,7 @@ const AddProduct = ({ categories, attributes, uploads }) => {
                             Select multiple images for the gallery.
                           </DialogDescription>
                           <MediaPopUp
-                            uploads={uploads}
+                            images={images}
                             onImageSelect={handleAddGalleryImage}
                           />
                         </DialogHeader>
@@ -546,7 +546,7 @@ const AddProduct = ({ categories, attributes, uploads }) => {
                       <div key={index} className="relative">
                         <Image
                           className="rounded-lg mt-3 w-40 h-40 border-2 border-gray-100 hover:border-gray-300"
-                          src={image}
+                          src={image.url}
                           alt="Gallery Image"
                           width={200}
                           height={200}
@@ -581,7 +581,7 @@ const AddProduct = ({ categories, attributes, uploads }) => {
                     <FormControl>
                       <RichTextEditor
                         {...field}
-                        uploads={uploads}
+                        images={images}
                         onChange={(value) => setDescription(value)}
                       />
                     </FormControl>

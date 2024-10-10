@@ -43,10 +43,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { updateProduct } from "@/utils/actions/product/update-product";
 import { FaEdit } from "react-icons/fa";
 
-const EditProduct = ({ categories, attributes, product, uploads }) => {
+const EditProduct = ({ categories, attributes, product, images }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [mainImage, setMainImage] = useState({ url: product.mainImage });
-  const [gallery, setGallery] = useState(product.gallery);
+  const [mainImage, setMainImage] = useState();
+  const [gallery, setGallery] = useState([]);
   const [description, setDescription] = useState(product.description);
   const mainCategories = categories.filter(
     (category) => category.parentId === null
@@ -79,8 +79,8 @@ const EditProduct = ({ categories, attributes, product, uploads }) => {
       price: product.price,
       stock: product.stock,
       slug: product.slug,
-      mainImage: product.mainImage,
-      gallery: product.gallery,
+      mainImage: mainImage,
+      gallery: gallery,
       description: product.description,
       categoryId: product.categoryId,
       subcategoryId: product.subcategoryId,
@@ -89,7 +89,7 @@ const EditProduct = ({ categories, attributes, product, uploads }) => {
   });
 
   const { execute, result, isExecuting } = useAction(updateProduct, {
-    onSuccess: ({ data }) => {
+    onSuccess: () => {
       setIsOpen(false);
       reset();
       toast({
@@ -110,19 +110,39 @@ const EditProduct = ({ categories, attributes, product, uploads }) => {
   });
 
   useEffect(() => {
+    // Reset the form with the updated product values
+    reset({
+      name: product.name,
+      sku: product.sku,
+      price: product.price,
+      stock: product.stock,
+      slug: product.slug,
+      mainImage: mainImage,
+      gallery: gallery,
+      description: product.description,
+      categoryId: product.categoryId,
+      subcategoryId: product.subcategoryId,
+      attributes: product.attributes,
+    });
+
+    // Update state variables based on the product
     setSelectedMainCategory(productCategoryWithChildren);
     setSelectedChildCategory(product.subcategory ? product.subcategory : "");
     setSelectedAttributes(attributeReformatted);
-    setMainImage({ url: product.mainImage });
-    setGallery(product.gallery);
-  }, [product]);
+    setMainImage(product.images.find((img) => img.isMain)?.image);
+    setGallery(
+      product.images
+        .filter((img) => !img.isMain) // Filter for non-main images
+        .map((img) => img.image)
+    );
+  }, [product]); // Re-run the effect when the product changes
 
   const handleRemoveMainImage = () => {
     setMainImage(null);
   };
 
-  const handleAddMainImage = (url) => {
-    setMainImage({ url });
+  const handleAddMainImage = (image) => {
+    setMainImage(image);
   };
 
   const handleRemoveGalleryImage = (image) => {
@@ -208,7 +228,7 @@ const EditProduct = ({ categories, attributes, product, uploads }) => {
                   price: parseFloat(values.price),
                   stock: parseInt(values.stock),
                   attributes: selectedAttrValues,
-                  mainImage: mainImage ? mainImage.url : "", // Ensure this is passed correctly
+                  mainImage: mainImage ? mainImage : "", // Ensure this is passed correctly
                   gallery: gallery, // Pass the gallery directly as an array
                   description: DOMPurify.sanitize(description), // Sanitize without stringifying
                   subcategoryId: selectedChildCategory
@@ -528,7 +548,7 @@ const EditProduct = ({ categories, attributes, product, uploads }) => {
                             Select an image for the main image.
                           </DialogDescription>
                           <MediaPopUp
-                            uploads={uploads}
+                            images={images}
                             onImageSelect={handleAddMainImage}
                           />
                         </DialogHeader>
@@ -561,33 +581,38 @@ const EditProduct = ({ categories, attributes, product, uploads }) => {
                             Select multiple images for the gallery.
                           </DialogDescription>
                           <MediaPopUp
-                            uploads={uploads}
+                            images={images}
                             onImageSelect={handleAddGalleryImage}
                           />
                         </DialogHeader>
                       </DialogContent>
                     </Dialog>
                   </div>
-                  <div className="grid grid-cols-4 gap-5 ">
-                    {gallery.map((image, index) => (
-                      <div key={index} className="relative">
-                        <Image
-                          className="rounded-lg mt-3 w-40 h-40 border-2 border-gray-100 hover:border-gray-300"
-                          src={image}
-                          alt="Gallery Image"
-                          width={200}
-                          height={200}
-                        />
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveGalleryImage(image)}
-                          className="pr-4 pt-2 absolute right-0 top-0 text-red-500 text-2xl"
-                        >
-                          <RiDeleteBin5Fill />
-                        </button>
-                      </div>
-                    ))}
+                  <div className="grid grid-cols-4 gap-5">
+                    {Array.isArray(gallery) && gallery.length > 0 ? (
+                      gallery.map((image) => (
+                        <div key={image.id} className="relative">
+                          <Image
+                            className="rounded-lg mt-3 w-40 h-40 border-2 border-gray-100 hover:border-gray-300"
+                            src={image.url} // Access the url property here
+                            alt={image.altText || "Imagine de galerie"} // Use altText if available
+                            width={200}
+                            height={200}
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveGalleryImage(image)} // Adjust if necessary
+                            className="pr-4 pt-2 absolute right-0 top-0 text-red-500 text-2xl"
+                          >
+                            <RiDeleteBin5Fill />
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <p>Nu sunt imagini disponibile.</p> // Optional: Render a message if no images
+                    )}
                   </div>
+
                   <input
                     type="hidden"
                     {...form.register("gallery")}
@@ -608,7 +633,7 @@ const EditProduct = ({ categories, attributes, product, uploads }) => {
                     <FormControl>
                       <RichTextEditor
                         {...field}
-                        uploads={uploads}
+                        images={images}
                         onChange={(value) => setDescription(value)}
                       />
                     </FormControl>

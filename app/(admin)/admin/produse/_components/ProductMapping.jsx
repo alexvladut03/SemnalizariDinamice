@@ -18,7 +18,7 @@ import EditProduct from "./EditProduct";
 import { deleteProduct } from "@/utils/actions/product/delete-product";
 import Image from "next/image";
 
-const ProductMapping = ({ products, categories, attributes, uploads }) => {
+const ProductMapping = ({ products, categories, attributes, images }) => {
   const [openDialogId, setOpenDialogId] = useState(null);
   const { execute, optimisticState } = useOptimisticAction(deleteProduct, {
     currentState: products,
@@ -48,10 +48,19 @@ const ProductMapping = ({ products, categories, attributes, uploads }) => {
       key={product.id}
       className="p-2 border-b border-gray-200 grid grid-cols-7 items-center"
     >
+      {console.log(product)}
       <p>{product.sku}</p>
       <p>{product.name}</p>
       <div>
-        <Image src={product.mainImage} width={100} height={100} />
+        {product.images.find((img) => img.isMain) ? (
+          <Image
+            src={product.images.find((img) => img.isMain)?.image.url || ""}
+            width={100}
+            height={100}
+          />
+        ) : (
+          "Fara imagine"
+        )}
       </div>
       <div>{`${product.category.name} ${
         product.subcategory?.name ? `> ${product.subcategory.name}` : ""
@@ -63,7 +72,7 @@ const ProductMapping = ({ products, categories, attributes, uploads }) => {
           product={product}
           categories={categories}
           attributes={attributes}
-          uploads={uploads}
+          images={images}
         />
         <AlertDialog
           open={openDialogId === product.id}

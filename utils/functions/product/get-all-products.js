@@ -12,6 +12,11 @@ export const getAllProducts = unstable_cache(
         category: true,
         subcategory: true,
         attributes: true,
+        images: {
+          include: {
+            image: true, // Include the Image model to get the URL
+          },
+        },
       },
     });
     return products;

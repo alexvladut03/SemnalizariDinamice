@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { zfd } from "zod-form-data";
 
 export const loginSchema = z.object({
   username: z
@@ -49,8 +50,20 @@ export const ProductSchema = z.object({
     .number({ message: "Stock-ul trebuie sa fie un numar" })
     .int()
     .nonnegative("Stocul trebuie sa fie un numar pozitiv"),
-  mainImage: z.string(),
-  gallery: z.array(z.string()),
+  mainImage: z.object({
+    id: z.string().min(1, "ID-ul este obligatoriu"),
+    name: z.string().min(1, "Numele este obligatoriu"),
+    uploadthingKey: z.string().min(1, "Cheia de upload este obligatorie"),
+    url: z.string(),
+  }),
+  gallery: z.array(
+    z.object({
+      id: z.string().min(1, "ID-ul este obligatoriu"),
+      name: z.string().min(1, "Numele este obligatoriu"),
+      uploadthingKey: z.string().min(1, "Cheia de upload este obligatorie"),
+      url: z.string(),
+    })
+  ),
   description: z.string().optional(),
   categoryId: z.string().min(1, "Categoria este obligatorie"), // Main category is required
   subcategoryId: z.string().optional(), // Optional field for child categories
@@ -81,4 +94,17 @@ export const attributeSchema = z.object({
   values: z
     .array(z.string().min(1, "Campul este obligatoriu"))
     .nonempty("Cel putin o valoare este necesara"),
+});
+
+export const imagesSchema = zfd.formData({
+  files: z.array(zfd.file()),
+});
+
+export const imageSchema = z.object({
+  image: z.object({
+    id: z.string().min(1, "ID-ul este obligatoriu"),
+    name: z.string().min(1, "Numele este obligatoriu"),
+    uploadthingKey: z.string().min(1, "Cheia de upload este obligatorie"),
+    url: z.string(),
+  }),
 });

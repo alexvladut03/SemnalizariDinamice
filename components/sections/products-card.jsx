@@ -4,14 +4,15 @@ import React from "react";
 import CartButton from "../custom ui/add-to-cart-button";
 
 const ProductsCard = ({ product }) => {
-  const { name, mainImage, price, slug } = product;
+  const { name, images, price, slug } = product;
+  const mainImage = images.find((img) => img.isMain)?.image;
 
   return (
     <div className="group relative border border-grey-500 flex justify-between flex-col rounded-lg p-6 overflow-hidden">
       <Link href={`/produse/${slug}`} prefetch={true}>
         <div className="relative block">
           <Image
-            src={mainImage}
+            src={mainImage?.url}
             alt={name}
             width={200}
             height={200}

@@ -80,6 +80,11 @@ export const updateProduct = authActionClient
         throw new Error("Produsul nu exista");
       }
 
+      // Check if the mainImage is in the gallery
+      if (gallery.find((image) => image.id === mainImage.id)) {
+        throw new Error("Imaginea principala este deja in galerie");
+      }
+
       // Update the product
       const updatedProduct = await prisma.product.update({
         where: { id },
@@ -89,8 +94,6 @@ export const updateProduct = authActionClient
           price,
           stock,
           slug: formatedSlug,
-          mainImage,
-          gallery,
           description,
           categoryId,
           subcategoryId: subcategoryId || null,
@@ -102,6 +105,25 @@ export const updateProduct = authActionClient
                 set: attr.values,
               },
             })),
+          },
+          images: {
+            deleteMany: {}, // Remove existing images if necessary
+            create: [
+              {
+                image: {
+                  connect: { id: mainImage.id }, // Connect the main image
+                },
+                isMain: true, // Set isMain to true for the main image
+                order: 0, // Optionally set the order for the main image
+              },
+              ...gallery.map((image, index) => ({
+                image: {
+                  connect: { id: image.id }, // Connect each gallery image
+                },
+                isMain: false, // Set isMain to false for gallery images
+                order: index + 1, // Set order for gallery images
+              })),
+            ],
           },
         },
       });

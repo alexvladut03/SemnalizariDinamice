@@ -22,10 +22,7 @@ const ProductPage = async ({ params }) => {
       return <div>Product not found</div>;
     }
 
-    const productGallery = [
-      product.mainImage.url,
-      ...product.gallery.map((image) => image.url),
-    ];
+    console.log(product);
 
     return (
       <>
@@ -50,10 +47,10 @@ const ProductPage = async ({ params }) => {
           </h1>
         </section>
         <section className="grid sm:grid-cols-1 lg:grid-cols-3 justify-items-center pb-5 items-center">
-          <ProductImages name={product.name} images={productGallery} />
+          <ProductImages name={product.name} images={product.images} />
           <ProductPrice
             price={product.price}
-            id={product.id}
+            sku={product.sku}
             filteredCategories={product}
           />
           <ProductBuy

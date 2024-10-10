@@ -70,6 +70,9 @@ export const createProduct = authActionClient
         throw new Error(`Atribut duplicat : ${duplicateAttributes.join(", ")}`);
       }
 
+      console.log("Main Image", mainImage);
+      console.log("Gallery", gallery);
+
       // Create the new product
       const newProduct = await prisma.product.create({
         data: {
@@ -78,11 +81,27 @@ export const createProduct = authActionClient
           price,
           stock,
           slug: formatedSlug,
-          mainImage,
-          gallery,
           description,
-          categoryId,
-          subcategoryId: subcategoryId || null,
+          categoryId: categoryId || null, // Ensure this is a valid ID or null
+          subcategoryId: subcategoryId ? subcategoryId : null, // Set to null if empty
+          images: {
+            create: [
+              {
+                image: {
+                  connect: { id: mainImage.id }, // Directly connect the id
+                },
+                isMain: true, // Set isMain to true for the main image
+                order: 0, // Optionally set the order for the main image
+              },
+              ...gallery.map((image) => ({
+                image: {
+                  connect: { id: image.id }, // Directly connect the id of each gallery image
+                },
+                isMain: false, // Set isMain to false for gallery images
+                order: gallery.indexOf(image) + 1, // Optional: Set order for gallery images
+              })),
+            ],
+          },
           attributes: {
             create: attributes.map((attr) => ({
               attributeId: attr.attributeId,

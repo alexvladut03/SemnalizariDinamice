@@ -5,12 +5,6 @@ import Featured from "@/components/sections/featured";
 import Testimonials from "@/components/sections/testimonials";
 
 export default function page() {
-  const formData = {
-    name: "",
-    username: "",
-    password: "",
-  };
-
   return (
     <>
       <Hero />

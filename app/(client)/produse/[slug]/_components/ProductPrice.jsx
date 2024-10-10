@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const ProductPrice = ({ price, id, filteredCategories }) => {
+const ProductPrice = ({ price, sku, filteredCategories }) => {
   return (
     <div className=" w-full lg:w-auto text-center lg:text-left">
       <div>
@@ -11,7 +11,7 @@ const ProductPrice = ({ price, id, filteredCategories }) => {
       <div className="text-gray-700">
         <span className="text-amber-500">★ ★ ★ ★ ☆</span>
         <span> 5.0 (4 recenzii | 100 vandute)</span>
-        <p>Cod produs: {id}</p>
+        <p>Cod produs: {sku}</p>
         <p>Retur: gratis pana la 15 zile</p>
         <hr className="border-t-2 border-amber-500 my-4" />
       </div>

@@ -28,7 +28,7 @@ const ProductImages = ({ name, images }) => {
   return (
     <div className="flex flex-col items-center w-full lg:w-auto max-w-sm">
       <Image
-        src={images[activeImage]}
+        src={images[activeImage].image.url}
         alt={name}
         width={400}
         height={400}
@@ -52,7 +52,7 @@ const ProductImages = ({ name, images }) => {
           {images.map((image, index) => (
             <Image
               key={index}
-              src={image}
+              src={image.image.url}
               alt={name}
               width={80}
               height={80}

@@ -3,13 +3,20 @@ import AddProduct from "./_components/AddProduct";
 import ProductMapping from "./_components/ProductMapping";
 import { getAllCategories } from "@/utils/functions/category/get-all-categories";
 import { getAllAttributes } from "@/utils/functions/attribute/get-all-attributes";
-import { getImagesCustom } from "@/utils/actions/images/get-images";
+import { getAllImages } from "@/utils/functions/image/get-all-images";
 
 const produse = async () => {
-  const products = await getAllProducts();
-  const categories = await getAllCategories();
-  const attributes = await getAllAttributes();
-  const uploads = await getImagesCustom();
+  const productsData = getAllProducts();
+  const categoriesData = getAllCategories();
+  const attributesData = getAllAttributes();
+  const imagesData = getAllImages();
+
+  const [products, categories, attributes, images] = await Promise.all([
+    productsData,
+    categoriesData,
+    attributesData,
+    imagesData,
+  ]);
 
   return (
     <div className="p-4 bg-gray-100">
@@ -20,7 +27,7 @@ const produse = async () => {
         <AddProduct
           categories={categories}
           attributes={attributes}
-          uploads={uploads}
+          images={images}
         />
       </div>
 
@@ -39,7 +46,7 @@ const produse = async () => {
             products={products}
             categories={categories}
             attributes={attributes}
-            uploads={uploads}
+            images={images}
           />
         </div>
       </section>

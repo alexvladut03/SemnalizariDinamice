@@ -31,7 +31,7 @@ import {
 } from "@/components/ui/dialog";
 import MediaPopUp from "./media-pop-up";
 
-const RichTextEditor = forwardRef(({ uploads, value, onChange }, ref) => {
+const RichTextEditor = forwardRef(({ images, value, onChange }, ref) => {
   const editor = useEditor({
     editorProps: {
       attributes: {
@@ -90,13 +90,13 @@ const RichTextEditor = forwardRef(({ uploads, value, onChange }, ref) => {
     <>
       <EditorContent editor={editor} ref={ref} />
       {editor ? (
-        <RichTextEditorToolbar uploads={uploads} editor={editor} />
+        <RichTextEditorToolbar images={images} editor={editor} />
       ) : null}
     </>
   );
 });
 
-const RichTextEditorToolbar = ({ uploads, editor }) => {
+const RichTextEditorToolbar = ({ images, editor }) => {
   return (
     <div className="border border-input bg-transparent rounded-br-md rounded-bl-md p-1 flex flex-row items-center gap-1">
       <Toggle
@@ -197,7 +197,7 @@ const RichTextEditorToolbar = ({ uploads, editor }) => {
           <DialogHeader>
             <DialogTitle>Images</DialogTitle>
             <DialogDescription>
-              <MediaPopUp uploads={uploads} editor={editor} />
+              <MediaPopUp images={images} editor={editor} />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
