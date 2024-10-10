@@ -9,6 +9,7 @@ import { RemoveScroll } from "react-remove-scroll";
 import { useCart } from "@/utils/context/cart-provider";
 import ClientNavbarCartProducts from "./client-navbar-cartproducts";
 import { FaSearch } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function ClientNavBarMobile() {
   const { countCartItems } = useCart();
@@ -23,6 +24,9 @@ export default function ClientNavBarMobile() {
   const startY = useRef(0);
   const currentX = useRef(0);
   const currentY = useRef(0);
+
+  const router = useRouter();
+  const [searchValue, setSearchValue] = useState("");
 
   const toggleCart = () => {
     if (isCartOpen) {
@@ -121,6 +125,10 @@ export default function ClientNavBarMobile() {
     }
   };
 
+  const handleSearchChange = (e) => {
+    e.preventDefault();
+    router.push(`/produse?search=${encodeURIComponent(searchValue)}`);
+  };
   return (
     <main>
       <div className="flex justify-between items-center w-full">
@@ -140,11 +148,15 @@ export default function ClientNavBarMobile() {
       </div>
       {/* Meniul de search. */}
       <div className="relative w-full text-white mt-2">
-        <input
-          type="text"
-          placeholder="Cauta produsul dorit..."
-          className="w-full pl-2 pr-10 py-1 border-2 border-amber-500 rounded-full bg-transparent placeholder:text-white focus:outline-none"
-        />
+        <form onSubmit={handleSearchChange}>
+          <input
+            type="text"
+            placeholder="Cauta produsul dorit..."
+            className="w-full pl-2 pr-10 py-1 border-2 border-amber-500 rounded-full bg-transparent placeholder:text-white focus:outline-none"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
+        </form>
         <FaSearch className="absolute right-3 top-2 text-xl cursor-pointer" />
       </div>
 

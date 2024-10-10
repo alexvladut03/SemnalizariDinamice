@@ -61,7 +61,7 @@ export default function OrderMobilAndDesktop({ setSortOrder }) {
         <div className="lg:hidden flex items-center">
           <div onClick={toggleFilterModal}>
             <Select>
-              <SelectTrigger className="w-[160px]">
+              <SelectTrigger className="w-[170px]">
                 <SelectValue placeholder={selectedValue || "Ordoneaza"} />
               </SelectTrigger>
             </Select>

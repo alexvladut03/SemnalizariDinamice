@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { CgMediaPodcast } from "react-icons/cg";
+import Link from "next/link";
 export default function ContactUsInfo() {
   return (
     <div className="space-y-4">
@@ -36,9 +37,15 @@ export default function ContactUsInfo() {
       <div className="p-3 rounded-xl flex flex-row items-center border border-gray-200 text-gray-400">
         <CgMediaPodcast className="text-gray-400 text-xl mr-4 col-span-2 sm:col-span-1" />
         <p className="font-semibold ">Retele de socializare:</p>
-        <FaFacebook className="text-xl mx-2" />
-        <FaTiktok className="text-xl mx-2" />
-        <FaInstagram className="text-xl mx-2" />
+        <Link href="https://www.facebook.com" target="_blank">
+          <FaFacebook className="text-xl mx-2 hover:text-amber-500" />
+        </Link>
+        <Link href="https://www.instagram.com" target="_blank">
+          <FaInstagram className="text-xl mx-2 hover:text-amber-500" />
+        </Link>
+        <Link href="https://www.tiktok.com" target="_blank">
+          <FaTiktok className="text-xl mx-2 hover:text-amber-500" />{" "}
+        </Link>
       </div>
     </div>
   );

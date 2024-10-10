@@ -1,7 +1,7 @@
 "use client";
 import GeneralButton from "@/components/custom ui/general-button";
 import { Verified } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import {
   Dialog,
@@ -94,12 +94,17 @@ export default function ProductDetailsReview() {
     }
   };
 
-  const [openDialog, setOpenDialog] = useState(false); // Adăugăm starea pentru dialog
-
+  const [openDialog, setOpenDialog] = useState(false);
   const handleAddReview = () => {
-    setOpenDialog(true); // Deschidem dialogul când se apasă pe buton
+    setOpenDialog(true);
   };
-
+  useEffect(() => {
+    if (!openDialog) {
+      setRating(0); // Resetăm rating-ul când dialogul se închide
+      setHoveredStar(0); // Resetăm și stelele hover
+    }
+  }, [openDialog]);
+  const [rating, setRating] = useState(0); // Adăugăm starea pentru rating-ul selectat
   return (
     <div>
       <div className="lg:flex lg:flex-row lg:gap-10 grid grid-rows-2 border-b-2 border-amber-500 pb-2">
@@ -232,10 +237,14 @@ export default function ProductDetailsReview() {
                 } hover:text-amber-500`}
                 onMouseEnter={() => setHoveredStar(index + 1)} // Setăm steaua pe hover
                 onMouseLeave={() => setHoveredStar(0)} // Resetăm steaua când mouse-ul părăsește
+                onClick={() => {
+                  setRating(index + 1); // Setăm rating-ul selectat
+                  handleAddReview(); // Deschidem dialogul la click
+                }}
               />
             ))}
             <span className="ml-2 font-semibold text-lg">
-              {getRatingText(hoveredStar)}
+              {getRatingText(hoveredStar || rating)}
             </span>
           </div>
           <div onClick={handleAddReview}>
@@ -284,28 +293,34 @@ export default function ProductDetailsReview() {
             <DialogHeader className="flex flex-row gap-4">
               <Image src="/logo.png" width={100} height={100} alt="Logo" />
               <div>
-                <DialogTitle>Adaugă un review pentru:</DialogTitle>
-                <DialogDescription>Semnalizari dinamice</DialogDescription>
+                <DialogTitle className="text-lg">
+                  Adaugă un review pentru:
+                </DialogTitle>
+                <DialogDescription className="text-base">
+                  Semnalizari dinamice
+                </DialogDescription>
               </div>
             </DialogHeader>
 
             <div className="space-y-4">
-              {/* Secțiunea pentru rating */}
+              {/* Stele de rating în dialog */}
               <div>
                 <span className="font-semibold text-lg">
-                  {getRatingText(hoveredStar)}
+                  {getRatingText(hoveredStar || rating)}
                 </span>
                 <div className="flex space-x-1">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <FaStar
                       key={index}
-                      className={`w-7 h-7 ${
-                        hoveredStar >= index + 1
+                      className={`w-7 h-7 cursor-pointer ${
+                        hoveredStar >= index + 1 ||
+                        (hoveredStar === 0 && rating >= index + 1)
                           ? "text-amber-500"
                           : "text-gray-200"
-                      } hover:text-amber-500`}
-                      onMouseEnter={() => setHoveredStar(index + 1)} // Setăm steaua pe hover
-                      onMouseLeave={() => setHoveredStar(0)} // Resetăm steaua când mouse-ul părăsește
+                      }`}
+                      onMouseEnter={() => setHoveredStar(index + 1)} // Hover efect
+                      onMouseLeave={() => setHoveredStar(0)} // Resetăm hover-ul
+                      onClick={() => setRating(index + 1)} // Permitem schimbarea rating-ului
                     />
                   ))}
                 </div>
@@ -339,7 +354,7 @@ export default function ProductDetailsReview() {
                   Încarcă imagini cu produsul pentru a oferi mai multe
                   informații și altor clienți! (optional)
                 </h4>
-                <div className="border-2 border-gray-200 p-6 text-center rounded-lg">
+                <div className="border-2 border-gray-300 p-6 text-center rounded-md">
                   <button className="text-amber-500">
                     Apasă aici pentru a încărca imaginile
                   </button>
