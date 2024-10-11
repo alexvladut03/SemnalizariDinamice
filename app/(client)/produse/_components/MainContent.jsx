@@ -15,10 +15,6 @@ export default function MainContent({ products }) {
   });
   const [sortOrder, setSortOrder] = useState("");
 
-  useEffect(() => {
-    applyFilters();
-  }, [selectedOptions, sortOrder, products, applyFilters]);
-
   const applyFilters = () => {
     let filtered = [...products];
 
@@ -47,6 +43,10 @@ export default function MainContent({ products }) {
 
     setFilteredProducts(filtered);
   };
+
+  useEffect(() => {
+    applyFilters();
+  }, [selectedOptions, sortOrder, products]);
 
   const handleApplyFilters = (filters) => {
     setSelectedOptions(filters);

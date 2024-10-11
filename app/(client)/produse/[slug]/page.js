@@ -15,17 +15,16 @@ import { getProductBySlug } from "@/utils/functions/product/get-product-by-slug"
 const ProductPage = async ({ params }) => {
   const { slug } = params;
 
-  const ProductContent = async () => {
-    const product = await getProductBySlug(slug);
-    if (!product) {
-      return <div>Product not found</div>;
-    }
+  const product = await getProductBySlug(slug);
 
-    console.log(product);
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
-    return (
-      <>
-        <section className="mt-8 mb-12">
+  return (
+    <main className="bg-white px-4">
+      <section className="max-w-7xl mx-auto">
+        <div className="mt-8 mb-12">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -44,8 +43,8 @@ const ProductPage = async ({ params }) => {
           <h1 className="sm:text-4xl font-bold tracking-tight text-black lg:text-left text-3xl mt-2 text-center">
             {product.name}
           </h1>
-        </section>
-        <section className="grid sm:grid-cols-1 lg:grid-cols-3 justify-items-center pb-5 items-center">
+        </div>
+        <div className="grid sm:grid-cols-1 lg:grid-cols-3 justify-items-center pb-5 items-center">
           <ProductImages name={product.name} images={product.images} />
           <ProductPrice
             price={product.price}
@@ -59,21 +58,13 @@ const ProductPage = async ({ params }) => {
             id={product.id}
             price={product.price}
           />
-        </section>
+        </div>
         <ProductDetails
           description={product.description}
           fitment={product.fitment}
           characteristics={product.characteristics}
         />
-      </>
-    );
-  };
-
-  return (
-    <main className="bg-white px-4">
-      <div className="max-w-7xl mx-auto">
-        <ProductContent />
-      </div>
+      </section>
     </main>
   );
 };

@@ -1,34 +1,13 @@
-import prisma from "@/utils/prisma";
-import { unstable_cache } from "next/cache";
+import { getAllProducts } from "./get-all-products";
 
-export const preload = () => {
-  void getProductBySlug();
+export const getProductBySlug = async (slug) => {
+  const products = await getAllProducts();
+
+  const product = products.find((product) => product.slug === slug);
+
+  if (!product) {
+    throw new Error("Produsul nu a fost gasit");
+  }
+
+  return product;
 };
-
-export const getProductBySlug = unstable_cache(
-  async ({ slug }) => {
-    const product = await prisma.product.findFirst({
-      where: {
-        slug,
-      },
-      include: {
-        category: true,
-        subcategory: true,
-        attributes: true,
-        images: {
-          include: {
-            image: true, // Include the Image model to get the URL
-          },
-        },
-      },
-    });
-
-    if (!product) {
-      throw new Error("Produsul nu a fost gasit");
-    }
-
-    return product;
-  },
-  ["products"],
-  { tags: ["products"] }
-);
