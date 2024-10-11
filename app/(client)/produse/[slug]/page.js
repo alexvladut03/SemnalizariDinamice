@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import ProductImages from "./_components/ProductImages";
 import ProductPrice from "./_components/ProductPrice";
 import ProductBuy from "./_components/ProductBuy";
@@ -73,9 +72,7 @@ const ProductPage = async ({ params }) => {
   return (
     <main className="bg-white px-4">
       <div className="max-w-7xl mx-auto">
-        <Suspense fallback={<div>Loading...</div>}>
-          <ProductContent />
-        </Suspense>
+        <ProductContent />
       </div>
     </main>
   );
