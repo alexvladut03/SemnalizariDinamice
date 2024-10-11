@@ -96,9 +96,15 @@ export const attributeSchema = z.object({
     .nonempty("Cel putin o valoare este necesara"),
 });
 
-export const imagesSchema = zfd.formData({
-  files: z.array(zfd.file()),
-});
+const MAX_FILE_SIZE = 500000000;
+const ACCEPTED_IMAGE_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/webp",
+];
+
+export const imagesSchema = z.instanceof(FormData);
 
 export const imageSchema = z.object({
   image: z.object({

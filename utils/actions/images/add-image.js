@@ -14,7 +14,10 @@ const addImage = authActionClient
   })
   .schema(imagesSchema)
   .metadata({ actionName: "addImage" })
-  .action(async ({ parsedInput: { files }, ctx: { userId } }) => {
+  .action(async ({ parsedInput, ctx: { userId } }) => {
+    // Extract files from FormData
+    const files = parsedInput.getAll("files");
+
     // Test if there are files
     if (!files.length) {
       throw new Error("Nu s-au gasit fisiere.");

@@ -12,7 +12,7 @@ import addImage from "@/utils/actions/images/add-image";
 import { useDropzone } from "react-dropzone";
 import { useAction } from "next-safe-action/hooks";
 import { toast } from "@/components/ui/use-toast";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Loader2 } from "lucide-react";
 import { FaXmark } from "react-icons/fa6";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -34,11 +34,11 @@ export const AddImage = () => {
         duration: 3000,
       });
     },
-    onError: () => {
+    onError: ({ error }) => {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "A aparut o eroare in timpul adaugarii imaginii.",
+        description: error.serverError,
         duration: 3000,
       });
     },
@@ -88,11 +88,9 @@ export const AddImage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!files?.length) return;
-
     const formData = new FormData();
-    files.forEach((file, index) => {
-      formData.append(`files[${index}]`, file); // Use array-like naming
+    files.forEach((file) => {
+      formData.append("files", file);
     });
 
     console.log("formData", formData);
@@ -140,7 +138,14 @@ export const AddImage = () => {
                 <Button type="button" onClick={removeAll}>
                   Sterge toate imaginile
                 </Button>
-                <Button type="submit">Incarca imaginile</Button>
+                {isExecuting ? (
+                  <Button type="submit" disabled>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Se incarca..
+                  </Button>
+                ) : (
+                  <Button type="submit">Incarca imaginile</Button>
+                )}
               </div>
             </div>
 
