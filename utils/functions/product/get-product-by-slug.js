@@ -6,8 +6,8 @@ export const preload = () => {
 };
 
 export const getProductBySlug = unstable_cache(
-  ({ slug }) => {
-    const product = prisma.product.findFirst({
+  async ({ slug }) => {
+    const product = await prisma.product.findFirst({
       where: {
         slug,
       },

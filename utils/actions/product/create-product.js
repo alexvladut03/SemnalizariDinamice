@@ -70,8 +70,9 @@ export const createProduct = authActionClient
         throw new Error(`Atribut duplicat : ${duplicateAttributes.join(", ")}`);
       }
 
-      console.log("Main Image", mainImage);
-      console.log("Gallery", gallery);
+      if (!mainImage) {
+        throw new Error("Imaginea principala este obligatorie");
+      }
 
       // Create the new product
       const newProduct = await prisma.product.create({

@@ -23,7 +23,7 @@ export default function ProductBoxCart({ item }) {
   return (
     <div className="bg-white rounded-lg shadow lg:p-6 p-2 flex flex-row w-full h-auto items-start relative">
       <Image
-        src={item.image}
+        src={item.mainImage.url}
         alt="Loading..."
         width={100}
         height={100}

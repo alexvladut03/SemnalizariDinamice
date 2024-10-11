@@ -53,14 +53,14 @@ export const ProductSchema = z.object({
     id: z.string().min(1, "ID-ul este obligatoriu"),
     name: z.string().min(1, "Numele este obligatoriu"),
     uploadthingKey: z.string().min(1, "Cheia de upload este obligatorie"),
-    url: z.string(),
+    url: z.string().min(1, "Imaginea este obligatorie"),
   }),
   gallery: z.array(
     z.object({
       id: z.string().min(1, "ID-ul este obligatoriu"),
       name: z.string().min(1, "Numele este obligatoriu"),
       uploadthingKey: z.string().min(1, "Cheia de upload este obligatorie"),
-      url: z.string(),
+      url: z.string().min(1, "Imaginea este obligatorie"),
     })
   ),
   description: z.string().optional(),

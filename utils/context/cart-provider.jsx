@@ -1,7 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useGetAllProductsByIds } from "../hooks/products/useGetAllProductsByIds";
-
-//trebuie rezolvat importul de la useGetAllProductsByIds
+import { getAllProductsByIds } from "../functions/product/get-all-products-by-ids";
 
 const CartContext = createContext({
   items: [],
@@ -12,7 +10,6 @@ const CartContext = createContext({
 });
 
 const updateCartInLocalStorage = (cartItems) => {
-  console.log("cartItems", cartItems);
   const cartItemsToStore = cartItems.map((item) => ({
     id: item.id,
     count: item.count,
@@ -68,11 +65,12 @@ const CartProvider = ({ children }) => {
       localStorage.getItem("cartItems")
     );
 
-    const fetchItems = () => {
+    const fetchItems = async () => {
       if (cartItemsFromLocalStorage) {
         const ids = cartItemsFromLocalStorage.map((item) => item.id);
 
-        const items = useGetAllProductsByIds(ids);
+        const items = await getAllProductsByIds(ids);
+        console.log("items", items);
         const countMap = new Map();
 
         // Aggregate counts for each id

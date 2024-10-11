@@ -31,7 +31,7 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
                   className="grid grid-cols-4 items-start lg:mb-2 mb-4 border-b border-amber-500 w-full"
                 >
                   <Image
-                    src={item.image}
+                    src={item.mainImage.url}
                     alt={item.name}
                     width={64}
                     height={64}

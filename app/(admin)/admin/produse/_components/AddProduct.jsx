@@ -44,7 +44,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 const AddProduct = ({ categories, attributes, images }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [mainImage, setMainImage] = useState(null);
+  const [mainImage, setMainImage] = useState();
   const [gallery, setGallery] = useState([]);
   const [description, setDescription] = useState("");
   const mainCategories = categories.filter(
@@ -185,7 +185,7 @@ const AddProduct = ({ categories, attributes, images }) => {
                   price: parseFloat(values.price),
                   stock: parseInt(values.stock),
                   attributes: selectedAttrValues,
-                  mainImage: mainImage ? mainImage : "", // Ensure this is passed correctly
+                  mainImage: mainImage ? mainImage : {}, // Ensure this is passed correctly
                   gallery: gallery, // Pass the gallery directly as an array
                   description: DOMPurify.sanitize(description), // Sanitize without stringifying
                 });
@@ -514,7 +514,7 @@ const AddProduct = ({ categories, attributes, images }) => {
                     value={mainImage ? JSON.stringify(mainImage) : ""}
                   />
                   <DisplayValidationError
-                    value={result.validationErrors?.mainImage}
+                    value={result.validationErrors?.mainImage.url}
                   />
                 </div>
 
