@@ -17,7 +17,7 @@ export default function MainContent({ products }) {
 
   useEffect(() => {
     applyFilters();
-  }, [selectedOptions, sortOrder, products]);
+  }, [selectedOptions, sortOrder, products, applyFilters]);
 
   const applyFilters = () => {
     let filtered = [...products];

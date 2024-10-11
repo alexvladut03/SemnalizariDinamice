@@ -55,6 +55,7 @@ const ProductMapping = ({ products, categories, attributes, images }) => {
         {product.images.find((img) => img.isMain) ? (
           <Image
             src={product.images.find((img) => img.isMain)?.image.url || ""}
+            alt={product.images.find((img) => img.isMain)?.image.alt || ""}
             width={100}
             height={100}
           />

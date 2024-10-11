@@ -135,7 +135,14 @@ const EditProduct = ({ categories, attributes, product, images }) => {
         .filter((img) => !img.isMain) // Filter for non-main images
         .map((img) => img.image)
     );
-  }, [product]); // Re-run the effect when the product changes
+  }, [
+    product,
+    attributeReformatted,
+    gallery,
+    mainImage,
+    productCategoryWithChildren,
+    reset,
+  ]); // Re-run the effect when the product changes
 
   const handleRemoveMainImage = () => {
     setMainImage(null);

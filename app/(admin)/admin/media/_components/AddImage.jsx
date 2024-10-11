@@ -125,7 +125,7 @@ export const AddImage = () => {
               {isDragActive ? (
                 <p>Se incarca...</p>
               ) : (
-                <p>Poti sa dai click sau "drag & drop" aici</p>
+                <p>Poti sa dai click sau &quot;drag & drop&quot; aici</p>
               )}
             </div>
           </div>
