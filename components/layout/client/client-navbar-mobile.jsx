@@ -10,9 +10,12 @@ import { useCart } from "@/utils/context/cart-provider";
 import ClientNavbarCartProducts from "./client-navbar-cartproducts";
 import { FaSearch } from "react-icons/fa";
 import { useRouter } from "next/navigation";
+import { AiOutlineLoading } from "react-icons/ai";
 
 export default function ClientNavBarMobile() {
-  const { countCartItems } = useCart();
+  const { countCartItems, loading } = useCart();
+  // Calculate the number of items in the cart
+  const cartItemCount = countCartItems();
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -141,8 +144,12 @@ export default function ClientNavBarMobile() {
 
         <div className="relative" onClick={toggleCart}>
           <FaCartPlus className="text-2xl text-amber-500 mr-2 cursor-pointer" />
-          <p className="absolute -top-[7px] right-0 bg-red-500 text-white rounded-full w-4 h-4 text-center text-xs">
-            {countCartItems()}
+          <p className="absolute -top-[7px] right-0 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">
+            {loading ? (
+              <AiOutlineLoading className="animate-spin" />
+            ) : (
+              cartItemCount
+            )}
           </p>
         </div>
       </div>

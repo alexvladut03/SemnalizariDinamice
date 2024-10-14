@@ -10,19 +10,25 @@ const CartContext = createContext({
   removeFromCart() {},
   countCartItems() {},
   countTotalPrice() {},
+  loading: false, // Add loading state to context
 });
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true); // New loading state
 
   const addToCart = async (product, qty) => {
+    setLoading(true);
     const updatedCart = await updateCart(product, qty);
     await fetchAndUpdateCart(updatedCart);
+    setLoading(false);
   };
 
   const removeItemFromCart = async (productId) => {
+    setLoading(true);
     const updatedCart = await removeFromCart(productId);
     await fetchAndUpdateCart(updatedCart);
+    setLoading(false);
   };
 
   const countCartItems = () => {
@@ -56,8 +62,10 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchCart = async () => {
+      setLoading(true);
       const cart = await getCart();
       await fetchAndUpdateCart(cart);
+      setLoading(false);
     };
 
     fetchCart();
@@ -71,6 +79,7 @@ const CartProvider = ({ children }) => {
         removeFromCart: removeItemFromCart,
         countCartItems,
         countTotalPrice,
+        loading, // Provide loading state in context
       }}
     >
       {children}

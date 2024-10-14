@@ -22,8 +22,6 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
           />
         </div>
 
-        {console.log("itemele sunt ", cartItems.items)}
-
         {cartItems.items.length > 0 ? (
           <>
             <div className="overflow-y-auto h-auto lg:max-h-48 scrollbar-hide">
