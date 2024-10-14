@@ -5,14 +5,14 @@ import { useCart } from "../../../../utils/context/cart-provider";
 
 export default function ProductBoxCart({ item }) {
   const [activeQuantity, setActiveQuantity] = useState(item.count);
-  const { updateCart, removeFromCart } = useCart();
+  const { addToCart, removeFromCart } = useCart();
 
   const setNextQuantity = () => {
-    updateCart(item, 1);
+    addToCart(item, 1);
     setActiveQuantity(activeQuantity + 1);
   };
   const setPreviousQuantity = () => {
-    updateCart(item, -1);
+    addToCart(item, -1);
     setActiveQuantity(activeQuantity - 1);
   };
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import CartButton from "../custom ui/add-to-cart-button";
+import AddToCartButton from "../custom ui/add-to-cart-button";
 
 const ProductsCard = ({ product }) => {
   const { name, images, price, slug } = product;
@@ -28,7 +28,7 @@ const ProductsCard = ({ product }) => {
       </Link>
       <div className="flex flex-col gap-3">
         <p className="mt-1.5 text-md text-gray-700 font-bold">{price} RON</p>
-        <CartButton product={product} />
+        <AddToCartButton product={product} />
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import GeneralButton from "@/components/custom ui/general-button";
 import { useCart } from "@/utils/context/cart-provider";
 
 export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
-  const { countTotalPrice, updateCart } = useCart();
+  const { countTotalPrice, addToCart } = useCart();
   const cartItems = useCart();
 
   return (
@@ -22,6 +22,8 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
           />
         </div>
 
+        {console.log("itemele sunt ", cartItems.items)}
+
         {cartItems.items.length > 0 ? (
           <>
             <div className="overflow-y-auto h-auto lg:max-h-48 scrollbar-hide">
@@ -31,7 +33,7 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
                   className="grid grid-cols-4 items-start lg:mb-2 mb-4 border-b border-amber-500 w-full"
                 >
                   <Image
-                    src={item.mainImage.url}
+                    src={item.mainImage?.url}
                     alt={item.name}
                     width={64}
                     height={64}
@@ -49,7 +51,7 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
                     </p>
                     <div className="flex mt-1">
                       <button
-                        onClick={() => updateCart(item, -1)}
+                        onClick={() => addToCart(item, -1)}
                         className="lg:text-black text-white"
                       >
                         <FaMinusCircle />
@@ -58,7 +60,7 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
                         {item.count}
                       </span>
                       <button
-                        onClick={() => updateCart(item, 1)}
+                        onClick={() => addToCart(item, 1)}
                         className="lg:text-black text-white"
                       >
                         <FaPlusCircle />

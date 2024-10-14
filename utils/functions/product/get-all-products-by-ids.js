@@ -2,12 +2,8 @@
 import prisma from "@/utils/prisma";
 import { unstable_cache } from "next/cache";
 
-export const preload = () => {
-  void getAllProductsByIds();
-};
-
 export const getAllProductsByIds = unstable_cache(
-  async ({ ids }) => {
+  async (ids) => {
     const products = await prisma.product.findMany({
       where: {
         id: {

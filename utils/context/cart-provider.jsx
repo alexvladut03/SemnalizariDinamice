@@ -1,55 +1,28 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAllProductsByIds } from "../functions/product/get-all-products-by-ids";
+import { removeFromCart } from "../actions/cart/remove-from-cart";
+import { getCart } from "../actions/cart/get-cart";
+import { updateCart } from "../actions/cart/update-cart";
 
 const CartContext = createContext({
   items: [],
-  updateCart() {},
+  addToCart() {},
   removeFromCart() {},
   countCartItems() {},
   countTotalPrice() {},
 });
 
-const updateCartInLocalStorage = (cartItems) => {
-  const cartItemsToStore = cartItems.map((item) => ({
-    id: item.id,
-    count: item.count,
-  }));
-  localStorage.setItem("cartItems", JSON.stringify(cartItemsToStore));
-};
-
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  const updateCart = (product, qty) => {
-    const finalCartItems = [...cartItems];
-    const index = cartItems.findIndex((item) => item.id === product.id);
-
-    if (index === -1) {
-      if (qty > 0) {
-        finalCartItems.push({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          image: product.mainImage,
-          count: qty,
-        });
-      }
-    } else {
-      finalCartItems[index].count += qty;
-      if (finalCartItems[index].count <= 0) {
-        finalCartItems.splice(index, 1);
-      }
-    }
-
-    updateCartInLocalStorage(finalCartItems);
-    setCartItems(finalCartItems);
+  const addToCart = async (product, qty) => {
+    const updatedCart = await updateCart(product, qty);
+    await fetchAndUpdateCart(updatedCart);
   };
 
-  const removeFromCart = (product) => {
-    const newProducts = cartItems.filter((item) => item.id !== product.id);
-
-    updateCartInLocalStorage(newProducts);
-    setCartItems(newProducts);
+  const removeItemFromCart = async (productId) => {
+    const updatedCart = await removeFromCart(productId);
+    await fetchAndUpdateCart(updatedCart);
   };
 
   const countCartItems = () => {
@@ -60,50 +33,42 @@ const CartProvider = ({ children }) => {
     return cartItems.reduce((acc, item) => acc + item.count * item.price, 0);
   };
 
+  const fetchAndUpdateCart = async (cart) => {
+    if (cart.length > 0) {
+      const ids = cart.map((item) => item.id);
+      const products = await getAllProductsByIds(ids);
+
+      const countMap = new Map();
+      cart.forEach((cartItem) => {
+        countMap.set(cartItem.id, cartItem.count);
+      });
+
+      const fetchedCartItems = products.map((product) => ({
+        ...product,
+        count: countMap.get(product.id),
+      }));
+
+      setCartItems(fetchedCartItems);
+    } else {
+      setCartItems([]);
+    }
+  };
+
   useEffect(() => {
-    const cartItemsFromLocalStorage = JSON.parse(
-      localStorage.getItem("cartItems")
-    );
-
-    const fetchItems = async () => {
-      if (cartItemsFromLocalStorage) {
-        const ids = cartItemsFromLocalStorage.map((item) => item.id);
-
-        const items = await getAllProductsByIds(ids);
-        console.log("items", items);
-        const countMap = new Map();
-
-        // Aggregate counts for each id
-        cartItemsFromLocalStorage.forEach((cartItem) => {
-          if (countMap.has(cartItem.id)) {
-            countMap.set(
-              cartItem.id,
-              countMap.get(cartItem.id) + cartItem.count
-            );
-          } else {
-            countMap.set(cartItem.id, cartItem.count);
-          }
-        });
-
-        const fetchedItemsFromLocalStorage = items.map((item) => ({
-          ...item,
-          count: countMap.get(item.id) || 0,
-        }));
-
-        console.log("fetched items", fetchedItemsFromLocalStorage);
-        setCartItems(fetchedItemsFromLocalStorage);
-      }
+    const fetchCart = async () => {
+      const cart = await getCart();
+      await fetchAndUpdateCart(cart);
     };
 
-    fetchItems();
+    fetchCart();
   }, []);
 
   return (
     <CartContext.Provider
       value={{
         items: cartItems,
-        updateCart,
-        removeFromCart,
+        addToCart,
+        removeFromCart: removeItemFromCart,
         countCartItems,
         countTotalPrice,
       }}

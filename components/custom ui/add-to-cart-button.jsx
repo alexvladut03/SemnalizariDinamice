@@ -5,13 +5,13 @@ import { FaCartPlus } from "react-icons/fa";
 import { useCart } from "../../utils/context/cart-provider";
 
 export default function AddToCartButton({ product, quantity }) {
-  const { updateCart } = useCart();
+  const { addToCart } = useCart();
 
   const addToCartClickHandler = () => {
     if (quantity) {
-      updateCart(product, quantity);
+      addToCart(product, quantity);
     } else {
-      updateCart(product, 1);
+      addToCart(product, 1);
     }
   };
 
