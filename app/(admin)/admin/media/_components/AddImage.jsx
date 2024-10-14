@@ -93,8 +93,6 @@ export const AddImage = () => {
       formData.append("files", file);
     });
 
-    console.log("formData", formData);
-
     execute(formData);
   };
 

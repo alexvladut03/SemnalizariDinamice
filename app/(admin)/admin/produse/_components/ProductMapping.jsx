@@ -48,7 +48,6 @@ const ProductMapping = ({ products, categories, attributes, images }) => {
       key={product.id}
       className="p-2 border-b border-gray-200 grid grid-cols-7 items-center"
     >
-      {console.log(product)}
       <p>{product.sku}</p>
       <p>{product.name}</p>
       <div>

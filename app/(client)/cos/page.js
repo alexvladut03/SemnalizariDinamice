@@ -11,7 +11,15 @@ import { redirect } from "next/navigation";
 export default function Page() {
   const [shipCost, setShipCost] = useState(20);
   const cartItems = useCart();
-  const { countTotalPrice } = useCart();
+  const { countTotalPrice, loading } = useCart();
+
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <FaCartPlus className="text-7xl text-amber-500 animate-spin" />
+      </div>
+    );
+  }
 
   return cartItems.items.length > 0 ? (
     <div className="bg-gray-100 py-10">
@@ -36,6 +44,24 @@ export default function Page() {
       </div>
     </div>
   ) : (
-    redirect("/cos/gol")
+    <div className="h-screen flex items-center justify-center relative bg-gray-100">
+      <div className="flex flex-col items-center text-center ">
+        <FaCartPlus className="text-7xl text-amber-500" />
+        <h1 className="text-2xl font-bold text-gray-800">
+          Coșul tău de cumpărături a rămas fără produse!
+        </h1>
+        <p className="mt-2 text-gray-600">
+          Încă avem sute de produse care te așteaptă!
+        </p>
+        <p className="mt-2 text-gray-600">Vezi care ți se potrivește!</p>
+        <Link href="/" className="mt-2 inline-block">
+          <GeneralButton
+            text="Continuă Cumpărăturile"
+            customPadding="p-3"
+            customMargin="ml-12"
+          />
+        </Link>
+      </div>
+    </div>
   );
 }

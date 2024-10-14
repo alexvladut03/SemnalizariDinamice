@@ -4,20 +4,10 @@ import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { useCart } from "../../../../utils/context/cart-provider";
 
 export default function ProductBoxCart({ item }) {
-  const [activeQuantity, setActiveQuantity] = useState(item.count);
   const { addToCart, removeFromCart } = useCart();
 
-  const setNextQuantity = () => {
-    addToCart(item, 1);
-    setActiveQuantity(activeQuantity + 1);
-  };
-  const setPreviousQuantity = () => {
-    addToCart(item, -1);
-    setActiveQuantity(activeQuantity - 1);
-  };
-
   const handleProductRemove = () => {
-    removeFromCart(item);
+    removeFromCart(item.id);
   };
 
   return (
@@ -39,10 +29,10 @@ export default function ProductBoxCart({ item }) {
         </div>
         <div className="flex text-xl gap-2 ">
           <button
-            onClick={setPreviousQuantity}
-            disabled={activeQuantity === 1}
+            onClick={() => addToCart(item, -1)}
+            disabled={item.count === 1}
             className={` ${
-              activeQuantity <= 1
+              item.count <= 1
                 ? "cursor-not-allowed opacity-50"
                 : "cursor-pointer"
             }`}
@@ -50,9 +40,9 @@ export default function ProductBoxCart({ item }) {
             <CiCircleMinus />
           </button>
 
-          <p className="font-semibold text-center">{activeQuantity}</p>
+          <p className="font-semibold text-center">{item.count}</p>
 
-          <button onClick={setNextQuantity} className="cursor-pointer">
+          <button onClick={() => addToCart(item, 1)} className="cursor-pointer">
             <CiCirclePlus />
           </button>
         </div>

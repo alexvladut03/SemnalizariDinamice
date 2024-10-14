@@ -1,8 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAllProductsByIds } from "../functions/product/get-all-products-by-ids";
-import { removeFromCart } from "../actions/cart/remove-from-cart";
+import { removeFromCart as serverRemoveFromCart } from "../actions/cart/remove-from-cart";
 import { getCart } from "../actions/cart/get-cart";
-import { updateCart } from "../actions/cart/update-cart";
+import { updateCart as serverUpdateCart } from "../actions/cart/update-cart";
+import { debounce } from "../debounce";
 
 const CartContext = createContext({
   items: [],
@@ -10,24 +11,34 @@ const CartContext = createContext({
   removeFromCart() {},
   countCartItems() {},
   countTotalPrice() {},
-  loading: false, // Add loading state to context
+  loading: false,
 });
 
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-  const [loading, setLoading] = useState(true); // New loading state
+  const [loading, setLoading] = useState(true);
 
-  const addToCart = async (product, qty) => {
-    setLoading(true);
-    const updatedCart = await updateCart(product, qty);
+  // Debounced update function for adding to the cart
+  const debouncedUpdateCart = debounce(async (product, qty) => {
+    const updatedCart = await serverUpdateCart(product, qty);
     await fetchAndUpdateCart(updatedCart);
+  }, 500); // Adjust delay as needed
+
+  // Debounced remove function for removing from the cart
+  const debouncedRemoveFromCart = debounce(async (productId) => {
+    const updatedCart = await serverRemoveFromCart(productId);
+    await fetchAndUpdateCart(updatedCart);
+  }, 500); // Adjust delay as needed
+
+  const addToCart = (product, qty) => {
+    setLoading(true);
+    debouncedUpdateCart(product, qty);
     setLoading(false);
   };
 
-  const removeItemFromCart = async (productId) => {
+  const removeItemFromCart = (productId) => {
     setLoading(true);
-    const updatedCart = await removeFromCart(productId);
-    await fetchAndUpdateCart(updatedCart);
+    debouncedRemoveFromCart(productId);
     setLoading(false);
   };
 
@@ -79,7 +90,7 @@ const CartProvider = ({ children }) => {
         removeFromCart: removeItemFromCart,
         countCartItems,
         countTotalPrice,
-        loading, // Provide loading state in context
+        loading,
       }}
     >
       {children}

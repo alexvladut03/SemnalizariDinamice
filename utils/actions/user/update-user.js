@@ -27,8 +27,6 @@ export const updateUser = authActionClient
       parsedInput: { name, username, password, id },
       ctx: { userId },
     }) => {
-      console.log("Updating user", id, name, username, password);
-
       const user = await prisma.user.findUnique({
         where: { id },
       });

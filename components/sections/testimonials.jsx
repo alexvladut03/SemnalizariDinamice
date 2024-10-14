@@ -166,9 +166,6 @@ export default function Testimonials() {
     let controls;
     const finalPosition = -width / 2 - 12;
 
-    console.log("finalPosition", finalPosition);
-    console.log("width", width);
-
     if (mustFinish) {
       controls = animate(xTranslation, [xTranslation.get(), finalPosition], {
         ease: "linear",
