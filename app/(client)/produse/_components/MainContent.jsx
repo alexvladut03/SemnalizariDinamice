@@ -4,8 +4,9 @@ import ProductsCard from "@/components/sections/products-card";
 import UpperBar from "./UpperBar";
 import SideBar from "./SideBar";
 
-export default function MainContent({ products }) {
+export default function MainContent({ products, attributes }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
+  console.log(attributes);
   const [selectedOptions, setSelectedOptions] = useState({
     "Tip Mașină": [],
     Preț: [],

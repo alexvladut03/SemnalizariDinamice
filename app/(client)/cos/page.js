@@ -7,6 +7,7 @@ import ProductSummary from "./_components/ProductSummary";
 import OrderSummary from "./_components/OrderSummary";
 import ProductBoxCart from "./_components/ProductBoxCart";
 import { redirect } from "next/navigation";
+import GeneralButton from "@/components/custom ui/general-button";
 
 export default function Page() {
   const [shipCost, setShipCost] = useState(20);
