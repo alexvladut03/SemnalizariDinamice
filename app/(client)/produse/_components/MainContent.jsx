@@ -8,8 +8,6 @@ export default function MainContent({ products, attributes }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [sortOrder, setSortOrder] = useState("");
-  console.log(attributes);
-  console.log("products", products);
   const applyFilters = () => {
     let filtered = [...products]; // Copiem toate produsele
 
