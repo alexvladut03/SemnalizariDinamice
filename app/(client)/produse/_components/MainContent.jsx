@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import ProductsCard from "@/components/sections/products-card";
 import UpperBar from "./UpperBar";
-import SideBar from "./SideBar";
+import FilterDesktopSideBar from "./FilterDesktopSideBar";
 
 export default function MainContent({ products, attributes }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -80,7 +80,7 @@ export default function MainContent({ products, attributes }) {
     <section id="Produse" className="my-28 max-w-7xl lg:mx-auto mx-4">
       <div className="flex">
         <div className="lg:block hidden">
-          <SideBar
+          <FilterDesktopSideBar
             selectedOptions={selectedOptions}
             onFilterChange={handleFilterChange}
             attributes={attributes} // Transmitem atributele dinamic

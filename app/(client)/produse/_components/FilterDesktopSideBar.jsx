@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 
-export default function SideBar({
+export default function FilterDesktopSideBar({
   selectedOptions,
   onFilterChange,
   attributes,
