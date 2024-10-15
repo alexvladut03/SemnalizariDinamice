@@ -83,7 +83,7 @@ export default function MainContent({ products, attributes }) {
           <FilterDesktopSideBar
             selectedOptions={selectedOptions}
             onFilterChange={handleFilterChange}
-            attributes={attributes} // Transmitem atributele dinamic
+            attributes={attributes}
           />
         </div>
 
@@ -96,11 +96,18 @@ export default function MainContent({ products, attributes }) {
             attributes={attributes}
           />
 
-          <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">
-            {filteredProducts.map((product) => (
-              <ProductsCard key={product.id} product={product} />
-            ))}
-          </div>
+          {filteredProducts.length === 0 ? (
+            <div className="text-left text-xl font-semibold text-black">
+              Nu am găsit produse care să corespundă criteriilor tale de
+              filtrare.
+            </div>
+          ) : (
+            <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">
+              {filteredProducts.map((product) => (
+                <ProductsCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </main>
       </div>
     </section>
