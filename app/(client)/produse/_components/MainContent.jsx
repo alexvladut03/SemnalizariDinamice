@@ -6,32 +6,34 @@ import SideBar from "./SideBar";
 
 export default function MainContent({ products, attributes }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
-  console.log(attributes);
-  const [selectedOptions, setSelectedOptions] = useState({
-    "Tip Mașină": [],
-    Preț: [],
-    Produse: [],
-    Disponibilitate: [],
-    "Rating minim": [],
-  });
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [sortOrder, setSortOrder] = useState("");
-
+  console.log(attributes);
+  console.log("products", products);
   const applyFilters = () => {
-    let filtered = [...products];
+    let filtered = [...products]; // Copiem toate produsele
 
+    // Iterăm prin fiecare categorie de filtrare
     Object.keys(selectedOptions).forEach((category) => {
       if (
         Array.isArray(selectedOptions[category]) &&
         selectedOptions[category].length > 0
       ) {
-        filtered = filtered.filter((product) =>
-          selectedOptions[category].some((option) =>
-            product[category.toLowerCase()]?.includes(option)
-          )
-        );
+        filtered = filtered.filter((product) => {
+          // Căutăm dacă produsul are atribute care se potrivesc cu categoria și opțiunile selectate
+          return selectedOptions[category].every((option) => {
+            return product.attributes.some((attribute) => {
+              const attributeValues = attribute.values || []; // Valori pentru atributul curent
+
+              // Verificăm dacă cel puțin o valoare din opțiunile selectate se găsește în valorile atributului
+              return attributeValues.includes(option);
+            });
+          });
+        });
       }
     });
 
+    // Sortare după sortOrder (aceasta rămâne neschimbată)
     if (sortOrder === "Pret Crescator") {
       filtered.sort((a, b) => a.price - b.price);
     } else if (sortOrder === "Pret Descrescator") {
@@ -42,7 +44,7 @@ export default function MainContent({ products, attributes }) {
       filtered.sort((a, b) => b.popularity - a.popularity);
     }
 
-    setFilteredProducts(filtered);
+    setFilteredProducts(filtered); // Actualizăm lista de produse filtrate
   };
 
   useEffect(() => {
@@ -79,11 +81,11 @@ export default function MainContent({ products, attributes }) {
   return (
     <section id="Produse" className="my-28 max-w-7xl lg:mx-auto mx-4">
       <div className="flex">
-        {/* Doar pe desktop */}
         <div className="lg:block hidden">
           <SideBar
             selectedOptions={selectedOptions}
             onFilterChange={handleFilterChange}
+            attributes={attributes} // Transmitem atributele dinamic
           />
         </div>
 
@@ -105,4 +107,3 @@ export default function MainContent({ products, attributes }) {
     </section>
   );
 }
-``;
