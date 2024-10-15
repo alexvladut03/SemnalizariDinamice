@@ -9,6 +9,7 @@ export default function UpperBar({
   applyFilters,
   removeFilter,
   setSortOrder,
+  attributes, // Atributele primite aici
 }) {
   return (
     <div className="flex flex-col gap-4 pb-5">
@@ -19,7 +20,11 @@ export default function UpperBar({
       />
       <div className="flex justify-between ">
         <OrderMobilAndDesktop setSortOrder={setSortOrder} />
-        <FilterMobil selectedOptions={selectedOptions} onApply={applyFilters} />
+        <FilterMobil
+          selectedOptions={selectedOptions}
+          onApply={applyFilters}
+          attributes={attributes} // Atributele transmise la FilterMobil
+        />
       </div>
     </div>
   );

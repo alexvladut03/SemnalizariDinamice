@@ -95,6 +95,7 @@ export default function MainContent({ products, attributes }) {
             applyFilters={handleApplyFilters}
             removeFilter={handleFilterChange}
             setSortOrder={handleSortOrderChange}
+            attributes={attributes}
           />
 
           <div className="grid lg:grid-cols-4 grid-cols-1 gap-4">

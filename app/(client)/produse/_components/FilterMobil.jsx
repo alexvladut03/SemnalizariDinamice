@@ -5,38 +5,12 @@ import { RemoveScroll } from "react-remove-scroll";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FaStar } from "react-icons/fa";
 
-export default function FilterMobil({ selectedOptions, onApply }) {
+export default function FilterMobil({ selectedOptions, onApply, attributes }) {
   const [openFilter, setOpenFilter] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Tip Mașină");
-
-  const categories = {
-    "Tip Mașină": ["Audi", "BMW", "Mercedes", "Volkswagen"],
-    Preț: [
-      "Sub 50",
-      "50-100",
-      "100-200",
-      "200-500",
-      "500-1000",
-      "Interval (Urmeaza)",
-    ],
-    Produse: [
-      "Capace",
-      "Semnalizări Dinamice",
-      "Proiectoare Logo",
-      "Embleme",
-      "Schimbătoare",
-      "Pedale",
-    ],
-    Disponibilitate: ["In Stoc", "Noutăți"],
-    "Rating minim": [
-      { stars: 5, count: 56, value: "5-stele" },
-      { stars: 4, count: 34, value: "4-stele" },
-      { stars: 3, count: 23, value: "3-stele" },
-      { stars: 2, count: 10, value: "2-stele" },
-      { stars: 1, count: 2, value: "1-stea" },
-    ],
-  };
+  const [selectedCategory, setSelectedCategory] = useState(
+    attributes[0]?.name || ""
+  );
 
   const [localSelectedOptions, setLocalSelectedOptions] =
     useState(selectedOptions);
@@ -78,27 +52,11 @@ export default function FilterMobil({ selectedOptions, onApply }) {
   };
 
   const handleClearFilters = () => {
-    setLocalSelectedOptions({
-      "Tip Mașină": [],
-      Preț: [],
-      Disponibilitate: [],
-      "Rating minim": [],
-      Produse: [],
+    const clearedOptions = {};
+    attributes.forEach((attribute) => {
+      clearedOptions[attribute.name] = [];
     });
-  };
-
-  // Funție pentru generarea stelelor cu FaStar
-  const renderStars = (starsCount) => {
-    return (
-      <div className="flex items-center">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <FaStar
-            key={index}
-            className={index < starsCount ? "text-amber-500" : "text-gray-200"}
-          />
-        ))}
-      </div>
-    );
+    setLocalSelectedOptions(clearedOptions);
   };
 
   return (
@@ -131,65 +89,52 @@ export default function FilterMobil({ selectedOptions, onApply }) {
               </div>
               <div className="grid grid-cols-3 h-full">
                 <div className="col-span-1 bg-gray-100 overflow-y-auto max-h-full scrollbar-hide">
-                  {Object.keys(categories).map((category) => (
+                  {attributes.map((attribute) => (
                     <div
-                      key={category}
+                      key={attribute.name}
                       className={`p-3 font-semibold cursor-pointer ${
-                        selectedCategory === category
+                        selectedCategory === attribute.name
                           ? "border-l-8 border-amber-500 bg-white"
                           : "bg-gray-100"
                       }`}
-                      onClick={() => setSelectedCategory(category)}
+                      onClick={() => setSelectedCategory(attribute.name)}
                     >
-                      {category}
+                      {attribute.name}
                     </div>
                   ))}
                 </div>
 
                 <div className="col-span-2 p-4 overflow-y-auto max-h-full scrollbar-hide">
                   <div className="flex flex-col gap-2">
-                    {categories[selectedCategory].map((option, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center cursor-pointer"
-                        onClick={() =>
-                          handleCheckboxChange(
-                            selectedCategory,
-                            option.value || option
-                          )
-                        }
-                      >
-                        <Checkbox
-                          id={`${selectedCategory}-${option.value || option}`}
-                          checked={
-                            localSelectedOptions[selectedCategory]?.includes(
-                              option.value || option
-                            ) || false
+                    {attributes
+                      .find((attribute) => attribute.name === selectedCategory)
+                      ?.values.map((option, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center cursor-pointer"
+                          onClick={() =>
+                            handleCheckboxChange(selectedCategory, option)
                           }
-                          onCheckedChange={() =>
-                            handleCheckboxChange(
-                              selectedCategory,
-                              option.value || option
-                            )
-                          }
-                        />
-                        <label
-                          htmlFor={`${selectedCategory}-${
-                            option.value || option
-                          }`}
-                          className="ml-2 align-baseline flex items-center"
                         >
-                          {selectedCategory === "Rating minim" ? (
-                            <>
-                              {renderStars(option.stars)}
-                              <span className="ml-2">({option.count})</span>
-                            </>
-                          ) : (
-                            option
-                          )}
-                        </label>
-                      </div>
-                    ))}
+                          <Checkbox
+                            id={`${selectedCategory}-${option}`}
+                            checked={
+                              localSelectedOptions[selectedCategory]?.includes(
+                                option
+                              ) || false
+                            }
+                            onCheckedChange={() =>
+                              handleCheckboxChange(selectedCategory, option)
+                            }
+                          />
+                          <label
+                            htmlFor={`${selectedCategory}-${option}`}
+                            className="ml-2 align-baseline flex items-center"
+                          >
+                            {option}
+                          </label>
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
