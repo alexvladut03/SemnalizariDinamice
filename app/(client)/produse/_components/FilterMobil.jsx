@@ -3,7 +3,6 @@ import { IoClose } from "react-icons/io5";
 import { Select, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RemoveScroll } from "react-remove-scroll";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FaStar } from "react-icons/fa";
 
 export default function FilterMobil({ selectedOptions, onApply, attributes }) {
   const [openFilter, setOpenFilter] = useState(false);

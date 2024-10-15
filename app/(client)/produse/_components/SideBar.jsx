@@ -1,6 +1,5 @@
 import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FaStar } from "react-icons/fa";
 
 export default function SideBar({
   selectedOptions,
@@ -9,19 +8,6 @@ export default function SideBar({
 }) {
   const handleCheckboxChange = (category, option) => {
     onFilterChange(category, option);
-  };
-
-  const renderStars = (starsCount) => {
-    return (
-      <div className="flex items-center">
-        {Array.from({ length: 5 }).map((_, index) => (
-          <FaStar
-            key={index}
-            className={index < starsCount ? "text-amber-500" : "text-gray-200"}
-          />
-        ))}
-      </div>
-    );
   };
 
   return (
