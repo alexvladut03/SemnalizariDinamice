@@ -14,7 +14,7 @@ const Featured = () => {
           </h2>
         </div>
         <dl className="grid grid-cols-1 gap-4 sm:grid-cols-4">
-          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
+          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-white px-4 py-8 text-center">
             <FaUsers className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Testimoniale de la Clienți</p>
             <p>
@@ -24,7 +24,7 @@ const Featured = () => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
+          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-white px-4 py-8 text-center">
             <FaStar className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Recenzii și Evaluări</p>
             <p>
@@ -34,7 +34,7 @@ const Featured = () => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
+          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-white px-4 py-8 text-center">
             <FaShieldAlt className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Garantie și Politica de Retur</p>
             <p>
@@ -44,7 +44,7 @@ const Featured = () => {
             </p>
           </div>
 
-          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-yellow-50 px-4 py-8 text-center">
+          <div className="flex flex-col gap-3 items-center justify-around rounded-lg bg-white px-4 py-8 text-center">
             <FaCarAlt className="text-7xl text-amber-500" />
             <p className="text-xl font-bold">Experiența și Expertiza Echipei</p>
             <p>

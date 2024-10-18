@@ -86,7 +86,7 @@ export default function ClientNavbarCartProducts({ toggleCart, isCartOpen }) {
           </>
         ) : (
           <div className="flex flex-col justify-center items-center h-full">
-            <p className="lg:text-gray-700 text-white text-center">
+            <p className="lg:text-gray-700 text-white text-center mb-2">
               Nu ai niciun produs în coș
             </p>
             <Link href={"/cos"} className="w-full">
