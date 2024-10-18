@@ -9,12 +9,12 @@ export default function GeneralButton({
 }) {
   return (
     <button
-      className={`relative flex items-center justify-center rounded-l-xl rounded-lg ${width} bg-amber-500 ${customPadding} font-semibold transition hover:scale-105 text-black`}
+      className={`relative flex items-center justify-center rounded-l-xl rounded-lg ${width} bg-[#f89000] ${customPadding} font-semibold transition hover:scale-105 text-black`}
     >
       <div className="absolute left-0 h-full flex items-center justify-center w-12 bg-black rounded-l-lg rounded-br-2xl">
         <MdKeyboardDoubleArrowRight className="text-3xl text-white" />
       </div>
-      <span className={`${customMargin}`}>{text}</span>
+      <span className={`${customMargin} text-white`}>{text}</span>
     </button>
   );
 }

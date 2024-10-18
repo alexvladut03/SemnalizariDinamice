@@ -8,26 +8,28 @@ const ProductsCard = ({ product }) => {
   const mainImage = images.find((img) => img.isMain)?.image;
 
   return (
-    <div className="group relative border border-grey-500 flex justify-between flex-col rounded-lg p-6 overflow-hidden">
-      <Link href={`/produse/${slug}`} prefetch={true}>
-        <div className="relative block">
+    <div className="group relative border border-gray-300 rounded-lg p-4 flex flex-col items-center bg-white shadow-lg shadow-gray-300 hover:shadow-md hover:shadow-amber-500 transition-shadow duration-300">
+      <Link href={`/produse/${slug}`} prefetch={true} className="w-full">
+        <div className="relative w-full">
           <Image
             src={mainImage?.url}
             alt={name}
             width={200}
             height={200}
-            className="w-3/4 mx-auto sm:w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
           />
-          <div>
-            <span className="whitespace-nowrap bg-amber-500 absolute top-0 h-8 w-14 rounded-lg flex items-center justify-center text-xs font-medium">
-              Nou
-            </span>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">{name}</h3>
-          </div>
+          <span className="whitespace-nowrap bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 absolute top-2 left-2 h-7 w-14 rounded-lg flex items-center justify-center text-sm font-semibold text-white ">
+            Nou
+          </span>
         </div>
       </Link>
-      <div className="flex flex-col gap-3">
-        <p className="mt-1.5 text-md text-gray-700 font-bold">{price} RON</p>
+
+      <div className="mt-4 flex flex-col items-center w-full">
+        <h3 className="text-lg font-semibold text-gray-900 text-center">
+          {name}
+        </h3>
+        <p className="mt-2 text-md text-gray-700 font-bold">{price} RON</p>
+
         <AddToCartButton product={product} />
       </div>
     </div>

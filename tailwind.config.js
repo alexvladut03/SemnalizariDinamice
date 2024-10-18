@@ -115,6 +115,9 @@ module.exports = withUt({
         blink2: "blink2 0.9s both",
       },
       colors: {
+        amber: {
+          500: "#f89000", // amber-500
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
