@@ -8,7 +8,7 @@ const ProductsCard = ({ product }) => {
   const mainImage = images.find((img) => img.isMain)?.image;
 
   return (
-    <div className="group relative border border-gray-300 rounded-lg p-4 flex flex-col items-center bg-white shadow-lg shadow-gray-300 hover:shadow-md hover:shadow-amber-500 transition-shadow duration-300">
+    <div className="group relative border border-gray-300 hover:border-amber-500 rounded-lg p-4 flex flex-col items-center bg-white shadow-lg shadow-gray-300 hover:shadow-md hover:shadow-amber-500 transition-shadow duration-300">
       <Link href={`/produse/${slug}`} prefetch={true} className="w-full">
         <div className="relative w-full">
           <Image
