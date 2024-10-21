@@ -152,17 +152,13 @@ export default function ClientFooter() {
                 SemnalizariDinamice@gmail.com
               </Link>
             </li>
-            <li>
-              <Link href="#" className="hover:text-amber-500 flex">
-                <MdInfoOutline className="text-2xl mr-1" />
-                Reg. Com: J23/3718/2013
-              </Link>
+            <li className="hover:text-amber-500 flex">
+              <MdInfoOutline className="text-2xl mr-1" />
+              Reg. Com: J20/2403/2656/004
             </li>
-            <li>
-              <Link href="#" className="hover:text-amber-500 flex">
-                <MdInfoOutline className="text-2xl mr-1" />
-                CUI: 32577423
-              </Link>
+            <li className="hover:text-amber-500 flex">
+              <MdInfoOutline className="text-2xl mr-1" />
+              CUI: 50726728
             </li>
           </ul>
         </div>

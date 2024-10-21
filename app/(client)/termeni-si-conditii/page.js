@@ -20,8 +20,9 @@ export default function page() {
         </p>
         <p>
           Vânzător – semnalizari-dinamice.ro cu denumirea comercială{" "}
-          <strong>MASYV Team</strong> având sediul social în Strada Berzelor Nr.
-          111 CUI 10101010 nr. de înregistrare la Registrul Comerțului 150105.
+          <strong>MASYV Team</strong> având sediul social în Dâmbovița ,
+          Crevedia ,Strada Berzelor Nr. 111 CUI 50726728 nr. de înregistrare la
+          Registrul Comerțului J2024032656004.
         </p>
         <p>
           Bunuri – orice produs inclusiv documentele și serviciile menționate în
