@@ -9,12 +9,14 @@ export default function Sortiments({ selectedOptions, onRemoveFilter }) {
         selectedOptions[category].length > 0
           ? selectedOptions[category].map((option, index) => (
               <button
+                className="relative flex items-center rounded-lg bg-[#f89000] pl-2 pr-10 py-1 font-medium transition hover:scale-105 text-black"
                 key={`${category}-${option}-${index}`}
-                className="flex items-center bg-amber-500 text-black px-3 py-1 rounded-lg gap-1"
                 onClick={() => onRemoveFilter(category, option)}
               >
-                <span>{option}</span>
-                <IoClose className="text-xl" />
+                <span className="text-left text-white">{option}</span>
+                <div className="absolute right-0 h-full flex items-center justify-center w-8 bg-black rounded-r-lg rounded-bl-2xl">
+                  <IoClose className="text-2xl text-white" />
+                </div>
               </button>
             ))
           : null
