@@ -36,7 +36,7 @@ export default function OrderSummary({ shipCost, totalPrice }) {
           className="flex-grow p-2 border rounded-l"
           placeholder="Introduceți codul"
         />
-        <button className="bg-amber-500 hover:bg-amber-400 text-white px-1 rounded-r text-3xl">
+        <button className="bg-amber-500 hover:bg-amber-600 text-white px-1 rounded-r text-3xl">
           <MdOutlineKeyboardArrowRight />
         </button>
       </div>
