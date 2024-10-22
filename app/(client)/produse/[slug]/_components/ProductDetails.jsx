@@ -1,7 +1,7 @@
 import DOMPurify from "isomorphic-dompurify";
 import ProductDetailsReview from "./ProductDetailsReview";
 
-const ProductDetails = ({ description, fitment, characteristics }) => {
+const ProductDetails = ({ product, description, fitment, characteristics }) => {
   return (
     <section className="bg-black text-white p-4 lg:pt-6  rounded-lg mb-10 lg:block flex flex-col">
       {/* Tab-uri */}
@@ -68,7 +68,7 @@ const ProductDetails = ({ description, fitment, characteristics }) => {
         />
       </div>
       <div className="hidden peer-checked/tab4:block bg-white text-black p-4 mt-1 rounded-lg ">
-        <ProductDetailsReview />
+        <ProductDetailsReview product={product} />
       </div>
     </section>
   );

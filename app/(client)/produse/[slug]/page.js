@@ -60,6 +60,7 @@ const ProductPage = async ({ params }) => {
           />
         </div>
         <ProductDetails
+          product={product}
           description={product.description}
           fitment={product.fitment}
           characteristics={product.characteristics}

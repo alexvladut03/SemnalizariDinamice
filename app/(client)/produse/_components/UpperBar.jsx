@@ -12,7 +12,7 @@ export default function UpperBar({
   attributes,
 }) {
   return (
-    <div className="flex flex-col gap-4 pb-5">
+    <div className="flex flex-col gap-2 pb-5">
       <Results />
       <Sortiments
         selectedOptions={selectedOptions}

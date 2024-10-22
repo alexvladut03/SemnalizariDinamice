@@ -77,7 +77,7 @@ export default function MainContent({ products, attributes }) {
   };
 
   return (
-    <section id="Produse" className="my-28 max-w-7xl lg:mx-auto mx-4">
+    <section id="Produse" className="my-4 max-w-7xl lg:mx-auto mx-4">
       <div className="flex">
         <div className="lg:block hidden">
           <FilterDesktopSideBar

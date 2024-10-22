@@ -11,7 +11,7 @@ export default function FilterDesktopSideBar({
   };
 
   return (
-    <aside className="sticky h-full w-56">
+    <aside className="sticky h-full w-48">
       {attributes.map((attribute, index) => (
         <div key={index} className="rounded-lg mb-4 flex flex-col gap-1">
           <h3 className="text-xl font-bold mb-2">{attribute.name}</h3>

@@ -14,7 +14,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ProductDetailsReview() {
+export default function ProductDetailsReview({ product }) {
+  console.log(product);
   const reviews = [
     {
       name: "Marian Andrei",
@@ -228,7 +229,7 @@ export default function ProductDetailsReview() {
           </span>
 
           {/* Stele de rating */}
-          <div className="lg:flex lg:items-center lg:mb-[9px] lg:mt-1 hidden">
+          <div className="lg:flex lg:items-center lg:mb-[9px] lg:mt-1 hidden cursor-pointer">
             {Array.from({ length: 5 }).map((_, index) => (
               <FaStar
                 key={index}
@@ -291,13 +292,19 @@ export default function ProductDetailsReview() {
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
           <DialogContent className="w-full max-w-4xl">
             <DialogHeader className="flex flex-row gap-4">
-              <Image src="/logo.png" width={100} height={100} alt="Logo" />
+              {console.log(product)}
+              <Image
+                src={product.images[0].image.url}
+                width={100}
+                height={100}
+                alt="Logo"
+              />
               <div>
                 <DialogTitle className="text-lg">
                   Adaugă un review pentru:
                 </DialogTitle>
                 <DialogDescription className="text-base">
-                  Semnalizari dinamice
+                  {product.name}
                 </DialogDescription>
               </div>
             </DialogHeader>
