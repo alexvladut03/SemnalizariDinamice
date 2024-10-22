@@ -4,6 +4,14 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import GeneralButton from "../custom ui/general-button";
 import Link from "next/link";
+import { IoShieldHalfSharp } from "react-icons/io5";
+import {
+  FaCreditCard,
+  FaHeadset,
+  FaRegCreditCard,
+  FaShieldAlt,
+  FaTruck,
+} from "react-icons/fa";
 
 const Hero = () => {
   return (
@@ -11,8 +19,8 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black z-10 animate-waveSlideBlack"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-transparent from-0% via-amber-500 via-10% to-black to-20% z-10 animate-waveSlideYellow"></div>
       <div className="max-w-7xl mx-auto grid lg:grid-cols-3 grid-cols-1 lg:px-0 lg:py-10 py-6 px-4 items-center justify-center">
-        <div className="text-white text-center lg:text-left col-span-2 ">
-          <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight !leading-[1.5]">
+        <div className="text-white text-center lg:text-left col-span-2 h-full flex flex-col justify-center">
+          <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight !leading-[1.5] mb-6">
             Accesorii auto{" "}
             <span className="text-amber-500">de la Pasionați</span>
             <br />
@@ -22,8 +30,8 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-lg lg:my-6 my-4">
-            Pasiunea noastră pentru mașini se reflectă în fiecare accesoriu,
-            toate fiind selectate cu grijă pentru a aduce un plus de
+            Pasiunea noastră pentru mașini se reflectă în fiecare accesoriu
+            oferit, toate fiind atent selectate pentru a aduce un plus de stil,
             personalitate și performanță vehiculului tău.
           </p>
           <Link
@@ -37,19 +45,60 @@ const Hero = () => {
               width="w-64"
             />
           </Link>
-          <blockquote className="lg:my-6 my-4 text-white">
-            <div className="lg:flex items-center">
-              <p className=" text-lg font-bold mr-4">Florin Daniel</p>
-              <span className="text-amber-500 text-xl">★ ★ ★ ★ ★</span>
+
+          <div className="grid grid-cols-4 gap-4 text-left py-8">
+            <div className="group mt-4">
+              <div className="flex items-center">
+                <FaShieldAlt className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base group-hover:text-amber-500">
+                  Garanție extinsă
+                </h2>
+              </div>
+              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+                Toate produsele noastre vin cu o garanție de minim 12 luni,
+                asigurându-te că beneficiezi de calitate și durabilitate.
+              </span>
             </div>
-            <p className="mt-3 text-base font-semibold">
-              Cei mai tari din domeniu!
-            </p>
-            <p className=" text-base leading-7">
-              Baietii sunt seriosi, raspund repede la mesaje si se vede ca pun
-              pasiune in ceea ce fac. Recomand cu incredere!
-            </p>
-          </blockquote>
+
+            <div className="group mt-4">
+              <div className="flex items-center">
+                <FaTruck className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base group-hover:text-amber-500">
+                  Livrare gratuită
+                </h2>
+              </div>
+              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+                Beneficiezi de livrare gratuită la comenzile de peste 300 de
+                lei, pentru a economisi la fiecare achiziție.
+              </span>
+            </div>
+
+            <div className="group mt-4">
+              <div className="flex items-center">
+                <FaRegCreditCard className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base group-hover:text-amber-500">
+                  Plăți rapide și sigure
+                </h2>
+              </div>
+              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+                Oferim opțiuni flexibile de plată, cu card bancar sau ramburs,
+                pentru o experiență de cumpărare rapidă și sigură.
+              </span>
+            </div>
+
+            <div className="group mt-4">
+              <div className="flex items-center">
+                <FaHeadset className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base group-hover:text-amber-500">
+                  Consultanță personalizată
+                </h2>
+              </div>
+              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+                Echipa noastră te ajută să alegi accesoriile potrivite, oferind
+                recomandări adaptate nevoilor tale.
+              </span>
+            </div>
+          </div>
         </div>
         <div className="grid lg:justify-end justify-center">
           <Video
