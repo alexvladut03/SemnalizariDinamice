@@ -3,7 +3,6 @@ import { getAllProductsByIds } from "../functions/product/get-all-products-by-id
 import { removeFromCart as serverRemoveFromCart } from "../actions/cart/remove-from-cart";
 import { getCart } from "../actions/cart/get-cart";
 import { updateCart as serverUpdateCart } from "../actions/cart/update-cart";
-import { debounce } from "../debounce";
 
 const CartContext = createContext({
   items: [],
@@ -17,29 +16,87 @@ const CartContext = createContext({
 const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Debounced update function for adding to the cart
-  const debouncedUpdateCart = debounce(async (product, qty) => {
-    const updatedCart = await serverUpdateCart(product, qty);
-    await fetchAndUpdateCart(updatedCart);
-  }, 500); // Adjust delay as needed
-
-  // Debounced remove function for removing from the cart
-  const debouncedRemoveFromCart = debounce(async (productId) => {
-    const updatedCart = await serverRemoveFromCart(productId);
-    await fetchAndUpdateCart(updatedCart);
-  }, 500); // Adjust delay as needed
+  const [pendingQuantities, setPendingQuantities] = useState({}); // To track pending quantities
+  const [timeoutId, setTimeoutId] = useState(null); // To manage the timeout
 
   const addToCart = (product, qty) => {
-    setLoading(true);
-    debouncedUpdateCart(product, qty);
-    setLoading(false);
+    // Cancel the previous timeout if it exists
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    // Immediately update the cart items
+    setCartItems((prevCartItems) => {
+      const existingItem = prevCartItems.find((item) => item.id === product.id);
+      let updatedItems;
+
+      if (existingItem) {
+        const newCount = existingItem.count + qty;
+
+        // Check if the new count is less than or equal to 0
+        if (newCount <= 0) {
+          // Remove item from cart
+          updatedItems = prevCartItems.filter((item) => item.id !== product.id);
+        } else {
+          // Update the count for the existing item
+          updatedItems = prevCartItems.map((item) =>
+            item.id === product.id ? { ...item, count: newCount } : item
+          );
+        }
+      } else if (qty > 0) {
+        // If the item doesn't exist and qty is positive, add it to the cart
+        updatedItems = [...prevCartItems, { ...product, count: qty }];
+      } else {
+        // If the item doesn't exist and qty is 0 or negative, do nothing
+        updatedItems = prevCartItems;
+      }
+
+      return updatedItems;
+    });
+
+    // Update pending quantities for server sync
+    setPendingQuantities((prev) => ({
+      ...prev,
+      [product.id]: (prev[product.id] || 0) + qty,
+    }));
+
+    // Set a timeout to call the server after a delay (e.g., 300 ms)
+    const id = setTimeout(async () => {
+      // Use the latest state from the pending quantities directly
+      const totalQuantity = (pendingQuantities[product.id] || 0) + qty;
+
+      // Call the server with the total quantity
+      await serverUpdateCart(product, totalQuantity);
+
+      // Reset the pending quantities after the update
+      setPendingQuantities((prev) => ({ ...prev, [product.id]: 0 }));
+
+      // Re-fetch the cart after the update
+      const updatedCart = await getCart();
+      await fetchAndUpdateCart(updatedCart);
+    }, 300);
+
+    setTimeoutId(id);
   };
 
   const removeItemFromCart = (productId) => {
-    setLoading(true);
-    debouncedRemoveFromCart(productId);
-    setLoading(false);
+    // Optimistically remove the item
+    const updatedItems = cartItems.filter((item) => item.id !== productId);
+    setCartItems(updatedItems);
+
+    // Cancel the previous timeout if it exists
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+
+    // Set a timeout to call the server after a delay (e.g., 300 ms)
+    const id = setTimeout(async () => {
+      await serverRemoveFromCart(productId);
+      // Re-fetch the cart after the removal if needed
+      await fetchAndUpdateCart(await getCart());
+    }, 300);
+
+    setTimeoutId(id);
   };
 
   const countCartItems = () => {
@@ -62,7 +119,7 @@ const CartProvider = ({ children }) => {
 
       const fetchedCartItems = products.map((product) => ({
         ...product,
-        count: countMap.get(product.id),
+        count: countMap.get(product.id) || 0,
       }));
 
       setCartItems(fetchedCartItems);
