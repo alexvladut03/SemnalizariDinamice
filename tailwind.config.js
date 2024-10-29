@@ -98,6 +98,16 @@ module.exports = withUt({
             backgroundColor: "black",
           },
         },
+        textHero: {
+          "0%": {
+            transform: "translateY(-20px)", // Pleacă de sus
+            opacity: "0", // Invizibil
+          },
+          "100%": {
+            transform: "translateY(0)", // Ajunge la poziția normală
+            opacity: "1", // Devine complet vizibil
+          },
+        },
       },
       animation: {
         waveSlideYellow: "waveSlideYellow 1.4s ease-in-out forwards",
@@ -113,6 +123,7 @@ module.exports = withUt({
         swingInTopBckNavProducts:
           "swingInTopBckNavProducts 0.8s cubic-bezier(0.175, 0.885, 0.320, 1.275) both",
         blink2: "blink2 0.9s both",
+        textHero: "textHero 0.6s ease-out both", // Animația durează 0.6s cu easing out
       },
       colors: {
         amber: {
