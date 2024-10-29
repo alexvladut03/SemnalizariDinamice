@@ -19,16 +19,7 @@ export const getAllProductsByIds = unstable_cache(
       },
     });
 
-    products.map((product) => {
-      product.mainImage = product.images.find((img) => img.isMain)?.image;
-    });
-
-    const filteredProducts = products.map((product) => {
-      const { id, name, price, mainImage } = product;
-      return { id, name, price, mainImage };
-    });
-
-    return filteredProducts;
+    return products;
   },
   ["products"],
   { tags: ["products"] }

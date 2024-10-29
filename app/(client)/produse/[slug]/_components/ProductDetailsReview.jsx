@@ -15,7 +15,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function ProductDetailsReview({ product }) {
-  console.log(product);
   const reviews = [
     {
       name: "Marian Andrei",
@@ -292,7 +291,6 @@ export default function ProductDetailsReview({ product }) {
         <Dialog open={openDialog} onOpenChange={setOpenDialog}>
           <DialogContent className="w-full max-w-4xl">
             <DialogHeader className="flex flex-row gap-4">
-              {console.log(product)}
               <Image
                 src={product.images[0].image.url}
                 width={100}

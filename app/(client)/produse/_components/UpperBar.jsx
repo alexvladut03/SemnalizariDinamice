@@ -10,10 +10,11 @@ export default function UpperBar({
   removeFilter,
   setSortOrder,
   attributes,
+  searchValue,
 }) {
   return (
     <div className="flex flex-col gap-2 pb-5">
-      <Results />
+      <Results searchValue={searchValue} />
       <Sortiments
         selectedOptions={selectedOptions}
         onRemoveFilter={removeFilter}

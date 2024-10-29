@@ -1,9 +1,4 @@
-import { useSearchParams } from "next/navigation";
-
-export default function Results() {
-  const searchParams = useSearchParams();
-  const searchValue = searchParams.get("search") || "";
-
+export default function Results({ searchValue }) {
   return (
     <div className="flex">
       <div className="text-2xl font-semibold">

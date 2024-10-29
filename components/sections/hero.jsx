@@ -11,7 +11,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black z-10 animate-waveSlideBlack"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-transparent from-0% via-amber-500 via-10% to-black to-20% z-10 animate-waveSlideYellow"></div>
       <div className="max-w-7xl mx-auto grid lg:grid-cols-3 grid-cols-1 lg:px-0 lg:py-10 py-6 px-4 items-center justify-center">
-        <div className="text-white text-center lg:text-left col-span-2 ">
+        <div className="text-white flex items-left h-full justify-around flex-col text-center lg:text-left col-span-2 ">
           <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight !leading-[1.5]">
             Accesorii auto{" "}
             <span className="text-amber-500">de la Pasionați</span>

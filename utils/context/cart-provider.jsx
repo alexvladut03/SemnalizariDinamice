@@ -45,7 +45,16 @@ const CartProvider = ({ children }) => {
         }
       } else if (qty > 0) {
         // If the item doesn't exist and qty is positive, add it to the cart
-        updatedItems = [...prevCartItems, { ...product, count: qty }];
+        updatedItems = [
+          ...prevCartItems,
+          {
+            id: product.id,
+            mainImage: product.images.find((img) => img.isMain)?.image,
+            name: product.name,
+            price: product.price,
+            count: qty,
+          },
+        ];
       } else {
         // If the item doesn't exist and qty is 0 or negative, do nothing
         updatedItems = prevCartItems;
@@ -110,7 +119,16 @@ const CartProvider = ({ children }) => {
   const fetchAndUpdateCart = async (cart) => {
     if (cart.length > 0) {
       const ids = cart.map((item) => item.id);
-      const products = await getAllProductsByIds(ids);
+      const fetchedProducts = await getAllProductsByIds(ids);
+
+      fetchedProducts.map((product) => {
+        product.mainImage = product.images.find((img) => img.isMain)?.image;
+      });
+
+      const products = fetchedProducts.map((product) => {
+        const { id, name, price, mainImage } = product;
+        return { id, name, price, mainImage };
+      });
 
       const countMap = new Map();
       cart.forEach((cartItem) => {

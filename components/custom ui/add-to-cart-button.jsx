@@ -18,13 +18,10 @@ export default function AddToCartButton({ product, quantity }) {
   return (
     <button
       onClick={addToCartClickHandler}
-      className="relative flex items-center justify-center w-full rounded-lg bg-gradient-to-r from-amber-500 via-amber-500 to-amber-500 p-3 font-semibold transition hover:scale-105 mt-5 text-black"
+      className="relative w-full flex items-center justify-center gap-2 rounded-lg bg-amber-500 p-2 font-semibold transition hover:scale-105 text-black"
     >
-      <div className="absolute left-0 h-full flex items-center justify-center w-12 bg-black rounded-l-lg rounded-br-2xl">
-        <FaCartPlus className="text-2xl text-white" />
-      </div>
-
-      <span className="ml-12 text-white">Adauga in Cos</span>
+      <FaCartPlus className="text-2xl text-white" />
+      <span className="text-white text-center">Adauga in Cos</span>
     </button>
   );
 }

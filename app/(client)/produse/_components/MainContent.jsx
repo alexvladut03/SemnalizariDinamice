@@ -3,11 +3,16 @@ import React, { useState, useEffect } from "react";
 import ProductsCard from "@/components/sections/products-card";
 import UpperBar from "./UpperBar";
 import FilterDesktopSideBar from "./FilterDesktopSideBar";
+import { useSearchParams } from "next/navigation";
 
 export default function MainContent({ products, attributes }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [sortOrder, setSortOrder] = useState("");
+
+  const searchParams = useSearchParams();
+  const searchValue = searchParams.get("search") || "";
+
   const applyFilters = () => {
     let filtered = [...products]; // Copiem toate produsele
 
@@ -94,6 +99,7 @@ export default function MainContent({ products, attributes }) {
             removeFilter={handleFilterChange}
             setSortOrder={handleSortOrderChange}
             attributes={attributes}
+            searchValue={searchValue}
           />
 
           {filteredProducts.length === 0 ? (
