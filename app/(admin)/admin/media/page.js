@@ -13,7 +13,7 @@ const Media = async () => {
       <div className="flex justify-end mb-4">
         <AddImage />
       </div>
-      <section className="bg-white rounded-lg shadow-sm shadow-gray-400">
+      <section className="bg-white rounded-lg shadow-sm shadow-gray-400 p-4">
         <ImageMapping images={images} />
       </section>
     </div>
