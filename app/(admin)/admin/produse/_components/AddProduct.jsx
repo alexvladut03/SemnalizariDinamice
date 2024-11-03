@@ -155,12 +155,12 @@ const AddProduct = ({ categories, attributes, images }) => {
   return (
     <Form {...form}>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
-          Add Product
+        <DialogTrigger className="p-2 w-52 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
+          Creează un produs
         </DialogTrigger>
         <DialogContent className="sm:max-w-[1000px]">
           <DialogHeader className="pl-4">
-            <DialogTitle>Creeaza un produs</DialogTitle>
+            <DialogTitle>Creează un produs</DialogTitle>
             <DialogDescription>
               Completează câmpurile de mai jos, apoi apasă pe butonul
               &quot;Creează&quot; când ai terminat.
@@ -191,7 +191,7 @@ const AddProduct = ({ categories, attributes, images }) => {
                   description: DOMPurify.sanitize(description), // Sanitize without stringifying
                 });
               }}
-              className="space-y-8 p-4"
+              className="space-y-4 p-4"
             >
               <div className="grid grid-cols-4 col-span-2 gap-5">
                 <FormField
