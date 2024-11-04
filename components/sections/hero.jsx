@@ -46,57 +46,57 @@ const Hero = () => {
             />
           </Link>
 
-          <div className="grid grid-cols-4 gap-4 text-left py-8">
-            <div className="group mt-4">
-              <div className="flex items-center">
-                <FaShieldAlt className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
-                <h2 className="font-semibold text-base group-hover:text-amber-500">
+          <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 lg:text-left py-8 ">
+            <div className="group mt-4 h-16">
+              <div className="flex lg:flex-row flex-col items-center">
+                <FaShieldAlt className="w-12 h-12 text-white mr-3 lg:group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base lg:group-hover:text-amber-500 mt-1">
                   Garanție extinsă
                 </h2>
               </div>
-              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+              <div className="lg:mt-2 hidden lg:group-hover:block lg:animate-textHero lg:absolute w-[201px] text-white text-sm">
                 Toate produsele noastre vin cu o garanție de minim 12 luni,
                 asigurându-te că beneficiezi de calitate și durabilitate.
-              </span>
+              </div>
             </div>
 
-            <div className="group mt-4">
-              <div className="flex items-center">
-                <FaTruck className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
-                <h2 className="font-semibold text-base group-hover:text-amber-500">
+            <div className="group mt-4 h-16">
+              <div className="flex lg:flex-row flex-col items-center">
+                <FaTruck className="w-12 h-12 text-white mr-3 lg:group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base lg:group-hover:text-amber-500 mt-1">
                   Livrare gratuită
                 </h2>
               </div>
-              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+              <div className="lg:mt-2 hidden lg:group-hover:block lg:animate-textHero lg:absolute w-[201px] text-white text-sm">
                 Beneficiezi de livrare gratuită la comenzile de peste 300 de
                 lei, pentru a economisi la fiecare achiziție.
-              </span>
+              </div>
             </div>
 
-            <div className="group mt-4">
-              <div className="flex items-center">
-                <FaRegCreditCard className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
-                <h2 className="font-semibold text-base group-hover:text-amber-500">
+            <div className="group mt-4 h-16">
+              <div className="flex lg:flex-row flex-col items-center">
+                <FaRegCreditCard className="w-12 h-12 text-white mr-3 lg:group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base lg:group-hover:text-amber-500 mt-1">
                   Plăți rapide și sigure
                 </h2>
               </div>
-              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+              <div className="lg:mt-2 hidden lg:group-hover:block lg:animate-textHero lg:absolute w-[201px] text-white text-sm">
                 Oferim opțiuni flexibile de plată, cu card bancar sau ramburs,
                 pentru o experiență de cumpărare rapidă și sigură.
-              </span>
+              </div>
             </div>
 
-            <div className="group mt-4">
-              <div className="flex items-center">
-                <FaHeadset className="w-12 h-12 text-white mr-3 group-hover:text-amber-500" />
-                <h2 className="font-semibold text-base group-hover:text-amber-500">
-                  Consultanță personalizată
+            <div className="group mt-4 h-16">
+              <div className="flex lg:flex-row flex-col items-center">
+                <FaHeadset className="w-12 h-12 text-white mr-3 lg:group-hover:text-amber-500" />
+                <h2 className="font-semibold text-base lg:group-hover:text-amber-500 mt-1">
+                  Suport personalizat
                 </h2>
               </div>
-              <span className="mt-2 hidden group-hover:block animate-textHero absolute w-[201px] text-white text-sm">
+              <div className="lg:mt-2 hidden lg:group-hover:block lg:animate-textHero lg:absolute w-[201px] text-white text-sm">
                 Echipa noastră te ajută să alegi accesoriile potrivite, oferind
                 recomandări adaptate nevoilor tale.
-              </span>
+              </div>
             </div>
           </div>
         </div>
