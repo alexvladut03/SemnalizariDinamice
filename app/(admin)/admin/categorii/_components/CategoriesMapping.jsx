@@ -48,7 +48,7 @@ const CategoriesMapping = ({ categories }) => {
   const renderCategories = (categories, level = 0) => {
     return categories.map((category, index) => (
       <div key={index}>
-        <div className="ml-4 p-2 border-b border-gray-200 grid grid-cols-4 items-center">
+        <div className=" p-2 border-b border-gray-200 grid grid-cols-4 items-center">
           <div>{`${"-".repeat(level)} ${category.name}`}</div>
           <div>{category.description}</div>
           <div>{category.slug}</div>

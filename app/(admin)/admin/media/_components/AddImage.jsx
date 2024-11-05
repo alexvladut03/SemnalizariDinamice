@@ -99,13 +99,13 @@ export const AddImage = () => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
-        Add Image
+        Adaugă o imagine
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px]">
         <DialogHeader>
-          <DialogTitle>Adauga o imagine</DialogTitle>
+          <DialogTitle>Adaugă o imagine</DialogTitle>
           <DialogDescription>
-            Aici poti sa incarci imaginile produselor.
+            Aici poți să încarci imaginile produselor.
           </DialogDescription>
         </DialogHeader>
 

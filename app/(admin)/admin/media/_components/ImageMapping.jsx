@@ -44,22 +44,25 @@ export const ImageMapping = ({ images }) => {
   });
 
   return (
-    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-7 gap-10">
+    <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-8 gap-8">
       {optimisticState.map((image) => (
-        <li className="relative shadow-lg" key={image.id}>
+        <li
+          className="relative shadow-sm shadow-gray-300 rounded-xl h-28 w-28 "
+          key={image.id}
+        >
           <Image
-            className="rounded-lg"
+            className="rounded-xl w-full h-full object-cover"
             src={image.url}
             alt={image.altText}
-            width={200}
-            height={200}
+            width={500}
+            height={500}
           />
           <AlertDialog
             open={openDialogId === image.id}
             onOpenChange={(isOpen) => setOpenDialogId(isOpen ? image.id : null)}
           >
             <AlertDialogTrigger>
-              <FaXmark className="absolute top-0 right-0 w-5 h-5 text-red-600 hover:text-red-300 transition-colors" />
+              <FaXmark className="absolute top-[2px] right-[2px] w-5 h-5 text-red-600 hover:text-red-300 transition-colors" />
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>

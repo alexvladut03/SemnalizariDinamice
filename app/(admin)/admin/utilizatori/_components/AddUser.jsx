@@ -64,14 +64,15 @@ const AddUser = () => {
   return (
     <Form {...form}>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
-          Adauga utilizator
+        <DialogTrigger className="p-2 w-52 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
+          Creează un utilizator
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Creeaza un utilizator</DialogTitle>
+            <DialogTitle>Creează un utilizator</DialogTitle>
             <DialogDescription>
-              Completeaza campurile de jos. Apasa pe Salvare pentru a salva.
+              Completează câmpurile de mai jos, apoi apasă pe butonul
+              &quot;Creează&quot; când ai terminat.
             </DialogDescription>
           </DialogHeader>
           <form

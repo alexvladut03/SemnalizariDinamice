@@ -72,14 +72,15 @@ const AddCategory = ({ categories }) => {
   return (
     <Form {...form}>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
-          Adauga categorie
+        <DialogTrigger className="p-2 w-52 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
+          Creează o categorie
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Creeaza o categorie</DialogTitle>
+            <DialogTitle>Creează o categorie</DialogTitle>
             <DialogDescription>
-              Completeaza campurile de jos. Apasa pe Salvare pentru a salva.
+              Completează câmpurile de mai jos, apoi apasă pe butonul
+              &quot;Creează&quot; când ai terminat.
             </DialogDescription>
           </DialogHeader>
           <form

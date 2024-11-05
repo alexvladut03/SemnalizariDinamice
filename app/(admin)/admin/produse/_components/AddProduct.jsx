@@ -155,17 +155,18 @@ const AddProduct = ({ categories, attributes, images }) => {
   return (
     <Form {...form}>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogTrigger className="p-2 w-48 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
-          Add Product
+        <DialogTrigger className="p-2 w-52 text-lg font-semibold bg-gray-400 rounded-lg border-2 hover:border-black">
+          Creează un produs
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[1100px]">
-          <DialogHeader>
-            <DialogTitle>Create a Product</DialogTitle>
+        <DialogContent className="sm:max-w-[1000px]">
+          <DialogHeader className="pl-4">
+            <DialogTitle>Creează un produs</DialogTitle>
             <DialogDescription>
-              Fill in the fields below. Click Save when you are done.
+              Completează câmpurile de mai jos, apoi apasă pe butonul
+              &quot;Creează&quot; când ai terminat.
             </DialogDescription>
           </DialogHeader>
-          <ScrollArea className="h-[500px] p-4">
+          <ScrollArea className="h-[500px]">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -190,9 +191,9 @@ const AddProduct = ({ categories, attributes, images }) => {
                   description: DOMPurify.sanitize(description), // Sanitize without stringifying
                 });
               }}
-              className="space-y-8"
+              className="space-y-4 p-4"
             >
-              <div className="grid grid-cols-4 gap-5">
+              <div className="grid grid-cols-4 col-span-2 gap-5">
                 <FormField
                   control={form.control}
                   name="name"
@@ -208,114 +209,180 @@ const AddProduct = ({ categories, attributes, images }) => {
                     </FormItem>
                   )}
                 />
-
                 {/* Main Category Select */}
-                <div className="col-span-2 gap-5 grid grid-cols-2">
-                  <FormField
-                    control={form.control}
-                    name="categoryId"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Categorie Principala</FormLabel>
-                        <Select
-                          onValueChange={(value) => {
-                            field.onChange(value);
-                            setSelectedMainCategory(
-                              mainCategories.find((cat) => cat.id === value)
-                            );
-                            setSelectedChildCategory(null); // Reset child category on main category change
-                          }}
-                          value={
-                            selectedMainCategory ? selectedMainCategory.id : ""
-                          }
-                          name={field.name}
-                        >
-                          <FormControl>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select Main Category" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            {mainCategories.map((category) => (
-                              <SelectItem key={category.id} value={category.id}>
-                                {category.name}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <DisplayValidationError
-                          value={result.validationErrors?.categoryId}
-                        />
-                      </FormItem>
-                    )}
-                  />
-
-                  {/* Child Category Select */}
-                  {selectedMainCategory?.children &&
-                    selectedMainCategory.children.length > 0 && (
-                      <FormField
-                        control={form.control}
-                        name="subcategoryId"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Subcategorie</FormLabel>
-                            <Select
-                              onValueChange={(value) => {
-                                field.onChange(value);
-                                setSelectedChildCategory(
-                                  selectedMainCategory.children.find(
-                                    (child) => child.id === value
-                                  )
-                                );
-                              }}
-                              value={
-                                selectedChildCategory
-                                  ? selectedChildCategory.id
-                                  : null
-                              }
-                              name={field.name}
-                            >
-                              <FormControl>
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select Subcategory" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                {selectedMainCategory.children.map((child) => (
-                                  <SelectItem key={child.id} value={child.id}>
-                                    {child.name}
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    )}
-                </div>
-
-                {/* Attribute Selection */}
                 <FormField
                   control={form.control}
-                  name="attributes"
+                  name="categoryId"
                   render={({ field }) => (
                     <FormItem>
-                      <div className="flex gap-5 items-start">
+                      <FormLabel>Categorie Principală</FormLabel>
+                      <Select
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setSelectedMainCategory(
+                            mainCategories.find((cat) => cat.id === value)
+                          );
+                          setSelectedChildCategory(null); // Reset child category on main category change
+                        }}
+                        value={
+                          selectedMainCategory ? selectedMainCategory.id : ""
+                        }
+                        name={field.name}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select Main Category" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {mainCategories.map((category) => (
+                            <SelectItem key={category.id} value={category.id}>
+                              {category.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <DisplayValidationError
+                        value={result.validationErrors?.categoryId}
+                      />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Child Category Select */}
+                {selectedMainCategory?.children &&
+                  selectedMainCategory.children.length > 0 && (
+                    <FormField
+                      control={form.control}
+                      name="subcategoryId"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Subcategorie</FormLabel>
+                          <Select
+                            onValueChange={(value) => {
+                              field.onChange(value);
+                              setSelectedChildCategory(
+                                selectedMainCategory.children.find(
+                                  (child) => child.id === value
+                                )
+                              );
+                            }}
+                            value={
+                              selectedChildCategory
+                                ? selectedChildCategory.id
+                                : null
+                            }
+                            name={field.name}
+                          >
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select Subcategory" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {selectedMainCategory.children.map((child) => (
+                                <SelectItem key={child.id} value={child.id}>
+                                  {child.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
+              </div>
+              <div className="grid grid-cols-4 gap-5">
+                <FormField
+                  control={form.control}
+                  name="sku"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>SKU</FormLabel>
+                      <FormControl>
+                        <Input placeholder="SKU" {...field} />
+                      </FormControl>
+                      <DisplayValidationError
+                        value={result.validationErrors?.sku}
+                      />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="price"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Preț</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="150" {...field} />
+                      </FormControl>
+                      <DisplayValidationError
+                        value={result.validationErrors?.price}
+                      />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="stock"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Stock</FormLabel>
+                      <FormControl>
+                        <Input type="number" placeholder="10" {...field} />
+                      </FormControl>
+                      <DisplayValidationError
+                        value={result.validationErrors?.stock}
+                      />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="slug"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Slug</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Slug" {...field} />
+                      </FormControl>
+                      <DisplayValidationError
+                        value={result.validationErrors?.slug}
+                      />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              {/* Attribute Selection */}
+
+              <FormField
+                control={form.control}
+                name="attributes"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="grid grid-cols-4 col-span-4 gap-5">
+                      <div>
                         <FormLabel>Atribute</FormLabel>
                         {/* Add New Attribute */}
                         <p
                           onClick={addSelectedAttribute}
-                          className="bg-black hover:cursor-pointer hover:bg-blue-500 text-sm text-white rounded-2xl text-center w-full py-2 px-4"
+                          className="bg-black hover:cursor-pointer hover:bg-blue-500 text-sm text-white rounded-2xl text-center w-full py-2 px-4 mt-2"
                         >
-                          Adauga un atribut
+                          Adaugă un atribut
                         </p>
                       </div>
+                    </div>
+                    <div className="grid grid-cols-4 gap-5">
                       <FormControl>
                         <>
                           {selectedAttributes.map((selectedAttr, index) => (
-                            <div key={index} className="mb-4">
-                              <div className="flex items-center gap-2">
+                            <div key={index} className="mb-4 w-full">
+                              <div className="flex w-full items-center gap-1">
                                 {/* Select Attribute */}
                                 <Select
                                   onValueChange={(value) => {
@@ -325,7 +392,7 @@ const AddProduct = ({ categories, attributes, images }) => {
                                 >
                                   <FormControl>
                                     <SelectTrigger>
-                                      <SelectValue placeholder="Selecteaza atribut" />
+                                      <SelectValue placeholder="Selectează atribut" />
                                     </SelectTrigger>
                                   </FormControl>
                                   <SelectContent>
@@ -351,11 +418,11 @@ const AddProduct = ({ categories, attributes, images }) => {
                                 </Select>
                                 <Button
                                   type="button"
-                                  size="icon"
                                   variant="ghost"
                                   onClick={() => removeSelectedAttribute(index)}
+                                  className="py-0 px-2"
                                 >
-                                  <TrashIcon className="h-4 w-4" />
+                                  <TrashIcon className="w-5 h-5" />
                                 </Button>
                               </div>
 
@@ -392,97 +459,32 @@ const AddProduct = ({ categories, attributes, images }) => {
                           ))}
                         </>
                       </FormControl>
-                      <DisplayValidationError
-                        value={result.validationErrors?.attributes}
-                      />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  className="row-start-2"
-                  name="sku"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>SKU</FormLabel>
-                      <FormControl>
-                        <Input placeholder="SKU" {...field} />
-                      </FormControl>
-                      <DisplayValidationError
-                        value={result.validationErrors?.sku}
-                      />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="price"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Pret</FormLabel>
-                      <FormControl>
-                        <Input type="number" placeholder="Price" {...field} />
-                      </FormControl>
-                      <DisplayValidationError
-                        value={result.validationErrors?.price}
-                      />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="stock"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Stock</FormLabel>
-                      <FormControl>
-                        <Input type="number" placeholder="Stock" {...field} />
-                      </FormControl>
-                      <DisplayValidationError
-                        value={result.validationErrors?.stock}
-                      />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="slug"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Slug</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Slug" {...field} />
-                      </FormControl>
-                      <DisplayValidationError
-                        value={result.validationErrors?.slug}
-                      />
-                    </FormItem>
-                  )}
-                />
-              </div>
+                    </div>
+                    <DisplayValidationError
+                      value={result.validationErrors?.attributes}
+                    />
+                  </FormItem>
+                )}
+              />
 
               <div className="flex gap-5">
                 <div>
                   <FormLabel className="mt-1 mr-5">
-                    Imagine Principala
+                    Imagine Principală
                   </FormLabel>
                   {mainImage ? (
                     <div className="relative ">
                       <Image
-                        className="rounded-lg mt-[13px] w-[340px] h-[340px] border-2 border-gray-100 hover:border-gray-300 border-solid"
+                        className="rounded-lg mt-6 w-72 h-72 border-2 border-gray-100 hover:border-gray-300 border-solid"
                         src={mainImage.url}
                         alt="Main Image"
-                        width={200}
-                        height={200}
+                        width={500}
+                        height={500}
                       />
                       <button
                         type="button"
                         onClick={handleRemoveMainImage}
-                        className="pr-4 pt-2 absolute right-0 top-0 text-red-500 text-2xl"
+                        className="absolute right-2 top-2 text-red-500 text-2xl"
                       >
                         <RiDeleteBin5Fill />
                       </button>
@@ -491,14 +493,14 @@ const AddProduct = ({ categories, attributes, images }) => {
                     <Dialog>
                       <DialogTrigger>
                         <p className="bg-black hover:bg-blue-500 text-sm text-white rounded-2xl text-center w-full py-2 px-4">
-                          Add Image
+                          Adaugă Imagine
                         </p>
                       </DialogTrigger>
                       <DialogContent className="bg-white max-w-6xl">
                         <DialogHeader>
-                          <DialogTitle>Images</DialogTitle>
+                          <DialogTitle>Imagini</DialogTitle>
                           <DialogDescription>
-                            Select an image for the main image.
+                            Selectează o imagine pentru imaginea principală.
                           </DialogDescription>
                           <MediaPopUp
                             images={images}
@@ -524,14 +526,14 @@ const AddProduct = ({ categories, attributes, images }) => {
                     <Dialog>
                       <DialogTrigger>
                         <p className="bg-black hover:bg-blue-500 text-sm text-white rounded-2xl text-center w-full py-2 px-4">
-                          Add Images
+                          Adaugă Imagine
                         </p>
                       </DialogTrigger>
                       <DialogContent className="bg-white max-w-6xl">
                         <DialogHeader>
-                          <DialogTitle>Images</DialogTitle>
+                          <DialogTitle>Imagini</DialogTitle>
                           <DialogDescription>
-                            Select multiple images for the gallery.
+                            Selectează mai multe imagini pentru galerie.
                           </DialogDescription>
                           <MediaPopUp
                             images={images}
@@ -545,16 +547,16 @@ const AddProduct = ({ categories, attributes, images }) => {
                     {gallery.map((image, index) => (
                       <div key={index} className="relative">
                         <Image
-                          className="rounded-lg mt-3 w-40 h-40 border-2 border-gray-100 hover:border-gray-300"
+                          className="rounded-lg mt-3 w-32 h-32 border-2 border-gray-100 hover:border-gray-300"
                           src={image.url}
                           alt="Gallery Image"
-                          width={200}
-                          height={200}
+                          width={500}
+                          height={500}
                         />
                         <button
                           type="button"
                           onClick={() => handleRemoveGalleryImage(image)}
-                          className="pr-4 pt-2 absolute right-0 top-0 text-red-500 text-2xl"
+                          className="absolute right-2 top-5 text-red-500 text-2xl"
                         >
                           <RiDeleteBin5Fill />
                         </button>
@@ -607,7 +609,7 @@ const AddProduct = ({ categories, attributes, images }) => {
                   type="submit"
                   className="bg-black hover:bg-blue-500 text-white rounded-2xl text-center w-full py-2"
                 >
-                  {isExecuting ? "Se creeaza.." : "Creeaza"}
+                  {isExecuting ? "Se creează.." : "Creează"}
                 </Button>
               </DialogFooter>
             </form>
