@@ -16,7 +16,7 @@ const ProductsCard = ({ product }) => {
             alt={name}
             width={200}
             height={200}
-            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+            className="h-[200px] w-full object-contain transition-transform duration-500 group-hover:scale-105"
           />
           <span className="whitespace-nowrap bg-gradient-to-r from-amber-600 via-amber-500 to-amber-400 absolute top-2 left-2 h-7 w-14 rounded-lg flex items-center justify-center text-sm font-semibold text-white ">
             Nou

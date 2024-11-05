@@ -1,5 +1,4 @@
 import { getAllAttributes } from "@/utils/functions/attribute/get-all-attributes";
-import { getAllProducts } from "@/utils/functions/product/get-all-products";
 import Link from "next/link";
 import React from "react";
 import ProductsAndFilters from "./_components/ProductsAndFilters";
