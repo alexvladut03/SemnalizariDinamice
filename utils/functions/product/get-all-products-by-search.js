@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@/utils/prisma";
 
-const PRODUCTS_PER_PAGE = 9;
+const PRODUCTS_PER_PAGE = 12;
 
 export const getAllProductsBySearch = async (searchParams) => {
   const { search, page, sort, ...attributesParams } = searchParams;
