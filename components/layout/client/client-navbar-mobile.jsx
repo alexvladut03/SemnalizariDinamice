@@ -130,8 +130,13 @@ export default function ClientNavBarMobile() {
 
   const handleSearchChange = (e) => {
     e.preventDefault();
-    router.push(`/produse?search=${encodeURIComponent(searchValue)}`);
+    const currentParams = new URLSearchParams(searchParams);
+    currentParams.set("search", searchValue);
+    const searchQuery = currentParams.toString();
+
+    router.push(`/produse?${searchQuery}`);
   };
+
   return (
     <main>
       <div className="flex justify-between items-center w-full">
