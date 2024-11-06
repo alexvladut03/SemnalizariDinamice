@@ -7,22 +7,25 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useRouter, useSearchParams } from "next/navigation";
 
-const ProductPagination = ({ productsPerPage, count, currentPage }) => {
+const ProductPagination = ({
+  productsPerPage,
+  count,
+  currentPage,
+  selectedFilters,
+  updateURL,
+}) => {
   const pages = Math.ceil(count / productsPerPage);
-  const router = useRouter();
-  const searchParams = useSearchParams();
 
   const handlePageChange = (page) => {
-    const currentParams = new URLSearchParams(searchParams.toString());
+    const newFilters = {
+      ...selectedFilters,
+      page: [page.toString()],
+    };
 
-    // Set the "page" query parameter to the selected page
-    currentParams.set("page", page);
-
-    const url = `/produse?${currentParams.toString()}`;
-
-    return url;
+    return `?${new URLSearchParams(
+      Object.entries(newFilters).map(([key, value]) => [key, value.join(",")])
+    ).toString()}`;
   };
 
   return (

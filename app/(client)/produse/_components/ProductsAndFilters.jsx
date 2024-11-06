@@ -1,10 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SidebarFilter from "./SidebarFilter";
 import ProductDisplay from "./ProductDisplay";
 import ProductPagination from "./ProductPagination";
 import { TopbarSort } from "./TopbarSort";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const ProductsAndFilters = ({ attributes, products, categories, params }) => {
   const { fetchedProducts, count, productsPerPage } = products;
@@ -55,6 +55,8 @@ const ProductsAndFilters = ({ attributes, products, categories, params }) => {
           productsPerPage={productsPerPage}
           count={count}
           currentPage={params.page ? parseInt(params.page) : 1}
+          updateURL={updateURL}
+          selectedFilters={selectedFilters}
         />
       </div>
     </div>
