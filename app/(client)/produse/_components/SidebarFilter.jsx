@@ -6,6 +6,7 @@ import MobileFilter from "./MobileFilter";
 
 const SidebarFilter = ({
   attributes,
+  categories,
   selectedFilters,
   setSelectedFilters,
   updateURL,
@@ -34,12 +35,14 @@ const SidebarFilter = ({
     <>
       <DesktopFilter
         attributes={attributes}
+        categories={categories}
         selectedFilters={selectedFilters}
         setSelectedFilters={setSelectedFilters}
         updateURL={updateURL}
       />
       <MobileFilter
         attributes={attributes}
+        categories={categories}
         selectedFilters={selectedFilters}
         setSelectedFilters={setSelectedFilters}
         updateURL={updateURL}

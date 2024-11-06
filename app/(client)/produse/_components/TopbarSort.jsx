@@ -28,6 +28,7 @@ export const TopbarSort = ({
       sort: [order],
     };
 
+    setSelectedFilters(newSelectedFilters);
     updateURL(newSelectedFilters);
   };
 
@@ -65,7 +66,9 @@ export const TopbarSort = ({
                   onClick={() => removeFilter(key, value)}
                   className="relative mb-2 flex items-center rounded-lg bg-[#f89000] pl-2 pr-10 py-1 font-medium transition hover:scale-105 text-black"
                 >
-                  <span className="text-left text-white">{value}</span>
+                  <span className="text-left text-white">
+                    {key === "price" ? `${value} RON` : value}
+                  </span>
                   <div className="absolute right-0 h-full flex items-center justify-center w-8 bg-black rounded-r-lg rounded-bl-2xl">
                     <IoClose className="text-2xl text-white" />
                   </div>
@@ -76,10 +79,13 @@ export const TopbarSort = ({
       </div>
 
       <div className="flex flex-col sm:flex-row justify-between sm:items-center mb-3">
-        <div className="flex items-center gap-4 text-sm">
-          <p className="hidden sm:block">Sorteaza dupa:</p>
-          <Select onValueChange={handleSortOrder}>
-            <SelectTrigger className="w-[180px] hidden sm:block">
+        <div className="items-center gap-4 text-sm hidden sm:flex">
+          <p>Sorteaza dupa:</p>
+          <Select
+            onValueChange={handleSortOrder}
+            value={selectedFilters.sort?.[0] || sortings[0].value}
+          >
+            <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Ordoneaza" />
             </SelectTrigger>
             <SelectContent className="w-full sm:w-[180px]">

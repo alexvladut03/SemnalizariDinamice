@@ -1,10 +1,11 @@
-"use server";
 import prisma from "@/utils/prisma";
 
 const PRODUCTS_PER_PAGE = 12;
 
 export const getAllProductsBySearch = async (searchParams) => {
-  const { search, page, sort, ...attributesParams } = searchParams;
+  const { search, page, sort, category, price, ...attributesParams } =
+    searchParams;
+  const priceFilters = price?.split("-");
 
   if (page < 1) {
     throw new Error("Invalid page number");
@@ -60,6 +61,13 @@ export const getAllProductsBySearch = async (searchParams) => {
           }
         : {}),
       AND: attributeConditions.length > 0 ? attributeConditions : undefined,
+      category: category ? { name: category } : undefined,
+      price: price
+        ? {
+            gte: parseFloat(priceFilters[0]),
+            lte: parseFloat(priceFilters[1]) || Number.MAX_SAFE_INTEGER,
+          }
+        : undefined,
     },
     include: {
       category: true,
@@ -87,6 +95,13 @@ export const getAllProductsBySearch = async (searchParams) => {
           }
         : {}),
       AND: attributeConditions.length > 0 ? attributeConditions : undefined,
+      category: category ? { name: category } : undefined,
+      price: price
+        ? {
+            gte: parseFloat(priceFilters[0]),
+            lte: parseFloat(priceFilters[1]) || Number.MAX_SAFE_INTEGER,
+          }
+        : undefined,
     },
   });
 

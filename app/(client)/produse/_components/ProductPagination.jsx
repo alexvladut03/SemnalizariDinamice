@@ -20,7 +20,7 @@ const ProductPagination = ({ productsPerPage, count, currentPage }) => {
     // Set the "page" query parameter to the selected page
     currentParams.set("page", page);
 
-    const url = `/produse-2?${currentParams.toString()}`;
+    const url = `/produse?${currentParams.toString()}`;
 
     return url;
   };

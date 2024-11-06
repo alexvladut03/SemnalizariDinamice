@@ -9,13 +9,15 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "../../../../components/ui/breadcrumb";
+} from "@/components/ui/breadcrumb";
 import { getProductBySlug } from "@/utils/functions/product/get-product-by-slug";
 
 const ProductPage = async ({ params }) => {
   const { slug } = params;
 
   const product = await getProductBySlug(slug);
+
+  console.log(product);
 
   if (!product) {
     return <div>Product not found</div>;

@@ -6,7 +6,7 @@ import ProductPagination from "./ProductPagination";
 import { TopbarSort } from "./TopbarSort";
 import { useSearchParams, useRouter } from "next/navigation";
 
-const ProductsAndFilters = ({ attributes, products, params }) => {
+const ProductsAndFilters = ({ attributes, products, categories, params }) => {
   const { fetchedProducts, count, productsPerPage } = products;
   const router = useRouter();
 
@@ -23,7 +23,6 @@ const ProductsAndFilters = ({ attributes, products, params }) => {
   });
 
   const updateURL = (filters) => {
-    console.log("filters", filters);
     const searchParams = new URLSearchParams();
     Object.entries(filters).forEach(([key, value]) => {
       if (value && value.length > 0) {
@@ -31,13 +30,14 @@ const ProductsAndFilters = ({ attributes, products, params }) => {
       }
     });
     searchParams.set("page", "1");
-    router.push(`/produse-2?${searchParams.toString()}`, { scroll: false });
+    router.push(`/produse?${searchParams.toString()}`, { scroll: false });
   };
 
   return (
     <div className="max-w-7xl mx-auto px-10 xl:px-0 my-5 sm:my-10 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
       <SidebarFilter
         attributes={attributes}
+        categories={categories}
         selectedFilters={selectedFilters}
         setSelectedFilters={setSelectedFilters}
         updateURL={updateURL}

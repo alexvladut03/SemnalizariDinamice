@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { MdOutlineLocalShipping, MdOutlineVerifiedUser } from "react-icons/md";
-import CartButton from "../../../../../components/custom ui/add-to-cart-button";
-import GeneralButton from "../../../../../components/custom ui/general-button";
+import CartButton from "@/components/custom ui/add-to-cart-button";
+import GeneralButton from "@/components/custom ui/general-button";
 
 const ProductBuy = ({ stock, name, mainImage, id, price }) => {
   const [activeQuantity, setActiveQuantity] = useState(1);
