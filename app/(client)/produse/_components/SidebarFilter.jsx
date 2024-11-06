@@ -1,6 +1,4 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
 import DesktopFilter from "./DesktopFilter";
 import MobileFilter from "./MobileFilter";
 

@@ -6,7 +6,7 @@ import { getAllProductsBySearch } from "@/utils/functions/product/get-all-produc
 import { getAllCategories } from "@/utils/functions/category/get-all-categories";
 
 const page = async ({ searchParams }) => {
-  const productsData = await getAllProductsBySearch(searchParams);
+  const productsData = await getAllProductsBySearch(await searchParams);
   const attributesData = await getAllAttributes();
   const categoriesData = await getAllCategories();
 
