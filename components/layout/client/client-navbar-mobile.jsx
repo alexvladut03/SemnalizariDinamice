@@ -208,7 +208,7 @@ export default function ClientNavBarMobile() {
             {/* Link-uri de navigare */}
             <nav className="flex flex-col gap-8 text-white font-semibold p-4">
               <Link
-                href="/#Acasa"
+                href="/"
                 className="hover:text-amber-500 cursor-pointer"
                 onClick={closeMenu} // Închide meniul când se apasă pe link
               >

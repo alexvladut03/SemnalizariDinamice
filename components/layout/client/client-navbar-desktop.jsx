@@ -55,7 +55,7 @@ export default function ClientNavbarDesktop() {
               : "animate-puffInCenterSearchInput"
           }`}
         >
-          <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
+          <Link href="/" className="hover:text-amber-500 cursor-pointer">
             Acasa
           </Link>
           <Link href="/produse" className="hover:text-amber-500 cursor-pointer">
