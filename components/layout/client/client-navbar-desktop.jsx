@@ -5,10 +5,11 @@ import ClientNavbarAddToCart from "./client-navbar-addtocart";
 import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ClientNavbarDesktop() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const searchParams = useSearchParams();
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
   const [isNavAnimatingOut, setIsNavAnimatingOut] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -34,7 +35,11 @@ export default function ClientNavbarDesktop() {
 
   const handleSearchChange = (e) => {
     e.preventDefault();
-    router.push(`/produse?search=${encodeURIComponent(searchValue)}`);
+    const currentParams = new URLSearchParams(searchParams);
+    currentParams.set("search", searchValue);
+    const searchQuery = currentParams.toString();
+
+    router.push(`/produse?${searchQuery}`);
   };
 
   return (
@@ -50,7 +55,7 @@ export default function ClientNavbarDesktop() {
               : "animate-puffInCenterSearchInput"
           }`}
         >
-          <Link href="/#Acasa" className="hover:text-amber-500 cursor-pointer">
+          <Link href="/" className="hover:text-amber-500 cursor-pointer">
             Acasa
           </Link>
           <Link href="/produse" className="hover:text-amber-500 cursor-pointer">

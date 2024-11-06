@@ -130,8 +130,13 @@ export default function ClientNavBarMobile() {
 
   const handleSearchChange = (e) => {
     e.preventDefault();
-    router.push(`/produse?search=${encodeURIComponent(searchValue)}`);
+    const currentParams = new URLSearchParams(searchParams);
+    currentParams.set("search", searchValue);
+    const searchQuery = currentParams.toString();
+
+    router.push(`/produse?${searchQuery}`);
   };
+
   return (
     <main>
       <div className="flex justify-between items-center w-full">
@@ -203,7 +208,7 @@ export default function ClientNavBarMobile() {
             {/* Link-uri de navigare */}
             <nav className="flex flex-col gap-8 text-white font-semibold p-4">
               <Link
-                href="/#Acasa"
+                href="/"
                 className="hover:text-amber-500 cursor-pointer"
                 onClick={closeMenu} // Închide meniul când se apasă pe link
               >

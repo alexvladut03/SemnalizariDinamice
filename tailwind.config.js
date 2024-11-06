@@ -108,6 +108,14 @@ module.exports = withUt({
             opacity: "1", // Devine complet vizibil
           },
         },
+        leftToRight: {
+          "0%": {
+            width: "30%",
+          },
+          "100%": {
+            width: "100%",
+          },
+        },
       },
       animation: {
         waveSlideYellow: "waveSlideYellow 1.4s ease-in-out forwards",
@@ -162,6 +170,9 @@ module.exports = withUt({
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+      transitionProperty: {
+        width: "width",
       },
       borderRadius: {
         lg: `var(--radius)`,
