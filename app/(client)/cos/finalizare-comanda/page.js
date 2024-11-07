@@ -20,12 +20,45 @@ const Checkout = () => {
   };
 
   const handleClientDataSubmit = (data) => {
-    console.log("Datele despre client trimise la Checkout:", data); // Verifică datele primite în `Checkout`
+    console.log("Client data received in Checkout:", data); // Monitorizează datele clientului
     setClientData(data);
   };
 
-  const handleOrderSubmit = () => {
+  const handleOrderSubmit = async () => {
     setIsReadyToSubmit(true); // Setăm la true pentru a declanșa trimiterea datelor în OrderFinalDetails
+
+    // Așteaptă până când `clientData` este actualizat
+    await new Promise((resolve) => setTimeout(resolve, 100)); // Așteptăm o mică întârziere pentru ca datele să fie actualizate
+
+    // După ce `clientData` este completat, continuăm cu cererea către endpoint
+    try {
+      const orderData = {
+        ...clientData,
+        paymentMethod: selectedPaymentMethod,
+        total: shippingCost + (selectedPaymentMethod === "ramburs" ? 5 : 0),
+      };
+
+      const response = await fetch("/api/fanCourier/createAWB", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ clientData: orderData }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error("Order submission error:", data);
+        return;
+      }
+
+      console.log("Order successfully submitted:", data);
+    } catch (error) {
+      console.error("Error submitting order:", error);
+    } finally {
+      setIsReadyToSubmit(false); // Resetează starea `isReadyToSubmit`
+    }
   };
 
   return (
@@ -36,7 +69,7 @@ const Checkout = () => {
           onShippingCostUpdate={handleShippingCostUpdate}
           onClientDataSubmit={handleClientDataSubmit}
           isReadyToSubmit={isReadyToSubmit}
-          setIsReadyToSubmit={setIsReadyToSubmit} // Transmitem funcția
+          setIsReadyToSubmit={setIsReadyToSubmit}
         />
         <OrderFinalBillingData />
         <OrderFinalPaymentMethod

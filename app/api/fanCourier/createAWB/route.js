@@ -65,7 +65,8 @@ export async function POST(req) {
             weight: 1,
             cod: isRamburs ? total : 0, // Total pentru ramburs
             declaredValue: !isRamburs ? total : 0, // Total pentru card
-            payment: isRamburs ? "recipient" : "sender", // "recipient" pentru ramburs, "sender" pentru card
+            payment: isRamburs ? "recipient" : "sender", // Cine plătește transportul
+            returnPayment: isRamburs ? "recipient" : "sender", // Cine plătește returul
             dimensions: { length: 20, height: 10, width: 15 },
           },
           recipient: {
