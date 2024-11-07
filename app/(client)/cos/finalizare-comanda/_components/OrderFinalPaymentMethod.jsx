@@ -1,11 +1,19 @@
+// OrderFinalPaymentMethod.js
+
 "use client";
 import React, { useState } from "react";
 import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
-export default function PaymentMethod() {
+
+export default function OrderFinalPaymentMethod({ onPaymentMethodChange }) {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("ramburs");
+
+  const handlePaymentChange = (method) => {
+    setSelectedPaymentMethod(method);
+    onPaymentMethodChange(method); // Notifică componenta părinte
+  };
 
   return (
     <div className="p-6 mb-8 bg-white rounded-lg shadow-sm shadow-amber-500 w-full">
@@ -18,15 +26,14 @@ export default function PaymentMethod() {
 
       <RadioGroup
         value={selectedPaymentMethod}
-        onValueChange={(value) => setSelectedPaymentMethod(value)}
+        onValueChange={handlePaymentChange}
         className="space-y-4"
       >
-        {/* Opțiunea Card */}
         <div
           className={`flex items-center p-4 border rounded-lg cursor-pointer ${
             selectedPaymentMethod === "card" ? "border-amber-500" : ""
           }`}
-          onClick={() => setSelectedPaymentMethod("card")}
+          onClick={() => handlePaymentChange("card")}
         >
           <RadioGroupItem value="card" id="card" className="text-amber-500" />
           <div className="ml-3">
@@ -43,7 +50,6 @@ export default function PaymentMethod() {
           </div>
         </div>
 
-        {/* Form pentru detalii card, afișat doar dacă opțiunea "card" este selectată */}
         {selectedPaymentMethod === "card" && (
           <div className="mt-4">
             <form className="space-y-4">
@@ -103,12 +109,11 @@ export default function PaymentMethod() {
           </div>
         )}
 
-        {/* Opțiunea Ramburs */}
         <div
           className={`flex items-center p-4 border rounded-lg cursor-pointer ${
             selectedPaymentMethod === "ramburs" ? "border-amber-500" : ""
           }`}
-          onClick={() => setSelectedPaymentMethod("ramburs")}
+          onClick={() => handlePaymentChange("ramburs")}
         >
           <RadioGroupItem
             value="ramburs"

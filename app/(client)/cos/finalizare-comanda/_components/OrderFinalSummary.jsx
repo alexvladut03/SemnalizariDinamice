@@ -1,15 +1,16 @@
+// OrderFinalSummary.js
+
 import React from "react";
 import Link from "next/link";
 import GeneralButton from "../../../../../components/custom ui/general-button";
 
 export default function OrderFinalSummary({
   selectedPaymentMethod,
-  productCost = 200, // costul produselor, pentru exemplu
-  shippingCost = 20, // costul livrării, pentru exemplu
+  productCost = 200,
+  shippingCost,
 }) {
-  // Adăugăm un cost de 5 RON pentru plata ramburs
   const processingFee = selectedPaymentMethod === "ramburs" ? 5 : 0;
-  const totalCost = productCost + shippingCost + processingFee;
+  const totalCost = productCost + (shippingCost || 19.99) + processingFee;
 
   return (
     <div className="bg-white rounded-lg shadow-sm shadow-amber-500 p-6 w-full">
@@ -22,7 +23,7 @@ export default function OrderFinalSummary({
           </div>
           <div className="flex justify-between">
             <p className="text-gray-700">Cost livrare:</p>
-            <p className="text-gray-700">{shippingCost} RON</p>
+            <p className="text-gray-700">{shippingCost || 19.99} RON</p>
           </div>
           {processingFee > 0 && (
             <div className="flex justify-between">

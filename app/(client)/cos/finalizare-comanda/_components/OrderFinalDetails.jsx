@@ -12,11 +12,11 @@ import {
 } from "@/components/ui/select";
 import { validateUserFanSchema } from "@/utils/zod";
 
-export default function OrderFinalDetails() {
+export default function OrderFinalDetails({ onShippingCostUpdate }) {
   const {
     register,
-    handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(validateUserFanSchema),
@@ -29,11 +29,14 @@ export default function OrderFinalDetails() {
       street: "",
     },
   });
-  console.log(errors);
+
   const [isDeliveryCourier, setIsDeliveryCourier] = useState(true);
   const [isDeliveryPersonal, setIsDeliveryPersonal] = useState(false);
   const [counties, setCounties] = useState([]);
   const [localities, setLocalities] = useState([]);
+
+  const county = watch("county");
+  const locality = watch("locality");
 
   const handleCountyChange = (value) => {
     setValue("county", value, { shouldValidate: true });
@@ -66,29 +69,41 @@ export default function OrderFinalDetails() {
       });
   };
 
-  const onSubmit = async (clientData) => {
+  const fetchShippingCost = async (county, locality, weight = 1) => {
     try {
-      // Trimitere date către backend
-      const response = await fetch("/api/fanCourier/createAWB", {
+      const response = await fetch("/api/fanCourier/calculateTariff", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ clientData }),
+        body: JSON.stringify({ county, locality, weight }),
       });
 
       if (!response.ok) {
-        // Dacă validarea eșuează pe backend, afișează răspunsul
-        const errorData = await response.json();
-        console.log("Erorile de validare de pe backend:", errorData.errors);
+        throw new Error("Failed to fetch shipping cost");
+      }
+
+      const data = await response.json();
+      console.log("Răspunsul complet de la API:", data);
+
+      // Extrage doar `totalCost` și transmite-l către componenta părinte
+      const totalCost = data.data?.data?.total;
+      if (totalCost !== undefined) {
+        onShippingCostUpdate(totalCost); // Trimite `total` către componenta părinte
+        console.log("Cost total trimis către onShippingCostUpdate:", totalCost);
       } else {
-        const data = await response.json();
-        console.log("Răspunsul de la Fan Courier:", data);
+        console.warn("`total` nu a fost găsit în răspunsul API.");
       }
     } catch (error) {
-      console.error("Eroare la trimiterea comenzii:", error);
+      console.error("Error fetching shipping cost:", error);
     }
   };
+
+  useEffect(() => {
+    if (county && locality) {
+      fetchShippingCost(county, locality);
+    }
+  }, [county, locality]);
 
   const handleDeliveryCourier = () => {
     setIsDeliveryCourier(true);
@@ -131,10 +146,7 @@ export default function OrderFinalDetails() {
 
         {isDeliveryCourier && (
           <div className="p-4 rounded-lg">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="lg:grid lg:grid-cols-2 lg:gap-4 space-y-4 lg:space-y-0"
-            >
+            <form className="lg:grid lg:grid-cols-2 lg:gap-4 space-y-4 lg:space-y-0">
               <div className="col-span-2 font-medium">Persoana de contact</div>
               <div>
                 <label className="ml-1 text-sm font-medium text-gray-700">
@@ -275,12 +287,6 @@ export default function OrderFinalDetails() {
                   <Input {...register("apartment")} placeholder="Apartament" />
                 </div>
               </div>
-              <button
-                type="submit"
-                className="mt-4 p-2 bg-amber-500 text-white rounded-lg"
-              >
-                Trimite Comanda
-              </button>
             </form>
           </div>
         )}
