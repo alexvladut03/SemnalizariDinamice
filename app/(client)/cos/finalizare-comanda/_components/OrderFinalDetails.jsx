@@ -60,6 +60,12 @@ export default function OrderFinalDetails({
   const handleLocalityChange = (value) => {
     setValue("locality", value, { shouldValidate: true });
   };
+  // Funcția de submit care validează datele și le trimite înapoi la Checkout
+  const onSubmit = (clientData) => {
+    console.log("Client data ready to submit:", clientData);
+    onClientDataSubmit(clientData); // Trimite datele validate către Checkout
+    setIsReadyToSubmit(false); // Resetează starea pentru a evita trimiterea repetată
+  };
 
   useEffect(() => {
     fetch("https://api.fancourier.ro/reports/counties")
@@ -114,19 +120,12 @@ export default function OrderFinalDetails({
   }, [county, locality]);
 
   useEffect(() => {
-    console.log("isReadyToSubmit value:", isReadyToSubmit); // Monitorizează valoarea `isReadyToSubmit`
     if (isReadyToSubmit) {
-      handleSubmit(
-        (clientData) => {
-          console.log("Client data ready to submit:", clientData); // Afișează datele de client dacă `isReadyToSubmit` e true
-          onClientDataSubmit(clientData);
-          setIsReadyToSubmit(false); // Resetăm `isReadyToSubmit` după trimitere
-        },
-        (validationErrors) => {
-          console.error("Validation error:", validationErrors); // Erorile de validare
-          setIsReadyToSubmit(false); // Resetăm `isReadyToSubmit` dacă există erori
-        }
-      )();
+      // Rulează validarea și trimiterea datelor doar când `isReadyToSubmit` este `true`
+      handleSubmit(onSubmit, (validationErrors) => {
+        console.error("Validation errors:", validationErrors); // Afișează erorile de validare
+        setIsReadyToSubmit(false); // Resetează `isReadyToSubmit` dacă există erori
+      })();
     }
   }, [isReadyToSubmit, handleSubmit, onClientDataSubmit, setIsReadyToSubmit]);
 

@@ -19,25 +19,16 @@ const Checkout = () => {
     setShippingCost(cost);
   };
 
-  const handleClientDataSubmit = (data) => {
-    console.log("Client data received in Checkout:", data); // Monitorizează datele clientului
+  const handleClientDataSubmit = async (data) => {
     setClientData(data);
-  };
 
-  const handleOrderSubmit = async () => {
-    setIsReadyToSubmit(true); // Setăm la true pentru a declanșa trimiterea datelor în OrderFinalDetails
+    const orderData = {
+      ...data,
+      paymentMethod: selectedPaymentMethod,
+      total: shippingCost + (selectedPaymentMethod === "ramburs" ? 5 : 0),
+    };
 
-    // Așteaptă până când `clientData` este actualizat
-    await new Promise((resolve) => setTimeout(resolve, 100)); // Așteptăm o mică întârziere pentru ca datele să fie actualizate
-
-    // După ce `clientData` este completat, continuăm cu cererea către endpoint
     try {
-      const orderData = {
-        ...clientData,
-        paymentMethod: selectedPaymentMethod,
-        total: shippingCost + (selectedPaymentMethod === "ramburs" ? 5 : 0),
-      };
-
       const response = await fetch("/api/fanCourier/createAWB", {
         method: "POST",
         headers: {
@@ -46,19 +37,21 @@ const Checkout = () => {
         body: JSON.stringify({ clientData: orderData }),
       });
 
-      const data = await response.json();
+      const responseData = await response.json();
 
       if (!response.ok) {
-        console.error("Order submission error:", data);
+        console.error("Order submission error:", responseData);
         return;
       }
 
-      console.log("Order successfully submitted:", data);
+      console.log("Order successfully submitted:", responseData);
     } catch (error) {
       console.error("Error submitting order:", error);
-    } finally {
-      setIsReadyToSubmit(false); // Resetează starea `isReadyToSubmit`
     }
+  };
+
+  const handleOrderSubmit = () => {
+    setIsReadyToSubmit(true); // Setează `isReadyToSubmit` la `true` pentru a declanșa validarea
   };
 
   return (
@@ -79,7 +72,7 @@ const Checkout = () => {
           selectedPaymentMethod={selectedPaymentMethod}
           shippingCost={shippingCost}
           clientData={clientData}
-          onSubmitOrder={handleOrderSubmit} // Butonul de trimitere a comenzii va declanșa această funcție
+          onSubmitOrder={handleOrderSubmit} // Declanșează validarea și trimiterea
         />
       </div>
     </div>
