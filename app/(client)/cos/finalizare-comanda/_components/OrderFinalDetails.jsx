@@ -12,11 +12,18 @@ import {
 } from "@/components/ui/select";
 import { validateUserFanSchema } from "@/utils/zod";
 
-export default function OrderFinalDetails({ onShippingCostUpdate }) {
+export default function OrderFinalDetails({
+  onShippingCostUpdate,
+  onClientDataSubmit,
+  isReadyToSubmit,
+  setIsReadyToSubmit,
+}) {
   const {
     register,
     setValue,
     watch,
+    getValues,
+    handleSubmit,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(validateUserFanSchema),
@@ -27,6 +34,13 @@ export default function OrderFinalDetails({ onShippingCostUpdate }) {
       county: "",
       locality: "",
       street: "",
+      streetNo: "",
+      zipCode: "",
+      building: "",
+      entrance: "",
+      floor: "",
+      apartment: "",
+      email: "",
     },
   });
 
@@ -84,15 +98,9 @@ export default function OrderFinalDetails({ onShippingCostUpdate }) {
       }
 
       const data = await response.json();
-      console.log("Răspunsul complet de la API:", data);
-
-      // Extrage doar `totalCost` și transmite-l către componenta părinte
       const totalCost = data.data?.data?.total;
       if (totalCost !== undefined) {
-        onShippingCostUpdate(totalCost); // Trimite `total` către componenta părinte
-        console.log("Cost total trimis către onShippingCostUpdate:", totalCost);
-      } else {
-        console.warn("`total` nu a fost găsit în răspunsul API.");
+        onShippingCostUpdate(totalCost);
       }
     } catch (error) {
       console.error("Error fetching shipping cost:", error);
@@ -104,6 +112,23 @@ export default function OrderFinalDetails({ onShippingCostUpdate }) {
       fetchShippingCost(county, locality);
     }
   }, [county, locality]);
+
+  useEffect(() => {
+    console.log("isReadyToSubmit value:", isReadyToSubmit); // Monitorizează valoarea `isReadyToSubmit`
+    if (isReadyToSubmit) {
+      handleSubmit(
+        (clientData) => {
+          console.log("Client data ready to submit:", clientData); // Afișează datele de client dacă `isReadyToSubmit` e true
+          onClientDataSubmit(clientData);
+          setIsReadyToSubmit(false); // Resetăm `isReadyToSubmit` după trimitere
+        },
+        (validationErrors) => {
+          console.error("Validation error:", validationErrors); // Erorile de validare
+          setIsReadyToSubmit(false); // Resetăm `isReadyToSubmit` dacă există erori
+        }
+      )();
+    }
+  }, [isReadyToSubmit, handleSubmit, onClientDataSubmit, setIsReadyToSubmit]);
 
   const handleDeliveryCourier = () => {
     setIsDeliveryCourier(true);
@@ -152,11 +177,7 @@ export default function OrderFinalDetails({ onShippingCostUpdate }) {
                 <label className="ml-1 text-sm font-medium text-gray-700">
                   Nume si Prenume
                 </label>
-                <Input
-                  {...register("name")}
-                  {...register("contactPerson")}
-                  placeholder="Nume si prenume"
-                />
+                <Input {...register("name")} placeholder="Nume si prenume" />
                 <div className="text-red-500 text-sm ml-1">
                   {errors.name?.message}
                 </div>

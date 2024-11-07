@@ -119,10 +119,6 @@ export const validateUserFanSchema = z.object({
     .string()
     .min(1, { message: "Numele destinatarului este obligatoriu" })
     .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
-  contactPerson: z
-    .string()
-    .min(1, { message: "Numele destinatarului este obligatoriu" })
-    .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
   phone: z
     .string()
     .min(1, { message: "Numărul de telefon este obligatoriu" })

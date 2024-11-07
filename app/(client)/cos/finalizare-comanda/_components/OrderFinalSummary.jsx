@@ -1,13 +1,11 @@
-// OrderFinalSummary.js
-
 import React from "react";
-import Link from "next/link";
 import GeneralButton from "../../../../../components/custom ui/general-button";
 
 export default function OrderFinalSummary({
   selectedPaymentMethod,
   productCost = 200,
   shippingCost,
+  onSubmitOrder,
 }) {
   const processingFee = selectedPaymentMethod === "ramburs" ? 5 : 0;
   const totalCost = productCost + (shippingCost || 19.99) + processingFee;
@@ -42,13 +40,7 @@ export default function OrderFinalSummary({
             <p className="text-xl font-semibold">{totalCost} RON</p>
           </div>
           <div className="w-full">
-            <Link href={"/cos/rezumat-comanda"}>
-              <GeneralButton
-                text="Continua"
-                customPadding="p-2"
-                customMargin="ml-10"
-              />
-            </Link>
+            <button onClick={onSubmitOrder}>Trimite Comanda</button>
           </div>
         </div>
       </div>
