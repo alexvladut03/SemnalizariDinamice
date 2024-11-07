@@ -4,8 +4,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    console.log("Notificare recepționată");
-
     // Parsăm body-ul request-ului
     const rawBody = await req.text();
     const { order, payment } = JSON.parse(rawBody);
@@ -13,6 +11,8 @@ export async function POST(req) {
     if (!order || !payment) {
       throw new Error("Invalid request body");
     }
+
+    console.log(order, payment);
 
     // Aici poți adăuga logica pentru actualizarea comenzii în baza ta de date
     await updateOrderStatus({
