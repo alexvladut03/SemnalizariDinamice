@@ -113,3 +113,30 @@ export const imageSchema = z.object({
     url: z.string(),
   }),
 });
+
+export const validateUserFanSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "Numele destinatarului este obligatoriu" })
+    .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
+  contactPerson: z
+    .string()
+    .min(1, { message: "Numele destinatarului este obligatoriu" })
+    .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
+  phone: z
+    .string()
+    .min(1, { message: "Numărul de telefon este obligatoriu" })
+    .max(16, { message: "Numărul de telefon nu poate depăși 16 caractere" }),
+  county: z
+    .string()
+    .min(1, { message: "Județul este obligatoriu" })
+    .max(50, { message: "Județul nu poate depăși 50 de caractere" }),
+  locality: z
+    .string()
+    .min(1, { message: "Localitatea este obligatorie" })
+    .max(50, { message: "Localitatea nu poate depăși 50 de caractere" }),
+  street: z
+    .string()
+    .min(1, { message: "Strada este obligatorie" })
+    .max(255, { message: "Strada nu poate depăși 255 de caractere" }),
+});

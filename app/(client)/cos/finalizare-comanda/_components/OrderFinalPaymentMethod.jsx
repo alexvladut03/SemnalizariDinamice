@@ -1,104 +1,139 @@
+// OrderFinalPaymentMethod.js
+
 "use client";
 import React, { useState } from "react";
+import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Input } from "@/components/ui/input";
 
-export default function OrderFinalPaymentMethod() {
-  const [isRamburs, setIsRamburs] = useState(true);
-  const [isCard, setIsCard] = useState(false);
+export default function OrderFinalPaymentMethod({ onPaymentMethodChange }) {
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("ramburs");
 
-  const handleRamburs = () => {
-    setIsRamburs(true);
-    setIsCard(false);
-  };
-
-  const handleCard = () => {
-    setIsRamburs(false);
-    setIsCard(true);
+  const handlePaymentChange = (method) => {
+    setSelectedPaymentMethod(method);
+    onPaymentMethodChange(method); // Notifică componenta părinte
   };
 
   return (
-    <div className="pb-6 bg-gray-100">
-      <div className="bg-white rounded-lg shadow-sm shadow-amber-500 p-6">
-        <div className="flex text-xl font-medium pb-4">
-          <div className="bg-amber-500 w-7 h-full rounded-full flex justify-center items-center text-white">
-            3
-          </div>
-          <div className="pl-4">Modalitate de plata</div>
+    <div className="p-6 mb-8 bg-white rounded-lg shadow-sm shadow-amber-500 w-full">
+      <div className="flex items-center mb-4">
+        <div className="bg-amber-500 w-7 h-7 rounded-full flex justify-center items-center text-white font-semibold">
+          3
         </div>
-        <div className="grid grid-cols-2 gap-4 mb-6 font-semibold">
-          <button
-            onClick={handleRamburs}
-            className={`lg:p-4 p-2 border rounded-lg text-center ${
-              isRamburs ? "bg-amber-500 border-black" : ""
-            }`}
-          >
-            Ramburs
-          </button>
+        <h2 className="pl-4 text-xl font-medium">Modalitate de plată</h2>
+      </div>
 
-          <button
-            onClick={handleCard}
-            className={`lg:p-4 p-2 border rounded-lg text-center ${
-              isCard ? "bg-amber-500 border-black" : ""
-            }`}
-          >
-            Card
-          </button>
-        </div>
-        {isRamburs && (
-          <div className="p-4 bg-gray-50 rounded-lg">
-            Vei plati in momentul in care comanda va fi livrata.
-            <div>
-              5 RON reprezintă costul pentru procesarea plății la livrare.
-            </div>
-            <div>Plata online cu cardul este gratuită.</div>
+      <RadioGroup
+        value={selectedPaymentMethod}
+        onValueChange={handlePaymentChange}
+        className="space-y-4"
+      >
+        <div
+          className={`flex items-center p-4 border rounded-lg cursor-pointer ${
+            selectedPaymentMethod === "card" ? "border-amber-500" : ""
+          }`}
+          onClick={() => handlePaymentChange("card")}
+        >
+          <RadioGroupItem value="card" id="card" className="text-amber-500" />
+          <div className="ml-3">
+            <Label htmlFor="card" className="font-semibold">
+              Card de credit
+            </Label>
+            <p className="text-sm text-gray-600">
+              Plătești imediat, fără costuri suplimentare.
+            </p>
           </div>
-        )}
-        {isCard && (
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <form className="grid grid-cols-2 gap-4">
-              <div className="col-span-2 font-medium">Detalii plată card</div>
-              <div className="col-span-2">
+          <div className="ml-auto flex gap-3">
+            <FaCcVisa className="text-blue-500 text-5xl" />
+            <FaCcMastercard className="text-yellow-500 text-5xl" />
+          </div>
+        </div>
+
+        {selectedPaymentMethod === "card" && (
+          <div className="mt-4">
+            <form className="space-y-4">
+              <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Numărul cardului
+                  Număr card
                 </label>
-                <input
+                <Input
                   type="text"
-                  placeholder="1437 1524 4022 4504"
+                  placeholder="Număr card"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                 />
+                <p className="text-xs text-red-500">Introdu un număr de card</p>
               </div>
-              <div className="col-span-1">
-                <label className="block text-sm font-medium text-gray-700">
-                  Data expirării
-                </label>
-                <div className="flex gap-4">
-                  <select className="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>12</option>
-                  </select>
-                  <select className="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                    <option>2019</option>
-                    <option>2020</option>
-                    <option>2021</option>
-                    <option>2024</option>
-                  </select>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Data expirării (LL/AA)
+                  </label>
+                  <Input
+                    type="text"
+                    placeholder="LL/AA"
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  />
+                  <p className="text-xs text-red-500">
+                    Introdu o dată de expirare validă
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Cod de securitate
+                  </label>
+                  <Input
+                    type="text"
+                    placeholder="CVV"
+                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                  />
+                  <p className="text-xs text-red-500">
+                    Introdu CVV sau codul de securitate de pe card
+                  </p>
                 </div>
               </div>
-              <div className="col-span-1">
+              <div>
                 <label className="block text-sm font-medium text-gray-700">
-                  Cod securitate
+                  Numele de pe card
                 </label>
-                <input
+                <Input
                   type="text"
-                  placeholder="CVV/CVV2"
+                  placeholder="Numele de pe card"
                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
                 />
+                <p className="text-xs text-red-500">
+                  Introdu numele tău exact așa cum este scris pe card
+                </p>
               </div>
             </form>
           </div>
         )}
-      </div>
+
+        <div
+          className={`flex items-center p-4 border rounded-lg cursor-pointer ${
+            selectedPaymentMethod === "ramburs" ? "border-amber-500" : ""
+          }`}
+          onClick={() => handlePaymentChange("ramburs")}
+        >
+          <RadioGroupItem
+            value="ramburs"
+            id="ramburs"
+            className="text-amber-500"
+          />
+          <div className="ml-3">
+            <Label htmlFor="ramburs" className="font-semibold">
+              Ramburs la curier
+            </Label>
+            <p className="text-sm text-gray-600">
+              Vei plăti în momentul în care comanda va fi livrată.
+            </p>
+            <p className="text-xs text-amber-500">
+              5 Lei reprezintă costul pentru procesarea plății la livrare. Plata
+              online cu cardul este gratuită.
+            </p>
+          </div>
+        </div>
+      </RadioGroup>
     </div>
   );
 }
