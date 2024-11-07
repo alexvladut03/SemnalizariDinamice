@@ -31,7 +31,7 @@ export default function OrderFinalBillingData() {
               isPersoanaFizica ? "bg-amber-500 border-black" : ""
             }`}
           >
-            Persoana fizica
+            Aceleasi cu datele de livrare
           </button>
 
           <button
@@ -40,7 +40,7 @@ export default function OrderFinalBillingData() {
               isPersoanaJuridica ? "bg-amber-500 border-black" : ""
             }`}
           >
-            Persoana juridica
+            Alte optiuni
           </button>
         </div>
         {isPersoanaFizica && (

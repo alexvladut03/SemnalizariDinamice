@@ -49,6 +49,11 @@ export async function POST(req) {
     const token = authData.data.token;
     console.log("Token obținut:", token);
 
+    // Logica pentru calculul sumei totale
+    const baseTotal = clientData.total || 0; // Totalul produselor (trimis de pe frontend)
+    const isRamburs = clientData.paymentMethod === "ramburs"; // Verifică dacă este ramburs
+    const total = isRamburs ? baseTotal + 5 : baseTotal; // Adaugă 5 lei pentru ramburs
+
     // Setare detalii AWB
     const awbData = {
       clientId: 7278991,
@@ -56,13 +61,11 @@ export async function POST(req) {
         {
           info: {
             service: "Standard",
-            bank: "",
-            bankAccount: "",
             packages: { parcel: 1, envelope: 0 },
             weight: 1,
-            cod: 0,
-            declaredValue: 0,
-            payment: "recipient",
+            cod: isRamburs ? total : 0, // Total pentru ramburs
+            declaredValue: !isRamburs ? total : 0, // Total pentru card
+            payment: isRamburs ? "recipient" : "sender", // "recipient" pentru ramburs, "sender" pentru card
             dimensions: { length: 20, height: 10, width: 15 },
           },
           recipient: {

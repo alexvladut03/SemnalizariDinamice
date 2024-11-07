@@ -2,7 +2,15 @@ import React from "react";
 import Link from "next/link";
 import GeneralButton from "../../../../../components/custom ui/general-button";
 
-export default function OrderFinalSummary() {
+export default function OrderFinalSummary({
+  selectedPaymentMethod,
+  productCost = 200, // costul produselor, pentru exemplu
+  shippingCost = 20, // costul livrării, pentru exemplu
+}) {
+  // Adăugăm un cost de 5 RON pentru plata ramburs
+  const processingFee = selectedPaymentMethod === "ramburs" ? 5 : 0;
+  const totalCost = productCost + shippingCost + processingFee;
+
   return (
     <div className="bg-white rounded-lg shadow-sm shadow-amber-500 p-6 w-full">
       <div className="lg:grid lg:grid-cols-3 space-y-4 lg:space-y-0">
@@ -10,23 +18,29 @@ export default function OrderFinalSummary() {
           <h2 className="text-xl font-medium mb-4">Sumar comanda</h2>
           <div className="flex justify-between">
             <p className="text-gray-700">Cost produse:</p>
-            <p className="text-gray-700">200RON</p>
+            <p className="text-gray-700">{productCost} RON</p>
           </div>
           <div className="flex justify-between">
             <p className="text-gray-700">Cost livrare:</p>
-            <p className="text-gray-700">20RON</p>
+            <p className="text-gray-700">{shippingCost} RON</p>
           </div>
+          {processingFee > 0 && (
+            <div className="flex justify-between">
+              <p className="text-gray-700">Taxă procesare ramburs:</p>
+              <p className="text-gray-700">{processingFee} RON</p>
+            </div>
+          )}
           <div className="flex justify-between mt-4 lg:hidden">
             <p className="text-xl font-semibold">Total:</p>
-            <p className="text-xl font-semibold">220RON</p>
+            <p className="text-xl font-semibold">{totalCost} RON</p>
           </div>
         </div>
         <div className="flex flex-col justify-center items-center lg:border-l-2 border-amber-500 px-5">
           <div className="hidden lg:flex justify-between w-full mb-4">
             <p className="text-xl font-semibold">Total:</p>
-            <p className="text-xl font-semibold">220RON</p>
+            <p className="text-xl font-semibold">{totalCost} RON</p>
           </div>
-          <div className="w-full ">
+          <div className="w-full">
             <Link href={"/cos/rezumat-comanda"}>
               <GeneralButton
                 text="Continua"

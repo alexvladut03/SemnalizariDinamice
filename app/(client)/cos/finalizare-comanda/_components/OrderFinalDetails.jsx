@@ -22,15 +22,14 @@ export default function OrderFinalDetails() {
     resolver: zodResolver(validateUserFanSchema),
     defaultValues: {
       name: "",
+      contactPerson: "",
       phone: "",
       county: "",
       locality: "",
       street: "",
     },
   });
-
-  console.log("Erorile din formular:", errors);
-
+  console.log(errors);
   const [isDeliveryCourier, setIsDeliveryCourier] = useState(true);
   const [isDeliveryPersonal, setIsDeliveryPersonal] = useState(false);
   const [counties, setCounties] = useState([]);
@@ -117,7 +116,7 @@ export default function OrderFinalDetails() {
               isDeliveryCourier ? "bg-amber-500 border-black" : ""
             }`}
           >
-            Livrare prin curier
+            Livrare la domiciliu
           </button>
 
           <button
@@ -126,7 +125,7 @@ export default function OrderFinalDetails() {
               isDeliveryPersonal ? "bg-amber-500 border-black" : ""
             }`}
           >
-            Ridicare personala
+            Livrare la EasyBox
           </button>
         </div>
 
@@ -141,7 +140,11 @@ export default function OrderFinalDetails() {
                 <label className="ml-1 text-sm font-medium text-gray-700">
                   Nume si Prenume
                 </label>
-                <Input {...register("name")} placeholder="Nume si prenume" />
+                <Input
+                  {...register("name")}
+                  {...register("contactPerson")}
+                  placeholder="Nume si prenume"
+                />
                 <div className="text-red-500 text-sm ml-1">
                   {errors.name?.message}
                 </div>
