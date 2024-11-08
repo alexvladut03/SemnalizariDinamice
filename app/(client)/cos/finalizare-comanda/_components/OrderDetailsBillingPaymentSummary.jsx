@@ -319,7 +319,7 @@ export default function OrderDetailsBillingPaymentSummary({
                 </label>
                 <Input {...register("streetNo")} placeholder="Numar" />
                 <div className="text-red-500 text-sm ml-1">
-                  {errors.street?.message}
+                  {errors.streetNo?.message}
                 </div>
               </div>
 
