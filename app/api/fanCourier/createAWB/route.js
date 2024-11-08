@@ -7,11 +7,12 @@ export async function POST(req) {
 
   try {
     const { clientData } = await req.json();
+    console.log("Date primite de la front-end:", clientData);
 
     // Validează datele clientului folosind schema Zod
     const validationResult = validateUserFanSchema.safeParse(clientData);
     if (!validationResult.success) {
-      // Returnează erorile de validare în format JSON
+      // Oprește execuția și trimite erorile de validare
       console.error("Erori de validare:", validationResult.error.errors);
       return NextResponse.json(
         {
@@ -50,9 +51,7 @@ export async function POST(req) {
     console.log("Token obținut:", token);
 
     // Logica pentru calculul sumei totale
-    const baseTotal = clientData.total || 0; // Totalul produselor (trimis de pe frontend)
-    const isRamburs = clientData.paymentMethod === "ramburs"; // Verifică dacă este ramburs
-    const total = isRamburs ? baseTotal + 5 : baseTotal; // Adaugă 5 lei pentru ramburs
+    const isRamburs = clientData.paymentMethod === "ramburs";
 
     // Setare detalii AWB
     const awbData = {
@@ -63,10 +62,8 @@ export async function POST(req) {
             service: "Standard",
             packages: { parcel: 1, envelope: 0 },
             weight: 1,
-            cod: isRamburs ? total : 0, // Total pentru ramburs
-            declaredValue: !isRamburs ? total : 0, // Total pentru card
+            declaredValue: clientData.total,
             payment: isRamburs ? "recipient" : "sender", // Cine plătește transportul
-            returnPayment: isRamburs ? "recipient" : "sender", // Cine plătește returul
             dimensions: { length: 20, height: 10, width: 15 },
           },
           recipient: {
