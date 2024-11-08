@@ -1,11 +1,9 @@
 // OrderFinalPaymentMethod.js
-
 "use client";
 import React, { useState } from "react";
 import { FaCcMastercard, FaCcVisa } from "react-icons/fa";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Input } from "@/components/ui/input";
 
 export default function OrderFinalPaymentMethod({ onPaymentMethodChange }) {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("ramburs");
@@ -49,66 +47,6 @@ export default function OrderFinalPaymentMethod({ onPaymentMethodChange }) {
             <FaCcMastercard className="text-yellow-500 text-5xl" />
           </div>
         </div>
-
-        {selectedPaymentMethod === "card" && (
-          <div className="mt-4">
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Număr card
-                </label>
-                <Input
-                  type="text"
-                  placeholder="Număr card"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                />
-                <p className="text-xs text-red-500">Introdu un număr de card</p>
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Data expirării (LL/AA)
-                  </label>
-                  <Input
-                    type="text"
-                    placeholder="LL/AA"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                  />
-                  <p className="text-xs text-red-500">
-                    Introdu o dată de expirare validă
-                  </p>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">
-                    Cod de securitate
-                  </label>
-                  <Input
-                    type="text"
-                    placeholder="CVV"
-                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                  />
-                  <p className="text-xs text-red-500">
-                    Introdu CVV sau codul de securitate de pe card
-                  </p>
-                </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Numele de pe card
-                </label>
-                <Input
-                  type="text"
-                  placeholder="Numele de pe card"
-                  className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-                />
-                <p className="text-xs text-red-500">
-                  Introdu numele tău exact așa cum este scris pe card
-                </p>
-              </div>
-            </form>
-          </div>
-        )}
-
         <div
           className={`flex items-center p-4 border rounded-lg cursor-pointer ${
             selectedPaymentMethod === "ramburs" ? "border-amber-500" : ""
