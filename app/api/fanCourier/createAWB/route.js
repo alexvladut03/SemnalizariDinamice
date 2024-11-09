@@ -147,7 +147,7 @@ export async function POST(req) {
         },
         body: JSON.stringify(awbData),
       });
-
+      console.log("Răspuns AWB:", awbData.shipments);
       if (!awbResponse.ok) {
         const awbError = await awbResponse.text();
         console.error("Eroare la generarea AWB:", awbError);

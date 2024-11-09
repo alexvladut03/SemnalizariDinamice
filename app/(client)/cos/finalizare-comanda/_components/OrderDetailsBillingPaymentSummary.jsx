@@ -113,6 +113,7 @@ export default function OrderDetailsBillingPaymentSummary({
       ...data, // Datele validate din inputuri
       total: Number(totalCost), // Asigură-te că `totalCost` este număr
       paymentMethod: paymentMethod, // Setează metoda de plată
+      contactPerson: isSameBillingOption ? data.name : null, // Setează persoana de contact
     };
     console.log("Datele finale:", finalData);
 
