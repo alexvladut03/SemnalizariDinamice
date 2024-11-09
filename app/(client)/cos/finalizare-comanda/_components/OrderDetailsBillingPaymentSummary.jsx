@@ -77,15 +77,20 @@ export default function OrderDetailsBillingPaymentSummary({
 
   const fetchShippingCost = async (county, locality, weight = 1) => {
     try {
-      const response = await fetch("/api/fanCourier/calculateTariff", {
+      const response = await fetch("/api/fanCourier/createAWB", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ county, locality, weight }),
+        body: JSON.stringify({
+          action: "calculateTariff",
+          clientData: { county, locality, weight },
+        }),
       });
 
       if (!response.ok) throw new Error("Failed to fetch shipping cost");
 
       const data = await response.json();
+      console.log("Răspunsul de la server:", data); // Verificăm structura răspunsului complet
+
       const total = data.data?.data?.total;
       if (total !== undefined) {
         setShippingCost(total);
@@ -117,10 +122,17 @@ export default function OrderDetailsBillingPaymentSummary({
       const response = await fetch("/api/fanCourier/createAWB", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ clientData: finalData }),
+        body: JSON.stringify({
+          action: "createAWB", // Asigură-te că specifici acțiunea
+          clientData: finalData,
+        }),
       });
+
       if (!response.ok) throw new Error("Failed to send order");
-      // Verifică răspunsul etc.
+
+      const responseData = await response.json();
+      console.log("Răspuns la trimiterea comenzii:", responseData);
+      // Adaugă logică pentru a afișa succesul sau eșecul către utilizator
     } catch (error) {
       console.error("Eroare la trimiterea comenzii:", error);
     }
