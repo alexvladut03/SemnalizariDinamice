@@ -49,7 +49,7 @@ export async function POST(req) {
       }
 
       const queryParams = new URLSearchParams({
-        clientId: 7278991,
+        clientId: 7276517,
         "info[service]": "Standard",
         "info[payment]": "recipient",
         "info[weight]": Number(weight),
@@ -91,13 +91,26 @@ export async function POST(req) {
       }
 
       const awbData = {
-        clientId: 7278991,
+        clientId: 7276517,
         shipments: [
           {
             info: {
-              service: "Standard",
+              service:
+                clientData.paymentMethod === "ramburs"
+                  ? "Cont Colector"
+                  : "Standard",
+              bank:
+                clientData.paymentMethod === "ramburs"
+                  ? "Banca Transilvania"
+                  : null,
+              bankAccount:
+                clientData.paymentMethod === "ramburs"
+                  ? "RO22BTRLRONCRT0CV1029301"
+                  : null,
               packages: { parcel: 1, envelope: 0 },
               weight: 1,
+              cod:
+                clientData.paymentMethod === "ramburs" ? clientData.total : 0,
               declaredValue: clientData.total,
               payment:
                 clientData.paymentMethod === "ramburs" ? "recipient" : "sender",
@@ -124,6 +137,8 @@ export async function POST(req) {
         ],
       };
 
+      console.log("AWB data trimis:", JSON.stringify(awbData, null, 2));
+
       const awbResponse = await fetch("https://api.fancourier.ro/intern-awb", {
         method: "POST",
         headers: {
@@ -143,6 +158,7 @@ export async function POST(req) {
       }
 
       const awbDataResponse = await awbResponse.json();
+      console.log("Răspuns AWB:", awbDataResponse);
       return NextResponse.json(awbDataResponse);
     } else {
       return NextResponse.json(

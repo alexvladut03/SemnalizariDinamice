@@ -46,8 +46,6 @@ export default function OrderDetailsBillingPaymentSummary({
       floor: "",
       apartment: "",
       email: "",
-      paymentMethod: "",
-      total: "",
     },
   });
   console.log(errors);
