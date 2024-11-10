@@ -645,9 +645,14 @@ export default function OrderDetailsBillingPaymentSummary({
             <span className="font-medium">{shippingCost}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-gray-600">Cost taxa de procesare</span>
-            <span className="font-medium ">{processingFee}</span>
+            {processingFee === 0 ? null : (
+              <>
+                <span className="text-gray-600">Cost taxa de procesare</span>
+                <span className="font-medium ">{processingFee}</span>
+              </>
+            )}
           </div>
+
           <div className="flex justify-between font-semibold text-lg pt-2 border-t">
             <span>Total</span>
             <span>{totalCost}</span>
