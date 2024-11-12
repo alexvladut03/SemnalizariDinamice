@@ -1,40 +1,24 @@
-// Checkout.js
+import { generateToken } from "@/utils/actions/sameday/generate-token";
+import getCountries from "@/utils/functions/shipping/get-countries";
+import { getLocalities } from "@/utils/functions/shipping/get-localities";
+import React from "react";
 
-"use client";
-import React, { useState } from "react";
-import OrderFinalDetails from "./_components/OrderFinalDetails";
-import OrderFinalBillingData from "./_components/OrderFinalBillingData";
-import OrderFinalPaymentMethod from "./_components/OrderFinalPaymentMethod";
-import OrderFinalSummary from "./_components/OrderFinalSummary";
+const page = async () => {
+  const counties = await getCountries();
 
-const Checkout = () => {
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("ramburs");
-  const [shippingCost, setShippingCost] = useState(0);
-
-  const handlePaymentMethodChange = (method) => {
-    setSelectedPaymentMethod(method);
-  };
-
-  const handleShippingCostUpdate = (cost) => {
-    setShippingCost(cost);
-  };
-
-  return (
-    <div className="bg-gray-100">
-      <div className="max-w-4xl mx-auto p-6 min-h-screen">
-        <div className="text-2xl font-semibold pb-4">Detalii comanda</div>
-        <OrderFinalDetails onShippingCostUpdate={handleShippingCostUpdate} />
-        <OrderFinalBillingData />
-        <OrderFinalPaymentMethod
-          onPaymentMethodChange={handlePaymentMethodChange}
-        />
-        <OrderFinalSummary
-          selectedPaymentMethod={selectedPaymentMethod}
-          shippingCost={shippingCost}
-        />
-      </div>
-    </div>
+  const countiesWithLocalities = await Promise.all(
+    counties.map(async (county) => {
+      const localities = await getLocalities(county.name);
+      return {
+        county: county.name,
+        localities: localities.map((locality) => locality.name),
+      };
+    })
   );
+
+  const token = await generateToken();
+
+  return <div>{token}</div>;
 };
 
-export default Checkout;
+export default page;

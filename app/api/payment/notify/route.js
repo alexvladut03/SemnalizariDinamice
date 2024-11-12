@@ -12,13 +12,7 @@ export async function POST(req) {
       throw new Error("Invalid request body");
     }
 
-    console.log(order, payment);
-
-    // Aici poți adăuga logica pentru actualizarea comenzii în baza ta de date
-    await updateOrderStatus({
-      orderId: order.orderId,
-      status: payment.status,
-    });
+    await updateOrderStatus(order.orderId, payment);
 
     return NextResponse.json({ errorCode: 0 });
   } catch (error) {
