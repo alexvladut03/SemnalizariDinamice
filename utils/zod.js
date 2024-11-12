@@ -115,11 +115,8 @@ export const imageSchema = z.object({
 });
 
 export const validateUserFanSchema = z.object({
+  // Recipient Info
   name: z
-    .string()
-    .min(1, { message: "Numele destinatarului este obligatoriu" })
-    .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
-  contactPerson: z
     .string()
     .min(1, { message: "Numele destinatarului este obligatoriu" })
     .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
@@ -127,6 +124,12 @@ export const validateUserFanSchema = z.object({
     .string()
     .min(1, { message: "Numărul de telefon este obligatoriu" })
     .max(16, { message: "Numărul de telefon nu poate depăși 16 caractere" }),
+  email: z
+    .string()
+    .max(100, { message: "Emailul nu poate depăși 100 de caractere" })
+    .optional(),
+
+  // Address Info
   county: z
     .string()
     .min(1, { message: "Județul este obligatoriu" })
@@ -139,4 +142,28 @@ export const validateUserFanSchema = z.object({
     .string()
     .min(1, { message: "Strada este obligatorie" })
     .max(255, { message: "Strada nu poate depăși 255 de caractere" }),
+  streetNo: z
+    .string()
+    .max(10, { message: "Numărul străzii nu poate depăși 10 caractere" })
+    .optional(),
+  zipCode: z
+    .string()
+    .max(6, { message: "Codul postal nu poate depăși 6 caractere" })
+    .optional(),
+  building: z
+    .string()
+    .max(20, { message: "Blocul nu poate depăși 20 de caractere" })
+    .optional(),
+  entrance: z
+    .string()
+    .max(16, { message: "Scara nu poate depăși 16 caractere" })
+    .optional(),
+  floor: z
+    .string()
+    .max(10, { message: "Etajul nu poate depăși 10 caractere" })
+    .optional(),
+  apartment: z
+    .string()
+    .max(10, { message: "Apartamentul nu poate depăși 10 caractere" })
+    .optional(),
 });

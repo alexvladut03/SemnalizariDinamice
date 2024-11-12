@@ -1,12 +1,10 @@
-import { generateToken } from "@/utils/actions/sameday/generate-token";
-import getCountries from "@/utils/functions/shipping/get-countries";
+import { getCounties } from "@/utils/functions/shipping/get-counties";
 import { getLocalities } from "@/utils/functions/shipping/get-localities";
-import React from "react";
+import OrderDetailsBillingPaymentSummary from "./_components/OrderDetailsBillingPaymentSummary";
 
-const page = async () => {
-  const counties = await getCountries();
-
-  const countiesWithLocalities = await Promise.all(
+const Page = async () => {
+  const counties = await getCounties();
+  const countrieswithLocalities = await Promise.all(
     counties.map(async (county) => {
       const localities = await getLocalities(county.name);
       return {
@@ -16,9 +14,13 @@ const page = async () => {
     })
   );
 
-  const token = await generateToken();
-
-  return <div>{token}</div>;
+  return (
+    <div className="max-w-7xl mx-auto min-h-screen">
+      <OrderDetailsBillingPaymentSummary
+        countrieswithLocalities={countrieswithLocalities}
+      />
+    </div>
+  );
 };
 
-export default page;
+export default Page;
