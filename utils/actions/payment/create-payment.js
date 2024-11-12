@@ -70,5 +70,17 @@ export const createPayment = async (formData) => {
   const response = await netopia.startPayment();
   console.log(response);
 
+  await prisma.order.create({
+    data: {
+      amount: amount,
+      nptID: response.payment.nptID,
+      status: response.payment.status,
+      dateTime: response.payment.dateTime,
+      code: response.error.code,
+      message: response.error.message,
+      operationDate: response.payment.operationDate,
+    },
+  });
+
   return response;
 };
