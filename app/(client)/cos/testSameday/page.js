@@ -122,6 +122,23 @@ export default function Page() {
     }
   };
 
+  const fetchPickupPoints = async () => {
+    try {
+      const response = await fetch("/api/sameday/pickup-points", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "pickuppoints" }),
+      });
+
+      if (!response.ok) throw new Error("Failed to fetch pickup points");
+
+      const data = await response.json();
+      console.log("Pickup points:", data); // Log or display the pickup points
+    } catch (error) {
+      console.error("Error fetching pickup points:", error);
+    }
+  };
+
   return (
     <div>
       <h1>Calculare cost de livrare</h1>
@@ -170,6 +187,12 @@ export default function Page() {
         className="mt-4 bg-green-500 text-white p-2 ml-4"
       >
         Servicii disponibile
+      </button>
+      <button
+        onClick={fetchPickupPoints}
+        className="mt-4 bg-green-500 text-white p-2 ml-4"
+      >
+        Puncte de ridicare
       </button>
 
       {deliveryCost && (

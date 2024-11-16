@@ -50,7 +50,7 @@ export async function POST(req) {
 
       // Structure the body as an object with all required fields
       const requestBody = {
-        pickupPoint: "515551", // Replace with actual pickup point ID
+        pickupPoint: "10820", // Replace with actual pickup point ID
         packageType: 1, // Standard package type
         packageNumber: 1, // Number of packages
         packageWeight: 1, // Weight from client data
@@ -135,6 +135,19 @@ export async function POST(req) {
         throw new Error("Failed to fetch services: " + errorText);
       }
 
+      const data = await response.json();
+      return NextResponse.json({ status: "success", data });
+    } else if (action === "pickuppoints") {
+      // Fetch pickup points
+      const response = await fetch(
+        "https://sameday-api.demo.zitec.com/api/client/pickup-points",
+        {
+          method: "GET",
+          headers: {
+            "X-AUTH-TOKEN": authToken,
+          },
+        }
+      );
       const data = await response.json();
       return NextResponse.json({ status: "success", data });
     } else {
