@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { useCart } from "../../../../utils/context/cart-provider";
 
-export default function ProductBoxCart({ item }) {
+export default function ProductBoxCart({ key, item }) {
   const { addToCart, removeFromCart } = useCart();
 
   const handleProductRemove = () => {
@@ -11,7 +11,10 @@ export default function ProductBoxCart({ item }) {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow lg:p-6 p-2 flex flex-row w-full h-auto items-start relative">
+    <div
+      key={key}
+      className="bg-white rounded-lg shadow lg:p-6 p-2 flex flex-row w-full h-auto items-start relative"
+    >
       <Image
         src={item.mainImage.url}
         alt="Loading..."

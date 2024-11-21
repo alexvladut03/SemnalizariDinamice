@@ -1,19 +1,19 @@
-"use server";
+import prisma from "@/utils/prisma";
 
-export const updateOrderStatus = async ({ orderId, status }) => {
-  const order = await prisma.order.update({
+export const updateOrderStatus = async ({ order, payment }) => {
+  const orderData = await prisma.order.findUnique({
     where: {
-      nptID: status.nptID,
-    },
-    data: {
-      amount: status.amount,
-      code: status.code,
-      message: status.message,
-      status: status.status,
-      operationDate: status.operationDate,
-      orderId,
+      orderId: order.orderID,
+      ntpId: payment.ntpID,
+      totalCost: payment.amount,
     },
   });
+
+  if (!orderData) {
+    throw new Error("Order not found");
+  }
+
+  console.log(payment.status);
 
   return order;
 };

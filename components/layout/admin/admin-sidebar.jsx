@@ -79,7 +79,14 @@ const AdminSidebar = () => {
           className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
         >
           <FaUser />
-          <div>Utilizatori</div>
+          <div>Utilizatories</div>
+        </Link>
+        <Link
+          href="/admin/comenzi"
+          className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
+        >
+          <FaRegFileAlt />
+          <div>Comenzi</div>
         </Link>
       </div>
     </div>

@@ -21,6 +21,10 @@ export const createProduct = authActionClient
         price,
         stock,
         slug,
+        length,
+        width,
+        height,
+        weight,
         mainImage,
         gallery,
         description,
@@ -33,6 +37,8 @@ export const createProduct = authActionClient
       const formatedSlug = slug
         ? slug.toLowerCase().replace(/ /g, "-")
         : name.toLowerCase().replace(/ /g, "-");
+
+      console.log("subcategoria este", subcategoryId);
 
       // Check for existing product by name
       const existingProductByName = await prisma.product.findFirst({
@@ -82,6 +88,10 @@ export const createProduct = authActionClient
           price,
           stock,
           slug: formatedSlug,
+          length,
+          width,
+          height,
+          weight,
           description,
           categoryId: categoryId || null, // Ensure this is a valid ID or null
           subcategoryId: subcategoryId ? subcategoryId : null, // Set to null if empty

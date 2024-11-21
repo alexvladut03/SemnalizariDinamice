@@ -20,4 +20,7 @@ const priceRange = [
   },
 ];
 
-export { priceRange };
+const banca = "Banca Transilvania";
+const iban = "RO22BTRLRONCRT0CV1029301";
+
+export { priceRange, banca, iban };

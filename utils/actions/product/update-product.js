@@ -21,6 +21,10 @@ export const updateProduct = authActionClient
         price,
         stock,
         slug,
+        length,
+        width,
+        height,
+        weight,
         mainImage,
         gallery,
         description,
@@ -35,10 +39,14 @@ export const updateProduct = authActionClient
         ? slug.toLowerCase().replace(/ /g, "-")
         : name.toLowerCase().replace(/ /g, "-");
 
+      console.log(id);
+
       // Check for existing product by name
       const existingProductByName = await prisma.product.findFirst({
         where: { name, NOT: { id } },
       });
+
+      console.log("subcategoria este", existingProductByName);
 
       if (existingProductByName) {
         throw new Error("Un produs cu acest nume exista deja");
@@ -94,6 +102,10 @@ export const updateProduct = authActionClient
           price,
           stock,
           slug: formatedSlug,
+          length,
+          width,
+          height,
+          weight,
           description,
           categoryId,
           subcategoryId: subcategoryId || null,

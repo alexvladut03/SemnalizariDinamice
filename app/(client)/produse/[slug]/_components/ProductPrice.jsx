@@ -93,6 +93,7 @@ const ProductPrice = ({ price, sku, filteredCategories }) => {
         <p>Retur: gratis pana la 15 zile</p>
         <hr className="border-t-2 border-amber-500 my-4" />
       </div>
+      {/*
       <div className="grid grid-cols-4 gap-2">
         {filteredCategories && filteredCategories.length > 0 ? (
           filteredCategories.map((catProduct) => (
@@ -110,6 +111,7 @@ const ProductPrice = ({ price, sku, filteredCategories }) => {
           <></>
         )}
       </div>
+      */}
     </div>
   );
 };

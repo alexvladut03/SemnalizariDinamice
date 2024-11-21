@@ -10,7 +10,6 @@ import { redirect } from "next/navigation";
 import GeneralButton from "@/components/custom ui/general-button";
 
 export default function Page() {
-  const [shipCost, setShipCost] = useState(20);
   const cartItems = useCart();
   const { countTotalPrice, loading } = useCart();
 
@@ -30,17 +29,14 @@ export default function Page() {
       <div className="lg:max-w-7xl mx-auto px-4 lg:px-0 flex flex-col lg:flex-row lg:space-x-10 items-start">
         <div className="w-full lg:w-2/3 flex-col space-y-5 order-2 ">
           {cartItems.items.map((item) => (
-            <ProductBoxCart key={item.id} item={item} shipCost={shipCost} />
+            <ProductBoxCart key={item.id} item={item} />
           ))}
           <div className="hidden lg:block">
-            <ProductSummary
-              shipCost={shipCost}
-              totalPrice={countTotalPrice()}
-            />
+            <ProductSummary totalPrice={countTotalPrice()} />
           </div>
         </div>
         <div className="w-full lg:w-1/3 order-1 lg:order-2 mb-5">
-          <OrderSummary shipCost={shipCost} totalPrice={countTotalPrice()} />
+          <OrderSummary totalPrice={countTotalPrice()} />
         </div>
       </div>
     </div>

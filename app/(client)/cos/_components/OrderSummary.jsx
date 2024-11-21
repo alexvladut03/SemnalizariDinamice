@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
 import GeneralButton from "../../../../components/custom ui/general-button";
 
-export default function OrderSummary({ shipCost, totalPrice }) {
+export default function OrderSummary({ totalPrice }) {
   return (
     <div className="p-6 bg-white rounded-lg shadow w-full">
       <div className="text-xl font-bold mb-4 flex justify-center lg:block">
@@ -14,12 +14,12 @@ export default function OrderSummary({ shipCost, totalPrice }) {
         <div>{`${totalPrice} RON`}</div>
       </div>
       <div className="flex justify-between mb-4">
-        <span>Cost livrare:</span>
-        <div>{`${shipCost} RON`}</div>
+        <span>Cost transport:</span>
+        <div>? RON</div>
       </div>
       <div className="flex justify-between text-xl font-bold text-gray-900 mb-4">
         <span>Total:</span>
-        <div>{`${totalPrice + shipCost} RON`}</div>
+        <div>{`${totalPrice} + transport RON`}</div>
       </div>
       <Link href={"/cos/finalizare-comanda"}>
         <GeneralButton

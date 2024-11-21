@@ -48,9 +48,16 @@ const CartProvider = ({ children }) => {
         updatedItems = [
           ...prevCartItems,
           {
+            createdAt: product.createdAt,
             id: product.id,
             mainImage: product.images.find((img) => img.isMain)?.image,
             name: product.name,
+            length: product.length,
+            width: product.width,
+            category: product.category.name,
+            sku: product.sku,
+            height: product.height,
+            weight: product.weight,
             price: product.price,
             count: qty,
           },
@@ -126,8 +133,30 @@ const CartProvider = ({ children }) => {
       });
 
       const products = fetchedProducts.map((product) => {
-        const { id, name, price, mainImage } = product;
-        return { id, name, price, mainImage };
+        const {
+          id,
+          name,
+          price,
+          mainImage,
+          length,
+          weight,
+          height,
+          category,
+          sku,
+          width,
+        } = product;
+        return {
+          id,
+          name,
+          price,
+          mainImage,
+          length,
+          weight,
+          height,
+          category: category.name,
+          sku,
+          width,
+        };
       });
 
       const countMap = new Map();

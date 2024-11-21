@@ -64,6 +64,10 @@ const AddProduct = ({ categories, attributes, images }) => {
       price: "",
       stock: "",
       slug: "",
+      length: "",
+      width: "",
+      height: "",
+      weight: "",
       mainImage: "",
       gallery: [],
       description: "",
@@ -183,6 +187,10 @@ const AddProduct = ({ categories, attributes, images }) => {
 
                 execute({
                   ...values,
+                  length: parseFloat(values.length),
+                  width: parseFloat(values.width),
+                  height: parseFloat(values.height),
+                  weight: parseFloat(values.weight),
                   price: parseFloat(values.price),
                   stock: parseInt(values.stock),
                   attributes: selectedAttrValues,
@@ -292,6 +300,69 @@ const AddProduct = ({ categories, attributes, images }) => {
                       )}
                     />
                   )}
+
+                <div className="col-span-2 grid grid-cols-4 gap-2">
+                  <FormField
+                    control={form.control}
+                    name="length"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Lungime</FormLabel>
+                        <FormControl>
+                          <Input type="number" placeholder="cm" {...field} />
+                        </FormControl>
+                        <DisplayValidationError
+                          value={result.validationErrors?.length}
+                        />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="width"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Latime</FormLabel>
+                        <FormControl>
+                          <Input type="number" placeholder="cm" {...field} />
+                        </FormControl>
+                        <DisplayValidationError
+                          value={result.validationErrors?.width}
+                        />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="height"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Inaltime</FormLabel>
+                        <FormControl>
+                          <Input type="number" placeholder="cm" {...field} />
+                        </FormControl>
+                        <DisplayValidationError
+                          value={result.validationErrors?.height}
+                        />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="weight"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Greutate</FormLabel>
+                        <FormControl>
+                          <Input type="number" placeholder="kg" {...field} />
+                        </FormControl>
+                        <DisplayValidationError
+                          value={result.validationErrors?.weight}
+                        />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
               <div className="grid grid-cols-4 gap-5">
                 <FormField
@@ -516,7 +587,7 @@ const AddProduct = ({ categories, attributes, images }) => {
                     value={mainImage ? JSON.stringify(mainImage) : ""}
                   />
                   <DisplayValidationError
-                    value={result.validationErrors?.mainImage.url}
+                    value={result.validationErrors?.mainImage}
                   />
                 </div>
 

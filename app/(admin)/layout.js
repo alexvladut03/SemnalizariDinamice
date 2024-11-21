@@ -1,7 +1,7 @@
 import { getSession } from "@/utils/get-session";
 import NavbarAdmin from "../../components/layout/admin/admin-navbar";
 import Link from "next/link";
-import { FaHome, FaProductHunt, FaUser } from "react-icons/fa";
+import { FaHome, FaProductHunt, FaRegFileAlt, FaUser } from "react-icons/fa";
 import { MdCategory, MdPermMedia } from "react-icons/md";
 
 export default async function AdminLayout({ children }) {
@@ -57,6 +57,13 @@ export default async function AdminLayout({ children }) {
             >
               <FaUser />
               <div>Utilizatori</div>
+            </Link>
+            <Link
+              href="/admin/comenzi"
+              className="flex items-center hover:bg-gray-700 cursor-pointer p-4 gap-2 text-lg"
+            >
+              <FaRegFileAlt />
+              <div>Comenzi</div>
             </Link>
           </div>
         </div>
