@@ -3,12 +3,13 @@
 import { actionClient } from "@/utils/safe-action";
 import { orderSchema } from "@/utils/zod";
 import { z } from "zod";
-import { banca, iban } from "@/utils/settings";
 import { v4 as uuidv4 } from "uuid";
 import { calculateParcelDimensions } from "@/lib/calculate-parcel-dimensions";
 import prisma from "@/utils/prisma";
 import { getFanCourierToken } from "../fanCourier/fan-courier-auth";
 import { Netopia } from "netopia-card";
+import generateOrderAWB from "@/utils/functions/fanCourier/generate-order-awb";
+import sendOrderEmail from "@/utils/functions/email/send-order-email";
 
 const blindArgsSchemas = [
   z.array(
@@ -56,6 +57,8 @@ export const createOrder = actionClient
 
     const productCreateData = products.map((product) => ({
       productId: product.id,
+      name: product.name,
+      category: product.category,
       quantity: product.count, // Use the count as quantity
       price: product.price,
     }));
@@ -123,8 +126,6 @@ export const createOrder = actionClient
         vat: 19,
       }));
 
-      console.log(totalCost);
-
       const requestData = {
         order: {
           ntpID: "",
@@ -173,8 +174,6 @@ export const createOrder = actionClient
         throw new Error("Failed to create payment");
       }
 
-      console.log(response.payment.ntpID);
-
       await prisma.order.update({
         where: { orderId: randomOrderId },
         data: {
@@ -187,117 +186,41 @@ export const createOrder = actionClient
       return { success: true, order: order, payment: response };
     }
 
+    const awb = await generateOrderAWB(order);
+
+    const orderDataWithAwb = await prisma.order.update({
+      where: {
+        orderId: randomOrderId,
+      },
+      data: {
+        awb: awb.response[0].awbNumber,
+        status: ["Pending", "Cash", "AWB Generated"],
+      },
+      include: {
+        products: true,
+      },
+    });
+
+    const orderEmail = await sendOrderEmail(orderDataWithAwb);
+
+    if (orderEmail.error) {
+      throw new Error("Failed to send order email");
+    }
+
+    await prisma.order.update({
+      where: {
+        orderId: randomOrderId,
+      },
+      data: {
+        status: [
+          "Pending",
+          "Cash",
+          "AWB Generated",
+          "Email Sent",
+          "Ready for Delivery",
+        ],
+      },
+    });
+
     return { success: true, order: order };
-
-    // const orderData = {
-    //   amount: 150.0, // Total amount for the order
-    //   status: "Pending", // Order status
-    //   paymentMethod: "Card", // Payment method
-
-    //   // Shipping details
-    //   shippingLastName: "Doe",
-    //   shippingFirstName: "John",
-    //   shippingPhone: "1234567890",
-    //   shippingEmail: "john.doe@example.com",
-    //   shippingCounty: "Bucharest",
-    //   shippingLocality: "Sector 1",
-    //   shippingStreet: "Main Street",
-    //   shippingStreetNo: "123",
-    //   shippingZipCode: "123456",
-    //   shippingBuilding: "Building A",
-    //   shippingEntrance: "Entrance 2",
-    //   shippingFloor: "3",
-    //   shippingApartment: "12B",
-
-    //   // Billing details
-    //   billingLastName: "Doe",
-    //   billingFirstName: "John",
-    //   billingPhone: "1234567890",
-    //   billingEmail: "john.doe@example.com",
-    //   billingCounty: "Bucharest",
-    //   billingLocality: "Sector 1",
-    //   billingStreet: "Main Street",
-    //   billingStreetNo: "123",
-    //   billingZipCode: "123456",
-
-    //   // Order details
-    //   totalCost: 150.0,
-    //   productsCost: 120.0,
-    //   totalWeight: 3.5,
-
-    //   // Connect products to the order
-    //   products: {
-    //     create: [
-    //       {
-    //         productId: "product-uuid-1", // Replace with the actual product ID
-    //         quantity: 2,
-    //         price: 40.0,
-    //       },
-    //       {
-    //         productId: "product-uuid-2", // Replace with the actual product ID
-    //         quantity: 1,
-    //         price: 80.0,
-    //       },
-    //     ],
-    //   },
-    // };
-
-    // const awbData = {
-    //   clientId: process.env.FAN_CLIENT_ID,
-    //   shipments: [
-    //     {
-    //       info: {
-    //         service:
-    //           parsedInput.paymentMethod === "ramburs"
-    //             ? "Cont Colector"
-    //             : "Standard",
-    //         bank: parsedInput.paymentMethod === "ramburs" ? banca : null,
-    //         bankAccount: parsedInput.paymentMethod === "ramburs" ? iban : null,
-    //         packages: { parcel: 1, envelope: 0 },
-    //         weight: totalWeight,
-    //         cod: parsedInput.paymentMethod === "ramburs" ? totalCost : 0,
-    //         declaredValue: productsCost,
-    //         payment:
-    //           parsedInput.paymentMethod === "ramburs"
-    //             ? "destinatar"
-    //             : "expeditor",
-    //         dimensions: parcelDimensions,
-    //       },
-    //       recipient: {
-    //         name: `${parsedInput.shippingFirstName} ${parsedInput.shippingLastName}`,
-    //         contactPerson: `${parsedInput.shippingFirstName} ${parsedInput.shippingLastName}`,
-    //         phone: parsedInput.shippingPhone,
-    //         email: parsedInput.shippingEmail,
-    //         address: {
-    //           county: parsedInput.shippingCounty,
-    //           locality: parsedInput.shippingLocality,
-    //           street: parsedInput.shippingStreet,
-    //           streetNo: parsedInput.shippingStreetNo,
-    //           zipCode: parsedInput.shippingZipCode,
-    //           building: parsedInput.shippingBuilding,
-    //           entrance: parsedInput.shippingEntrance,
-    //           floor: parsedInput.shippingFloor,
-    //           apartment: parsedInput.shippingApartment,
-    //         },
-    //       },
-    //     },
-    //   ],
-    // };
-
-    // const awbResponse = await fetch("https://api.fancourier.ro/intern-awb", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${authToken}`,
-    //   },
-    //   body: JSON.stringify(awbData),
-    // });
-
-    // if (!awbResponse.ok) {
-    //   throw new Error("Failed to create AWB");
-    // }
-
-    // const awb = await awbResponse.json();
-
-    // return awb;
   });

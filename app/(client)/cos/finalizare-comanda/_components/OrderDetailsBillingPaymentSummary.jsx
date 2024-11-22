@@ -26,6 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { orderSchema } from "@/utils/zod";
 import { useCart } from "@/utils/context/cart-provider";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 export default function OrderDetailsBillingPaymentSummary({
   countrieswithLocalities,
@@ -88,27 +89,35 @@ export default function OrderDetailsBillingPaymentSummary({
       )?.localities || []
     : [];
 
-  const { form, action, handleSubmitWithAction, resetFormAndAction } =
-    useHookFormAction(createOrderWithData, zodResolver(orderSchema), {
-      actionProps: {
-        onSuccess: (data) => {
-          console.log("Comanda a fost creată cu succes");
+  const {
+    form,
+    action: { execute, status },
+    handleSubmitWithAction,
+    resetFormAndAction,
+  } = useHookFormAction(createOrderWithData, zodResolver(orderSchema), {
+    actionProps: {
+      onSuccess: (data) => {
+        console.log("Comanda a fost creată cu succes");
 
-          if (
-            data.data.order.paymentMethod === "card" &&
-            data.data.payment.error.code === "101"
-          ) {
-            router.push(data.data.payment.payment.paymentURL);
-          }
-        },
-        onError: (error) => {
-          console.error("Eroare la crearea comenzii:", error);
-        },
+        if (
+          data.data.order.paymentMethod === "card" &&
+          data.data.payment.error.code === "101"
+        ) {
+          router.push(data.data.payment.payment.paymentURL);
+        } else if (data.data.order.paymentMethod === "ramburs") {
+          router.push("/confirm?orderId=" + data.data.order.orderId);
+        }
       },
-      formProps: {
-        mode: "onChange",
+      onError: (error) => {
+        console.error("Eroare la crearea comenzii:", error);
       },
-    });
+    },
+    formProps: {
+      mode: "onChange",
+    },
+  });
+
+  console.log("status", status);
 
   useEffect(() => {
     const shippingLocality = form.watch("shippingLocality");
@@ -187,7 +196,7 @@ export default function OrderDetailsBillingPaymentSummary({
     e.preventDefault();
     const data = form.getValues();
 
-    await action.execute(data);
+    await execute(data);
   };
 
   return (
@@ -907,12 +916,23 @@ export default function OrderDetailsBillingPaymentSummary({
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="w-full mt-6 bg-amber-500 text-white font-semibold py-3 rounded-lg"
-          >
-            Trimite comanda
-          </button>
+          {status === "executing" ? (
+            <button
+              type="submit"
+              className="w-full mt-6 bg-amber-600 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2"
+              disabled
+            >
+              <span>Trimite comanda</span>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="w-full mt-6 bg-amber-500 text-white font-semibold py-3 rounded-lg"
+            >
+              Trimite comanda
+            </button>
+          )}
         </div>
       </div>
     </form>

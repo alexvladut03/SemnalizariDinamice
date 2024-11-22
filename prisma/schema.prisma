@@ -123,6 +123,7 @@ model Order {
   paymentMethod       String      // Payment method (e.g., Card, Cash on Delivery, etc.)
   ntpId               String?
   ntpStatus           Int?
+  awb                 BigInt?
 
   // Recipient Info
   shippingLastName    String
@@ -160,6 +161,8 @@ model Order {
 model OrderProduct {
   orderId   String
   productId String
+  name      String  // Name of the product
+  category  String  // Category of the product
   quantity  Int     // Quantity of the product in the order
   price     Float   // Price of the product
 
