@@ -16,6 +16,7 @@ export const getAllProductsByIds = unstable_cache(
             image: true, // Include the Image model to get the URL
           },
         },
+        category: true,
       },
     });
 

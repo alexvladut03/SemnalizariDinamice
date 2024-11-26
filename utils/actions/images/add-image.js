@@ -1,6 +1,8 @@
 "use server";
 
 import { utapi } from "@/app/server/uploadthing";
+import prisma from "@/utils/prisma";
+
 import { authActionClient } from "@/utils/safe-action";
 import { imagesSchema } from "@/utils/zod";
 import { revalidateTag } from "next/cache";
@@ -40,6 +42,12 @@ const addImage = authActionClient
         uploadthingKey: response.data.key,
       })),
     });
+
+    if (!uploadedImages) {
+      await utapi.deleteFiles(
+        uploadResponse.map((response) => response.data.key)
+      );
+    }
 
     // Refresh the path or page
     revalidateTag("images");

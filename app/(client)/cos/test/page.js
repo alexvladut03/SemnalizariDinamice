@@ -95,6 +95,7 @@ export default function Page() {
       console.error("Error deleting AWB:", err);
     }
   };
+
   const fetchPrintAWB = async (awbNumber) => {
     try {
       const response = await fetch(`/api/fanCourier/createAWB`, {

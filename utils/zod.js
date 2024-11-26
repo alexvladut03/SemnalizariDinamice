@@ -49,6 +49,10 @@ export const ProductSchema = z.object({
     .number({ message: "Stock-ul trebuie sa fie un numar" })
     .int()
     .nonnegative("Stocul trebuie sa fie un numar pozitiv"),
+  width: z.number().min(1, "Latimea este obligatorie"),
+  height: z.number().min(1, "Inaltimea este obligatorie"),
+  length: z.number().min(1, "Lungimea este obligatorie"),
+  weight: z.number().min(0.1, "Greutatea este obligatorie"),
   mainImage: z.object({
     id: z.string().min(1, "ID-ul este obligatoriu"),
     name: z.string().min(1, "Numele este obligatoriu"),
@@ -65,7 +69,7 @@ export const ProductSchema = z.object({
   ),
   description: z.string().optional(),
   categoryId: z.string().min(1, "Categoria este obligatorie"), // Main category is required
-  subcategoryId: z.string().optional(), // Optional field for child categories
+  subcategoryId: z.string().nullable().optional(), // Subcategory is optional
   // Array of attributes with their selected values
   attributes: z.array(
     z.object({
@@ -114,56 +118,107 @@ export const imageSchema = z.object({
   }),
 });
 
-export const validateUserFanSchema = z.object({
+export const orderSchema = z.object({
   // Recipient Info
-  name: z
+  shippingLastName: z
     .string()
     .min(1, { message: "Numele destinatarului este obligatoriu" })
     .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
-  phone: z
+  shippingFirstName: z
+    .string()
+    .min(1, { message: "Prenumele destinatarului este obligatoriu" })
+    .max(50, { message: "Prenumele nu poate depăși 50 de caractere" }),
+  shippingPhone: z
     .string()
     .min(1, { message: "Numărul de telefon este obligatoriu" })
-    .max(16, { message: "Numărul de telefon nu poate depăși 16 caractere" }),
-  email: z
+    .max(12, { message: "Numărul de telefon nu poate depăși 12 caractere" }),
+  shippingEmail: z
     .string()
+    .min(1, { message: "Emailul este obligatoriu" })
     .max(100, { message: "Emailul nu poate depăși 100 de caractere" })
     .optional(),
 
   // Address Info
-  county: z
+  shippingCounty: z
     .string()
     .min(1, { message: "Județul este obligatoriu" })
     .max(50, { message: "Județul nu poate depăși 50 de caractere" }),
-  locality: z
+  shippingLocality: z
     .string()
     .min(1, { message: "Localitatea este obligatorie" })
     .max(50, { message: "Localitatea nu poate depăși 50 de caractere" }),
-  street: z
+  shippingStreet: z
     .string()
     .min(1, { message: "Strada este obligatorie" })
     .max(255, { message: "Strada nu poate depăși 255 de caractere" }),
-  streetNo: z
+  shippingStreetNo: z
     .string()
     .max(10, { message: "Numărul străzii nu poate depăși 10 caractere" })
     .optional(),
-  zipCode: z
+  shippingZipCode: z
     .string()
+    .min(1, { message: "Codul postal este obligatoriu" })
     .max(6, { message: "Codul postal nu poate depăși 6 caractere" })
     .optional(),
-  building: z
+  shippingBuilding: z
     .string()
     .max(20, { message: "Blocul nu poate depăși 20 de caractere" })
     .optional(),
-  entrance: z
+  shippingEntrance: z
     .string()
     .max(16, { message: "Scara nu poate depăși 16 caractere" })
     .optional(),
-  floor: z
+  shippingFloor: z
     .string()
     .max(10, { message: "Etajul nu poate depăși 10 caractere" })
     .optional(),
-  apartment: z
+  shippingApartment: z
     .string()
     .max(10, { message: "Apartamentul nu poate depăși 10 caractere" })
     .optional(),
+
+  // Billing Info
+  billingLastName: z
+    .string()
+    .min(1, { message: "Numele este obligatoriu" })
+    .max(50, { message: "Numele nu poate depăși 50 de caractere" }),
+  billingFirstName: z
+    .string()
+    .min(1, { message: "Prenumele este obligatoriu" })
+    .max(50, { message: "Prenumele nu poate depăși 50 de caractere" }),
+  billingPhone: z
+    .string()
+    .min(1, { message: "Numărul de telefon este obligatoriu" })
+    .max(12, { message: "Numărul de telefon nu poate depăși 12 caractere" }),
+  billingEmail: z
+    .string()
+    .min(1, { message: "Emailul este obligatoriu" })
+    .max(100, { message: "Emailul nu poate depăși 100 de caractere" })
+    .optional(),
+  billingCounty: z
+    .string()
+    .min(1, { message: "Județul este obligatoriu" })
+    .max(50, { message: "Județul nu poate depăși 50 de caractere" }),
+  billingLocality: z
+    .string()
+    .min(1, { message: "Localitatea este obligatorie" })
+    .max(50, { message: "Localitatea nu poate depăși 50 de caractere" }),
+  billingStreet: z
+    .string()
+    .min(1, { message: "Strada este obligatorie" })
+    .max(255, { message: "Strada nu poate depăși 255 de caractere" }),
+  billingStreetNo: z
+    .string()
+    .max(50, { message: "Numărul străzii nu poate depăși 50 caractere" })
+    .optional(),
+  billingZipCode: z
+    .string()
+    .min(1, { message: "Codul postal este obligatoriu" })
+    .max(6, { message: "Codul postal nu poate depăși 6 caractere" })
+    .optional(),
+
+  // Order Info
+  paymentMethod: z
+    .string()
+    .min(1, { message: "Metoda de plată este obligatorie" }),
 });

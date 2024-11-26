@@ -35,6 +35,10 @@ model Product {
   slug          String
   price         Float
   stock         Int
+  length        Float
+  width         Float
+  height        Float
+  weight        Float
   description   String?      
 
   // Many-to-many relation to Image model
@@ -50,6 +54,9 @@ model Product {
 
   // Relation to ProductAttribute
   attributes    ProductAttribute[]
+
+  // Relation to OrderProduct
+  orderProducts OrderProduct[]
 
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
@@ -105,12 +112,74 @@ model ProductAttribute {
 }
 
 model Order {
-  id          String    @id @default(uuid())
-  orderId     String?   @unique
-  amount      Float
-  code        String    @unique
-  message     String?
-  nptID       String    @unique
-  status      String
-  operationDate DateTime
+  id                  String      @id @default(uuid())
+  orderId             String     @unique
+  totalCost           Float       // Total cost of the order, including any fees
+  productsCost        Float       // Cost of the products in the order
+  totalWeight         Float       // Total weight of the order
+  parcelDimensions    String      // Dimensions of the parcel
+  status              String[]     // Order status (e.g., Pending, Completed, etc.)
+  operationDate       DateTime    // Date and time of the operation
+  paymentMethod       String      // Payment method (e.g., Card, Cash on Delivery, etc.)
+  ntpId               String?
+  ntpStatus           Int?
+  awb                 BigInt?
+
+  // Recipient Info
+  shippingLastName    String
+  shippingFirstName   String
+  shippingPhone       String
+  shippingEmail       String
+  shippingCounty      String
+  shippingLocality    String
+  shippingStreet      String
+  shippingStreetNo    String
+  shippingZipCode     String
+  shippingBuilding    String?
+  shippingEntrance    String?
+  shippingFloor       String?
+  shippingApartment   String?
+
+  // Billing Info
+  billingLastName     String
+  billingFirstName    String
+  billingPhone        String
+  billingEmail        String
+  billingCounty       String
+  billingLocality     String
+  billingStreet       String
+  billingStreetNo     String
+  billingZipCode      String
+
+  // Relation to Product
+  products            OrderProduct[]
+
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
 }
+
+model OrderProduct {
+  orderId   String
+  productId String
+  name      String  // Name of the product
+  category  String  // Category of the product
+  quantity  Int     // Quantity of the product in the order
+  price     Float   // Price of the product
+
+  // Relations
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  // Composite primary key
+  @@id([orderId, productId])
+}
+
+model Token {
+  id         String   @id @default(uuid())
+  service    String   // Name of the API or service (e.g., "ShippingAPI")
+  token      String   // The token itself
+  expiresAt  DateTime // Expiration date and time
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
