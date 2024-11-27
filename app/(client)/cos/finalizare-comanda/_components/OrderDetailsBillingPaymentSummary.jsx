@@ -27,10 +27,12 @@ import { orderSchema } from "@/utils/zod";
 import { useCart } from "@/utils/context/cart-provider";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import samedayMap from "@/components/custom ui/sameday-map";
 
 export default function OrderDetailsBillingPaymentSummary({
   countrieswithLocalities,
 }) {
+  const sameDay = samedayMap();
   const router = useRouter();
   const [isStandardShipping, setStandardShipping] = useState(true);
   const [isSameBillingOption, setSameBillingOption] = useState(true);
@@ -58,6 +60,12 @@ export default function OrderDetailsBillingPaymentSummary({
     totalWeight,
     countTotalPrice()
   );
+
+  sameDay.subscribe((message) => {
+    console.log("message", message);
+
+    sameDay.close();
+  });
 
   const handleShippingCountyChange = (value) => {
     setSelectedShippingCounty(value);
@@ -507,7 +515,7 @@ export default function OrderDetailsBillingPaymentSummary({
               </div>
             </div>
           ) : (
-            <div className="mt-4">Formular pentru livrare la EasyBox</div>
+            <div className="mt-4">{sameDay.open()}</div>
           )}
         </div>
         {/* OrderBillingdata */}
