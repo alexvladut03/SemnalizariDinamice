@@ -43,6 +43,8 @@ export async function GET(req) {
     },
   });
 
+  console.log(response);
+
   if (!response.ok) {
     throw new Error("Failed to calculate shipping cost from Fan Courier");
   }

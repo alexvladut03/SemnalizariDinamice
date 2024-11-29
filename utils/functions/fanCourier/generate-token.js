@@ -24,6 +24,7 @@ export const getFanCourierToken = async () => {
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "no-store",
       }
     );
 
@@ -40,11 +41,7 @@ export const getFanCourierToken = async () => {
       throw new Error("Token not received from Fan Courier");
     }
 
-    console.log(tokenRecord);
-    //const expiresAtISO = new Date(data.data.expiresAt).toISOString();
-    const expiresAt = new Date();
-    expiresAt.setMinutes(expiresAt.getMinutes() + 2);
-    const expiresAtISO = expiresAt.toISOString();
+    const expiresAtISO = new Date(data.data.expiresAt).toISOString();
 
     if (tokenRecord) {
       tokenRecord = await prisma.token.update({
@@ -65,6 +62,8 @@ export const getFanCourierToken = async () => {
         },
       });
     }
+
+    console.log("returned token", tokenRecord.token);
 
     return tokenRecord.token;
   } catch (error) {
