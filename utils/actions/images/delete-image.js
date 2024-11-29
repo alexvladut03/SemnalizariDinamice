@@ -1,6 +1,8 @@
 "use server";
 
 import { utapi } from "@/app/server/uploadthing";
+import prisma from "@/utils/prisma";
+
 import { authActionClient } from "@/utils/safe-action";
 import { imageSchema } from "@/utils/zod";
 import { revalidateTag } from "next/cache";
@@ -36,6 +38,8 @@ const deleteImage = authActionClient
 
     // Delete the image from the server
     const deleteResponse = await utapi.deleteFiles(image.uploadthingKey);
+
+    console.log(deleteResponse);
 
     if (deleteResponse.error) {
       throw new Error(deleteResponse.error);

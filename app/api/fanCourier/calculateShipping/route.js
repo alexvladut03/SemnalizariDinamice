@@ -1,4 +1,4 @@
-import { getFanCourierToken } from "@/utils/actions/fanCourier/fan-courier-auth";
+import { getFanCourierToken } from "@/utils/functions/fanCourier/generate-token";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
