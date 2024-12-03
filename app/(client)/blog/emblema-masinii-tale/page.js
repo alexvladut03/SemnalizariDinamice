@@ -21,14 +21,14 @@ export default function BlogPost() {
   return (
     <div className="lg:flex lg:max-w-7xl lg:mx-auto py-10 gap-10 mx-10 grid grid-cols-1">
       <article className="lg:w-3/4 w-full">
-        <div className="bg-black mb-6 rounded-lg text-white">
-          <div className="relative overflow-hidden group">
+        <div className="bg-black mb-6 rounded-lg text-white border border-black">
+          <div className="relative overflow-hidden group rounded-t-lg">
             <Image
-              src="/logo.png"
+              src="/blog4.png"
               alt="Emblema mașinii: crom sau negru lucios?"
               width={960}
               height={320}
-              className="w-full h-80 object-cover rounded-lg transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-96 object-top transition-transform duration-500 group-hover:scale-105"
             />
             <div className="vertical-rect"></div>
           </div>
@@ -125,7 +125,7 @@ export default function BlogPost() {
       </article>
 
       {/* Bara laterală - Postări Recente */}
-      <RecentPosts exclude={[2, 3, 6]} />
+      <RecentPosts exclude={[2, 4, 6]} />
     </div>
   );
 }
