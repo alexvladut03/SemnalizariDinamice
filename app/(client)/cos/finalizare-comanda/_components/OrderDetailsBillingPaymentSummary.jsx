@@ -142,6 +142,7 @@ export default function OrderDetailsBillingPaymentSummary({
         <BillingOptions
           isSameBillingOption={isSameBillingOption}
           setSameBillingOption={setSameBillingOption}
+          isStandardShipping={isStandardShipping}
           form={form}
           countrieswithLocalities={countrieswithLocalities}
         />
@@ -150,6 +151,7 @@ export default function OrderDetailsBillingPaymentSummary({
           paymentMethod={paymentMethod}
           setPaymentMethod={setPaymentMethod}
           form={form}
+          isStandardShipping={isStandardShipping}
         />
       </div>
 

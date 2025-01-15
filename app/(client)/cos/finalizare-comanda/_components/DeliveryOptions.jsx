@@ -49,7 +49,9 @@ const DeliveryOptions = ({
           className={`flex items-center gap-4 border rounded-lg p-4 w-full cursor-pointer transition-colors duration-500 ${
             isStandardShipping ? "border-amber-500 bg-orange-50" : ""
           }`}
-          onClick={() => setStandardShipping(true)}
+          onClick={() => {
+            setStandardShipping(true);
+          }}
         >
           <div
             className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
@@ -108,65 +110,65 @@ const DeliveryOptions = ({
           </span>
         </div>
       </div>
+      <div className="col-span-2 grid grid-cols-2 mt-4 gap-4">
+        <div>
+          <Label htmlFor="shippingLastName">Nume</Label>
+          <Input
+            id="shippingLastName"
+            {...form.register("shippingLastName")}
+            placeholder="Nume"
+          />
+          {form.formState.errors.shippingLastName && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.shippingLastName.message}
+            </p>
+          )}
+        </div>
+        <div>
+          <Label htmlFor="shippingFirstName">Prenume</Label>
+          <Input
+            id="shippingFirstName"
+            {...form.register("shippingFirstName")}
+            placeholder="Prenume"
+          />
+          {form.formState.errors.shippingFirstName && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.shippingFirstName.message}
+            </p>
+          )}
+        </div>
+        <div>
+          <Label htmlFor="shippingPhone">Telefon</Label>
+          <Input
+            type="number"
+            id="shippingPhone"
+            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            {...form.register("shippingPhone")}
+            placeholder="Numarul tau de telefon"
+          />
+          {form.formState.errors.shippingPhone && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.shippingPhone.message}
+            </p>
+          )}
+        </div>
+        <div>
+          <Label htmlFor="shippingEmail">Email</Label>
+          <Input
+            id="shippingEmail"
+            {...form.register("shippingEmail")}
+            placeholder="Email"
+          />
+          {form.formState.errors.shippingEmail && (
+            <p className="text-red-500 text-sm">
+              {form.formState.errors.shippingEmail.message}
+            </p>
+          )}
+        </div>
+      </div>
       {isStandardShipping ? (
         <div className="lg:grid lg:grid-cols-2 lg:gap-4 space-y-4 mt-4 lg:space-y-0">
-          <div className="col-span-2 grid grid-cols-3 gap-4">
-            <div>
-              <Label htmlFor="shippingLastName">Nume</Label>
-              <Input
-                id="shippingLastName"
-                {...form.register("shippingLastName")}
-                placeholder="Nume"
-              />
-              {form.formState.errors.shippingLastName && (
-                <p className="text-red-500 text-sm">
-                  {form.formState.errors.shippingLastName.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor="shippingFirstName">Prenume</Label>
-              <Input
-                id="shippingFirstName"
-                {...form.register("shippingFirstName")}
-                placeholder="Prenume"
-              />
-              {form.formState.errors.shippingFirstName && (
-                <p className="text-red-500 text-sm">
-                  {form.formState.errors.shippingFirstName.message}
-                </p>
-              )}
-            </div>
-            <div>
-              <Label htmlFor="shippingPhone">Telefon</Label>
-              <Input
-                type="number"
-                id="shippingPhone"
-                className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                {...form.register("shippingPhone")}
-                placeholder="Numarul tau de telefon"
-              />
-              {form.formState.errors.shippingPhone && (
-                <p className="text-red-500 text-sm">
-                  {form.formState.errors.shippingPhone.message}
-                </p>
-              )}
-            </div>
-          </div>
-          <div className="col-span-2 grid grid-cols-3 gap-4">
-            <div>
-              <Label htmlFor="shippingEmail">Email</Label>
-              <Input
-                id="shippingEmail"
-                {...form.register("shippingEmail")}
-                placeholder="Email"
-              />
-              {form.formState.errors.shippingEmail && (
-                <p className="text-red-500 text-sm">
-                  {form.formState.errors.shippingEmail.message}
-                </p>
-              )}
-            </div>
+          <div className="col-span-2 grid grid-cols-2 gap-4">
             <div>
               <Label htmlFor="shippingCounty">Județ</Label>
               <Select onValueChange={handleShippingCountyChange}>

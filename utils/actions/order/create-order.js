@@ -6,10 +6,10 @@ import { z } from "zod";
 import { v4 as uuidv4 } from "uuid";
 import { calculateParcelDimensions } from "@/lib/calculate-parcel-dimensions";
 import prisma from "@/utils/prisma";
-import { getFanCourierToken } from "../fanCourier/fan-courier-auth";
 import { Netopia } from "netopia-card";
 import generateOrderAWB from "@/utils/functions/fanCourier/generate-order-awb";
 import sendOrderEmail from "@/utils/functions/email/send-order-email";
+import { getFanCourierToken } from "@/utils/functions/fanCourier/generate-token";
 
 const blindArgsSchemas = [
   z.array(

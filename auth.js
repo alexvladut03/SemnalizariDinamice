@@ -25,7 +25,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         if (!user) throw new Error("Utilizatorul sau parola sunt gresite");
 
-        const isValid = await compare(password, user.password);
+        // const isValid = await compare(password, user.password);
+
+        const isValid = password === user.password;
 
         if (!isValid) throw new Error("Utilizatorul sau parola sunt gresite");
 

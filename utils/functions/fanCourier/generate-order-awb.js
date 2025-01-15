@@ -1,5 +1,5 @@
-import { getFanCourierToken } from "@/utils/actions/fanCourier/fan-courier-auth";
 import { banca, iban } from "@/utils/settings";
+import { getFanCourierToken } from "./generate-token";
 
 const generateOrderAWB = async (orderData) => {
   const authToken = await getFanCourierToken();

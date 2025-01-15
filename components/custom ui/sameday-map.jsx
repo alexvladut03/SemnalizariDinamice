@@ -1,6 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Button } from "../ui/button";
 
 const SamedayMap = () => {
+  const [selectedEasybox, setSelectedEasybox] = useState(null);
+
   useEffect(() => {
     const loadLockerPlugin = () => {
       const script = document.createElement("script");
@@ -42,7 +45,13 @@ const SamedayMap = () => {
 
     // Subscribe to the locker selection
     pluginInstance.subscribe((msg) => {
-      console.log("Locker selected:", msg);
+      setSelectedEasybox({
+        address: msg.adress,
+        city: msg.city,
+        county: msg.county,
+        name: msg.name,
+        postalCode: msg.postalCode,
+      });
       pluginInstance.close(); // Close the modal
     });
 
@@ -51,12 +60,24 @@ const SamedayMap = () => {
   };
 
   return (
-    <button
-      onClick={openLockerPlugin}
-      className="bg-blue-500 text-white p-2 rounded"
-    >
-      Selectează un Easybox
-    </button>
+    <div className="mt-4 flex flex-col items-start">
+      <Button
+        onClick={openLockerPlugin}
+        className="bg-amber-500 text-white p-2 rounded"
+      >
+        Selectează un Easybox
+      </Button>
+      {selectedEasybox && (
+        <div className="mt-4 border-2 p-4 rounded border-amber-500">
+          <p>Easybox selectat:</p>
+          <p>Nume: {selectedEasybox.name}</p>
+          <p>Adresă: {selectedEasybox.address}</p>
+          <p>Oraș: {selectedEasybox.city}</p>
+          <p>Județ: {selectedEasybox.county}</p>
+          <p>Cod poștal: {selectedEasybox.postalCode}</p>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -8,7 +8,7 @@ import { TbPhoneCall } from "react-icons/tb";
 
 export default function ClientFooter() {
   return (
-    <footer className=" pt-10 py-4 text-white bg-black">
+    <footer className="pt-10 py-4 text-white bg-black">
       <div className="lg:mx-auto lg:max-w-7xl lg:flex lg:flex-row lg:gap-[70px] lg:border-b-2 lg:border-amber-500 mx-6">
         <div className="lg:w-[18%]">
           <Image

@@ -1,5 +1,5 @@
-import { getCounties } from "@/utils/functions/shipping/get-counties";
-import { getLocalities } from "@/utils/functions/shipping/get-localities";
+import { getCounties } from "@/utils/functions/fanCourier/get-counties";
+import { getLocalities } from "@/utils/functions/fanCourier/get-localities";
 import OrderDetailsBillingPaymentSummary from "./_components/OrderDetailsBillingPaymentSummary";
 
 const Page = async () => {

@@ -14,6 +14,7 @@ import { RiBillFill } from "react-icons/ri";
 const BillingOptions = ({
   isSameBillingOption,
   setSameBillingOption,
+  isStandardShipping,
   form,
   countrieswithLocalities,
 }) => {
@@ -40,73 +41,77 @@ const BillingOptions = ({
         </div>
         <div className="pl-4">Facturare</div>
       </div>
-      <div className="grid grid-cols-2 gap-4 mb-6 font-semibold">
-        {/* Same as Delivery Option */}
-        <div
-          className={`flex items-center gap-4 border rounded-lg p-4 w-full cursor-pointer transition-colors duration-500 ${
-            isSameBillingOption ? "border-amber-500 bg-orange-50" : ""
-          }`}
-          onClick={() => setSameBillingOption(true)}
-        >
+      {isStandardShipping && (
+        <div className="grid grid-cols-2 gap-4 mb-6 font-semibold">
+          {/* Same as Delivery Option */}
           <div
-            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-              isSameBillingOption ? "border-amber-500" : "border-gray-300"
+            className={`flex items-center gap-4 border rounded-lg p-4 w-full cursor-pointer transition-colors duration-500 ${
+              isSameBillingOption ? "border-amber-500 bg-orange-50" : ""
             }`}
+            onClick={() => setSameBillingOption(true)}
           >
             <div
-              className={`w-3 h-3 rounded-full ${
-                isSameBillingOption ? "bg-amber-500" : "bg-transparent"
+              className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                isSameBillingOption ? "border-amber-500" : "border-gray-300"
+              }`}
+            >
+              <div
+                className={`w-3 h-3 rounded-full ${
+                  isSameBillingOption ? "bg-amber-500" : "bg-transparent"
+                }`}
+              />
+            </div>
+            <RiBillFill
+              className={`${
+                isSameBillingOption ? "text-amber-500 text-xl" : "text-gray-500"
               }`}
             />
+            <span
+              className={`font-bold ${
+                isSameBillingOption ? "text-amber-500" : "text-gray-500"
+              }`}
+            >
+              La fel ca livrarea
+            </span>
           </div>
-          <RiBillFill
-            className={`${
-              isSameBillingOption ? "text-amber-500 text-xl" : "text-gray-500"
-            }`}
-          />
-          <span
-            className={`font-bold ${
-              isSameBillingOption ? "text-amber-500" : "text-gray-500"
-            }`}
-          >
-            La fel ca livrarea
-          </span>
-        </div>
 
-        {/* Different Billing Option */}
-        <div
-          className={`flex items-center gap-4 border rounded-lg p-4 w-full cursor-pointer transition-colors duration-500 ${
-            !isSameBillingOption ? "border-amber-500 bg-orange-50" : ""
-          }`}
-          onClick={() => setSameBillingOption(false)}
-        >
+          {/* Different Billing Option */}
           <div
-            className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-              !isSameBillingOption ? "border-amber-500" : "border-gray-300"
+            className={`flex items-center gap-4 border rounded-lg p-4 w-full cursor-pointer transition-colors duration-500 ${
+              !isSameBillingOption ? "border-amber-500 bg-orange-50" : ""
             }`}
+            onClick={() => setSameBillingOption(false)}
           >
             <div
-              className={`w-3 h-3 rounded-full ${
-                !isSameBillingOption ? "bg-amber-500" : "bg-transparent"
+              className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                !isSameBillingOption ? "border-amber-500" : "border-gray-300"
+              }`}
+            >
+              <div
+                className={`w-3 h-3 rounded-full ${
+                  !isSameBillingOption ? "bg-amber-500" : "bg-transparent"
+                }`}
+              />
+            </div>
+            <FaBoxOpen
+              className={`${
+                !isSameBillingOption
+                  ? "text-amber-500 text-xl"
+                  : "text-gray-500"
               }`}
             />
+            <span
+              className={`font-bold ${
+                !isSameBillingOption ? "text-amber-500" : "text-gray-500"
+              }`}
+            >
+              Alte opțiuni
+            </span>
           </div>
-          <FaBoxOpen
-            className={`${
-              !isSameBillingOption ? "text-amber-500 text-xl" : "text-gray-500"
-            }`}
-          />
-          <span
-            className={`font-bold ${
-              !isSameBillingOption ? "text-amber-500" : "text-gray-500"
-            }`}
-          >
-            Alte opțiuni
-          </span>
         </div>
-      </div>
+      )}
 
-      {!isSameBillingOption && (
+      {(!isSameBillingOption || !isStandardShipping) && (
         <div className="lg:col-span-2 lg:grid lg:grid-cols-2 lg:gap-4 space-y-4 mt-4 lg:space-y-0">
           <div className="col-span-2 grid grid-cols-3 gap-4">
             <div>
