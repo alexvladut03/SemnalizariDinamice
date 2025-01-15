@@ -6,7 +6,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 const blogs = [
   {
     id: 1,
-    image: "/logo.png",
+    image: "/blog1.png",
     author: "Andrei Mocanu",
     date: "6 Iulie, 2024",
     readTime: "15 minute",
@@ -16,7 +16,7 @@ const blogs = [
   },
   {
     id: 2,
-    image: "/logo.png",
+    image: "/blog2.png",
     author: "Ionita Alexandru",
     date: "25 Iulie, 2024",
     readTime: "10 minute",
@@ -26,7 +26,7 @@ const blogs = [
   },
   {
     id: 3,
-    image: "/logo.png",
+    image: "/blog3.png",
     author: "Ionita Alexandru",
     date: "23 August, 2024",
     readTime: "20 minute",
@@ -36,7 +36,7 @@ const blogs = [
   },
   {
     id: 4,
-    image: "/logo.png",
+    image: "/blog4.png",
     author: "Andrei Mocanu",
     date: "30 August, 2024",
     readTime: "5 minute",
@@ -46,7 +46,7 @@ const blogs = [
   },
   {
     id: 5,
-    image: "/logo.png",
+    image: "/blog5.png",
     author: "Andrei Mocanu",
     date: "2 Septembrie, 2024",
     readTime: "10 minute",
@@ -56,7 +56,7 @@ const blogs = [
   },
   {
     id: 6,
-    image: "/logo.png",
+    image: "/blog6.png",
     author: "Andrei Mocanu",
     date: "9 Septembrie, 2024",
     readTime: "15 minute",
@@ -80,9 +80,9 @@ export default function BlogCards() {
               <Image
                 src={blog.image}
                 alt={blog.title}
-                width={960}
-                height={320}
-                className="w-full h-56 object-cover transition-transform duration-500 hover:scale-105 hover:animate-blink2 bg-black"
+                width={2000}
+                height={1000}
+                className="w-full h-52 object-cover transition-transform duration-500 hover:scale-105 hover:animate-blink2 bg-black"
               />
             </div>
             <div className="flex flex-col justify-between p-6 flex-grow">

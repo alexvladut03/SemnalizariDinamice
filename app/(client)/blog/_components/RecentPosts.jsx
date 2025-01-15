@@ -7,7 +7,7 @@ export default function RecentPosts({ exclude = [] }) {
   const blogs = [
     {
       id: 1,
-      image: "/logo.png",
+      image: "/blog1.png",
       author: "Andrei Mocanu",
       date: "6 Iulie, 2024",
       readTime: "15 minute",
@@ -17,53 +17,53 @@ export default function RecentPosts({ exclude = [] }) {
     },
     {
       id: 2,
-      image: "/logo.png",
+      image: "/blog2.png",
       author: "Andrei Mocanu",
       date: "25 Iulie, 2024",
       readTime: "10 minute",
       title:
-        "Avantajele instalării semnalizărilor dinamice: Vizibilitate sporită și siguranță în trafic",
-      link: "/blog/avantajele-instalarii-semnalizarilor-dinamice",
+        "Semnalizări dinamice vs. semnalizări standard: De ce merită să faci upgrade-ul?",
+      link: "/blog/semnalizarile-dinamice-vs-semnalizarile-standard",
     },
     {
       id: 3,
-      image: "/logo.png",
+      image: "/blog3.png",
       author: "Andrei Mocanu",
       date: "23 August, 2024",
       readTime: "20 minute",
       title:
-        "Cum să alegi emblema auto potrivită pentru marca ta: Crom vs. negru lucios",
-      link: "/blog/cum-sa-alegi-emblema-auto-potrivita-pentru-marca-ta",
+        "Accesorii auto moderne: De ce să alegi proiectoarele de logo pentru mașina ta.",
+      link: "/blog/accesorii-auto-moderne",
     },
     {
       id: 4,
-      image: "/logo.png",
+      image: "/blog4.png",
       author: "Andrei Mocanu",
       date: "30 August, 2024",
       readTime: "5 minute",
       title:
-        "Avantajele proiectoarelor de logo pentru mașini: Un mod inovator de a ieși în evidență",
-      link: "/blog/avantajele-proiectoarelor-de-logo-pentru-masini",
+        "Emblema mașinii tale: Eleganța cromului sau stilul modern al negrului lucios?",
+      link: "/blog/emblema-masinii-tale",
     },
     {
       id: 5,
-      image: "/logo.png",
+      image: "/blog5.png",
       author: "Andrei Mocanu",
       date: "2 Septembrie, 2024",
       readTime: "10 minute",
       title:
-        "Ghid esențial pentru personalizarea mașinii: Detalii de impact, de la schimbătoare de viteză la capace de roți",
-      link: "/blog/ghid-essential-pentru-personalizarea-masinii",
+        "Ghid pentru personalizarea mașinii tale:De la capace de jante la semnalizări dinamice.",
+      link: "/blog/ghid-pentru-personalizarea-masinii-tale",
     },
     {
       id: 6,
-      image: "/logo.png",
+      image: "/blog6.png",
       author: "Andrei Mocanu",
       date: "9 Septembrie, 2024",
       readTime: "15 minute",
       title:
-        "Semnalizări dinamice vs. semnalizări standard: De ce merită să faci upgrade-ul?",
-      link: "/blog/semnalizarile-dinamice-vs-semnalizarile-standard",
+        "Avantajele instalării unui schimbător de viteză modern: Confort și Stil",
+      link: "/blog/avantajele-instalarii-unui-schimbator-de-viteza-modern",
     },
   ];
 
